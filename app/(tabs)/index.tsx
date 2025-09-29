@@ -1,11 +1,13 @@
-import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { COLORS } from "@/constants/color";
+import { Ionicons } from "@expo/vector-icons";
+import { FlatList, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type Exercise = {
 	id: string;
 	name: string;
 	description: string;
-	image: string;
+	icon: keyof typeof Ionicons.glyphMap;
 };
 
 const exercises: Exercise[] = [
@@ -13,26 +15,31 @@ const exercises: Exercise[] = [
 		id: "1",
 		name: "Pomodoro",
 		description: "25 min de travail, 5 min de pause",
-		image: "",
+		icon: "repeat-outline",
 	},
 	{
 		id: "2",
 		name: "Deep Work",
 		description: "90 min de focus sans interruption",
-		image: "",
+		icon: "briefcase-outline",
 	},
 	{
 		id: "3",
 		name: "Méthode 52/17",
 		description: "52 min de travail, 17 min de pause",
-		image: "",
+		icon: "hourglass-outline",
 	},
 ];
 
 export default function HomeScreen() {
 	const renderExercise = ({ item }: { item: Exercise }) => (
 		<TouchableOpacity style={styles.card} activeOpacity={0.8}>
-			<Image source={{ uri: item.image }} style={styles.image} />
+			<Ionicons
+				name={item.icon}
+				size={40}
+				color={COLORS.secondary}
+				style={styles.icon}
+			/>
 			<View style={styles.textContainer}>
 				<Text style={styles.name}>{item.name}</Text>
 				<Text style={styles.description}>{item.description}</Text>
@@ -54,17 +61,16 @@ export default function HomeScreen() {
 	);
 }
 
-const styles = StyleSheet.create({
+export const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: "#F5F5F7",
 		paddingHorizontal: 16,
 		paddingTop: 16,
 	},
 	title: {
 		fontSize: 24,
 		fontWeight: "700",
-		color: "#a000e1",
+		color: COLORS.primary,
 		marginBottom: 20,
 		textAlign: "center",
 	},
@@ -72,7 +78,7 @@ const styles = StyleSheet.create({
 		paddingBottom: 20,
 	},
 	card: {
-		backgroundColor: "#fff",
+		backgroundColor: COLORS.cardBackground,
 		borderRadius: 20,
 		padding: 16,
 		flexDirection: "row",
@@ -84,11 +90,9 @@ const styles = StyleSheet.create({
 		shadowRadius: 6,
 		elevation: 3,
 	},
-	image: {
-		width: 48,
-		height: 48,
+	icon: {
 		marginRight: 16,
-		tintColor: "#b29cff"
+		color: COLORS.secondary,
 	},
 	textContainer: {
 		flex: 1,
@@ -96,12 +100,13 @@ const styles = StyleSheet.create({
 	name: {
 		fontSize: 18,
 		fontWeight: "600",
-		color: "#000", // noir
+		color: COLORS.text,
 		marginBottom: 4,
 	},
 	description: {
 		fontSize: 14,
-		color: "#444",
+		color: COLORS.textSecondary,
 	},
 });
+
 
