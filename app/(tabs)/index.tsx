@@ -1,98 +1,107 @@
-import { Image } from 'expo-image';
-import { Platform, StyleSheet } from 'react-native';
+import { FlatList, Image, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-import { HelloWave } from '@/components/hello-wave';
-import ParallaxScrollView from '@/components/parallax-scroll-view';
-import { ThemedText } from '@/components/themed-text';
-import { ThemedView } from '@/components/themed-view';
-import { Link } from 'expo-router';
+type Exercise = {
+	id: string;
+	name: string;
+	description: string;
+	image: string;
+};
+
+const exercises: Exercise[] = [
+	{
+		id: "1",
+		name: "Pomodoro",
+		description: "25 min de travail, 5 min de pause",
+		image: "",
+	},
+	{
+		id: "2",
+		name: "Deep Work",
+		description: "90 min de focus sans interruption",
+		image: "",
+	},
+	{
+		id: "3",
+		name: "Méthode 52/17",
+		description: "52 min de travail, 17 min de pause",
+		image: "",
+	},
+];
 
 export default function HomeScreen() {
-  return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
-      headerImage={
-        <Image
-          source={require('@/assets/images/partial-react-logo.png')}
-          style={styles.reactLogo}
-        />
-      }>
-      <ThemedView style={styles.titleContainer}>
-        <ThemedText type="title">Welcome!</ThemedText>
-        <HelloWave />
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 1: Try it</ThemedText>
-        <ThemedText>
-          Edit <ThemedText type="defaultSemiBold">app/(tabs)/index.tsx</ThemedText> to see changes.
-          Press{' '}
-          <ThemedText type="defaultSemiBold">
-            {Platform.select({
-              ios: 'cmd + d',
-              android: 'cmd + m',
-              web: 'F12',
-            })}
-          </ThemedText>{' '}
-          to open developer tools.
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <Link href="/modal">
-          <Link.Trigger>
-            <ThemedText type="subtitle">Step 2: Explore</ThemedText>
-          </Link.Trigger>
-          <Link.Preview />
-          <Link.Menu>
-            <Link.MenuAction title="Action" icon="cube" onPress={() => alert('Action pressed')} />
-            <Link.MenuAction
-              title="Share"
-              icon="square.and.arrow.up"
-              onPress={() => alert('Share pressed')}
-            />
-            <Link.Menu title="More" icon="ellipsis">
-              <Link.MenuAction
-                title="Delete"
-                icon="trash"
-                destructive
-                onPress={() => alert('Delete pressed')}
-              />
-            </Link.Menu>
-          </Link.Menu>
-        </Link>
+	const renderExercise = ({ item }: { item: Exercise }) => (
+		<TouchableOpacity style={styles.card} activeOpacity={0.8}>
+			<Image source={{ uri: item.image }} style={styles.image} />
+			<View style={styles.textContainer}>
+				<Text style={styles.name}>{item.name}</Text>
+				<Text style={styles.description}>{item.description}</Text>
+			</View>
+		</TouchableOpacity>
+	);
 
-        <ThemedText>
-          {`Tap the Explore tab to learn more about what's included in this starter app.`}
-        </ThemedText>
-      </ThemedView>
-      <ThemedView style={styles.stepContainer}>
-        <ThemedText type="subtitle">Step 3: Get a fresh start</ThemedText>
-        <ThemedText>
-          {`When you're ready, run `}
-          <ThemedText type="defaultSemiBold">npm run reset-project</ThemedText> to get a fresh{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> directory. This will move the current{' '}
-          <ThemedText type="defaultSemiBold">app</ThemedText> to{' '}
-          <ThemedText type="defaultSemiBold">app-example</ThemedText>.
-        </ThemedText>
-      </ThemedView>
-    </ParallaxScrollView>
-  );
+	return (
+		<SafeAreaView style={styles.container}>
+			<Text style={styles.title}>🎯 Choisis ta méthode</Text>
+			<FlatList
+				data={exercises}
+				renderItem={renderExercise}
+				keyExtractor={(item) => item.id}
+				contentContainerStyle={styles.list}
+				showsVerticalScrollIndicator={false}
+			/>
+		</SafeAreaView>
+	);
 }
 
 const styles = StyleSheet.create({
-  titleContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  stepContainer: {
-    gap: 8,
-    marginBottom: 8,
-  },
-  reactLogo: {
-    height: 178,
-    width: 290,
-    bottom: 0,
-    left: 0,
-    position: 'absolute',
-  },
+	container: {
+		flex: 1,
+		backgroundColor: "#F5F5F7",
+		paddingHorizontal: 16,
+		paddingTop: 16,
+	},
+	title: {
+		fontSize: 24,
+		fontWeight: "700",
+		color: "#a000e1",
+		marginBottom: 20,
+		textAlign: "center",
+	},
+	list: {
+		paddingBottom: 20,
+	},
+	card: {
+		backgroundColor: "#fff",
+		borderRadius: 20,
+		padding: 16,
+		flexDirection: "row",
+		alignItems: "center",
+		marginBottom: 16,
+		shadowColor: "#000",
+		shadowOpacity: 0.08,
+		shadowOffset: { width: 0, height: 2 },
+		shadowRadius: 6,
+		elevation: 3,
+	},
+	image: {
+		width: 48,
+		height: 48,
+		marginRight: 16,
+		tintColor: "#b29cff"
+	},
+	textContainer: {
+		flex: 1,
+	},
+	name: {
+		fontSize: 18,
+		fontWeight: "600",
+		color: "#000", // noir
+		marginBottom: 4,
+	},
+	description: {
+		fontSize: 14,
+		color: "#444",
+	},
 });
+
