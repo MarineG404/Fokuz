@@ -69,6 +69,8 @@ export default function MethodDetails() {
 							<TimerComponent
 								workDurationMinutes={method.workDuration}
 								breakDurationMinutes={method.breakDuration}
+								methodName={method.name}
+								methodId={method.id}
 							/>
 						</View>
 					</>

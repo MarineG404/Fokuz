@@ -14,8 +14,10 @@ export const HeaderTitle = ({ title, showDrawer = false, showBack = false }: Pro
 	const navigation = useNavigation();
 	const COLORS = useThemeColors();
 
+	const hasButtons = showDrawer || showBack;
+
 	return (
-		<View style={styles.headerRow}>
+		<View style={[styles.headerRow, !hasButtons && styles.headerRowSimple]}>
 			{showDrawer && (
 				<TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())} style={styles.menuButton}>
 					<Ionicons name="menu" size={26} color={COLORS.primary} />
@@ -30,7 +32,11 @@ export const HeaderTitle = ({ title, showDrawer = false, showBack = false }: Pro
 
 			<Text
 				pointerEvents="none"
-				style={[styles.headerTitle, styles.headerTitleCentered, { color: COLORS.primary, fontSize: 26 }]}
+				style={[
+					styles.headerTitle,
+					hasButtons ? styles.headerTitleCentered : styles.headerTitleSimple,
+					{ color: COLORS.primary, fontSize: 26 }
+				]}
 			>
 				{title}
 			</Text>
@@ -61,5 +67,13 @@ const styles = StyleSheet.create({
 		left: 0,
 		right: 0,
 		textAlign: "center",
+	},
+	headerTitleSimple: {
+		textAlign: "center",
+		flex: 1,
+	},
+	headerRowSimple: {
+		minHeight: 38, // Même hauteur que les boutons (26 + 6*2 padding)
+		justifyContent: "center",
 	},
 });

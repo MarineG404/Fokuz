@@ -1,5 +1,7 @@
+import { SessionRecord } from '@/types/session';
 import * as Haptics from 'expo-haptics';
 import { useEffect, useRef, useState } from 'react';
+import { historyService } from './historyService';
 import { soundManager } from './soundManager';
 
 export type TimerPhase = 'work' | 'break' | 'finished';
@@ -23,6 +25,8 @@ export interface TimerControls {
 export interface UseTimerProps {
 	workDurationMinutes: number;
 	breakDurationMinutes?: number;
+	methodName?: string;
+	methodId?: string;
 	onPhaseChange?: (phase: TimerPhase) => void;
 	onFinish?: () => void;
 }
@@ -30,6 +34,8 @@ export interface UseTimerProps {
 export const useTimer = ({
 	workDurationMinutes,
 	breakDurationMinutes,
+	methodName = 'Session personnalisée',
+	methodId = 'custom',
 	onPhaseChange,
 	onFinish
 }: UseTimerProps) => {
@@ -38,6 +44,13 @@ export const useTimer = ({
 	const [phase, setPhase] = useState<TimerPhase>('work');
 	const [sessionCount, setSessionCount] = useState(0);
 	const intervalRef = useRef<number | null>(null);
+
+	// Variables pour tracking de session
+	const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
+	const [sessionStartTime, setSessionStartTime] = useState<Date | null>(null);
+	const [actualWorkTime, setActualWorkTime] = useState(0); // en secondes
+	const [actualBreakTime, setActualBreakTime] = useState(0); // en secondes
+	const [completedCycles, setCompletedCycles] = useState(0);
 
 	const totalWorkTime = workDurationMinutes * 60;
 	const totalBreakTime = breakDurationMinutes ? breakDurationMinutes * 60 : 0;
@@ -49,10 +62,40 @@ export const useTimer = ({
 		return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
 	};
 
+	// Sauvegarder une session
+	const saveSession = async (isCompleted: boolean) => {
+		if (!currentSessionId || !sessionStartTime) return;
+
+		const session: SessionRecord = {
+			id: currentSessionId,
+			methodName,
+			methodId,
+			workDuration: workDurationMinutes,
+			breakDuration: breakDurationMinutes,
+			completedCycles,
+			totalWorkTime: Math.round(actualWorkTime / 60), // convertir en minutes
+			totalBreakTime: Math.round(actualBreakTime / 60),
+			startTime: sessionStartTime,
+			endTime: new Date(),
+			date: new Date().toISOString().split('T')[0],
+			isCompleted,
+		};
+
+		await historyService.saveSession(session);
+	};
+
 	// Start timer
 	const start = () => {
 		// Vibration forte pour tester
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+
+		// Nouvelle session
+		const sessionId = historyService.generateSessionId();
+		setCurrentSessionId(sessionId);
+		setSessionStartTime(new Date());
+		setActualWorkTime(0);
+		setActualBreakTime(0);
+		setCompletedCycles(0);
 
 		setTimeLeft(totalWorkTime);
 		setPhase('work');
@@ -63,8 +106,21 @@ export const useTimer = ({
 
 	// Restart timer (nouvelle session)
 	const restart = () => {
+		// Sauvegarder la session précédente si elle existe
+		if (currentSessionId) {
+			saveSession(false); // Session abandonnée pour restart
+		}
+
 		// Vibration forte pour tester
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+
+		// Nouvelle session
+		const sessionId = historyService.generateSessionId();
+		setCurrentSessionId(sessionId);
+		setSessionStartTime(new Date());
+		setActualWorkTime(0);
+		setActualBreakTime(0);
+		setCompletedCycles(0);
 
 		setTimeLeft(totalWorkTime);
 		setPhase('work');
@@ -90,10 +146,21 @@ export const useTimer = ({
 
 	// Reset timer
 	const reset = () => {
+		// Sauvegarder la session si elle existe
+		if (currentSessionId) {
+			saveSession(false); // Session abandonnée
+		}
+
 		setIsRunning(false);
 		setTimeLeft(0);
 		setPhase('work');
 		setSessionCount(0);
+		setCurrentSessionId(null);
+		setSessionStartTime(null);
+		setActualWorkTime(0);
+		setActualBreakTime(0);
+		setCompletedCycles(0);
+
 		if (intervalRef.current) {
 			clearInterval(intervalRef.current);
 		}
@@ -103,17 +170,32 @@ export const useTimer = ({
 	useEffect(() => {
 		if (isRunning && timeLeft > 0) {
 			intervalRef.current = setInterval(() => {
+				// Tracker le temps réel
+				if (phase === 'work') {
+					setActualWorkTime(prev => prev + 1);
+				} else if (phase === 'break') {
+					setActualBreakTime(prev => prev + 1);
+				}
+
 				setTimeLeft(prev => {
 					if (prev <= 1) {
 						// Timer finished
 						if (phase === 'work' && breakDurationMinutes) {
 							// Work phase finished - auto-switch to break
+							setCompletedCycles(prev => prev + 1);
 							soundManager.playTransitionSound();
 							setPhase('break');
 							onPhaseChange?.('break');
 							return totalBreakTime;
 						} else {
 							// Break finished or no break - stop timer
+							if (phase === 'break') {
+								setCompletedCycles(prev => prev + 1);
+							}
+
+							// Session terminée avec succès
+							saveSession(true);
+
 							soundManager.playFinishSound();
 							setIsRunning(false);
 							setPhase('finished');

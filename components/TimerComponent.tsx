@@ -9,6 +9,8 @@ import { SessionCircularTimer } from './SessionCircularTimer';
 interface TimerComponentProps {
 	workDurationMinutes: number;
 	breakDurationMinutes?: number;
+	methodName?: string;
+	methodId?: string;
 	onPhaseChange?: (phase: TimerPhase) => void;
 	onFinish?: () => void;
 }
@@ -25,6 +27,8 @@ const getPhaseLabel = (phase: TimerPhase): string => {
 export const TimerComponent: React.FC<TimerComponentProps> = ({
 	workDurationMinutes,
 	breakDurationMinutes,
+	methodName,
+	methodId,
 	onPhaseChange,
 	onFinish,
 }) => {
@@ -37,6 +41,8 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 	const timer = useTimer({
 		workDurationMinutes,
 		breakDurationMinutes,
+		methodName,
+		methodId,
 		onPhaseChange,
 		onFinish,
 	});
