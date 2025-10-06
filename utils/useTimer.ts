@@ -1,4 +1,6 @@
+import * as Haptics from 'expo-haptics';
 import { useEffect, useRef, useState } from 'react';
+import { soundManager } from './soundManager';
 
 export type TimerPhase = 'work' | 'break' | 'finished';
 
@@ -34,6 +36,7 @@ export const useTimer = ({
 	const [timeLeft, setTimeLeft] = useState(0);
 	const [isRunning, setIsRunning] = useState(false);
 	const [phase, setPhase] = useState<TimerPhase>('work');
+	const [sessionCount, setSessionCount] = useState(0);
 	const intervalRef = useRef<number | null>(null);
 
 	const totalWorkTime = workDurationMinutes * 60;
@@ -48,9 +51,25 @@ export const useTimer = ({
 
 	// Start timer
 	const start = () => {
+		// Vibration forte pour tester
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+
 		setTimeLeft(totalWorkTime);
 		setPhase('work');
 		setIsRunning(true);
+		setSessionCount(prev => prev + 1);
+		onPhaseChange?.('work');
+	};
+
+	// Restart timer (nouvelle session)
+	const restart = () => {
+		// Vibration forte pour tester
+		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+
+		setTimeLeft(totalWorkTime);
+		setPhase('work');
+		setIsRunning(true);
+		setSessionCount(prev => prev + 1);
 		onPhaseChange?.('work');
 	};
 
@@ -74,6 +93,7 @@ export const useTimer = ({
 		setIsRunning(false);
 		setTimeLeft(0);
 		setPhase('work');
+		setSessionCount(0);
 		if (intervalRef.current) {
 			clearInterval(intervalRef.current);
 		}
@@ -88,11 +108,13 @@ export const useTimer = ({
 						// Timer finished
 						if (phase === 'work' && breakDurationMinutes) {
 							// Work phase finished - auto-switch to break
+							soundManager.playTransitionSound();
 							setPhase('break');
 							onPhaseChange?.('break');
 							return totalBreakTime;
 						} else {
 							// Break finished or no break - stop timer
+							soundManager.playFinishSound();
 							setIsRunning(false);
 							setPhase('finished');
 							onPhaseChange?.('finished');
@@ -144,6 +166,8 @@ export const useTimer = ({
 	return {
 		...state,
 		...controls,
+		restart,
+		sessionCount,
 		formatTime,
 		formattedTime: formatTime(timeLeft),
 	};

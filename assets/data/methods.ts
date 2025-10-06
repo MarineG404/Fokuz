@@ -14,8 +14,8 @@ export const methods: Method[] = [
 		id: "1",
 		name: "Pomodoro",
 		description: "Travaillez en intervalles de 25 minutes avec des pauses de 5 minutes.",
-		workDuration: 25,
-		breakDuration: 5,
+		workDuration: 0.2,
+		breakDuration: 0.2,
 		icon: "repeat-outline",
 	},
 	{

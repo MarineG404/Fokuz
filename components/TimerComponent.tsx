@@ -1,7 +1,9 @@
 import { useThemeColors } from '@/constants/color';
 import { TimerPhase, useTimer } from '@/utils/useTimer';
-import React from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import React, { useEffect, useState } from 'react';
+import { Animated, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import { ConfirmModal } from './ConfirmModal';
 import { SessionCircularTimer } from './SessionCircularTimer';
 
 interface TimerComponentProps {
@@ -27,6 +29,11 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 	onFinish,
 }) => {
 	const COLORS = useThemeColors();
+	const [showConfirmModal, setShowConfirmModal] = useState(false);
+	const [fadeAnim] = useState(new Animated.Value(1));
+	const [scaleAnim] = useState(new Animated.Value(1));
+	const [phaseAnim] = useState(new Animated.Value(0));
+
 	const timer = useTimer({
 		workDurationMinutes,
 		breakDurationMinutes,
@@ -34,12 +41,87 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 		onFinish,
 	});
 
+	// Animation lors du changement de phase
+	useEffect(() => {
+		if (timer.timeLeft > 0) {
+			Animated.sequence([
+				Animated.timing(phaseAnim, {
+					toValue: 1,
+					duration: 300,
+					useNativeDriver: true,
+				}),
+				Animated.timing(phaseAnim, {
+					toValue: 0,
+					duration: 300,
+					useNativeDriver: true,
+				}),
+			]).start();
+		}
+	}, [timer.phase]);
+
+	// Animation lors du start/pause
+	useEffect(() => {
+		Animated.timing(scaleAnim, {
+			toValue: timer.isRunning ? 1.02 : 1,
+			duration: 200,
+			useNativeDriver: true,
+		}).start();
+	}, [timer.isRunning]);
+
+	const handleTerminate = () => {
+		setShowConfirmModal(true);
+	};
+
+	const confirmTerminate = () => {
+		timer.reset();
+		setShowConfirmModal(false);
+	};
+
+	const cancelTerminate = () => {
+		setShowConfirmModal(false);
+	};
+
 	return (
 		<View style={styles.container}>
-			<Text style={[styles.sectionTitle, { color: COLORS.primary }]}>Minuteur</Text>
+			<Animated.View style={[styles.header, { opacity: fadeAnim }]}>
+				<Text style={[styles.sectionTitle, { color: COLORS.primary }]}>Minuteur</Text>
+				{timer.sessionCount > 0 && (
+					<Text style={[styles.sessionCounter, { color: COLORS.textSecondary }]}>
+						Session {timer.sessionCount}
+					</Text>
+				)}
+			</Animated.View>
 
 			{timer.timeLeft > 0 ? (
-				<View style={styles.timerContainer}>
+				<Animated.View style={[styles.timerContainer, { transform: [{ scale: scaleAnim }] }]}>
+					{/* Indicateur de phase animé */}
+					<Animated.View style={[
+						styles.phaseIndicator,
+						{
+							backgroundColor: timer.phase === 'work' ? COLORS.workColor : COLORS.breakColor,
+							transform: [{
+								scale: phaseAnim.interpolate({
+									inputRange: [0, 1],
+									outputRange: [1, 1.1]
+								})
+							}],
+							opacity: phaseAnim.interpolate({
+								inputRange: [0, 1],
+								outputRange: [0.8, 1]
+							})
+						}
+					]}>
+						<Ionicons
+							name={timer.phase === 'work' ? 'briefcase' : 'cafe'}
+							size={16}
+							color="white"
+							style={styles.phaseIcon}
+						/>
+						<Text style={styles.phaseText}>
+							{getPhaseLabel(timer.phase)}
+						</Text>
+					</Animated.View>
+
 					<SessionCircularTimer
 						workDurationMinutes={workDurationMinutes}
 						breakDurationMinutes={breakDurationMinutes || 5}
@@ -47,58 +129,131 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 						timeLeft={timer.timeLeft}
 						formattedTime={timer.formattedTime}
 					/>
-				</View>
+				</Animated.View>
 			) : (
-				<View style={styles.readyContainer}>
+				<Animated.View style={[styles.readyContainer, { opacity: fadeAnim }]}>
+					<Ionicons
+						name={timer.sessionCount > 0 ? 'checkmark-circle' : 'play-circle'}
+						size={48}
+						color={COLORS.primary}
+						style={styles.readyIcon}
+					/>
 					<Text style={[styles.readyText, { color: COLORS.text }]}>
-						Prêt à commencer !
+						{timer.sessionCount > 0 ? 'Session terminée !' : 'Prêt à commencer !'}
 					</Text>
-				</View>
+					{timer.sessionCount > 0 && (
+						<Text style={[styles.readySubText, { color: COLORS.textSecondary }]}>
+							Félicitations pour cette session de focus !
+						</Text>
+					)}
+				</Animated.View>
 			)}
 
-			<View style={styles.buttonRow}>
+			<Animated.View style={[styles.buttonRow, { opacity: fadeAnim }]}>
 				{timer.timeLeft === 0 ? (
-					<TouchableOpacity
-						style={[styles.button, { backgroundColor: COLORS.primary }]}
-						onPress={timer.start}
-					>
-						<Text style={styles.buttonText}>Commencer</Text>
-					</TouchableOpacity>
+					<View style={styles.buttonRow}>
+						<TouchableOpacity
+							style={[styles.button, styles.primaryButton, { backgroundColor: COLORS.primary }]}
+							onPress={timer.sessionCount > 0 ? timer.restart : timer.start}
+							activeOpacity={0.8}
+						>
+							<Ionicons
+								name={timer.sessionCount > 0 ? "refresh" : "play"}
+								size={18}
+								color="white"
+								style={styles.buttonIcon}
+							/>
+							<Text style={styles.buttonText}>
+								{timer.sessionCount > 0 ? 'Nouvelle session' : 'Commencer'}
+							</Text>
+						</TouchableOpacity>
+						{timer.sessionCount > 0 && (
+							<TouchableOpacity
+								style={[styles.button, styles.resetButton, { borderColor: COLORS.primary }]}
+								onPress={handleTerminate}
+								activeOpacity={0.7}
+							>
+								<Ionicons name="stop" size={16} color={COLORS.primary} style={styles.buttonIcon} />
+								<Text style={[styles.buttonText, { color: COLORS.primary }]}>Terminer</Text>
+							</TouchableOpacity>
+						)}
+					</View>
 				) : (
 					<>
 						<TouchableOpacity
-							style={[styles.button, { backgroundColor: timer.isRunning ? COLORS.secondary : COLORS.primary }]}
+							style={[
+								styles.button,
+								styles.primaryButton,
+								{
+									backgroundColor: timer.isRunning ? COLORS.secondary : COLORS.primary,
+									transform: [{ scale: timer.isRunning ? 1.05 : 1 }]
+								}
+							]}
 							onPress={timer.toggle}
+							activeOpacity={0.8}
 						>
+							<Ionicons
+								name={timer.isRunning ? "pause" : "play"}
+								size={16}
+								color="white"
+								style={styles.buttonIcon}
+							/>
 							<Text style={styles.buttonText}>
 								{timer.isRunning ? 'Pause' : 'Reprendre'}
 							</Text>
 						</TouchableOpacity>
 						<TouchableOpacity
 							style={[styles.button, styles.resetButton, { borderColor: COLORS.primary }]}
-							onPress={timer.reset}
+							onPress={handleTerminate}
+							activeOpacity={0.7}
 						>
-							<Text style={[styles.buttonText, { color: COLORS.primary }]}>Reset</Text>
+							<Ionicons name="stop" size={16} color={COLORS.primary} style={styles.buttonIcon} />
+							<Text style={[styles.buttonText, { color: COLORS.primary }]}>Terminer</Text>
 						</TouchableOpacity>
 					</>
 				)}
-			</View>
+			</Animated.View>
+
+			{/* Modal de confirmation */}
+			<ConfirmModal
+				visible={showConfirmModal}
+				title="Terminer la session ?"
+				message="Vous allez perdre votre progression actuelle et remettre le compteur à zéro."
+				confirmText="Terminer"
+				cancelText="Annuler"
+				onConfirm={confirmTerminate}
+				onCancel={cancelTerminate}
+			/>
 		</View>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		marginTop: 20,
+		marginTop: 24,
 		alignItems: 'center',
+		paddingHorizontal: 20,
+	},
+	header: {
+		alignItems: 'center',
+		marginBottom: 24,
 	},
 	sectionTitle: {
-		fontSize: 18,
-		fontWeight: '600',
-		marginBottom: 16,
+		fontSize: 20,
+		fontWeight: '700',
+		marginBottom: 6,
+		letterSpacing: 0.5,
+	},
+	sessionCounter: {
+		fontSize: 14,
+		fontWeight: '500',
+		paddingHorizontal: 12,
+		paddingVertical: 4,
+		borderRadius: 12,
+		backgroundColor: 'rgba(0,0,0,0.05)',
 	},
 	timerContainer: {
-		marginBottom: 30,
+		marginBottom: 36,
 		alignItems: 'center',
 		justifyContent: 'center',
 	},
@@ -108,21 +263,74 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 		marginBottom: 30,
 	},
+	readyIcon: {
+		marginBottom: 16,
+	},
 	readyText: {
 		fontSize: 18,
 		fontWeight: '500',
 		textAlign: 'center',
+		marginBottom: 8,
+	},
+	readySubText: {
+		fontSize: 14,
+		textAlign: 'center',
+		fontStyle: 'italic',
+	},
+	phaseIndicator: {
+		flexDirection: 'row',
+		alignItems: 'center',
+		paddingHorizontal: 16,
+		paddingVertical: 8,
+		borderRadius: 20,
+		marginBottom: 20,
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.2,
+		shadowRadius: 4,
+		elevation: 3,
+	},
+	phaseIcon: {
+		marginRight: 6,
+	},
+	phaseText: {
+		color: 'white',
+		fontSize: 14,
+		fontWeight: '600',
 	},
 	buttonRow: {
 		flexDirection: 'row',
-		gap: 12,
+		gap: 16,
+		justifyContent: 'center',
+		marginTop: 8,
 	},
 	button: {
-		paddingHorizontal: 24,
+		flexDirection: 'row',
+		paddingHorizontal: 20,
 		paddingVertical: 12,
-		borderRadius: 8,
-		minWidth: 100,
+		borderRadius: 12,
+		minWidth: 120,
 		alignItems: 'center',
+		justifyContent: 'center',
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.1,
+		shadowRadius: 3,
+		elevation: 2,
+	},
+	primaryButton: {
+		shadowOpacity: 0.2,
+		shadowRadius: 4,
+		elevation: 3,
+	},
+	buttonIcon: {
+		marginRight: 6,
 	},
 	resetButton: {
 		backgroundColor: 'transparent',
@@ -133,4 +341,5 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 		fontWeight: '600',
 	},
+
 });

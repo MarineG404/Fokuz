@@ -1,10 +1,11 @@
 import { methods } from "@/assets/data/methods";
 import { HeaderTitle } from "@/components/HeaderTitle";
+import { LofiPlayer } from "@/components/LofiPlayer";
 import { TimerComponent } from "@/components/TimerComponent";
 import { useThemeColors } from "@/constants/color";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
@@ -19,35 +20,70 @@ export default function MethodDetails() {
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
 			<HeaderTitle title={method ? method.name : "Méthode non trouvée"} showBack />
 
-			<View style={styles.content}>
+			<ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
 				{method ? (
 					<>
-						<Text style={[styles.description, { color: COLORS.text }]}>
-							{method.description}
-						</Text>
-
-						<Text style={[styles.sectionTitle, { color: COLORS.primary }]}>Durée</Text>
-						<Text style={[styles.meta, { color: COLORS.textSecondary }]}>
-							Travail: {method.workDuration} minutes
-						</Text>
-						{method.breakDuration && (
-							<Text style={[styles.meta, { color: COLORS.textSecondary }]}>
-								Pause: {method.breakDuration} minutes
+						{/* Description Card */}
+						<View style={[
+							styles.card,
+							COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
+							{ backgroundColor: COLORS.cardBackground }
+						]}>
+							<Text style={[styles.description, { color: COLORS.text }]}>
+								{method.description}
 							</Text>
-						)}
+						</View>
 
-						{/* Timer Section */}
-						<TimerComponent
-							workDurationMinutes={method.workDuration}
-							breakDurationMinutes={method.breakDuration}
-						/>
+						{/* Duration Info Card */}
+						<View style={[
+							styles.card,
+							styles.durationCard,
+							COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
+							{ backgroundColor: COLORS.cardBackground }
+						]}>
+							<Text style={[styles.cardTitle, { color: COLORS.primary }]}>Configuration</Text>
+							<View style={styles.durationRow}>
+								<View style={[styles.durationItem, { borderLeftColor: COLORS.workColor }]}>
+									<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>Travail</Text>
+									<Text style={[styles.durationValue, { color: COLORS.text }]}>{method.workDuration} min</Text>
+								</View>
+								{method.breakDuration && (
+									<View style={[styles.durationItem, { borderLeftColor: COLORS.breakColor }]}>
+										<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>Pause</Text>
+										<Text style={[styles.durationValue, { color: COLORS.text }]}>{method.breakDuration} min</Text>
+									</View>
+								)}
+							</View>
+						</View>
+
+						{/* Lofi Player Card */}
+						<LofiPlayer />
+
+						{/* Timer Card */}
+						<View style={[
+							styles.card,
+							styles.timerCard,
+							COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
+							{ backgroundColor: COLORS.cardBackground }
+						]}>
+							<TimerComponent
+								workDurationMinutes={method.workDuration}
+								breakDurationMinutes={method.breakDuration}
+							/>
+						</View>
 					</>
 				) : (
-					<Text style={[styles.meta, { color: COLORS.textSecondary }]}>
-						Méthode non trouvée (id: {id})
-					</Text>
+					<View style={[
+						styles.card,
+						COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
+						{ backgroundColor: COLORS.cardBackground }
+					]}>
+						<Text style={[styles.errorText, { color: COLORS.textSecondary }]}>
+							Méthode non trouvée (id: {id})
+						</Text>
+					</View>
 				)}
-			</View>
+			</ScrollView>
 		</SafeAreaView>
 	);
 }
@@ -61,21 +97,64 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingTop: 8,
 	},
-	sectionTitle: {
-		fontSize: 18,
-		fontWeight: "600",
-		marginTop: 8,
-		marginBottom: 8,
+	card: {
+		borderRadius: 16,
+		padding: 20,
+		marginBottom: 16,
+	},
+	cardLight: {
+		borderWidth: 1,
+		borderColor: '#E5E7EB',
+	},
+	cardDark: {
+		shadowColor: '#000',
+		shadowOffset: {
+			width: 0,
+			height: 2,
+		},
+		shadowOpacity: 0.25,
+		shadowRadius: 8,
+		elevation: 6,
 	},
 	description: {
 		fontSize: 16,
 		lineHeight: 24,
-		marginBottom: 12,
-		textAlign: "center",
+		textAlign: 'center',
 	},
-	meta: {
-		marginTop: 4,
+	durationCard: {
+		marginBottom: 20,
+	},
+	cardTitle: {
+		fontSize: 18,
+		fontWeight: '600',
+		marginBottom: 16,
+		textAlign: 'center',
+	},
+	durationRow: {
+		flexDirection: 'row',
+		justifyContent: 'space-around',
+	},
+	durationItem: {
+		alignItems: 'center',
+		paddingLeft: 16,
+		borderLeftWidth: 4,
+		flex: 1,
+		marginHorizontal: 8,
+	},
+	durationLabel: {
+		fontSize: 14,
+		fontWeight: '500',
+		marginBottom: 4,
+	},
+	durationValue: {
+		fontSize: 20,
+		fontWeight: 'bold',
+	},
+	timerCard: {
+		alignItems: 'center',
+	},
+	errorText: {
 		fontSize: 16,
-		marginLeft: 8,
+		textAlign: 'center',
 	},
 });
