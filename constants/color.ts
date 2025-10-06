@@ -8,6 +8,8 @@ export const light = {
 	cardBackground: "#fff",
 	text: "#000",
 	textSecondary: "#757575ff",
+	workColor: "#6366F1",      // Bleu indigo pour le travail
+	breakColor: "#EC4899",     // Rose/magenta pour la pause
 };
 
 export const dark = {
@@ -17,6 +19,8 @@ export const dark = {
 	cardBackground: "#16151aff",
 	text: "#fff",
 	textSecondary: "#bdbdbd",
+	workColor: "#818CF8",      // Bleu indigo plus clair pour le travail
+	breakColor: "#F472B6",     // Rose plus clair pour la pause
 };
 
 export const useThemeColors = () => {
