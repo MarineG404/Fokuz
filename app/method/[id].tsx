@@ -1,5 +1,6 @@
 import { methods } from "@/assets/data/methods";
 import { HeaderTitle } from "@/components/HeaderTitle";
+import { TimerComponent } from "@/components/TimerComponent";
 import { useThemeColors } from "@/constants/color";
 import { useLocalSearchParams } from "expo-router";
 import React from "react";
@@ -34,6 +35,12 @@ export default function MethodDetails() {
 								Pause: {method.breakDuration} minutes
 							</Text>
 						)}
+
+						{/* Timer Section */}
+						<TimerComponent
+							workDurationMinutes={method.workDuration}
+							breakDurationMinutes={method.breakDuration}
+						/>
 					</>
 				) : (
 					<Text style={[styles.meta, { color: COLORS.textSecondary }]}>
