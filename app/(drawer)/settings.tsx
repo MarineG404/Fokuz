@@ -1,7 +1,8 @@
 import { HeaderTitle } from "@/components/HeaderTitle";
+import { ThemeSwitcher } from "@/components/ThemeSwitcher";
 import { useThemeColors } from "@/constants/color";
 import React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SettingsScreen() {
@@ -10,7 +11,9 @@ export default function SettingsScreen() {
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
 			<HeaderTitle title="Paramètres" showBack />
-
+			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>Thème de l'application</Text>
+			<ThemeSwitcher />
+			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>Autres paramètres (à venir)</Text>
 		</SafeAreaView>
 	);
 }
@@ -21,26 +24,10 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 16,
 		paddingTop: 16,
 	},
-	headerRow: {
-		height: 56,
-		alignItems: "center",
-		justifyContent: "center",
-		position: "relative",
-		paddingHorizontal: 16,
-	},
-	backButton: {
-		position: "absolute",
-		left: 12,
-		top: 16,
-		padding: 6,
-	},
-	headerTitle: {
+	titlebis: {
 		fontSize: 20,
 		fontWeight: "700",
-	},
-	content: {
-		flex: 1,
-		alignItems: "center",
-		justifyContent: "center",
+		marginTop: 8,
+		marginBottom: 8,
 	},
 });
