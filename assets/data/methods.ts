@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 
-export type Exercise = {
+export type Method = {
 	id: string;
 	name: string;
 	workDuration: number;
@@ -8,7 +8,7 @@ export type Exercise = {
 	icon: keyof typeof Ionicons.glyphMap;
 };
 
-export const exercises: Exercise[] = [
+export const methods: Method[] = [
 	{
 		id: "1",
 		name: "Pomodoro",
