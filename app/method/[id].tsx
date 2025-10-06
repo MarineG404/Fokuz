@@ -6,12 +6,11 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const COLORS = useThemeColors();
-
 
 export default function MethodDetails() {
 	const params = useLocalSearchParams();
 	const id = params.id as string | undefined;
+	const COLORS = useThemeColors();
 
 	const method = methods.find((m) => m.id === id);
 
@@ -19,11 +18,28 @@ export default function MethodDetails() {
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
 			<HeaderTitle title={method ? method.name : "Méthode non trouvée"} showBack />
 
-			<View style={styles.container}>
-				<Text style={styles.title}>Détails de la méthode</Text>
-				<Text style={styles.subtitle}>Voici les détails pour la méthode sélectionnée :</Text>
-				<Text style={styles.methodName}>{method ? method.name : "Méthode non trouvée"}</Text>
-				<Text style={styles.meta}>id: {id}</Text>
+			<View style={styles.content}>
+				{method ? (
+					<>
+						<Text style={[styles.description, { color: COLORS.text }]}>
+							{method.description}
+						</Text>
+
+						<Text style={[styles.sectionTitle, { color: COLORS.primary }]}>Durée</Text>
+						<Text style={[styles.meta, { color: COLORS.textSecondary }]}>
+							Travail: {method.workDuration} minutes
+						</Text>
+						{method.breakDuration && (
+							<Text style={[styles.meta, { color: COLORS.textSecondary }]}>
+								Pause: {method.breakDuration} minutes
+							</Text>
+						)}
+					</>
+				) : (
+					<Text style={[styles.meta, { color: COLORS.textSecondary }]}>
+						Méthode non trouvée (id: {id})
+					</Text>
+				)}
 			</View>
 		</SafeAreaView>
 	);
@@ -34,22 +50,25 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 16,
 		paddingTop: 16,
 	},
-	title: {
-		fontSize: 20,
-		fontWeight: "700",
-		marginBottom: 8,
-		color: COLORS.primary,
+	content: {
+		flex: 1,
+		paddingTop: 8,
 	},
-	subtitle: {
-		color: COLORS.text,
-	},
-	methodName: {
-		color: COLORS.text,
+	sectionTitle: {
 		fontSize: 18,
+		fontWeight: "600",
 		marginTop: 8,
+		marginBottom: 8,
+	},
+	description: {
+		fontSize: 16,
+		lineHeight: 24,
+		marginBottom: 12,
+		textAlign: "center",
 	},
 	meta: {
-		color: COLORS.textSecondary,
-		marginTop: 6,
+		marginTop: 4,
+		fontSize: 16,
+		marginLeft: 8,
 	},
 });
