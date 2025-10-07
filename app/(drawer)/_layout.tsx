@@ -18,7 +18,7 @@ export default function DrawerLayout() {
 				drawerLabelStyle: { fontSize: 16 },
 			}}
 		>
-			<Drawer.Screen name="(tabs)" options={{ title: "Home" }} />
+			<Drawer.Screen name="(tabs)" options={{ title: "Accueil" }} />
 			<Drawer.Screen name="settings" options={{ title: "Paramètres" }} />
 		</Drawer>
 	);
