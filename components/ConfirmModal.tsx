@@ -1,3 +1,4 @@
+import BlockCard from '@/components/BlockCard';
 import { useThemeColors } from '@/constants/color';
 import React from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
@@ -31,7 +32,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
 			onRequestClose={onCancel}
 		>
 			<View style={styles.modalOverlay}>
-				<View style={[styles.modalContent, { backgroundColor: COLORS.cardBackground }]}>
+				<BlockCard style={styles.modalContent}>
 					<Text style={[styles.modalTitle, { color: COLORS.text }]}>
 						{title}
 					</Text>
@@ -57,7 +58,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
 							</Text>
 						</TouchableOpacity>
 					</View>
-				</View>
+				</BlockCard>
 			</View>
 		</Modal>
 	);
@@ -66,24 +67,13 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
 const styles = StyleSheet.create({
 	modalOverlay: {
 		flex: 1,
-		backgroundColor: 'rgba(0, 0, 0, 0.5)',
 		justifyContent: 'center',
 		alignItems: 'center',
 		padding: 20,
 	},
 	modalContent: {
-		borderRadius: 16,
-		padding: 24,
 		width: '100%',
 		maxWidth: 320,
-		shadowColor: '#000',
-		shadowOffset: {
-			width: 0,
-			height: 4,
-		},
-		shadowOpacity: 0.3,
-		shadowRadius: 12,
-		elevation: 8,
 	},
 	modalTitle: {
 		fontSize: 18,
@@ -110,7 +100,6 @@ const styles = StyleSheet.create({
 		alignItems: 'center',
 	},
 	cancelButton: {
-		backgroundColor: 'transparent',
 		borderWidth: 1,
 	},
 	confirmButton: {

@@ -1,3 +1,4 @@
+import BlockCard from '@/components/BlockCard';
 import { useThemeColors } from '@/constants/color';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
@@ -36,12 +37,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 	};
 
 	return (
-		<View style={[
-			styles.container,
-			COLORS.text === '#000' ? styles.containerLight : styles.containerDark,
-			{ backgroundColor: COLORS.cardBackground },
-			isCollapsed && styles.collapsed
-		]}>
+		<BlockCard style={[styles.container, isCollapsed && styles.collapsed]}>
 			{/* Header */}
 			<View style={styles.header}>
 				<View style={styles.headerLeft}>
@@ -92,14 +88,12 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 					</View>
 				</>
 			)}
-		</View>
+		</BlockCard>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		borderRadius: 16,
-		padding: 16,
 		marginBottom: 16,
 	},
 	containerLight: {

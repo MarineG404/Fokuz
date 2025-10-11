@@ -1,3 +1,4 @@
+import BlockCard from '@/components/BlockCard';
 import { useThemeColors } from '@/constants/color';
 import { SessionRecord } from '@/types/session';
 import { historyService } from '@/utils/historyService';
@@ -57,11 +58,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 	const statusInfo = getStatusInfo();
 
 	return (
-		<View style={[
-			styles.container,
-			COLORS.text === '#000' ? styles.containerLight : styles.containerDark,
-			{ backgroundColor: COLORS.cardBackground }
-		]}>
+		<BlockCard style={styles.container}>
 			{/* Header avec méthode et statut */}
 			<View style={styles.header}>
 				<View style={styles.methodInfo}>
@@ -138,14 +135,13 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 					{formatTime(session.startTime)} → {formatTime(session.endTime)}
 				</Text>
 			</View>
-		</View>
+		</BlockCard>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		borderRadius: 16,
-		padding: 20,
+		// layout-only; visual styles come from BlockCard
 		marginBottom: 12,
 	},
 	containerLight: {

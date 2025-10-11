@@ -1,4 +1,5 @@
 import { methods } from "@/assets/data/methods";
+import BlockCard from '@/components/BlockCard';
 import { HeaderTitle } from "@/components/HeaderTitle";
 import { LofiPlayer } from "@/components/LofiPlayer";
 import { TimerComponent } from "@/components/TimerComponent";
@@ -36,23 +37,14 @@ export default function MethodDetails() {
 				{method ? (
 					<>
 						{/* Description Card */}
-						<View style={[
-							styles.card,
-							COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
-							{ backgroundColor: COLORS.cardBackground }
-						]}>
+						<BlockCard>
 							<Text style={[styles.description, { color: COLORS.text }]}>
 								{method.description}
 							</Text>
-						</View>
+						</BlockCard>
 
 						{/* Duration Info Card */}
-						<View style={[
-							styles.card,
-							styles.durationCard,
-							COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
-							{ backgroundColor: COLORS.cardBackground }
-						]}>
+						<BlockCard style={styles.durationCard}>
 							<Text style={[styles.cardTitle, { color: COLORS.primary }]}>Configuration</Text>
 							<View style={styles.durationRow}>
 								<View style={[styles.durationItem, { borderLeftColor: COLORS.workColor }]}>
@@ -66,7 +58,7 @@ export default function MethodDetails() {
 									</View>
 								)}
 							</View>
-						</View>
+						</BlockCard>
 
 						{/* Lofi + Timer: stacked on portrait, side-by-side on landscape */}
 						{(() => {
@@ -76,19 +68,19 @@ export default function MethodDetails() {
 								return (
 									<View style={styles.landscapeRow}>
 										<View style={styles.landscapeHalf}>
-											<View style={[styles.card, styles.cardFill, COLORS.text === '#000' ? styles.cardLight : styles.cardDark, { backgroundColor: COLORS.cardBackground }]}>
+											<BlockCard style={[styles.cardFill]}>
 												<LofiPlayer />
-											</View>
+											</BlockCard>
 										</View>
 										<View style={styles.landscapeHalf}>
-											<View style={[styles.card, styles.cardFill, styles.timerCard, COLORS.text === '#000' ? styles.cardLight : styles.cardDark, { backgroundColor: COLORS.cardBackground }]}>
+											<BlockCard style={[styles.cardFill, styles.timerCard]}>
 												<TimerComponent
 													workDurationMinutes={method.workDuration}
 													breakDurationMinutes={method.breakDuration}
 													methodName={method.name}
 													methodId={method.id}
 												/>
-											</View>
+											</BlockCard>
 										</View>
 									</View>
 								);
@@ -97,33 +89,24 @@ export default function MethodDetails() {
 								<>
 									{/* Portrait: stacked */}
 									<LofiPlayer />
-									<View style={[
-										styles.card,
-										styles.timerCard,
-										COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
-										{ backgroundColor: COLORS.cardBackground }
-									]}>
+									<BlockCard style={[styles.card, styles.timerCard]}>
 										<TimerComponent
 											workDurationMinutes={method.workDuration}
 											breakDurationMinutes={method.breakDuration}
 											methodName={method.name}
 											methodId={method.id}
 										/>
-									</View>
+									</BlockCard>
 								</>
 							);
 						})()}
 					</>
 				) : (
-					<View style={[
-						styles.card,
-						COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
-						{ backgroundColor: COLORS.cardBackground }
-					]}>
+					<BlockCard style={styles.card} padded={false}>
 						<Text style={[styles.errorText, { color: COLORS.textSecondary }]}>
 							Méthode non trouvée (id: {id})
 						</Text>
-					</View>
+					</BlockCard>
 				)}
 			</ScrollView>
 		</SafeAreaView>

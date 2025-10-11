@@ -1,3 +1,4 @@
+import BlockCard from '@/components/BlockCard';
 import { HeaderTitle } from '@/components/HeaderTitle';
 import { SessionCard } from '@/components/SessionCard';
 import { StatsCard } from '@/components/StatsCard';
@@ -83,7 +84,6 @@ export default function HistoryScreen() {
 				filter === type && styles.filterButtonActive,
 				{
 					borderColor: COLORS.primary,
-					backgroundColor: filter === type ? COLORS.primary : 'transparent',
 				}
 			]}
 			onPress={() => setFilter(type)}
@@ -200,6 +200,25 @@ export default function HistoryScreen() {
 							))}
 						</View>
 					))
+				)}
+				{sessions.length === 0 && (
+					<BlockCard>
+						<View style={styles.emptyState}>
+							<Ionicons
+								name="document-text-outline"
+								size={48}
+								color={COLORS.textSecondary}
+								style={styles.emptyIcon}
+							/>
+							<Text style={[styles.emptyTitle, { color: COLORS.text }]}>Aucune session trouvée</Text>
+							<Text style={[styles.emptySubtitle, { color: COLORS.textSecondary }]}>
+								{filter === 'all'
+									? "Commencez votre première session pour voir l'historique ici"
+									: "Aucune session pour cette période"
+								}
+							</Text>
+						</View>
+					</BlockCard>
 				)}
 			</ScrollView>
 		</SafeAreaView>

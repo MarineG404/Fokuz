@@ -1,4 +1,5 @@
 import { Method } from "@/assets/data/methods";
+import BlockCard from '@/components/BlockCard';
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -13,25 +14,23 @@ export const MethodCard = ({ method }: { method: Method }) => {
 	};
 
 	return (
-		<TouchableOpacity
-			onPress={onPress}
-			style={[styles.card, { backgroundColor: COLORS.cardBackground }]}
-		>
-			<Ionicons name={method.icon} size={40} color={COLORS.secondary} style={styles.icon} />
-			<View style={styles.textContainer}>
-				<Text style={[styles.name, { color: COLORS.text }]}>{method.name}</Text>
-				<Text style={[styles.description, { color: COLORS.textSecondary }]}>
-					{method.workDuration} min de travail
-					{method.breakDuration ? `, ${method.breakDuration} min de pause` : ""}
-				</Text>
-			</View>
+		<TouchableOpacity onPress={onPress}>
+			<BlockCard style={styles.card}>
+				<Ionicons name={method.icon} size={40} color={COLORS.secondary} style={styles.icon} />
+				<View style={styles.textContainer}>
+					<Text style={[styles.name, { color: COLORS.text }]}>{method.name}</Text>
+					<Text style={[styles.description, { color: COLORS.textSecondary }]}>
+						{method.workDuration} min de travail
+						{method.breakDuration ? `, ${method.breakDuration} min de pause` : ""}
+					</Text>
+				</View>
+			</BlockCard>
 		</TouchableOpacity>
 	);
 };
 
 const styles = StyleSheet.create({
 	card: {
-		backgroundColor: "transparent",
 		borderRadius: 20,
 		padding: 16,
 		flexDirection: "row",
@@ -59,6 +58,6 @@ const styles = StyleSheet.create({
 		marginBottom: 4,
 	},
 	description: {
-		fontSize: 14,
+		// layout-only styles: visual styles (radius/padding/shadow) come from BlockCard
 	},
 });

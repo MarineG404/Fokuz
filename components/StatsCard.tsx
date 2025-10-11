@@ -1,3 +1,4 @@
+import BlockCard from '@/components/BlockCard';
 import { useThemeColors } from '@/constants/color';
 import { historyService } from '@/utils/historyService';
 import { Ionicons } from '@expo/vector-icons';
@@ -48,11 +49,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 	}
 
 	return (
-		<View style={[
-			styles.container,
-			COLORS.text === '#000' ? styles.containerLight : styles.containerDark,
-			{ backgroundColor: COLORS.cardBackground }
-		]}>
+		<BlockCard style={styles.container}>
 			<View style={styles.header}>
 				<Ionicons name="stats-chart" size={20} color={COLORS.primary} />
 				<Text style={[styles.title, { color: COLORS.text }]}>
@@ -100,20 +97,18 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 					</View>
 				</View>
 			)}
-		</View>
+		</BlockCard>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		borderRadius: 16,
-		padding: 20,
+		// layout-only; visual styles provided by BlockCard
 		marginBottom: 24,
 	},
 	containerLight: {
 		borderWidth: 1,
 		borderColor: '#E5E7EB',
-		backgroundColor: '#FAFAFA',
 	},
 	containerDark: {
 		shadowColor: '#000',
