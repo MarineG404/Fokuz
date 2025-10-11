@@ -1,7 +1,7 @@
 import { useThemeColors } from '@/constants/color';
 import React from 'react';
 import { StyleProp, View, ViewStyle } from 'react-native';
-import { uiStyles } from './uiStyles';
+import { uiStyles } from '../ui/uiStyles';
 
 interface BlockCardProps {
 	children: React.ReactNode;

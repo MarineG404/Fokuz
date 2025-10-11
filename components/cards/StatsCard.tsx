@@ -1,9 +1,9 @@
-import BlockCard from '@/components/BlockCard';
 import { useThemeColors } from '@/constants/color';
 import { historyService } from '@/utils/historyService';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import BlockCard from '../ui/BlockCard';
 
 interface StatsCardProps {
 	totalSessions: number;

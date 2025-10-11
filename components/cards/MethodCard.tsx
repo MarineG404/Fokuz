@@ -1,9 +1,9 @@
 import { Method } from "@/assets/data/methods";
-import BlockCard from '@/components/BlockCard';
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import BlockCard from "../ui/BlockCard";
 
 export const MethodCard = ({ method }: { method: Method }) => {
 	const COLORS = useThemeColors();
@@ -31,33 +31,14 @@ export const MethodCard = ({ method }: { method: Method }) => {
 
 const styles = StyleSheet.create({
 	card: {
-		borderRadius: 20,
-		padding: 16,
 		flexDirection: "row",
 		alignItems: "center",
 		marginBottom: 16,
-
-		// Ombre iOS
-		shadowColor: "#000",
-		shadowOffset: { width: 0, height: 1 },
-		shadowOpacity: 0.1,
-		shadowRadius: 3,
-
-		// Ombre Android
-		elevation: 2,
 	},
-	icon: {
-		marginRight: 16,
-	},
-	textContainer: {
-		flex: 1,
-	},
-	name: {
-		fontSize: 18,
-		fontWeight: "600",
-		marginBottom: 4,
-	},
-	description: {
-		// layout-only styles: visual styles (radius/padding/shadow) come from BlockCard
-	},
+	icon: { marginRight: 16 },
+	textContainer: { flex: 1 },
+	name: { fontSize: 18, fontWeight: "600", marginBottom: 4 },
+	description: { fontSize: 14 },
 });
+
+export default MethodCard;

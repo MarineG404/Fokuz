@@ -1,8 +1,8 @@
 import { methods } from "@/assets/data/methods";
-import BlockCard from '@/components/BlockCard';
-import { HeaderTitle } from "@/components/HeaderTitle";
-import { LofiPlayer } from "@/components/LofiPlayer";
-import { TimerComponent } from "@/components/TimerComponent";
+import { LofiPlayer } from "@/components/media/LofiPlayer";
+import { TimerComponent } from "@/components/timer/TimerComponent";
+import BlockCard from "@/components/ui/BlockCard";
+import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import { useLocalSearchParams } from "expo-router";
 import * as ScreenOrientation from 'expo-screen-orientation';

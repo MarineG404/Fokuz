@@ -1,6 +1,6 @@
 import { methods } from "@/assets/data/methods";
-import { HeaderTitle } from "@/components/HeaderTitle";
-import { MethodCard } from "@/components/MethodCard";
+import { MethodCard } from "@/components/cards/MethodCard";
+import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import { FlatList, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";

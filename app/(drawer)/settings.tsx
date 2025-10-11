@@ -1,5 +1,5 @@
-import { HeaderTitle } from "@/components/HeaderTitle";
-import { ThemeSwitcher } from "@/components/ThemeSwitcher";
+import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
+import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import React from "react";
 import { StyleSheet, Text } from "react-native";

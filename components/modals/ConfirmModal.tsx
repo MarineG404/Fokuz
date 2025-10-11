@@ -1,7 +1,7 @@
-import BlockCard from '@/components/BlockCard';
 import { useThemeColors } from '@/constants/color';
 import React from 'react';
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from 'react-native';
+import BlockCard from '../ui/BlockCard';
 
 interface ConfirmModalProps {
 	visible: boolean;

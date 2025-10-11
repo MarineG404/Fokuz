@@ -1,9 +1,9 @@
-import BlockCard from '@/components/BlockCard';
 import { useThemeColors } from '@/constants/color';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useState } from 'react';
 import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
 import YoutubePlayer from 'react-native-youtube-iframe';
+import BlockCard from '../ui/BlockCard';
 
 interface LofiPlayerProps {
 	isVisible?: boolean;

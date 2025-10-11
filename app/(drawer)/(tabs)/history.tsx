@@ -1,7 +1,7 @@
-import BlockCard from '@/components/BlockCard';
-import { HeaderTitle } from '@/components/HeaderTitle';
-import { SessionCard } from '@/components/SessionCard';
-import { StatsCard } from '@/components/StatsCard';
+import { SessionCard } from '@/components/cards/SessionCard';
+import { StatsCard } from '@/components/cards/StatsCard';
+import BlockCard from '@/components/ui/BlockCard';
+import { HeaderTitle } from '@/components/ui/HeaderTitle';
 import { useThemeColors } from '@/constants/color';
 import { SessionRecord } from '@/types/session';
 import { historyService } from '@/utils/historyService';

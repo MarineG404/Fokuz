@@ -3,8 +3,8 @@ import { TimerPhase, useTimer } from '@/utils/useTimer';
 import { Ionicons } from '@expo/vector-icons';
 import React, { useEffect, useState } from 'react';
 import { Animated, StyleSheet, Text, View } from 'react-native';
-import AppButton from './AppButton';
-import { ConfirmModal } from './ConfirmModal';
+import { ConfirmModal } from '../modals/ConfirmModal';
+import AppButton from '../ui/AppButton';
 import { SessionCircularTimer } from './SessionCircularTimer';
 
 export interface TimerComponentProps {
