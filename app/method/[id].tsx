@@ -4,12 +4,24 @@ import { LofiPlayer } from "@/components/LofiPlayer";
 import { TimerComponent } from "@/components/TimerComponent";
 import { useThemeColors } from "@/constants/color";
 import { useLocalSearchParams } from "expo-router";
+import * as ScreenOrientation from 'expo-screen-orientation';
 import React from "react";
-import { ScrollView, StyleSheet, Text, View } from "react-native";
+import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 
 export default function MethodDetails() {
+
+	React.useEffect(() => {
+		// allow rotation for this screen
+		ScreenOrientation.unlockAsync().catch(() => { });
+
+		return () => {
+			// restore portrait lock when leaving
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
+		};
+	}, []);
+
 	const params = useLocalSearchParams();
 	const id = params.id as string | undefined;
 	const COLORS = useThemeColors();
@@ -56,23 +68,51 @@ export default function MethodDetails() {
 							</View>
 						</View>
 
-						{/* Lofi Player Card */}
-						<LofiPlayer />
-
-						{/* Timer Card */}
-						<View style={[
-							styles.card,
-							styles.timerCard,
-							COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
-							{ backgroundColor: COLORS.cardBackground }
-						]}>
-							<TimerComponent
-								workDurationMinutes={method.workDuration}
-								breakDurationMinutes={method.breakDuration}
-								methodName={method.name}
-								methodId={method.id}
-							/>
-						</View>
+						{/* Lofi + Timer: stacked on portrait, side-by-side on landscape */}
+						{(() => {
+							const { width, height } = useWindowDimensions();
+							const isLandscape = width > height;
+							if (isLandscape) {
+								return (
+									<View style={styles.landscapeRow}>
+										<View style={styles.landscapeHalf}>
+											<View style={[styles.card, styles.cardFill, COLORS.text === '#000' ? styles.cardLight : styles.cardDark, { backgroundColor: COLORS.cardBackground }]}>
+												<LofiPlayer />
+											</View>
+										</View>
+										<View style={styles.landscapeHalf}>
+											<View style={[styles.card, styles.cardFill, styles.timerCard, COLORS.text === '#000' ? styles.cardLight : styles.cardDark, { backgroundColor: COLORS.cardBackground }]}>
+												<TimerComponent
+													workDurationMinutes={method.workDuration}
+													breakDurationMinutes={method.breakDuration}
+													methodName={method.name}
+													methodId={method.id}
+												/>
+											</View>
+										</View>
+									</View>
+								);
+							}
+							return (
+								<>
+									{/* Portrait: stacked */}
+									<LofiPlayer />
+									<View style={[
+										styles.card,
+										styles.timerCard,
+										COLORS.text === '#000' ? styles.cardLight : styles.cardDark,
+										{ backgroundColor: COLORS.cardBackground }
+									]}>
+										<TimerComponent
+											workDurationMinutes={method.workDuration}
+											breakDurationMinutes={method.breakDuration}
+											methodName={method.name}
+											methodId={method.id}
+										/>
+									</View>
+								</>
+							);
+						})()}
 					</>
 				) : (
 					<View style={[
@@ -154,6 +194,23 @@ const styles = StyleSheet.create({
 	},
 	timerCard: {
 		alignItems: 'center',
+	},
+	landscapeRow: {
+		flexDirection: 'row',
+		justifyContent: 'space-between',
+		alignItems: 'flex-start',
+		gap: 16,
+		marginBottom: 16,
+	},
+	landscapeHalf: {
+		flex: 1,
+		minHeight: 300,
+		marginHorizontal: 8,
+	},
+	cardFill: {
+		flex: 1,
+		paddingVertical: 12,
+		justifyContent: 'center',
 	},
 	errorText: {
 		fontSize: 16,
