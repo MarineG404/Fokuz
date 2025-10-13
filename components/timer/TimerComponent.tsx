@@ -59,7 +59,7 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 				Animated.timing(phaseAnim, { toValue: 0, duration: 300, useNativeDriver: true }),
 			]).start();
 		}
-	}, [timer.phase]);
+	}, [timer.phase, timer.timeLeft, phaseAnim]);
 
 	useEffect(() => {
 		Animated.timing(scaleAnim, {
@@ -67,7 +67,7 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 			duration: 200,
 			useNativeDriver: true,
 		}).start();
-	}, [timer.isRunning]);
+	}, [timer.isRunning, scaleAnim]);
 
 	const handleTerminate = () => setShowConfirmModal(true);
 	const confirmTerminate = () => {

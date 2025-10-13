@@ -18,7 +18,7 @@ const LOFI_VIDEOS = [
 
 export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 	const COLORS = useThemeColors();
-	const [playing, setPlaying] = useState(false);
+	const [playing] = useState(false);
 	const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 	const [isCollapsed, setIsCollapsed] = useState(false);
 

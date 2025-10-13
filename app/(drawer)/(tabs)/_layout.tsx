@@ -1,11 +1,10 @@
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+// navigation not required here
 import { Tabs } from "expo-router";
 import React from "react";
 
 export default function TabLayout() {
-	const navigation = useNavigation();
 	const COLORS = useThemeColors();
 
 	return (

@@ -46,7 +46,7 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 				useNativeDriver: true,
 			}),
 		]).start();
-	}, [currentPhase]);
+	}, [currentPhase, phaseAnim]);
 
 	// Animation de pulsation pour l'indicateur
 	useEffect(() => {
@@ -67,7 +67,7 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 		pulseAnimation.start();
 
 		return () => pulseAnimation.stop();
-	}, []);
+	}, [pulseAnim]);
 
 	// Durées en secondes
 	const workDuration = workDurationMinutes * 60;

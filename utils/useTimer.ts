@@ -1,6 +1,6 @@
 import { SessionRecord } from "@/types/session";
 import * as Haptics from "expo-haptics";
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { historyService } from "./historyService";
 import { soundManager } from "./soundManager";
 
@@ -63,7 +63,7 @@ export const useTimer = ({
 	};
 
 	// Sauvegarder une session
-	const saveSession = async (isCompleted: boolean) => {
+	const saveSession = useCallback(async (isCompleted: boolean) => {
 		if (!currentSessionId || !sessionStartTime) return;
 
 		const session: SessionRecord = {
@@ -82,7 +82,7 @@ export const useTimer = ({
 		};
 
 		await historyService.saveSession(session);
-	};
+	}, [currentSessionId, sessionStartTime, methodName, methodId, workDurationMinutes, breakDurationMinutes, completedCycles, actualWorkTime, actualBreakTime]);
 
 	// Start timer
 	const start = () => {
@@ -218,7 +218,7 @@ export const useTimer = ({
 				clearInterval(intervalRef.current);
 			}
 		};
-	}, [isRunning, timeLeft, phase, totalBreakTime, breakDurationMinutes, onPhaseChange, onFinish]);
+	}, [isRunning, timeLeft, phase, totalBreakTime, breakDurationMinutes, onPhaseChange, onFinish, saveSession]);
 
 	// Cleanup on unmount
 	useEffect(() => {
