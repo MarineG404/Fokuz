@@ -1,7 +1,7 @@
-import { useThemeColors } from '@/constants/color';
-import React from 'react';
-import { StyleProp, View, ViewStyle } from 'react-native';
-import { uiStyles } from '../ui/uiStyles';
+import { useThemeColors } from "@/constants/color";
+import React from "react";
+import { StyleProp, View, ViewStyle } from "react-native";
+import { uiStyles } from "../ui/uiStyles";
 
 interface BlockCardProps {
 	children: React.ReactNode;
@@ -9,13 +9,21 @@ interface BlockCardProps {
 	padded?: boolean;
 }
 
-export const BlockCard: React.FC<BlockCardProps> = ({ children, style, padded = true }) => {
+const BlockCard: React.FC<BlockCardProps> = ({ children, style, padded = true }) => {
 	const COLORS = useThemeColors();
 
-	const themeCardStyle = COLORS.text === '#000' ? uiStyles.cardLight : uiStyles.cardDark;
+	const themeCardStyle = COLORS.text === "#000" ? uiStyles.cardLight : uiStyles.cardDark;
 
 	return (
-		<View style={[uiStyles.card, padded && uiStyles.cardPadded, themeCardStyle, { backgroundColor: COLORS.cardBackground }, style]}>
+		<View
+			style={[
+				uiStyles.card,
+				padded && uiStyles.cardPadded,
+				themeCardStyle,
+				{ backgroundColor: COLORS.cardBackground },
+				style,
+			]}
+		>
 			{children}
 		</View>
 	);

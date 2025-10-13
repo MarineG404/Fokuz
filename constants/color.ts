@@ -1,4 +1,3 @@
-
 import { useSimpleTheme } from "@/contexts/SimpleTheme";
 
 export const light = {
@@ -8,9 +7,9 @@ export const light = {
 	cardBackground: "#fff",
 	text: "#000",
 	textSecondary: "#757575ff",
-	workColor: "#4F46E5",      // Bleu indigo plus intense
-	breakColor: "#E11D48",     // Rose plus vif et contrasté
-	mutedButton: '#E5E7EB',
+	workColor: "#4F46E5", // Bleu indigo plus intense
+	breakColor: "#E11D48", // Rose plus vif et contrasté
+	mutedButton: "#E5E7EB",
 };
 
 export const dark = {
@@ -20,9 +19,9 @@ export const dark = {
 	cardBackground: "#16151aff",
 	text: "#fff",
 	textSecondary: "#bdbdbd",
-	workColor: "#6366F1",      // Bleu indigo vif pour le travail
-	breakColor: "#EC4899",     // Rose vif pour la pause
-	mutedButton: '#2F3136',
+	workColor: "#6366F1", // Bleu indigo vif pour le travail
+	breakColor: "#EC4899", // Rose vif pour la pause
+	mutedButton: "#2F3136",
 };
 
 export const useThemeColors = () => {

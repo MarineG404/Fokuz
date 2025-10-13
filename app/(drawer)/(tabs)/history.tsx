@@ -1,30 +1,23 @@
-import { SessionCard } from '@/components/cards/SessionCard';
-import { StatsCard } from '@/components/cards/StatsCard';
-import BlockCard from '@/components/ui/BlockCard';
-import { HeaderTitle } from '@/components/ui/HeaderTitle';
-import { useThemeColors } from '@/constants/color';
-import { SessionRecord } from '@/types/session';
-import { historyService } from '@/utils/historyService';
-import { Ionicons } from '@expo/vector-icons';
-import { useFocusEffect } from '@react-navigation/native';
-import React, { useCallback, useState } from 'react';
-import {
-	RefreshControl,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View
-} from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { SessionCard } from "@/components/cards/SessionCard";
+import { StatsCard } from "@/components/cards/StatsCard";
+import BlockCard from "@/components/ui/BlockCard";
+import { HeaderTitle } from "@/components/ui/HeaderTitle";
+import { useThemeColors } from "@/constants/color";
+import { SessionRecord } from "@/types/session";
+import { historyService } from "@/utils/historyService";
+import { Ionicons } from "@expo/vector-icons";
+import { useFocusEffect } from "@react-navigation/native";
+import React, { useCallback, useState } from "react";
+import { RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
-type FilterType = 'all' | 'today' | 'week' | 'month';
+type FilterType = "all" | "today" | "week" | "month";
 
 export default function HistoryScreen() {
 	const COLORS = useThemeColors();
 	const [sessions, setSessions] = useState<SessionRecord[]>([]);
 	const [loading, setLoading] = useState(true);
-	const [filter, setFilter] = useState<FilterType>('all');
+	const [filter, setFilter] = useState<FilterType>("all");
 
 	const loadSessions = useCallback(async () => {
 		try {
@@ -32,14 +25,14 @@ export default function HistoryScreen() {
 			let loadedSessions: SessionRecord[] = [];
 
 			switch (filter) {
-				case 'today':
-					const today = new Date().toISOString().split('T')[0];
+				case "today":
+					const today = new Date().toISOString().split("T")[0];
 					loadedSessions = await historyService.getSessionsByDate(today);
 					break;
-				case 'week':
+				case "week":
 					loadedSessions = await historyService.getRecentSessions(7);
 					break;
-				case 'month':
+				case "month":
 					loadedSessions = await historyService.getRecentSessions(30);
 					break;
 				default:
@@ -48,7 +41,7 @@ export default function HistoryScreen() {
 
 			setSessions(loadedSessions);
 		} catch (error) {
-			console.error('Erreur lors du chargement des sessions:', error);
+			console.error("Erreur lors du chargement des sessions:", error);
 		} finally {
 			setLoading(false);
 		}
@@ -57,12 +50,12 @@ export default function HistoryScreen() {
 	useFocusEffect(
 		useCallback(() => {
 			loadSessions();
-		}, [loadSessions])
+		}, [loadSessions]),
 	);
 
 	const getFilteredStats = () => {
 		const totalSessions = sessions.length;
-		const completedSessions = sessions.filter(s => s.isCompleted).length;
+		const completedSessions = sessions.filter((s) => s.isCompleted).length;
 		const totalWorkTime = sessions.reduce((sum, s) => sum + s.totalWorkTime, 0);
 		const avgWorkTime = totalSessions > 0 ? Math.round(totalWorkTime / totalSessions) : 0;
 
@@ -84,16 +77,18 @@ export default function HistoryScreen() {
 				filter === type && styles.filterButtonActive,
 				{
 					borderColor: COLORS.primary,
-				}
+				},
 			]}
 			onPress={() => setFilter(type)}
 		>
-			<Text style={[
-				styles.filterButtonText,
-				{
-					color: filter === type ? 'white' : COLORS.textSecondary,
-				}
-			]}>
+			<Text
+				style={[
+					styles.filterButtonText,
+					{
+						color: filter === type ? "white" : COLORS.textSecondary,
+					},
+				]}
+			>
 				{label}
 			</Text>
 		</TouchableOpacity>
@@ -102,7 +97,7 @@ export default function HistoryScreen() {
 	const groupSessionsByDate = () => {
 		const grouped: { [date: string]: SessionRecord[] } = {};
 
-		sessions.forEach(session => {
+		sessions.forEach((session) => {
 			if (!grouped[session.date]) {
 				grouped[session.date] = [];
 			}
@@ -120,16 +115,16 @@ export default function HistoryScreen() {
 		const yesterday = new Date(today);
 		yesterday.setDate(yesterday.getDate() - 1);
 
-		if (dateStr === today.toISOString().split('T')[0]) {
+		if (dateStr === today.toISOString().split("T")[0]) {
 			return "Aujourd'hui";
-		} else if (dateStr === yesterday.toISOString().split('T')[0]) {
+		} else if (dateStr === yesterday.toISOString().split("T")[0]) {
 			return "Hier";
 		} else {
-			return date.toLocaleDateString('fr-FR', {
-				weekday: 'long',
-				year: 'numeric',
-				month: 'long',
-				day: 'numeric'
+			return date.toLocaleDateString("fr-FR", {
+				weekday: "long",
+				year: "numeric",
+				month: "long",
+				day: "numeric",
 			});
 		}
 	};
@@ -169,24 +164,18 @@ export default function HistoryScreen() {
 
 				{/* Sessions groupées par date */}
 				{sessions.length === 0 ? (
-					<View style={[
-						styles.emptyState,
-						{ backgroundColor: COLORS.cardBackground }
-					]}>
+					<View style={[styles.emptyState, { backgroundColor: COLORS.cardBackground }]}>
 						<Ionicons
 							name="document-text-outline"
 							size={48}
 							color={COLORS.textSecondary}
 							style={styles.emptyIcon}
 						/>
-						<Text style={[styles.emptyTitle, { color: COLORS.text }]}>
-							Aucune session trouvée
-						</Text>
+						<Text style={[styles.emptyTitle, { color: COLORS.text }]}>Aucune session trouvée</Text>
 						<Text style={[styles.emptySubtitle, { color: COLORS.textSecondary }]}>
-							{filter === 'all'
+							{filter === "all"
 								? "Commencez votre première session pour voir l'historique ici"
-								: "Aucune session pour cette période"
-							}
+								: "Aucune session pour cette période"}
 						</Text>
 					</View>
 				) : (
@@ -210,12 +199,13 @@ export default function HistoryScreen() {
 								color={COLORS.textSecondary}
 								style={styles.emptyIcon}
 							/>
-							<Text style={[styles.emptyTitle, { color: COLORS.text }]}>Aucune session trouvée</Text>
+							<Text style={[styles.emptyTitle, { color: COLORS.text }]}>
+								Aucune session trouvée
+							</Text>
 							<Text style={[styles.emptySubtitle, { color: COLORS.textSecondary }]}>
-								{filter === 'all'
+								{filter === "all"
 									? "Commencez votre première session pour voir l'historique ici"
-									: "Aucune session pour cette période"
-								}
+									: "Aucune session pour cette période"}
 							</Text>
 						</View>
 					</BlockCard>
@@ -235,7 +225,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	filtersContainer: {
-		flexDirection: 'row',
+		flexDirection: "row",
 		gap: 8,
 		marginBottom: 20,
 		paddingHorizontal: 4,
@@ -251,12 +241,12 @@ const styles = StyleSheet.create({
 	},
 	filterButtonText: {
 		fontSize: 14,
-		fontWeight: '500',
+		fontWeight: "500",
 	},
 	emptyState: {
 		padding: 32,
 		borderRadius: 16,
-		alignItems: 'center',
+		alignItems: "center",
 		marginTop: 40,
 	},
 	emptyIcon: {
@@ -264,13 +254,13 @@ const styles = StyleSheet.create({
 	},
 	emptyTitle: {
 		fontSize: 18,
-		fontWeight: '600',
+		fontWeight: "600",
 		marginBottom: 8,
-		textAlign: 'center',
+		textAlign: "center",
 	},
 	emptySubtitle: {
 		fontSize: 14,
-		textAlign: 'center',
+		textAlign: "center",
 		lineHeight: 20,
 	},
 	dateGroup: {
@@ -278,9 +268,9 @@ const styles = StyleSheet.create({
 	},
 	dateHeader: {
 		fontSize: 16,
-		fontWeight: '600',
+		fontWeight: "600",
 		marginBottom: 12,
 		marginLeft: 4,
-		textTransform: 'capitalize',
+		textTransform: "capitalize",
 	},
 });

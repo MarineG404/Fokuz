@@ -1,6 +1,7 @@
 # 🎯 Fokuz
 
 ## 📖 Description
+
 Application mobile de productivité développée avec React Native et Expo, conçue pour améliorer la concentration et la gestion du temps. Fokuz propose des exercices de concentration avec différentes méthodes (pomodoro, deeap work) et un système de suivi complet des sessions.
 
 L'application combine des techniques de bien-être mental avec un suivi statistique détaillé pour aider les utilisateurs à développer leurs capacités de concentration de manière progressive et mesurable.
@@ -20,6 +21,7 @@ L'application combine des techniques de bien-être mental avec un suivi statisti
 ---
 
 ## 🛠️ Technologies utilisées
+
 - **Framework** : React Native, Expo SDK 54
 - **Langage** : TypeScript
 

@@ -5,29 +5,67 @@ import BlockCard from "@/components/ui/BlockCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import { useLocalSearchParams } from "expo-router";
-import * as ScreenOrientation from 'expo-screen-orientation';
+import * as ScreenOrientation from "expo-screen-orientation";
 import React from "react";
 import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
 export default function MethodDetails() {
-
 	React.useEffect(() => {
 		// allow rotation for this screen
-		ScreenOrientation.unlockAsync().catch(() => { });
+		ScreenOrientation.unlockAsync().catch(() => {});
 
 		return () => {
 			// restore portrait lock when leaving
-			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
 		};
 	}, []);
 
 	const params = useLocalSearchParams();
 	const id = params.id as string | undefined;
 	const COLORS = useThemeColors();
+	const { width, height } = useWindowDimensions();
 
 	const method = methods.find((m) => m.id === id);
+
+	function renderLofiAndTimer() {
+		const isLandscape = width > height;
+		if (isLandscape) {
+			return (
+				<View style={styles.landscapeRow}>
+					<View style={styles.landscapeHalf}>
+						<BlockCard style={[styles.cardFill]}>
+							<LofiPlayer />
+						</BlockCard>
+					</View>
+					<View style={styles.landscapeHalf}>
+						<BlockCard style={[styles.cardFill, styles.timerCard]}>
+							<TimerComponent
+								workDurationMinutes={method!.workDuration}
+								breakDurationMinutes={method!.breakDuration}
+								methodName={method!.name}
+								methodId={method!.id}
+							/>
+						</BlockCard>
+					</View>
+				</View>
+			);
+		}
+		return (
+			<>
+				{/* Portrait: stacked */}
+				<LofiPlayer />
+				<BlockCard style={[styles.card, styles.timerCard]}>
+					<TimerComponent
+						workDurationMinutes={method!.workDuration}
+						breakDurationMinutes={method!.breakDuration}
+						methodName={method!.name}
+						methodId={method!.id}
+					/>
+				</BlockCard>
+			</>
+		);
+	}
 
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
@@ -38,9 +76,7 @@ export default function MethodDetails() {
 					<>
 						{/* Description Card */}
 						<BlockCard>
-							<Text style={[styles.description, { color: COLORS.text }]}>
-								{method.description}
-							</Text>
+							<Text style={[styles.description, { color: COLORS.text }]}>{method.description}</Text>
 						</BlockCard>
 
 						{/* Duration Info Card */}
@@ -48,58 +84,29 @@ export default function MethodDetails() {
 							<Text style={[styles.cardTitle, { color: COLORS.primary }]}>Configuration</Text>
 							<View style={styles.durationRow}>
 								<View style={[styles.durationItem, { borderLeftColor: COLORS.workColor }]}>
-									<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>Travail</Text>
-									<Text style={[styles.durationValue, { color: COLORS.text }]}>{method.workDuration} min</Text>
+									<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>
+										Travail
+									</Text>
+									<Text style={[styles.durationValue, { color: COLORS.text }]}>
+										{method.workDuration} min
+									</Text>
 								</View>
 								{method.breakDuration && (
 									<View style={[styles.durationItem, { borderLeftColor: COLORS.breakColor }]}>
-										<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>Pause</Text>
-										<Text style={[styles.durationValue, { color: COLORS.text }]}>{method.breakDuration} min</Text>
+										<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>
+											Pause
+										</Text>
+										<Text style={[styles.durationValue, { color: COLORS.text }]}>
+											{method.breakDuration} min
+										</Text>
 									</View>
 								)}
 							</View>
 						</BlockCard>
 
 						{/* Lofi + Timer: stacked on portrait, side-by-side on landscape */}
-						{(() => {
-							const { width, height } = useWindowDimensions();
-							const isLandscape = width > height;
-							if (isLandscape) {
-								return (
-									<View style={styles.landscapeRow}>
-										<View style={styles.landscapeHalf}>
-											<BlockCard style={[styles.cardFill]}>
-												<LofiPlayer />
-											</BlockCard>
-										</View>
-										<View style={styles.landscapeHalf}>
-											<BlockCard style={[styles.cardFill, styles.timerCard]}>
-												<TimerComponent
-													workDurationMinutes={method.workDuration}
-													breakDurationMinutes={method.breakDuration}
-													methodName={method.name}
-													methodId={method.id}
-												/>
-											</BlockCard>
-										</View>
-									</View>
-								);
-							}
-							return (
-								<>
-									{/* Portrait: stacked */}
-									<LofiPlayer />
-									<BlockCard style={[styles.card, styles.timerCard]}>
-										<TimerComponent
-											workDurationMinutes={method.workDuration}
-											breakDurationMinutes={method.breakDuration}
-											methodName={method.name}
-											methodId={method.id}
-										/>
-									</BlockCard>
-								</>
-							);
-						})()}
+						{/* useWindowDimensions must be called unconditionally at component top-level */}
+						{renderLofiAndTimer()}
 					</>
 				) : (
 					<BlockCard style={styles.card} padded={false}>
@@ -129,10 +136,10 @@ const styles = StyleSheet.create({
 	},
 	cardLight: {
 		borderWidth: 1,
-		borderColor: '#E5E7EB',
+		borderColor: "#E5E7EB",
 	},
 	cardDark: {
-		shadowColor: '#000',
+		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
 			height: 2,
@@ -144,23 +151,23 @@ const styles = StyleSheet.create({
 	description: {
 		fontSize: 16,
 		lineHeight: 24,
-		textAlign: 'center',
+		textAlign: "center",
 	},
 	durationCard: {
 		marginBottom: 20,
 	},
 	cardTitle: {
 		fontSize: 18,
-		fontWeight: '600',
+		fontWeight: "600",
 		marginBottom: 16,
-		textAlign: 'center',
+		textAlign: "center",
 	},
 	durationRow: {
-		flexDirection: 'row',
-		justifyContent: 'space-around',
+		flexDirection: "row",
+		justifyContent: "space-around",
 	},
 	durationItem: {
-		alignItems: 'center',
+		alignItems: "center",
 		paddingLeft: 16,
 		borderLeftWidth: 4,
 		flex: 1,
@@ -168,20 +175,20 @@ const styles = StyleSheet.create({
 	},
 	durationLabel: {
 		fontSize: 14,
-		fontWeight: '500',
+		fontWeight: "500",
 		marginBottom: 4,
 	},
 	durationValue: {
 		fontSize: 20,
-		fontWeight: 'bold',
+		fontWeight: "bold",
 	},
 	timerCard: {
-		alignItems: 'center',
+		alignItems: "center",
 	},
 	landscapeRow: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'flex-start',
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "flex-start",
 		gap: 16,
 		marginBottom: 16,
 	},
@@ -193,10 +200,10 @@ const styles = StyleSheet.create({
 	cardFill: {
 		flex: 1,
 		paddingVertical: 12,
-		justifyContent: 'center',
+		justifyContent: "center",
 	},
 	errorText: {
 		fontSize: 16,
-		textAlign: 'center',
+		textAlign: "center",
 	},
 });

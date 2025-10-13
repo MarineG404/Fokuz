@@ -19,7 +19,10 @@ export const HeaderTitle = ({ title, showDrawer = false, showBack = false }: Pro
 	return (
 		<View style={[styles.headerRow, !hasButtons && styles.headerRowSimple]}>
 			{showDrawer && (
-				<TouchableOpacity onPress={() => navigation.dispatch(DrawerActions.openDrawer())} style={styles.menuButton}>
+				<TouchableOpacity
+					onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
+					style={styles.menuButton}
+				>
 					<Ionicons name="menu" size={26} color={COLORS.primary} />
 				</TouchableOpacity>
 			)}
@@ -35,7 +38,7 @@ export const HeaderTitle = ({ title, showDrawer = false, showBack = false }: Pro
 				style={[
 					styles.headerTitle,
 					hasButtons ? styles.headerTitleCentered : styles.headerTitleSimple,
-					{ color: COLORS.primary, fontSize: 26 }
+					{ color: COLORS.primary, fontSize: 26 },
 				]}
 			>
 				{title}

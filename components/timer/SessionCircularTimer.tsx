@@ -1,8 +1,8 @@
-import { useThemeColors } from '@/constants/color';
-import { TimerPhase } from '@/utils/useTimer';
-import React, { useEffect, useRef } from 'react';
-import { Animated, StyleSheet, Text } from 'react-native';
-import Svg, { Circle, G } from 'react-native-svg';
+import { useThemeColors } from "@/constants/color";
+import { TimerPhase } from "@/utils/useTimer";
+import React, { useEffect, useRef } from "react";
+import { Animated, StyleSheet, Text } from "react-native";
+import Svg, { Circle, G } from "react-native-svg";
 
 interface SessionCircularTimerProps {
 	workDurationMinutes: number;
@@ -62,7 +62,7 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 					duration: 1000,
 					useNativeDriver: true,
 				}),
-			])
+			]),
 		);
 		pulseAnimation.start();
 
@@ -80,14 +80,14 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 
 	// Calculer la position actuelle dans le cycle complet
 	let currentPosition = 0;
-	if (currentPhase === 'work') {
+	if (currentPhase === "work") {
 		// Dans la phase de travail
 		const workElapsed = workDuration - timeLeft;
 		currentPosition = workElapsed / totalDuration;
-	} else if (currentPhase === 'break') {
+	} else if (currentPhase === "break") {
 		// Dans la phase de pause (après le travail)
 		const breakElapsed = breakDuration - timeLeft;
-		currentPosition = workProportion + (breakElapsed / totalDuration);
+		currentPosition = workProportion + breakElapsed / totalDuration;
 	}
 
 	// Paramètres SVG
@@ -96,17 +96,19 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 	const currentPositionOffset = circumference * (1 - currentPosition);
 
 	// Couleur de fond plus contrastée
-	const backgroundColor = COLORS.text === '#000' ? '#D1D5DB' : '#374151';
+	const backgroundColor = COLORS.text === "#000" ? "#D1D5DB" : "#374151";
 
 	return (
-		<Animated.View style={[
-			styles.container,
-			{
-				width: size,
-				height: size,
-				transform: [{ scale: scaleAnim }]
-			}
-		]}>
+		<Animated.View
+			style={[
+				styles.container,
+				{
+					width: size,
+					height: size,
+					transform: [{ scale: scaleAnim }],
+				},
+			]}
+		>
 			<Svg width={size} height={size} style={styles.svg}>
 				<G rotation="270" origin={`${size / 2}, ${size / 2}`}>
 					{/* Cercle de fond avec effet de glow */}
@@ -130,7 +132,7 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 						strokeDasharray={`${workArcLength} ${circumference - workArcLength}`}
 						strokeDashoffset={0}
 						fill="transparent"
-						opacity={currentPhase === 'work' ? 0.9 : 0.5}
+						opacity={currentPhase === "work" ? 0.9 : 0.5}
 					/>
 
 					{/* Arc de pause avec meilleure visibilité */}
@@ -143,7 +145,7 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 						strokeDasharray={`${breakArcLength} ${circumference - breakArcLength}`}
 						strokeDashoffset={-workArcLength}
 						fill="transparent"
-						opacity={currentPhase === 'break' ? 0.9 : 0.5}
+						opacity={currentPhase === "break" ? 0.9 : 0.5}
 					/>
 
 					{/* Indicateur de position actuelle avec animation */}
@@ -163,64 +165,61 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 			</Svg>
 
 			{/* Contenu central avec animation */}
-			<Animated.View style={[
-				styles.centerContent,
-				{ transform: [{ scale: phaseAnim }] }
-			]}>
+			<Animated.View style={[styles.centerContent, { transform: [{ scale: phaseAnim }] }]}>
 				<Text style={[styles.phaseText, { color: COLORS.text }]}>
-					{currentPhase === 'work' ? 'Travail' : currentPhase === 'break' ? 'Pause' : 'Terminé'}
+					{currentPhase === "work" ? "Travail" : currentPhase === "break" ? "Pause" : "Terminé"}
 				</Text>
-				<Text style={[styles.timerDisplay, { color: COLORS.text }]}>
-					{formattedTime}
-				</Text>
+				<Text style={[styles.timerDisplay, { color: COLORS.text }]}>{formattedTime}</Text>
 			</Animated.View>
 
 			{/* Effet de pulsation pour l'indicateur de phase active */}
-			<Animated.View style={[
-				styles.pulseIndicator,
-				{
-					width: size * 0.15,
-					height: size * 0.15,
-					borderRadius: size * 0.075,
-					backgroundColor: currentPhase === 'work' ? COLORS.workColor : COLORS.breakColor,
-					transform: [{ scale: pulseAnim }],
-					opacity: 0.3,
-				}
-			]} />
+			<Animated.View
+				style={[
+					styles.pulseIndicator,
+					{
+						width: size * 0.15,
+						height: size * 0.15,
+						borderRadius: size * 0.075,
+						backgroundColor: currentPhase === "work" ? COLORS.workColor : COLORS.breakColor,
+						transform: [{ scale: pulseAnim }],
+						opacity: 0.3,
+					},
+				]}
+			/>
 		</Animated.View>
 	);
 };
 
 const styles = StyleSheet.create({
 	container: {
-		justifyContent: 'center',
-		alignItems: 'center',
-		position: 'relative',
+		justifyContent: "center",
+		alignItems: "center",
+		position: "relative",
 	},
 	svg: {
-		position: 'absolute',
+		position: "absolute",
 	},
 	centerContent: {
-		alignItems: 'center',
-		justifyContent: 'center',
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	phaseText: {
 		fontSize: 18,
-		fontWeight: '600',
+		fontWeight: "600",
 		marginBottom: 12,
-		textAlign: 'center',
+		textAlign: "center",
 		letterSpacing: 0.5,
-		textTransform: 'uppercase',
+		textTransform: "uppercase",
 	},
 	timerDisplay: {
 		fontSize: 36,
-		fontWeight: '700',
-		fontFamily: 'monospace',
-		textAlign: 'center',
+		fontWeight: "700",
+		fontFamily: "monospace",
+		textAlign: "center",
 		letterSpacing: 1,
 	},
 	pulseIndicator: {
-		position: 'absolute',
+		position: "absolute",
 		zIndex: -1,
 	},
 });

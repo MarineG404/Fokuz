@@ -1,9 +1,9 @@
-import { useThemeColors } from '@/constants/color';
-import { historyService } from '@/utils/historyService';
-import { Ionicons } from '@expo/vector-icons';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-import BlockCard from '../ui/BlockCard';
+import { useThemeColors } from "@/constants/color";
+import { historyService } from "@/utils/historyService";
+import { Ionicons } from "@expo/vector-icons";
+import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+import BlockCard from "../ui/BlockCard";
 
 interface StatsCardProps {
 	totalSessions: number;
@@ -26,7 +26,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 		icon,
 		value,
 		label,
-		color = COLORS.primary
+		color = COLORS.primary,
 	}: {
 		icon: string;
 		value: string | number;
@@ -35,12 +35,8 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 	}) => (
 		<View style={styles.statItem}>
 			<Ionicons name={icon as any} size={20} color={color} />
-			<Text style={[styles.statValue, { color: COLORS.text }]}>
-				{value}
-			</Text>
-			<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
-				{label}
-			</Text>
+			<Text style={[styles.statValue, { color: COLORS.text }]}>{value}</Text>
+			<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>{label}</Text>
 		</View>
 	);
 
@@ -52,17 +48,11 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 		<BlockCard style={styles.container}>
 			<View style={styles.header}>
 				<Ionicons name="stats-chart" size={20} color={COLORS.primary} />
-				<Text style={[styles.title, { color: COLORS.text }]}>
-					Statistiques
-				</Text>
+				<Text style={[styles.title, { color: COLORS.text }]}>Statistiques</Text>
 			</View>
 
 			<View style={styles.statsGrid}>
-				<StatItem
-					icon="document-text"
-					value={totalSessions}
-					label="Sessions"
-				/>
+				<StatItem icon="document-text" value={totalSessions} label="Sessions" />
 
 				<StatItem
 					icon="checkmark-circle"
@@ -81,7 +71,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 					icon="trending-up"
 					value={`${completionRate}%`}
 					label="Taux de réussite"
-					color={completionRate >= 80 ? '#10B981' : completionRate >= 60 ? '#F59E0B' : '#EF4444'}
+					color={completionRate >= 80 ? "#10B981" : completionRate >= 60 ? "#F59E0B" : "#EF4444"}
 				/>
 			</View>
 
@@ -108,10 +98,10 @@ const styles = StyleSheet.create({
 	},
 	containerLight: {
 		borderWidth: 1,
-		borderColor: '#E5E7EB',
+		borderColor: "#E5E7EB",
 	},
 	containerDark: {
-		shadowColor: '#000',
+		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
 			height: 2,
@@ -121,53 +111,53 @@ const styles = StyleSheet.create({
 		elevation: 4,
 	},
 	header: {
-		flexDirection: 'row',
-		alignItems: 'center',
+		flexDirection: "row",
+		alignItems: "center",
 		marginBottom: 16,
 	},
 	title: {
 		fontSize: 16,
-		fontWeight: '600',
+		fontWeight: "600",
 		marginLeft: 8,
 	},
 	statsGrid: {
-		flexDirection: 'row',
-		flexWrap: 'wrap',
-		justifyContent: 'space-between',
+		flexDirection: "row",
+		flexWrap: "wrap",
+		justifyContent: "space-between",
 		gap: 16,
 	},
 	statItem: {
-		alignItems: 'center',
-		minWidth: '22%',
+		alignItems: "center",
+		minWidth: "22%",
 		flex: 1,
 	},
 	statValue: {
 		fontSize: 18,
-		fontWeight: '700',
+		fontWeight: "700",
 		marginTop: 8,
 		marginBottom: 4,
 	},
 	statLabel: {
 		fontSize: 11,
-		textAlign: 'center',
+		textAlign: "center",
 		lineHeight: 14,
 	},
 	additionalStats: {
 		marginTop: 16,
 		paddingTop: 16,
 		borderTopWidth: 1,
-		borderTopColor: 'rgba(0,0,0,0.08)',
+		borderTopColor: "rgba(0,0,0,0.08)",
 	},
 	avgStat: {
-		alignItems: 'center',
+		alignItems: "center",
 	},
 	avgValue: {
 		fontSize: 16,
-		fontWeight: '600',
+		fontWeight: "600",
 		marginBottom: 4,
 	},
 	avgLabel: {
 		fontSize: 12,
-		textAlign: 'center',
+		textAlign: "center",
 	},
 });

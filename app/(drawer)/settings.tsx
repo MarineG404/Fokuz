@@ -1,5 +1,5 @@
-import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
+import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { useThemeColors } from "@/constants/color";
 import React from "react";
 import { StyleSheet, Text } from "react-native";
@@ -11,9 +11,12 @@ export default function SettingsScreen() {
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
 			<HeaderTitle title="Paramètres" showBack />
-			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>Thème de l'application</Text>
+			{}
+			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{"Thème de l'application"}</Text>
 			<ThemeSwitcher />
-			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>Autres paramètres (à venir)</Text>
+			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>
+				Autres paramètres (à venir)
+			</Text>
 		</SafeAreaView>
 	);
 }

@@ -1,9 +1,9 @@
-import { DailyStats, SessionRecord } from '@/types/session';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { DailyStats, SessionRecord } from "@/types/session";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const STORAGE_KEYS = {
-	SESSIONS: '@fokuz/sessions',
-	DAILY_STATS: '@fokuz/daily_stats',
+	SESSIONS: "@fokuz/sessions",
+	DAILY_STATS: "@fokuz/daily_stats",
 };
 
 class HistoryService {
@@ -13,15 +13,12 @@ class HistoryService {
 			const existingSessions = await this.getAllSessions();
 			const updatedSessions = [session, ...existingSessions];
 
-			await AsyncStorage.setItem(
-				STORAGE_KEYS.SESSIONS,
-				JSON.stringify(updatedSessions)
-			);
+			await AsyncStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(updatedSessions));
 
 			// Mettre à jour les stats quotidiennes
 			await this.updateDailyStats(session);
 		} catch (error) {
-			console.error('Erreur lors de la sauvegarde de session:', error);
+			console.error("Erreur lors de la sauvegarde de session:", error);
 		}
 	}
 
@@ -39,7 +36,7 @@ class HistoryService {
 				endTime: new Date(session.endTime),
 			}));
 		} catch (error) {
-			console.error('Erreur lors de la récupération des sessions:', error);
+			console.error("Erreur lors de la récupération des sessions:", error);
 			return [];
 		}
 	}
@@ -47,7 +44,7 @@ class HistoryService {
 	// Récupérer les sessions d'une date spécifique
 	async getSessionsByDate(date: string): Promise<SessionRecord[]> {
 		const allSessions = await this.getAllSessions();
-		return allSessions.filter(session => session.date === date);
+		return allSessions.filter((session) => session.date === date);
 	}
 
 	// Récupérer les sessions des N derniers jours
@@ -56,9 +53,7 @@ class HistoryService {
 		const cutoffDate = new Date();
 		cutoffDate.setDate(cutoffDate.getDate() - days);
 
-		return allSessions.filter(session =>
-			session.startTime >= cutoffDate
-		);
+		return allSessions.filter((session) => session.startTime >= cutoffDate);
 	}
 
 	// Mettre à jour les statistiques quotidiennes
@@ -99,12 +94,9 @@ class HistoryService {
 				[session.date]: dateStats,
 			};
 
-			await AsyncStorage.setItem(
-				STORAGE_KEYS.DAILY_STATS,
-				JSON.stringify(updatedStats)
-			);
+			await AsyncStorage.setItem(STORAGE_KEYS.DAILY_STATS, JSON.stringify(updatedStats));
 		} catch (error) {
-			console.error('Erreur lors de la mise à jour des stats:', error);
+			console.error("Erreur lors de la mise à jour des stats:", error);
 		}
 	}
 
@@ -114,7 +106,7 @@ class HistoryService {
 			const data = await AsyncStorage.getItem(STORAGE_KEYS.DAILY_STATS);
 			return data ? JSON.parse(data) : {};
 		} catch (error) {
-			console.error('Erreur lors de la récupération des stats:', error);
+			console.error("Erreur lors de la récupération des stats:", error);
 			return {};
 		}
 	}
@@ -128,7 +120,7 @@ class HistoryService {
 		const end = new Date(endDate);
 
 		for (let date = new Date(start); date <= end; date.setDate(date.getDate() + 1)) {
-			const dateStr = date.toISOString().split('T')[0];
+			const dateStr = date.toISOString().split("T")[0];
 			if (allStats[dateStr]) {
 				result.push(allStats[dateStr]);
 			}
@@ -140,12 +132,9 @@ class HistoryService {
 	// Supprimer toutes les données (pour debug/reset)
 	async clearAllData(): Promise<void> {
 		try {
-			await AsyncStorage.multiRemove([
-				STORAGE_KEYS.SESSIONS,
-				STORAGE_KEYS.DAILY_STATS,
-			]);
+			await AsyncStorage.multiRemove([STORAGE_KEYS.SESSIONS, STORAGE_KEYS.DAILY_STATS]);
 		} catch (error) {
-			console.error('Erreur lors de la suppression des données:', error);
+			console.error("Erreur lors de la suppression des données:", error);
 		}
 	}
 

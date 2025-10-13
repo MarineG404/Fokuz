@@ -3,7 +3,7 @@ import { useSimpleTheme } from "@/contexts/SimpleTheme";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-type ThemeMode = 'auto' | 'light' | 'dark';
+type ThemeMode = "auto" | "light" | "dark";
 
 const options: { key: ThemeMode; label: string }[] = [
 	{ key: "auto", label: "Automatique" },

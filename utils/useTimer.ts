@@ -1,10 +1,10 @@
-import { SessionRecord } from '@/types/session';
-import * as Haptics from 'expo-haptics';
-import { useEffect, useRef, useState } from 'react';
-import { historyService } from './historyService';
-import { soundManager } from './soundManager';
+import { SessionRecord } from "@/types/session";
+import * as Haptics from "expo-haptics";
+import { useEffect, useRef, useState } from "react";
+import { historyService } from "./historyService";
+import { soundManager } from "./soundManager";
 
-export type TimerPhase = 'work' | 'break' | 'finished';
+export type TimerPhase = "work" | "break" | "finished";
 
 export interface TimerState {
 	timeLeft: number; // en secondes
@@ -34,14 +34,14 @@ export interface UseTimerProps {
 export const useTimer = ({
 	workDurationMinutes,
 	breakDurationMinutes,
-	methodName = 'Session personnalisée',
-	methodId = 'custom',
+	methodName = "Session personnalisée",
+	methodId = "custom",
 	onPhaseChange,
-	onFinish
+	onFinish,
 }: UseTimerProps) => {
 	const [timeLeft, setTimeLeft] = useState(0);
 	const [isRunning, setIsRunning] = useState(false);
-	const [phase, setPhase] = useState<TimerPhase>('work');
+	const [phase, setPhase] = useState<TimerPhase>("work");
 	const [sessionCount, setSessionCount] = useState(0);
 	const intervalRef = useRef<number | null>(null);
 
@@ -59,7 +59,7 @@ export const useTimer = ({
 	const formatTime = (seconds: number): string => {
 		const minutes = Math.floor(seconds / 60);
 		const remainingSeconds = seconds % 60;
-		return `${minutes.toString().padStart(2, '0')}:${remainingSeconds.toString().padStart(2, '0')}`;
+		return `${minutes.toString().padStart(2, "0")}:${remainingSeconds.toString().padStart(2, "0")}`;
 	};
 
 	// Sauvegarder une session
@@ -77,7 +77,7 @@ export const useTimer = ({
 			totalBreakTime: Math.round(actualBreakTime / 60),
 			startTime: sessionStartTime,
 			endTime: new Date(),
-			date: new Date().toISOString().split('T')[0],
+			date: new Date().toISOString().split("T")[0],
 			isCompleted,
 		};
 
@@ -98,10 +98,10 @@ export const useTimer = ({
 		setCompletedCycles(0);
 
 		setTimeLeft(totalWorkTime);
-		setPhase('work');
+		setPhase("work");
 		setIsRunning(true);
-		setSessionCount(prev => prev + 1);
-		onPhaseChange?.('work');
+		setSessionCount((prev) => prev + 1);
+		onPhaseChange?.("work");
 	};
 
 	// Restart timer (nouvelle session)
@@ -123,10 +123,10 @@ export const useTimer = ({
 		setCompletedCycles(0);
 
 		setTimeLeft(totalWorkTime);
-		setPhase('work');
+		setPhase("work");
 		setIsRunning(true);
-		setSessionCount(prev => prev + 1);
-		onPhaseChange?.('work');
+		setSessionCount((prev) => prev + 1);
+		onPhaseChange?.("work");
 	};
 
 	// Pause timer
@@ -153,7 +153,7 @@ export const useTimer = ({
 
 		setIsRunning(false);
 		setTimeLeft(0);
-		setPhase('work');
+		setPhase("work");
 		setSessionCount(0);
 		setCurrentSessionId(null);
 		setSessionStartTime(null);
@@ -171,26 +171,26 @@ export const useTimer = ({
 		if (isRunning && timeLeft > 0) {
 			intervalRef.current = setInterval(() => {
 				// Tracker le temps réel
-				if (phase === 'work') {
-					setActualWorkTime(prev => prev + 1);
-				} else if (phase === 'break') {
-					setActualBreakTime(prev => prev + 1);
+				if (phase === "work") {
+					setActualWorkTime((prev) => prev + 1);
+				} else if (phase === "break") {
+					setActualBreakTime((prev) => prev + 1);
 				}
 
-				setTimeLeft(prev => {
+				setTimeLeft((prev) => {
 					if (prev <= 1) {
 						// Timer finished
-						if (phase === 'work' && breakDurationMinutes) {
+						if (phase === "work" && breakDurationMinutes) {
 							// Work phase finished - auto-switch to break
-							setCompletedCycles(prev => prev + 1);
+							setCompletedCycles((prev) => prev + 1);
 							soundManager.playTransitionSound();
-							setPhase('break');
-							onPhaseChange?.('break');
+							setPhase("break");
+							onPhaseChange?.("break");
 							return totalBreakTime;
 						} else {
 							// Break finished or no break - stop timer
-							if (phase === 'break') {
-								setCompletedCycles(prev => prev + 1);
+							if (phase === "break") {
+								setCompletedCycles((prev) => prev + 1);
 							}
 
 							// Session terminée avec succès
@@ -198,8 +198,8 @@ export const useTimer = ({
 
 							soundManager.playFinishSound();
 							setIsRunning(false);
-							setPhase('finished');
-							onPhaseChange?.('finished');
+							setPhase("finished");
+							onPhaseChange?.("finished");
 							onFinish?.();
 							return 0;
 						}

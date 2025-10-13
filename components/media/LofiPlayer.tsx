@@ -1,9 +1,9 @@
-import { useThemeColors } from '@/constants/color';
-import { Ionicons } from '@expo/vector-icons';
-import React, { useState } from 'react';
-import { StyleSheet, Text, TouchableOpacity, View } from 'react-native';
-import YoutubePlayer from 'react-native-youtube-iframe';
-import BlockCard from '../ui/BlockCard';
+import { useThemeColors } from "@/constants/color";
+import { Ionicons } from "@expo/vector-icons";
+import React, { useState } from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import YoutubePlayer from "react-native-youtube-iframe";
+import BlockCard from "../ui/BlockCard";
 
 interface LofiPlayerProps {
 	isVisible?: boolean;
@@ -11,9 +11,9 @@ interface LofiPlayerProps {
 
 // Playlist de videos lofi populaires
 const LOFI_VIDEOS = [
-	'jfKfPfyJRdk', // lofi hip hop radio - beats to relax/study to
-	'5qap5aO4i9A', // lofi hip hop radio - beats to sleep/chill to
-	'DWcJFNfaw9c', // synthwave radio - beats to chill/game to
+	"jfKfPfyJRdk", // lofi hip hop radio - beats to relax/study to
+	"5qap5aO4i9A", // lofi hip hop radio - beats to sleep/chill to
+	"DWcJFNfaw9c", // synthwave radio - beats to chill/game to
 ];
 
 export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
@@ -42,9 +42,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 			<View style={styles.header}>
 				<View style={styles.headerLeft}>
 					<Ionicons name="musical-notes" size={20} color={COLORS.primary} />
-					<Text style={[styles.title, { color: COLORS.text }]}>
-						Lofi Focus
-					</Text>
+					<Text style={[styles.title, { color: COLORS.text }]}>Lofi Focus</Text>
 				</View>
 				<TouchableOpacity onPress={toggleCollapse}>
 					<Ionicons
@@ -64,7 +62,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 							play={playing}
 							videoId={LOFI_VIDEOS[currentVideoIndex]}
 							onChangeState={(state: string) => {
-								if (state === 'ended') {
+								if (state === "ended") {
 									nextVideo();
 								}
 							}}
@@ -74,13 +72,21 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 					{/* Controls */}
 					<View style={styles.controls}>
 						<TouchableOpacity
-							style={[styles.controlButton, styles.secondaryButton, { borderColor: COLORS.primary }]}
+							style={[
+								styles.controlButton,
+								styles.secondaryButton,
+								{ borderColor: COLORS.primary },
+							]}
 							onPress={previousVideo}
 						>
 							<Ionicons name="play-skip-back" size={20} color={COLORS.primary} />
 						</TouchableOpacity>
 						<TouchableOpacity
-							style={[styles.controlButton, styles.secondaryButton, { borderColor: COLORS.primary }]}
+							style={[
+								styles.controlButton,
+								styles.secondaryButton,
+								{ borderColor: COLORS.primary },
+							]}
 							onPress={nextVideo}
 						>
 							<Ionicons name="play-skip-forward" size={20} color={COLORS.primary} />
@@ -98,10 +104,10 @@ const styles = StyleSheet.create({
 	},
 	containerLight: {
 		borderWidth: 1,
-		borderColor: '#E5E7EB',
+		borderColor: "#E5E7EB",
 	},
 	containerDark: {
-		shadowColor: '#000',
+		shadowColor: "#000",
 		shadowOffset: {
 			width: 0,
 			height: 2,
@@ -114,40 +120,40 @@ const styles = StyleSheet.create({
 		paddingBottom: 16,
 	},
 	header: {
-		flexDirection: 'row',
-		justifyContent: 'space-between',
-		alignItems: 'center',
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
 		marginBottom: 12,
 	},
 	headerLeft: {
-		flexDirection: 'row',
-		alignItems: 'center',
+		flexDirection: "row",
+		alignItems: "center",
 	},
 	title: {
 		fontSize: 16,
-		fontWeight: '600',
+		fontWeight: "600",
 		marginLeft: 8,
 	},
 	playerContainer: {
 		borderRadius: 12,
-		overflow: 'hidden',
+		overflow: "hidden",
 		marginBottom: 16,
 	},
 	controls: {
-		flexDirection: 'row',
-		justifyContent: 'center',
-		alignItems: 'center',
+		flexDirection: "row",
+		justifyContent: "center",
+		alignItems: "center",
 		gap: 12,
 	},
 	controlButton: {
 		width: 48,
 		height: 48,
 		borderRadius: 24,
-		justifyContent: 'center',
-		alignItems: 'center',
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	secondaryButton: {
-		backgroundColor: 'transparent',
+		backgroundColor: "transparent",
 		borderWidth: 2,
 	},
 });

@@ -1,6 +1,6 @@
-import React from 'react';
-import { StyleSheet, View } from 'react-native';
-import Svg, { Circle, G } from 'react-native-svg';
+import React from "react";
+import { StyleSheet, View } from "react-native";
+import Svg, { Circle, G } from "react-native-svg";
 
 interface CircularTimerProps {
 	progress: number; // 0 to 1
@@ -15,7 +15,7 @@ export const CircularTimer: React.FC<CircularTimerProps> = ({
 	color,
 	size = 200,
 	strokeWidth = 12,
-	backgroundColor = '#e0e0e0',
+	backgroundColor = "#e0e0e0",
 }) => {
 	const radius = (size - strokeWidth) / 2;
 	const circumference = 2 * Math.PI * radius;
@@ -55,10 +55,10 @@ export const CircularTimer: React.FC<CircularTimerProps> = ({
 
 const styles = StyleSheet.create({
 	container: {
-		justifyContent: 'center',
-		alignItems: 'center',
+		justifyContent: "center",
+		alignItems: "center",
 	},
 	svg: {
-		position: 'absolute',
+		position: "absolute",
 	},
 });

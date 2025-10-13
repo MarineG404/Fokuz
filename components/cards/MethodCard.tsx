@@ -10,7 +10,7 @@ export const MethodCard = ({ method }: { method: Method }) => {
 	const router = useRouter();
 
 	const onPress = () => {
-		router.push((`/method/${method.id}` as any));
+		router.push(`/method/${method.id}` as any);
 	};
 
 	return (
