@@ -43,7 +43,7 @@ export const useTimer = ({
 	const [isRunning, setIsRunning] = useState(false);
 	const [phase, setPhase] = useState<TimerPhase>("work");
 	const [sessionCount, setSessionCount] = useState(0);
-	const intervalRef = useRef<number | null>(null);
+	const intervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
 	// Variables pour tracking de session
 	const [currentSessionId, setCurrentSessionId] = useState<string | null>(null);
