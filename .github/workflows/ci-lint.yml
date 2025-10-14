@@ -1,0 +1,43 @@
+name: CI - format & lint & typecheck
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    lint:
+        name: Lint / Format / Typecheck
+        runs-on: ubuntu-latest
+        steps:
+            - name: Checkout
+              uses: actions/checkout@v4
+              with:
+                  fetch-depth: 0
+
+            - name: Use Node.js
+              uses: actions/setup-node@v4
+              with:
+                  node-version: "18"
+                  cache: "npm"
+
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run Prettier (format)
+              run: npm run format
+
+            - name: Run ESLint (auto-fix)
+              run: npm run lint:fix
+
+            - name: Run TypeScript check
+              run: npx tsc --noEmit
+
+            - name: Fail if formatting/lint changed files
+              run: |
+                  if [ -n "$(git status --porcelain)" ]; then
+                    echo "Working tree changed after formatting/linting. Please run 'npm run format' and 'npm run lint:fix' locally and commit the fixes.";
+                    git --no-pager status --porcelain
+                    exit 1
+                  fi
