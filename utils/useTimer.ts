@@ -63,26 +63,39 @@ export const useTimer = ({
 	};
 
 	// Sauvegarder une session
-	const saveSession = useCallback(async (isCompleted: boolean) => {
-		if (!currentSessionId || !sessionStartTime) return;
+	const saveSession = useCallback(
+		async (isCompleted: boolean) => {
+			if (!currentSessionId || !sessionStartTime) return;
 
-		const session: SessionRecord = {
-			id: currentSessionId,
+			const session: SessionRecord = {
+				id: currentSessionId,
+				methodName,
+				methodId,
+				workDuration: workDurationMinutes,
+				breakDuration: breakDurationMinutes,
+				completedCycles,
+				totalWorkTime: Math.round(actualWorkTime / 60), // convertir en minutes
+				totalBreakTime: Math.round(actualBreakTime / 60),
+				startTime: sessionStartTime,
+				endTime: new Date(),
+				date: new Date().toISOString().split("T")[0],
+				isCompleted,
+			};
+
+			await historyService.saveSession(session);
+		},
+		[
+			currentSessionId,
+			sessionStartTime,
 			methodName,
 			methodId,
-			workDuration: workDurationMinutes,
-			breakDuration: breakDurationMinutes,
+			workDurationMinutes,
+			breakDurationMinutes,
 			completedCycles,
-			totalWorkTime: Math.round(actualWorkTime / 60), // convertir en minutes
-			totalBreakTime: Math.round(actualBreakTime / 60),
-			startTime: sessionStartTime,
-			endTime: new Date(),
-			date: new Date().toISOString().split("T")[0],
-			isCompleted,
-		};
-
-		await historyService.saveSession(session);
-	}, [currentSessionId, sessionStartTime, methodName, methodId, workDurationMinutes, breakDurationMinutes, completedCycles, actualWorkTime, actualBreakTime]);
+			actualWorkTime,
+			actualBreakTime,
+		],
+	);
 
 	// Start timer
 	const start = () => {
@@ -218,7 +231,16 @@ export const useTimer = ({
 				clearInterval(intervalRef.current);
 			}
 		};
-	}, [isRunning, timeLeft, phase, totalBreakTime, breakDurationMinutes, onPhaseChange, onFinish, saveSession]);
+	}, [
+		isRunning,
+		timeLeft,
+		phase,
+		totalBreakTime,
+		breakDurationMinutes,
+		onPhaseChange,
+		onFinish,
+		saveSession,
+	]);
 
 	// Cleanup on unmount
 	useEffect(() => {
