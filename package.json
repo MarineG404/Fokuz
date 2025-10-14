@@ -10,7 +10,8 @@
 		"web": "expo start --web",
 		"lint": "eslint . --ext .js,.jsx,.ts,.tsx",
 		"lint:fix": "eslint . --ext .js,.jsx,.ts,.tsx --fix",
-		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+		"format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+		"check": "npm run format && npm run lint:fix && npx tsc --noEmit"
 	},
 	"dependencies": {
 		"@expo/metro-runtime": "~6.1.2",
