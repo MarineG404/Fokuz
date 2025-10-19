@@ -47,8 +47,8 @@ export function SimpleThemeProvider({ children }: { children: React.ReactNode })
 				? "dark"
 				: "light"
 			: mode === "dark"
-			? "dark"
-			: "light";
+				? "dark"
+				: "light";
 
 	return (
 		<ThemeContext.Provider value={{ mode, setMode, effectiveScheme }}>

@@ -7,6 +7,7 @@ import { useThemeColors } from "@/constants/color";
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { FlatList, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -20,9 +21,11 @@ export default function HomeScreen() {
 		await addCustomMethod(method);
 	};
 
+	const { t } = useTranslation();
+
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-			<HeaderTitle title="Choisis ta méthode" showDrawer />
+	    <HeaderTitle title={t("chooseMethod")} showDrawer />
 			<FlatList
 				data={allMethods}
 				renderItem={({ item }) => <MethodCard method={item} />}

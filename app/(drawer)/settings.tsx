@@ -1,12 +1,15 @@
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
+import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
 import { useThemeColors } from "@/constants/color";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SettingsScreen() {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
@@ -15,8 +18,9 @@ export default function SettingsScreen() {
 			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{"Thème de l'application"}</Text>
 			<ThemeSwitcher />
 			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>
-				Autres paramètres (à venir)
+				{t("LANGUAGE_SETTINGS")}
 			</Text>
+			<LanguageSwitcher />
 		</SafeAreaView>
 	);
 }

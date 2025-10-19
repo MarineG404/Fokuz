@@ -6,6 +6,7 @@ import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import "react-native-reanimated";
+import "@/src/localization/i18n";
 
 function InnerLayout() {
 	const { effectiveScheme } = useSimpleTheme();

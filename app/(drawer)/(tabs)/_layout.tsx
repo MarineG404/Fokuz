@@ -1,6 +1,5 @@
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
-// navigation not required here
 import { Tabs } from "expo-router";
 import React from "react";
 
