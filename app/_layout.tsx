@@ -1,4 +1,5 @@
 import { useThemeColors } from "@/constants/color";
+import { CustomMethodsProvider } from "@/contexts/CustomMethodsContext";
 import { SimpleThemeProvider, useSimpleTheme } from "@/contexts/SimpleTheme";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
@@ -31,7 +32,9 @@ export const unstable_settings = {
 export default function RootLayout() {
 	return (
 		<SimpleThemeProvider>
-			<InnerLayout />
+			<CustomMethodsProvider>
+				<InnerLayout />
+			</CustomMethodsProvider>
 		</SimpleThemeProvider>
 	);
 }

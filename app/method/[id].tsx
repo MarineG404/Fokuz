@@ -1,9 +1,9 @@
-import { methods } from "@/assets/data/methods";
 import { LofiPlayer } from "@/components/media/LofiPlayer";
 import { TimerComponent } from "@/components/timer/TimerComponent";
 import BlockCard from "@/components/ui/BlockCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
+import { useAllMethods } from "@/hooks/useAllMethods";
 import { useLocalSearchParams } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import React from "react";
@@ -25,10 +25,36 @@ export default function MethodDetails() {
 	const id = params.id as string | undefined;
 	const COLORS = useThemeColors();
 	const { width, height } = useWindowDimensions();
+	const { getMethodById, loading } = useAllMethods();
 
-	const method = methods.find((m) => m.id === id);
+	const method = getMethodById(id || "");
 
-	function renderLofiAndTimer() {
+	// Afficher un loader pendant le chargement
+	if (loading) {
+		return (
+			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
+				<HeaderTitle title="Chargement..." showBack />
+			</SafeAreaView>
+		);
+	}
+
+	// Si la méthode n'existe pas après le chargement
+	if (!method) {
+		return (
+			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
+				<HeaderTitle title="Méthode non trouvée" showBack />
+				<ScrollView style={styles.content}>
+					<BlockCard style={styles.card} padded={false}>
+						<Text style={[styles.errorText, { color: COLORS.textSecondary }]}>
+							Méthode non trouvée (id: {id})
+						</Text>
+					</BlockCard>
+				</ScrollView>
+			</SafeAreaView>
+		);
+	}
+
+	const renderLofiAndTimer = () => {
 		const isLandscape = width > height;
 		if (isLandscape) {
 			return (
@@ -41,10 +67,10 @@ export default function MethodDetails() {
 					<View style={styles.landscapeHalf}>
 						<BlockCard style={[styles.cardFill, styles.timerCard]}>
 							<TimerComponent
-								workDurationMinutes={method!.workDuration}
-								breakDurationMinutes={method!.breakDuration}
-								methodName={method!.name}
-								methodId={method!.id}
+								workDurationMinutes={method.workDuration}
+								breakDurationMinutes={method.breakDuration}
+								methodName={method.name}
+								methodId={method.id}
 							/>
 						</BlockCard>
 					</View>
@@ -57,64 +83,52 @@ export default function MethodDetails() {
 				<LofiPlayer />
 				<BlockCard style={[styles.card, styles.timerCard]}>
 					<TimerComponent
-						workDurationMinutes={method!.workDuration}
-						breakDurationMinutes={method!.breakDuration}
-						methodName={method!.name}
-						methodId={method!.id}
+						workDurationMinutes={method.workDuration}
+						breakDurationMinutes={method.breakDuration}
+						methodName={method.name}
+						methodId={method.id}
 					/>
 				</BlockCard>
 			</>
 		);
-	}
+	};
 
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-			<HeaderTitle title={method ? method.name : "Méthode non trouvée"} showBack />
+			<HeaderTitle title={method.name} showBack />
 
 			<ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-				{method ? (
-					<>
-						{/* Description Card */}
-						<BlockCard>
-							<Text style={[styles.description, { color: COLORS.text }]}>{method.description}</Text>
-						</BlockCard>
+				<>
+					{/* Description Card */}
+					<BlockCard>
+						<Text style={[styles.description, { color: COLORS.text }]}>{method.description}</Text>
+					</BlockCard>
 
-						{/* Duration Info Card */}
-						<BlockCard style={styles.durationCard}>
-							<Text style={[styles.cardTitle, { color: COLORS.primary }]}>Configuration</Text>
-							<View style={styles.durationRow}>
-								<View style={[styles.durationItem, { borderLeftColor: COLORS.workColor }]}>
-									<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>
-										Travail
-									</Text>
+					{/* Duration Info Card */}
+					<BlockCard style={styles.durationCard}>
+						<Text style={[styles.cardTitle, { color: COLORS.primary }]}>Configuration</Text>
+						<View style={styles.durationRow}>
+							<View style={[styles.durationItem, { borderLeftColor: COLORS.workColor }]}>
+								<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>Travail</Text>
+								<Text style={[styles.durationValue, { color: COLORS.text }]}>
+									{method.workDuration} min
+								</Text>
+							</View>
+							{method.breakDuration && (
+								<View style={[styles.durationItem, { borderLeftColor: COLORS.breakColor }]}>
+									<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>Pause</Text>
 									<Text style={[styles.durationValue, { color: COLORS.text }]}>
-										{method.workDuration} min
+										{method.breakDuration} min
 									</Text>
 								</View>
-								{method.breakDuration && (
-									<View style={[styles.durationItem, { borderLeftColor: COLORS.breakColor }]}>
-										<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>
-											Pause
-										</Text>
-										<Text style={[styles.durationValue, { color: COLORS.text }]}>
-											{method.breakDuration} min
-										</Text>
-									</View>
-								)}
-							</View>
-						</BlockCard>
-
-						{/* Lofi + Timer: stacked on portrait, side-by-side on landscape */}
-						{/* useWindowDimensions must be called unconditionally at component top-level */}
-						{renderLofiAndTimer()}
-					</>
-				) : (
-					<BlockCard style={styles.card} padded={false}>
-						<Text style={[styles.errorText, { color: COLORS.textSecondary }]}>
-							Méthode non trouvée (id: {id})
-						</Text>
+							)}
+						</View>
 					</BlockCard>
-				)}
+
+					{/* Lofi + Timer: stacked on portrait, side-by-side on landscape */}
+					{/* useWindowDimensions must be called unconditionally at component top-level */}
+					{renderLofiAndTimer()}
+				</>
 			</ScrollView>
 		</SafeAreaView>
 	);

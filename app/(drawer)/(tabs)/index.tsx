@@ -1,21 +1,40 @@
-import { methods } from "@/assets/data/methods";
+import type { Method } from "@/assets/data/methods";
 import { MethodCard } from "@/components/cards/MethodCard";
+import { AddMethodModal } from "@/components/modals/AddMethodModal";
+import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
+import { useAllMethods } from "@/hooks/useAllMethods";
+import { useCustomMethods } from "@/hooks/useCustomMethods";
+import { useState } from "react";
 import { FlatList, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
 	const COLORS = useThemeColors();
+	const { allMethods } = useAllMethods();
+	const { addCustomMethod } = useCustomMethods();
+	const [modalVisible, setModalVisible] = useState(false);
+
+	const handleAddMethod = async (method: Omit<Method, "id">) => {
+		await addCustomMethod(method);
+	};
+
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
 			<HeaderTitle title="Choisis ta méthode" showDrawer />
 			<FlatList
-				data={methods}
+				data={allMethods}
 				renderItem={({ item }) => <MethodCard method={item} />}
 				keyExtractor={(item) => item.id}
 				contentContainerStyle={styles.list}
 				showsVerticalScrollIndicator={false}
+			/>
+			<FloatingActionButton onPress={() => setModalVisible(true)} />
+			<AddMethodModal
+				visible={modalVisible}
+				onClose={() => setModalVisible(false)}
+				onAdd={handleAddMethod}
 			/>
 		</SafeAreaView>
 	);
