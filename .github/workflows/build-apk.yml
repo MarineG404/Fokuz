@@ -101,7 +101,8 @@ jobs:
               uses: actions/upload-artifact@v4
               with:
                   name: fokuz-apk
-                  path: android/app/build/outputs/apk/release/fokuz.apk
+                  # Upload any APK produced by the Gradle build (robust to filename)
+                  path: android/app/build/outputs/apk/release/*.apk
 
     # 4. Cleanup after successful build
     cleanup:
