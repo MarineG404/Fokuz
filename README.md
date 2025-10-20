@@ -1,5 +1,7 @@
 # 🎯 Fokuz
 
+***Français** | [English](README.en.md)*
+
 ## 📖 Description
 
 Application mobile de productivité développée avec React Native et Expo, conçue pour améliorer la concentration et la gestion du temps. Fokuz propose des méthodes de concentration avec différentes techniques (Pomodoro, Deep Work, 52/17) et un système de suivi complet des sessions.
