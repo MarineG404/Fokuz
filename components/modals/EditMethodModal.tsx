@@ -2,6 +2,7 @@ import type { Method } from "@/assets/data/methods";
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
 	Alert,
 	Modal,
@@ -35,6 +36,7 @@ const AVAILABLE_ICONS: (keyof typeof Ionicons.glyphMap)[] = [
 
 export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMethodModalProps) {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 	const [name, setName] = useState("");
 	const [description, setDescription] = useState("");
 	const [workDuration, setWorkDuration] = useState("");
@@ -54,13 +56,19 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 
 	const handleUpdate = () => {
 		if (!name.trim() || !workDuration.trim()) {
-			Alert.alert("Erreur", "Le nom et la durée de travail sont obligatoires");
+			Alert.alert(
+				t("EDIT_METHOD.ERROR.TITLE", "Error"),
+				t("EDIT_METHOD.ERROR.REQUIRED_FIELDS")
+			);
 			return;
 		}
 
 		const workMin = parseInt(workDuration);
 		if (isNaN(workMin) || workMin <= 0) {
-			Alert.alert("Erreur", "La durée de travail doit être un nombre positif");
+			Alert.alert(
+				t("EDIT_METHOD.ERROR.TITLE", "Error"),
+				t("EDIT_METHOD.ERROR.INVALID_WORK_DURATION")
+			);
 			return;
 		}
 
@@ -92,7 +100,9 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 			<View style={styles.overlay}>
 				<View style={[styles.modalContainer, { backgroundColor: COLORS.background }]}>
 					<View style={styles.header}>
-						<Text style={[styles.title, { color: COLORS.text }]}>Modifier la méthode</Text>
+						<Text style={[styles.title, { color: COLORS.text }]}>
+							{t("EDIT_METHOD.TITLE")}
+						</Text>
 						<Pressable onPress={onClose} style={styles.closeButton}>
 							<Ionicons name="close" size={24} color={COLORS.text} />
 						</Pressable>
@@ -101,7 +111,9 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 					<ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
 						{/* Nom */}
 						<View style={styles.inputGroup}>
-							<Text style={[styles.label, { color: COLORS.text }]}>Nom de la méthode *</Text>
+							<Text style={[styles.label, { color: COLORS.text }]}>
+								{t("EDIT_METHOD.NAME_LABEL")}
+							</Text>
 							<TextInput
 								style={[
 									styles.input,
@@ -113,14 +125,16 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 								]}
 								value={name}
 								onChangeText={setName}
-								placeholder="Ex: Ma méthode perso"
+								placeholder={t("EDIT_METHOD.NAME_PLACEHOLDER")}
 								placeholderTextColor={COLORS.textSecondary}
 							/>
 						</View>
 
 						{/* Description */}
 						<View style={styles.inputGroup}>
-							<Text style={[styles.label, { color: COLORS.text }]}>Description</Text>
+							<Text style={[styles.label, { color: COLORS.text }]}>
+								{t("EDIT_METHOD.DESCRIPTION_LABEL")}
+							</Text>
 							<TextInput
 								style={[
 									styles.input,
@@ -133,7 +147,7 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 								]}
 								value={description}
 								onChangeText={setDescription}
-								placeholder="Décrivez votre méthode..."
+								placeholder={t("EDIT_METHOD.DESCRIPTION_PLACEHOLDER")}
 								placeholderTextColor={COLORS.textSecondary}
 								multiline
 								numberOfLines={3}
@@ -143,7 +157,7 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 						{/* Durée de travail */}
 						<View style={styles.inputGroup}>
 							<Text style={[styles.label, { color: COLORS.text }]}>
-								Durée de travail (minutes) *
+								{t("EDIT_METHOD.WORK_DURATION_LABEL")}
 							</Text>
 							<TextInput
 								style={[
@@ -165,7 +179,7 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 						{/* Durée de pause */}
 						<View style={styles.inputGroup}>
 							<Text style={[styles.label, { color: COLORS.textSecondary }]}>
-								Durée de pause (minutes)
+								{t("EDIT_METHOD.BREAK_DURATION_LABEL")}
 							</Text>
 							<TextInput
 								style={[
@@ -186,7 +200,9 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 
 						{/* Sélection d'icône */}
 						<View style={styles.inputGroup}>
-							<Text style={[styles.label, { color: COLORS.text }]}>Icône</Text>
+							<Text style={[styles.label, { color: COLORS.text }]}>
+								{t("EDIT_METHOD.ICON_LABEL")}
+							</Text>
 							<View style={styles.iconGrid}>
 								{AVAILABLE_ICONS.map((icon) => (
 									<Pressable
@@ -214,13 +230,17 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 					{/* Boutons d'action */}
 					<View style={styles.footer}>
 						<Pressable onPress={onClose} style={[styles.button, { backgroundColor: COLORS.card }]}>
-							<Text style={[styles.buttonText, { color: COLORS.text }]}>Annuler</Text>
+							<Text style={[styles.buttonText, { color: COLORS.text }]}>
+								{t("EDIT_METHOD.CANCEL")}
+							</Text>
 						</Pressable>
 						<Pressable
 							onPress={handleUpdate}
 							style={[styles.button, { backgroundColor: COLORS.primary }]}
 						>
-							<Text style={[styles.buttonText, { color: "#FFFFFF" }]}>Modifier</Text>
+							<Text style={[styles.buttonText, { color: "#FFFFFF" }]}>
+								{t("EDIT_METHOD.SAVE")}
+							</Text>
 						</Pressable>
 					</View>
 				</View>

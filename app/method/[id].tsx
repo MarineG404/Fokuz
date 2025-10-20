@@ -7,17 +7,18 @@ import { useAllMethods } from "@/hooks/useAllMethods";
 import { useLocalSearchParams } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function MethodDetails() {
 	React.useEffect(() => {
 		// allow rotation for this screen
-		ScreenOrientation.unlockAsync().catch(() => {});
+		ScreenOrientation.unlockAsync().catch(() => { });
 
 		return () => {
 			// restore portrait lock when leaving
-			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
 		};
 	}, []);
 
@@ -29,11 +30,13 @@ export default function MethodDetails() {
 
 	const method = getMethodById(id || "");
 
+	const { t } = useTranslation();
+
 	// Afficher un loader pendant le chargement
 	if (loading) {
 		return (
 			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-				<HeaderTitle title="Chargement..." showBack />
+				<HeaderTitle title={t("METHOD.LOADING")} showBack />
 			</SafeAreaView>
 		);
 	}
@@ -42,11 +45,11 @@ export default function MethodDetails() {
 	if (!method) {
 		return (
 			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-				<HeaderTitle title="Méthode non trouvée" showBack />
+				<HeaderTitle title={t("METHOD.NOT_FOUND")} showBack />
 				<ScrollView style={styles.content}>
 					<BlockCard style={styles.card} padded={false}>
 						<Text style={[styles.errorText, { color: COLORS.textSecondary }]}>
-							Méthode non trouvée (id: {id})
+							{t("METHOD.NOT_FOUND_ID", { id })}
 						</Text>
 					</BlockCard>
 				</ScrollView>
@@ -69,7 +72,11 @@ export default function MethodDetails() {
 							<TimerComponent
 								workDurationMinutes={method.workDuration}
 								breakDurationMinutes={method.breakDuration}
-								methodName={method.name}
+								methodName={
+									"translationKey" in method
+										? t(`METHODS.${method.translationKey}.NAME`)
+										: method.name
+								}
 								methodId={method.id}
 							/>
 						</BlockCard>
@@ -85,7 +92,9 @@ export default function MethodDetails() {
 					<TimerComponent
 						workDurationMinutes={method.workDuration}
 						breakDurationMinutes={method.breakDuration}
-						methodName={method.name}
+						methodName={
+							"translationKey" in method ? t(`METHODS.${method.translationKey}.NAME`) : method.name
+						}
 						methodId={method.id}
 					/>
 				</BlockCard>
@@ -95,30 +104,45 @@ export default function MethodDetails() {
 
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-			<HeaderTitle title={method.name} showBack />
+			<HeaderTitle
+				title={
+					"translationKey" in method ? t(`METHODS.${method.translationKey}.NAME`) : method.name
+				}
+				showBack
+			/>
 
 			<ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
 				<>
 					{/* Description Card */}
 					<BlockCard>
-						<Text style={[styles.description, { color: COLORS.text }]}>{method.description}</Text>
+						<Text style={[styles.description, { color: COLORS.text }]}>
+							{"translationKey" in method
+								? t(`METHODS.${method.translationKey}.DESCRIPTION`)
+								: method.description}
+						</Text>
 					</BlockCard>
 
 					{/* Duration Info Card */}
 					<BlockCard style={styles.durationCard}>
-						<Text style={[styles.cardTitle, { color: COLORS.primary }]}>Configuration</Text>
+						<Text style={[styles.cardTitle, { color: COLORS.primary }]}>
+							{t("METHOD.CONFIGURATION")}
+						</Text>
 						<View style={styles.durationRow}>
 							<View style={[styles.durationItem, { borderLeftColor: COLORS.workColor }]}>
-								<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>Travail</Text>
+								<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>
+									{t("METHOD.WORK")}
+								</Text>
 								<Text style={[styles.durationValue, { color: COLORS.text }]}>
-									{method.workDuration} min
+									{t("METHOD.WORK_DURATION", { duration: method.workDuration })}
 								</Text>
 							</View>
 							{method.breakDuration && (
 								<View style={[styles.durationItem, { borderLeftColor: COLORS.breakColor }]}>
-									<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>Pause</Text>
+									<Text style={[styles.durationLabel, { color: COLORS.textSecondary }]}>
+										{t("METHOD.BREAK")}
+									</Text>
 									<Text style={[styles.durationValue, { color: COLORS.text }]}>
-										{method.breakDuration} min
+										{t("METHOD.BREAK_DURATION", { duration: method.breakDuration })}
 									</Text>
 								</View>
 							)}

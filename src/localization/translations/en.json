@@ -1,4 +1,142 @@
-{	"language": "English",
-	"chooseMethod": "Choose your method",
-	"LANGUAGE_SETTINGS": "Language Settings"
+{
+	"CHOOSE_METHOD": "Choose your method",
+	"THEME_SETTINGS": "App Theme",
+	"LANGUAGE_SETTINGS": "Language Settings",
+	"EDIT_METHOD": {
+		"TITLE": "Edit method",
+		"NAME_LABEL": "Method name *",
+		"NAME_PLACEHOLDER": "Ex: My custom method",
+		"DESCRIPTION_LABEL": "Description",
+		"DESCRIPTION_PLACEHOLDER": "Describe your method...",
+		"WORK_DURATION_LABEL": "Work duration (minutes) *",
+		"BREAK_DURATION_LABEL": "Break duration (minutes)",
+		"ICON_LABEL": "Icon",
+		"CANCEL": "Cancel",
+		"SAVE": "Update",
+		"ERROR": {
+			"REQUIRED_FIELDS": "Name and work duration are required",
+			"INVALID_WORK_DURATION": "Work duration must be a positive number"
+		},
+		"DELETE": {
+			"TITLE": "Delete method",
+			"MESSAGE": "Are you sure you want to delete \"{{name}}\" ?"
+		}
+	},
+	"SETTINGS": "Settings",
+	"HOME": "Home",
+	"HISTORY": "History",
+	"DURATION": {
+		"WORK": "{{duration}} min work",
+		"BREAK": ", {{duration}} min break"
+	},
+	"METHODS": {
+		"POMODORO": {
+			"NAME": "Pomodoro",
+			"DESCRIPTION": "Work in 25-minute intervals with 5-minute breaks."
+		},
+		"DEEP_WORK": {
+			"NAME": "Deep Work",
+			"DESCRIPTION": "Focus intensely for 90 minutes for deep work."
+		},
+		"52_17": {
+			"NAME": "52/17 Method",
+			"DESCRIPTION": "Work for 52 minutes, then take a 17-minute break."
+		}
+	},
+	"FILTERS": {
+		"ALL": "All",
+		"TODAY": "Today",
+		"WEEK": "7 days",
+		"MONTH": "30 days"
+	},
+	"DATES": {
+		"TODAY": "Today",
+		"YESTERDAY": "Yesterday"
+	},
+	"EMPTY_STATE": {
+		"TITLE": "No sessions found",
+		"SUBTITLE_ALL": "Start your first session to see history here",
+		"SUBTITLE_FILTERED": "No sessions for this period"
+	},
+	"METHOD": {
+		"LOADING": "Loading...",
+		"NOT_FOUND": "Method not found",
+		"NOT_FOUND_ID": "Method not found (id: {{id}})",
+		"CONFIGURATION": "Configuration",
+		"WORK": "Work",
+		"WORK_DURATION": "{{duration}} min",
+		"BREAK": "Break",
+		"BREAK_DURATION": "{{duration}} min"
+	},
+	"SESSION": {
+		"STATUS": {
+			"COMPLETED": "Completed",
+			"ABANDONED": "Abandoned"
+		},
+		"STATS": {
+			"TOTAL_DURATION": "Total duration",
+			"WORK": "Work",
+			"BREAK": "Break",
+			"CYCLES": "Cycles"
+		}
+	},
+	"STATS": {
+		"TITLE": "Statistics",
+		"SESSIONS": "Sessions",
+		"COMPLETED": "Completed",
+		"TOTAL_TIME": "Total time",
+		"SUCCESS_RATE": "Success rate",
+		"AVG_DURATION": "Average duration per session"
+	},
+	"LOFI_PLAYER": {
+		"TITLE": "Lofi Focus"
+	},
+	"TIMER": {
+		"TITLE": "Timer",
+		"SESSION_COUNT": "Session {{count}}",
+		"PHASE": {
+			"WORK": "Work",
+			"BREAK": "Break",
+			"FINISHED": "Finished"
+		},
+		"STATUS": {
+			"READY": "Ready to start!",
+			"COMPLETED": "Session completed!",
+			"CONGRATS": "Congratulations on this focus session!"
+		},
+		"BUTTONS": {
+			"START": "Start",
+			"NEW_SESSION": "New session",
+			"PAUSE": "Pause",
+			"RESUME": "Resume",
+			"FINISH": "Finish"
+		},
+		"CONFIRM_MODAL": {
+			"TITLE": "Finish session?",
+			"MESSAGE": "You will lose your current progress and reset the timer."
+		}
+	},
+	"MODAL": {
+		"CONFIRM": {
+			"CONFIRM_BUTTON": "Confirm",
+			"CANCEL_BUTTON": "Cancel"
+		},
+		"ADD_METHOD": {
+			"TITLE": "New method",
+			"NAME_LABEL": "Method name *",
+			"NAME_PLACEHOLDER": "Ex: My custom method",
+			"DESCRIPTION_LABEL": "Description",
+			"DESCRIPTION_PLACEHOLDER": "Describe your method...",
+			"WORK_DURATION_LABEL": "Work duration (minutes) *",
+			"BREAK_DURATION_LABEL": "Break duration (minutes)",
+			"ICON_LABEL": "Icon",
+			"CANCEL_BUTTON": "Cancel",
+			"ADD_BUTTON": "Add",
+			"ERROR": {
+				"TITLE": "Error",
+				"REQUIRED_FIELDS": "Name and work duration are required",
+				"INVALID_WORK_DURATION": "Work duration must be a positive number"
+			}
+		}
+	}
 }

@@ -4,6 +4,7 @@ import { useCustomMethods } from "@/hooks/useCustomMethods";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Alert, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { EditMethodModal } from "../modals/EditMethodModal";
 import BlockCard from "../ui/BlockCard";
@@ -11,6 +12,7 @@ import BlockCard from "../ui/BlockCard";
 export const MethodCard = ({ method }: { method: Method }) => {
 	const COLORS = useThemeColors();
 	const router = useRouter();
+	const { t } = useTranslation();
 	const { updateCustomMethod, deleteCustomMethod } = useCustomMethods();
 	const [editModalVisible, setEditModalVisible] = useState(false);
 
@@ -29,19 +31,23 @@ export const MethodCard = ({ method }: { method: Method }) => {
 	};
 
 	const handleDelete = () => {
-		Alert.alert("Supprimer la méthode", `Voulez-vous vraiment supprimer "${method.name}" ?`, [
-			{
-				text: "Annuler",
-				style: "cancel",
-			},
-			{
-				text: "Supprimer",
-				style: "destructive",
-				onPress: async () => {
-					await deleteCustomMethod(method.id);
+		Alert.alert(
+			t("EDIT_METHOD.DELETE.TITLE"),
+			t("EDIT_METHOD.DELETE.MESSAGE", { name: method.name }),
+			[
+				{
+					text: t("MODAL.CONFIRM.CANCEL_BUTTON"),
+					style: "cancel",
 				},
-			},
-		]);
+				{
+					text: t("MODAL.CONFIRM.CONFIRM_BUTTON"),
+					style: "destructive",
+					onPress: async () => {
+						await deleteCustomMethod(method.id);
+					},
+				},
+			],
+		);
 	};
 
 	return (
@@ -51,8 +57,8 @@ export const MethodCard = ({ method }: { method: Method }) => {
 				<View style={styles.textContainer}>
 					<Text style={[styles.name, { color: COLORS.text }]}>{method.name}</Text>
 					<Text style={[styles.description, { color: COLORS.textSecondary }]}>
-						{method.workDuration} min de travail
-						{method.breakDuration ? `, ${method.breakDuration} min de pause` : ""}
+						{t("DURATION.WORK", { duration: method.workDuration })}
+						{method.breakDuration && t("DURATION.BREAK", { duration: method.breakDuration })}
 					</Text>
 				</View>
 				{isCustomMethod && (

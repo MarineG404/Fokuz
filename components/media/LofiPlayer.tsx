@@ -1,6 +1,7 @@
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import BlockCard from "../ui/BlockCard";
@@ -18,6 +19,7 @@ const LOFI_VIDEOS = [
 
 export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 	const [playing] = useState(false);
 	const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 	const [isCollapsed, setIsCollapsed] = useState(false);
@@ -42,7 +44,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 			<View style={styles.header}>
 				<View style={styles.headerLeft}>
 					<Ionicons name="musical-notes" size={20} color={COLORS.primary} />
-					<Text style={[styles.title, { color: COLORS.text }]}>Lofi Focus</Text>
+					<Text style={[styles.title, { color: COLORS.text }]}>{t("LOFI_PLAYER.TITLE")}</Text>
 				</View>
 				<TouchableOpacity onPress={toggleCollapse}>
 					<Ionicons

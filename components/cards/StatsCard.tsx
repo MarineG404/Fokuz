@@ -2,6 +2,7 @@ import { useThemeColors } from "@/constants/color";
 import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, View } from "react-native";
 import BlockCard from "../ui/BlockCard";
 
@@ -21,6 +22,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 	completionRate,
 }) => {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 
 	const StatItem = ({
 		icon,
@@ -48,29 +50,29 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 		<BlockCard style={styles.container}>
 			<View style={styles.header}>
 				<Ionicons name="stats-chart" size={20} color={COLORS.primary} />
-				<Text style={[styles.title, { color: COLORS.text }]}>Statistiques</Text>
+				<Text style={[styles.title, { color: COLORS.text }]}>{t("STATS.TITLE")}</Text>
 			</View>
 
 			<View style={styles.statsGrid}>
-				<StatItem icon="document-text" value={totalSessions} label="Sessions" />
+				<StatItem icon="document-text" value={totalSessions} label={t("STATS.SESSIONS")} />
 
 				<StatItem
 					icon="checkmark-circle"
 					value={completedSessions}
-					label="Terminées"
+					label={t("STATS.COMPLETED")}
 					color="#10B981"
 				/>
 
 				<StatItem
 					icon="time"
 					value={historyService.formatDuration(totalWorkTime)}
-					label="Temps total"
+					label={t("STATS.TOTAL_TIME")}
 				/>
 
 				<StatItem
 					icon="trending-up"
 					value={`${completionRate}%`}
-					label="Taux de réussite"
+					label={t("STATS.SUCCESS_RATE")}
 					color={completionRate >= 80 ? "#10B981" : completionRate >= 60 ? "#F59E0B" : "#EF4444"}
 				/>
 			</View>
@@ -82,7 +84,7 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 							{historyService.formatDuration(avgWorkTime)}
 						</Text>
 						<Text style={[styles.avgLabel, { color: COLORS.textSecondary }]}>
-							Durée moyenne par session
+							{t("STATS.AVG_DURATION")}
 						</Text>
 					</View>
 				</View>

@@ -1,6 +1,7 @@
 import { useThemeColors } from "@/constants/color";
 import { TimerPhase } from "@/utils/useTimer";
 import React, { useEffect, useRef } from "react";
+import { useTranslation } from "react-i18next";
 import { Animated, StyleSheet, Text } from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
 
@@ -24,6 +25,7 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 	strokeWidth = 16,
 }) => {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 	const radius = (size - strokeWidth) / 2;
 	const circumference = 2 * Math.PI * radius;
 
@@ -167,7 +169,11 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 			{/* Contenu central avec animation */}
 			<Animated.View style={[styles.centerContent, { transform: [{ scale: phaseAnim }] }]}>
 				<Text style={[styles.phaseText, { color: COLORS.text }]}>
-					{currentPhase === "work" ? "Travail" : currentPhase === "break" ? "Pause" : "Terminé"}
+					{currentPhase === "work"
+						? t("TIMER.PHASE.WORK")
+						: currentPhase === "break"
+							? t("TIMER.PHASE.BREAK")
+							: t("TIMER.PHASE.FINISHED")}
 				</Text>
 				<Text style={[styles.timerDisplay, { color: COLORS.text }]}>{formattedTime}</Text>
 			</Animated.View>

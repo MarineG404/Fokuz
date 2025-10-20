@@ -2,6 +2,7 @@ import { useThemeColors } from "@/constants/color";
 import { TimerPhase, useTimer } from "@/utils/useTimer";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Animated, StyleSheet, Text, View } from "react-native";
 import { ConfirmModal } from "../modals/ConfirmModal";
 import AppButton from "../ui/AppButton";
@@ -16,14 +17,14 @@ export interface TimerComponentProps {
 	onFinish?: () => void;
 }
 
-const getPhaseLabel = (phase: TimerPhase): string => {
+const getPhaseLabel = (phase: TimerPhase, t: (key: string) => string): string => {
 	switch (phase) {
 		case "work":
-			return "Travail";
+			return t("TIMER.PHASE.WORK");
 		case "break":
-			return "Pause";
+			return t("TIMER.PHASE.BREAK");
 		case "finished":
-			return "Terminé";
+			return t("TIMER.PHASE.FINISHED");
 		default:
 			return "";
 	}
@@ -38,6 +39,7 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 	onFinish,
 }) => {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 	const [showConfirmModal, setShowConfirmModal] = useState(false);
 	const [fadeAnim] = useState(new Animated.Value(1));
 	const [scaleAnim] = useState(new Animated.Value(1));
@@ -79,10 +81,10 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 	return (
 		<View style={styles.container}>
 			<Animated.View style={[styles.header, { opacity: fadeAnim }]}>
-				<Text style={[styles.sectionTitle, { color: COLORS.primary }]}>Minuteur</Text>
+				<Text style={[styles.sectionTitle, { color: COLORS.primary }]}>{t("TIMER.TITLE")}</Text>
 				{timer.sessionCount > 0 && (
 					<Text style={[styles.sessionCounter, { color: COLORS.textSecondary }]}>
-						Session {timer.sessionCount}
+						{t("TIMER.SESSION_COUNT", { count: timer.sessionCount })}
 					</Text>
 				)}
 			</Animated.View>
@@ -107,7 +109,7 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 							color="white"
 							style={styles.phaseIcon}
 						/>
-						<Text style={styles.phaseText}>{getPhaseLabel(timer.phase)}</Text>
+						<Text style={styles.phaseText}>{getPhaseLabel(timer.phase, t)}</Text>
 					</Animated.View>
 
 					<SessionCircularTimer
@@ -127,11 +129,11 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 						style={styles.readyIcon}
 					/>
 					<Text style={[styles.readyText, { color: COLORS.text }]}>
-						{timer.sessionCount > 0 ? "Session terminée !" : "Prêt à commencer !"}
+						{timer.sessionCount > 0 ? t("TIMER.STATUS.COMPLETED") : t("TIMER.STATUS.READY")}
 					</Text>
 					{timer.sessionCount > 0 && (
 						<Text style={[styles.readySubText, { color: COLORS.textSecondary }]}>
-							Félicitations pour cette session de focus !
+							{t("TIMER.STATUS.CONGRATS")}
 						</Text>
 					)}
 				</Animated.View>
@@ -141,14 +143,16 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 				{timer.timeLeft === 0 ? (
 					<View style={styles.buttonRow}>
 						<AppButton
-							title={timer.sessionCount > 0 ? "Nouvelle session" : "Commencer"}
+							title={
+								timer.sessionCount > 0 ? t("TIMER.BUTTONS.NEW_SESSION") : t("TIMER.BUTTONS.START")
+							}
 							onPress={timer.sessionCount > 0 ? timer.restart : timer.start}
 							iconName={timer.sessionCount > 0 ? "refresh" : "play"}
 							variant="primary"
 						/>
 						{timer.sessionCount > 0 && (
 							<AppButton
-								title="Terminer"
+								title={t("TIMER.BUTTONS.FINISH")}
 								onPress={handleTerminate}
 								iconName="stop"
 								variant="muted"
@@ -158,24 +162,29 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 				) : (
 					<>
 						<AppButton
-							title={timer.isRunning ? "Pause" : "Reprendre"}
+							title={timer.isRunning ? t("TIMER.BUTTONS.PAUSE") : t("TIMER.BUTTONS.RESUME")}
 							onPress={timer.toggle}
 							iconName={timer.isRunning ? "pause" : "play"}
 							variant="primary"
 							activeOpacity={0.85}
 							style={{ transform: [{ scale: timer.isRunning ? 1.05 : 1 }] }}
 						/>
-						<AppButton title="Terminer" onPress={handleTerminate} iconName="stop" variant="muted" />
+						<AppButton
+							title={t("TIMER.BUTTONS.FINISH")}
+							onPress={handleTerminate}
+							iconName="stop"
+							variant="muted"
+						/>
 					</>
 				)}
 			</Animated.View>
 
 			<ConfirmModal
 				visible={showConfirmModal}
-				title="Terminer la session ?"
-				message="Vous allez perdre votre progression actuelle et remettre le compteur à zéro."
-				confirmText="Terminer"
-				cancelText="Annuler"
+				title={t("TIMER.CONFIRM_MODAL.TITLE")}
+				message={t("TIMER.CONFIRM_MODAL.MESSAGE")}
+				confirmText={t("TIMER.BUTTONS.FINISH")}
+				cancelText={t("MODAL.CONFIRM.CANCEL_BUTTON")}
 				onConfirm={confirmTerminate}
 				onCancel={cancelTerminate}
 			/>

@@ -1,16 +1,18 @@
 import { useThemeColors } from "@/constants/color";
 import { Drawer } from "expo-router/drawer";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function DrawerLayout() {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 
 	return (
 		<Drawer
 			screenOptions={{
 				headerShown: false,
 				drawerStyle: {
-					width: 200, // drawer plus fin
+					width: 200,
 					backgroundColor: COLORS.cardBackground,
 				},
 				drawerActiveTintColor: COLORS.primary,
@@ -18,8 +20,8 @@ export default function DrawerLayout() {
 				drawerLabelStyle: { fontSize: 16 },
 			}}
 		>
-			<Drawer.Screen name="(tabs)" options={{ title: "Accueil" }} />
-			<Drawer.Screen name="settings" options={{ title: "Paramètres" }} />
+			<Drawer.Screen name="(tabs)" options={{ title: t("HOME") }} />
+			<Drawer.Screen name="settings" options={{ title: t("SETTINGS") }} />
 		</Drawer>
 	);
 }

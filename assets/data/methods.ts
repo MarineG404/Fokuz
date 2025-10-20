@@ -7,6 +7,7 @@ export type Method = {
 	workDuration: number;
 	breakDuration?: number;
 	icon: keyof typeof Ionicons.glyphMap;
+	translationKey?: string;
 };
 
 export const methods: Method[] = [
@@ -17,6 +18,7 @@ export const methods: Method[] = [
 		workDuration: 25,
 		breakDuration: 5,
 		icon: "repeat-outline",
+		translationKey: "POMODORO",
 	},
 	{
 		id: "2",
@@ -24,6 +26,7 @@ export const methods: Method[] = [
 		description: "Concentrez-vous intensément pendant 90 minutes pour un travail en profondeur.",
 		workDuration: 90,
 		icon: "briefcase-outline",
+		translationKey: "DEEP_WORK",
 	},
 	{
 		id: "3",
@@ -32,5 +35,6 @@ export const methods: Method[] = [
 		workDuration: 52,
 		breakDuration: 17,
 		icon: "hourglass-outline",
+		translationKey: "52_17",
 	},
 ];

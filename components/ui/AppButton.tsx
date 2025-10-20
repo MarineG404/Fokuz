@@ -30,10 +30,10 @@ const AppButton: React.FC<AppButtonProps> = ({
 		variant === "primary"
 			? COLORS.primary
 			: variant === "muted"
-			? // muted button from theme
-			  // @ts-ignore newest key exists on COLORS
-			  (COLORS as any).mutedButton || "rgba(0,0,0,0.06)"
-			: "transparent";
+				? // muted button from theme
+					// @ts-ignore newest key exists on COLORS
+					(COLORS as any).mutedButton || "rgba(0,0,0,0.06)"
+				: "transparent";
 
 	const color = variant === "primary" ? "#fff" : COLORS.text;
 

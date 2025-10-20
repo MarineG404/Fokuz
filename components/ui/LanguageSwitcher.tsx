@@ -2,8 +2,7 @@ import { useThemeColors } from "@/constants/color";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
-import { Dropdown } from 'react-native-element-dropdown';
-
+import { Dropdown } from "react-native-element-dropdown";
 
 const options = [
 	{ value: "fr", label: "Français" },
@@ -19,19 +18,25 @@ export const LanguageSwitcher = () => {
 			<Dropdown
 				data={options}
 				value={i18n.language}
-				onChange={item => i18n.changeLanguage(item.value)}
+				onChange={(item) => i18n.changeLanguage(item.value)}
 				labelField="label"
 				valueField="value"
-				style={[styles.dropdown, {
-					borderColor: COLORS.primary,
-					backgroundColor: COLORS.card
-				}]}
+				style={[
+					styles.dropdown,
+					{
+						borderColor: COLORS.primary,
+						backgroundColor: COLORS.card,
+					},
+				]}
 				selectedTextStyle={[styles.selectedText, { color: COLORS.text }]}
-				containerStyle={[styles.listContainer, {
-					backgroundColor: COLORS.card,
-					borderColor: COLORS.border,
-					borderWidth: 1
-				}]}
+				containerStyle={[
+					styles.listContainer,
+					{
+						backgroundColor: COLORS.card,
+						borderColor: COLORS.border,
+						borderWidth: 1,
+					},
+				]}
 				placeholderStyle={{ color: COLORS.text }}
 				itemTextStyle={{ color: COLORS.text }}
 				activeColor={COLORS.primary + "15"}

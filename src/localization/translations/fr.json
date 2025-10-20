@@ -1,5 +1,142 @@
 {
-	"language": "French",
-	"chooseMethod": "Choisissez votre méthode",
-	"LANGUAGE_SETTINGS": "Paramètres de langue"
+	"CHOOSE_METHOD": "Choisissez votre méthode",
+	"THEME_SETTINGS": "Thème de l'application",
+	"LANGUAGE_SETTINGS": "Paramètres de langue",
+	"EDIT_METHOD": {
+		"TITLE": "Modifier la méthode",
+		"NAME_LABEL": "Nom de la méthode *",
+		"NAME_PLACEHOLDER": "Ex: Ma méthode perso",
+		"DESCRIPTION_LABEL": "Description",
+		"DESCRIPTION_PLACEHOLDER": "Décrivez votre méthode...",
+		"WORK_DURATION_LABEL": "Durée de travail (minutes) *",
+		"BREAK_DURATION_LABEL": "Durée de pause (minutes)",
+		"ICON_LABEL": "Icône",
+		"CANCEL": "Annuler",
+		"SAVE": "Modifier",
+		"ERROR": {
+			"REQUIRED_FIELDS": "Le nom et la durée de travail sont obligatoires",
+			"INVALID_WORK_DURATION": "La durée de travail doit être un nombre positif"
+		},
+		"DELETE": {
+			"TITLE": "Supprimer la méthode",
+			"MESSAGE": "Voulez-vous vraiment supprimer \"{{name}}\" ?"
+		}
+	},
+	"SETTINGS": "Paramètres",
+	"HOME": "Accueil",
+	"HISTORY": "Historique",
+	"DURATION": {
+		"WORK": "{{duration}} min de travail",
+		"BREAK": ", {{duration}} min de pause"
+	},
+	"METHODS": {
+		"POMODORO": {
+			"NAME": "Pomodoro",
+			"DESCRIPTION": "Travaillez en intervalles de 25 minutes avec des pauses de 5 minutes."
+		},
+		"DEEP_WORK": {
+			"NAME": "Deep Work",
+			"DESCRIPTION": "Concentrez-vous intensément pendant 90 minutes pour un travail en profondeur."
+		},
+		"52_17": {
+			"NAME": "Méthode 52/17",
+			"DESCRIPTION": "Travaillez pendant 52 minutes, puis faites une pause de 17 minutes."
+		}
+	},
+	"FILTERS": {
+		"ALL": "Tout",
+		"TODAY": "Aujourd'hui",
+		"WEEK": "7 jours",
+		"MONTH": "30 jours"
+	},
+	"DATES": {
+		"TODAY": "Aujourd'hui",
+		"YESTERDAY": "Hier"
+	},
+	"EMPTY_STATE": {
+		"TITLE": "Aucune session trouvée",
+		"SUBTITLE_ALL": "Commencez votre première session pour voir l'historique ici",
+		"SUBTITLE_FILTERED": "Aucune session pour cette période"
+	},
+	"METHOD": {
+		"LOADING": "Chargement...",
+		"NOT_FOUND": "Méthode non trouvée",
+		"NOT_FOUND_ID": "Méthode non trouvée (id: {{id}})",
+		"CONFIGURATION": "Configuration",
+		"WORK": "Travail",
+		"WORK_DURATION": "{{duration}} min",
+		"BREAK": "Pause",
+		"BREAK_DURATION": "{{duration}} min"
+	},
+	"SESSION": {
+		"STATUS": {
+			"COMPLETED": "Terminée",
+			"ABANDONED": "Abandonnée"
+		},
+		"STATS": {
+			"TOTAL_DURATION": "Durée totale",
+			"WORK": "Travail",
+			"BREAK": "Pause",
+			"CYCLES": "Cycles"
+		}
+	},
+	"STATS": {
+		"TITLE": "Statistiques",
+		"SESSIONS": "Sessions",
+		"COMPLETED": "Terminées",
+		"TOTAL_TIME": "Temps total",
+		"SUCCESS_RATE": "Taux de réussite",
+		"AVG_DURATION": "Durée moyenne par session"
+	},
+	"LOFI_PLAYER": {
+		"TITLE": "Lofi Focus"
+	},
+	"TIMER": {
+		"TITLE": "Minuteur",
+		"SESSION_COUNT": "Session {{count}}",
+		"PHASE": {
+			"WORK": "Travail",
+			"BREAK": "Pause",
+			"FINISHED": "Terminé"
+		},
+		"STATUS": {
+			"READY": "Prêt à commencer !",
+			"COMPLETED": "Session terminée !",
+			"CONGRATS": "Félicitations pour cette session de focus !"
+		},
+		"BUTTONS": {
+			"START": "Commencer",
+			"NEW_SESSION": "Nouvelle session",
+			"PAUSE": "Pause",
+			"RESUME": "Reprendre",
+			"FINISH": "Terminer"
+		},
+		"CONFIRM_MODAL": {
+			"TITLE": "Terminer la session ?",
+			"MESSAGE": "Vous allez perdre votre progression actuelle et remettre le compteur à zéro."
+		}
+	},
+	"MODAL": {
+		"CONFIRM": {
+			"CONFIRM_BUTTON": "Confirmer",
+			"CANCEL_BUTTON": "Annuler"
+		},
+		"ADD_METHOD": {
+			"TITLE": "Nouvelle méthode",
+			"NAME_LABEL": "Nom de la méthode *",
+			"NAME_PLACEHOLDER": "Ex: Ma méthode perso",
+			"DESCRIPTION_LABEL": "Description",
+			"DESCRIPTION_PLACEHOLDER": "Décrivez votre méthode...",
+			"WORK_DURATION_LABEL": "Durée de travail (minutes) *",
+			"BREAK_DURATION_LABEL": "Durée de pause (minutes)",
+			"ICON_LABEL": "Icône",
+			"CANCEL_BUTTON": "Annuler",
+			"ADD_BUTTON": "Ajouter",
+			"ERROR": {
+				"TITLE": "Erreur",
+				"REQUIRED_FIELDS": "Le nom et la durée de travail sont obligatoires",
+				"INVALID_WORK_DURATION": "La durée de travail doit être un nombre positif"
+			}
+		}
+	}
 }

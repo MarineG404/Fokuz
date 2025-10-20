@@ -25,7 +25,7 @@ export default function HomeScreen() {
 
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-	    <HeaderTitle title={t("chooseMethod")} showDrawer />
+			<HeaderTitle title={t("CHOOSE_METHOD")} showDrawer />
 			<FlatList
 				data={allMethods}
 				renderItem={({ item }) => <MethodCard method={item} />}

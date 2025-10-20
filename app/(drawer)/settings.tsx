@@ -13,13 +13,11 @@ export default function SettingsScreen() {
 
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-			<HeaderTitle title="Paramètres" showBack />
+			<HeaderTitle title={t("SETTINGS")} showBack />
 			{}
-			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{"Thème de l'application"}</Text>
+			<Text style={[styles.titlebis, { color: COLORS.secondary }]}> {t("THEME_SETTINGS")}</Text>
 			<ThemeSwitcher />
-			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>
-				{t("LANGUAGE_SETTINGS")}
-			</Text>
+			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{t("LANGUAGE_SETTINGS")}</Text>
 			<LanguageSwitcher />
 		</SafeAreaView>
 	);

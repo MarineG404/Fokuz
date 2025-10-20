@@ -1,5 +1,6 @@
 import { useThemeColors } from "@/constants/color";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import BlockCard from "../ui/BlockCard";
 
@@ -17,12 +18,13 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
 	visible,
 	title,
 	message,
-	confirmText = "Confirmer",
-	cancelText = "Annuler",
+	confirmText,
+	cancelText,
 	onConfirm,
 	onCancel,
 }) => {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 
 	return (
 		<Modal animationType="fade" transparent={true} visible={visible} onRequestClose={onCancel}>
@@ -41,7 +43,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
 							onPress={onCancel}
 						>
 							<Text style={[styles.modalButtonText, { color: COLORS.textSecondary }]}>
-								{cancelText}
+								{cancelText || t("MODAL.CONFIRM.CANCEL_BUTTON")}
 							</Text>
 						</TouchableOpacity>
 						<TouchableOpacity
@@ -52,7 +54,9 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
 							]}
 							onPress={onConfirm}
 						>
-							<Text style={[styles.modalButtonText, { color: "white" }]}>{confirmText}</Text>
+							<Text style={[styles.modalButtonText, { color: "white" }]}>
+								{confirmText || t("MODAL.CONFIRM.CONFIRM_BUTTON")}
+							</Text>
 						</TouchableOpacity>
 					</View>
 				</BlockCard>

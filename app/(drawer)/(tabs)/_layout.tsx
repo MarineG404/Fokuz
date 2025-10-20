@@ -2,9 +2,11 @@ import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import { Tabs } from "expo-router";
 import React from "react";
+import { useTranslation } from "react-i18next";
 
 export default function TabLayout() {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 
 	return (
 		<Tabs
@@ -17,7 +19,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="index"
 				options={{
-					title: "Home",
+					title: t("HOME"),
 					tabBarIcon: ({ color, size }) => (
 						<Ionicons name="home-outline" size={size} color={color} />
 					),
@@ -26,7 +28,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="history"
 				options={{
-					title: "Historique",
+					title: t("HISTORY"),
 					tabBarIcon: ({ color, size }) => (
 						<Ionicons name="document-text-outline" size={size} color={color} />
 					),

@@ -3,6 +3,7 @@ import { SessionRecord } from "@/types/session";
 import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, View } from "react-native";
 import BlockCard from "../ui/BlockCard";
 
@@ -12,6 +13,7 @@ interface SessionCardProps {
 
 export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 
 	const getMethodIcon = (methodName: string) => {
 		switch (methodName.toLowerCase()) {
@@ -44,13 +46,13 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 			return {
 				icon: "checkmark-circle" as const,
 				color: "#10B981",
-				text: "Terminée",
+				text: t("SESSION.STATUS.COMPLETED"),
 			};
 		} else {
 			return {
 				icon: "close-circle" as const,
 				color: "#EF4444",
-				text: "Abandonnée",
+				text: t("SESSION.STATUS.ABANDONED"),
 			};
 		}
 	};
@@ -79,7 +81,9 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 				<View style={styles.statItem}>
 					<Ionicons name="time-outline" size={16} color={COLORS.textSecondary} />
 					<Text style={[styles.statValue, { color: COLORS.text }]}>{getSessionDuration()}</Text>
-					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>Durée totale</Text>
+					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
+						{t("SESSION.STATS.TOTAL_DURATION")}
+					</Text>
 				</View>
 
 				<View style={styles.statItem}>
@@ -87,7 +91,9 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 					<Text style={[styles.statValue, { color: COLORS.text }]}>
 						{historyService.formatDuration(session.totalWorkTime)}
 					</Text>
-					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>Travail</Text>
+					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
+						{t("SESSION.STATS.WORK")}
+					</Text>
 				</View>
 
 				{session.totalBreakTime > 0 && (
@@ -96,14 +102,18 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 						<Text style={[styles.statValue, { color: COLORS.text }]}>
 							{historyService.formatDuration(session.totalBreakTime)}
 						</Text>
-						<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>Pause</Text>
+						<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
+							{t("SESSION.STATS.BREAK")}
+						</Text>
 					</View>
 				)}
 
 				<View style={styles.statItem}>
 					<Ionicons name="repeat-outline" size={16} color={COLORS.textSecondary} />
 					<Text style={[styles.statValue, { color: COLORS.text }]}>{session.completedCycles}</Text>
-					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>Cycles</Text>
+					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
+						{t("SESSION.STATS.CYCLES")}
+					</Text>
 				</View>
 			</View>
 

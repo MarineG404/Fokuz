@@ -8,6 +8,7 @@ import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -18,6 +19,7 @@ export default function HistoryScreen() {
 	const [sessions, setSessions] = useState<SessionRecord[]>([]);
 	const [loading, setLoading] = useState(true);
 	const [filter, setFilter] = useState<FilterType>("all");
+	const { t } = useTranslation();
 
 	const loadSessions = useCallback(async () => {
 		try {
@@ -116,9 +118,9 @@ export default function HistoryScreen() {
 		yesterday.setDate(yesterday.getDate() - 1);
 
 		if (dateStr === today.toISOString().split("T")[0]) {
-			return "Aujourd'hui";
+			return t("DATES.TODAY");
 		} else if (dateStr === yesterday.toISOString().split("T")[0]) {
-			return "Hier";
+			return t("DATES.YESTERDAY");
 		} else {
 			return date.toLocaleDateString("fr-FR", {
 				weekday: "long",
@@ -131,7 +133,7 @@ export default function HistoryScreen() {
 
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-			<HeaderTitle title="Historique" />
+			<HeaderTitle title={t("HISTORY")} />
 
 			<ScrollView
 				style={styles.content}
@@ -147,10 +149,10 @@ export default function HistoryScreen() {
 			>
 				{/* Filtres */}
 				<View style={styles.filtersContainer}>
-					<FilterButton type="all" label="Tout" />
-					<FilterButton type="today" label="Aujourd'hui" />
-					<FilterButton type="week" label="7 jours" />
-					<FilterButton type="month" label="30 jours" />
+					<FilterButton type="all" label={t("FILTERS.ALL")} />
+					<FilterButton type="today" label={t("FILTERS.TODAY")} />
+					<FilterButton type="week" label={t("FILTERS.WEEK")} />
+					<FilterButton type="month" label={t("FILTERS.MONTH")} />
 				</View>
 
 				{/* Statistiques */}
@@ -171,11 +173,11 @@ export default function HistoryScreen() {
 							color={COLORS.textSecondary}
 							style={styles.emptyIcon}
 						/>
-						<Text style={[styles.emptyTitle, { color: COLORS.text }]}>Aucune session trouvée</Text>
+						<Text style={[styles.emptyTitle, { color: COLORS.text }]}>
+							{t("EMPTY_STATE.TITLE")}
+						</Text>
 						<Text style={[styles.emptySubtitle, { color: COLORS.textSecondary }]}>
-							{filter === "all"
-								? "Commencez votre première session pour voir l'historique ici"
-								: "Aucune session pour cette période"}
+							{t(filter === "all" ? "EMPTY_STATE.SUBTITLE_ALL" : "EMPTY_STATE.SUBTITLE_FILTERED")}
 						</Text>
 					</View>
 				) : (
@@ -200,12 +202,10 @@ export default function HistoryScreen() {
 								style={styles.emptyIcon}
 							/>
 							<Text style={[styles.emptyTitle, { color: COLORS.text }]}>
-								Aucune session trouvée
+								{t("EMPTY_STATE.TITLE")}
 							</Text>
 							<Text style={[styles.emptySubtitle, { color: COLORS.textSecondary }]}>
-								{filter === "all"
-									? "Commencez votre première session pour voir l'historique ici"
-									: "Aucune session pour cette période"}
+								{t(filter === "all" ? "EMPTY_STATE.SUBTITLE_ALL" : "EMPTY_STATE.SUBTITLE_FILTERED")}
 							</Text>
 						</View>
 					</BlockCard>
