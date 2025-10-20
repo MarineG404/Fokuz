@@ -2,7 +2,7 @@
 
 ## 📖 Description
 
-Application mobile de productivité développée avec React Native et Expo, conçue pour améliorer la concentration et la gestion du temps. Fokuz propose des exercices de concentration avec différentes méthodes (pomodoro, deeap work) et un système de suivi complet des sessions.
+Application mobile de productivité développée avec React Native et Expo, conçue pour améliorer la concentration et la gestion du temps. Fokuz propose des méthodes de concentration avec différentes techniques (Pomodoro, Deep Work, 52/17) et un système de suivi complet des sessions.
 
 L'application combine des techniques de bien-être mental avec un suivi statistique détaillé pour aider les utilisateurs à développer leurs capacités de concentration de manière progressive et mesurable.
 
@@ -10,20 +10,26 @@ L'application combine des techniques de bien-être mental avec un suivi statisti
 
 ## 🚀 Fonctionnalités
 
-- [x] **Exercices de concentration** - Catalogue d'exercices avec différentes méthodes
-- [x] **Timer personnalisable** - Chronomètre avec contrôles play/pause/reset et affichage temps formaté
-- [x] **Suivi des sessions** - Historique complet des sessions avec statut (complétée/abandonnée)
-- [x] **Statistiques détaillées** - Tableaux de bord avec taux de réussite, temps total
-- [x] **Filtrage avancé** - Filtres par statut, méthode et période pour l'analyse des données
-- [x] **Interface intuitive** - Navigation drawer/tabs avec design cohérent et responsive
+- [x] **Méthodes de concentration** - Catalogue de méthodes prédéfinies (Pomodoro, Deep Work, 52/17)
+- [x] **Méthodes personnalisées** - Création, modification et suppression de méthodes custom
+- [x] **Timer intelligent** - Chronomètre avec alternance travail/pause et contrôles complets
+- [x] **Suivi des sessions** - Historique détaillé avec statut (complétée/abandonnée)
+- [x] **Statistiques avancées** - Tableaux de bord avec taux de réussite, temps total, moyenne
+- [x] **Filtrage intelligent** - Filtres par période (aujourd'hui, 7 jours, 30 jours)
+- [x] **Interface multilingue** - Support français/anglais avec i18next
+- [x] **Design adaptatif** - Interface responsive avec mode portrait/paysage
+- [x] **Player audio intégré** - Musique Lo-Fi pour améliorer la concentration
 - [x] **Persistance locale** - Sauvegarde automatique avec AsyncStorage
+- [x] **Navigation moderne** - Drawer + Tabs avec Expo Router
 
 ---
 
 ## 🛠️ Technologies utilisées
 
-- **Framework** : React Native, Expo SDK 54
-- **Langage** : TypeScript
+- **React Native & Expo** - Framework mobile cross-platform
+- **TypeScript** - Langage typé pour plus de robustesse
+- **i18n** - Internationalisation français/anglais
+- **ESLint & Prettier** - Qualité et formatage du code
 
 ---
 
@@ -31,26 +37,20 @@ L'application combine des techniques de bien-être mental avec un suivi statisti
 
 ```bash
 Fokuz/
-├── app/                      # Navigation et écrans principaux
-│   ├── (drawer)/            # Layout drawer navigation
-│   │   └── (tabs)/          # Layout tabs (index, history)
-│   ├── timer/               # Écrans timer
-│   └── method/              # Détails des méthodes
-├── assets/                   # Ressources statiques
-│   ├── data/                # Données exercices
-│   └── images/              # Icons et splash screens
-├── components/              # Composants réutilisables
-│   ├── ExercicesCards.tsx   # Cartes d'exercices
-│   ├── SessionCard.tsx      # Affichage sessions historique
-│   ├── StatsCard.tsx        # Cartes statistiques
-│   └── HeaderTitle.tsx      # Header personnalisé
-├── constants/               # Constantes (couleurs, tokens)
-├── themes/                  # Configuration thème
-├── types/                   # Interfaces TypeScript
-├── utils/                   # Services et hooks
-│   ├── historyService.ts    # Gestion données historique
-│   └── useTimer.ts          # Hook timer personnalisé
-└── README.md
+├── app/                          # Navigation et écrans (Expo Router)
+│   ├── (drawer)/(tabs)/         # Pages principales (index, history)
+│   ├── method/[id].tsx          # Page détail méthode
+│   └── settings.tsx             # Paramètres
+├── components/                   # Composants réutilisables
+│   ├── cards/                   # MethodCard, SessionCard, StatsCard
+│   ├── modals/                  # Add/Edit/ConfirmModal
+│   ├── timer/TimerComponent.tsx # Timer principal
+│   └── ui/                      # HeaderTitle, BlockCard, FAB
+├── contexts/                     # Gestion d'état (méthodes custom)
+├── hooks/                        # useAllMethods, useTimer
+├── src/localization/            # i18n français/anglais
+├── assets/data/methods.ts       # Méthodes prédéfinies
+└── utils/historyService.ts      # Persistance sessions
 ```
 
 ---
@@ -70,25 +70,53 @@ cd Fokuz
 npm install
 ```
 
-### 3. Lancer l'application
+### 3. Scripts disponibles
 
 ```bash
-# Démarrage du serveur de développement
-npx expo start
-
-# ou avec nettoyage du cache
+# Nettoyage cache + démarrage
 npx expo start -c
+
+# Linting et formatage
+npm run lint                    # Vérifier le code
+npm run lint:fix               # Corriger automatiquement
+npm run format                # Formater avec Prettier
+npm run check                 # Format + lint + typecheck
 ```
 
 ---
 
 ## 🎮 Utilisation
 
-1. **Écran principal** : Parcourir les exercices de concentration disponibles
-2. **Sélection exercice** : Choisir une méthode (pomodoro, deap work, ...)
-3. **Session timer** : Lancer le chronomètre et suivre l'exercice
-4. **Historique** : Consulter les sessions passées avec filtres et statistiques
-5. **Analyse** : Suivre les progrès via les cartes statistiques
+### Navigation principale
+1. **Accueil** : Parcourir et sélectionner les méthodes de concentration
+2. **Historique** : Consulter les sessions avec filtres et statistiques
+3. **Paramètres** : Configuration thème et langue
+
+### Gestion des méthodes
+1. **Méthodes prédéfinies** : Pomodoro (25/5), Deep Work (90min), 52/17
+2. **Méthodes custom** : Créer via le bouton + avec nom, description, durées
+3. **Édition/Suppression** : Gestion complète des méthodes personnalisées
+
+### Sessions de concentration
+1. **Sélection** : Choisir une méthode depuis l'accueil
+2. **Configuration** : Visualiser durées travail/pause
+3. **Timer** : Lancer avec audio Lo-Fi, contrôles play/pause/stop
+4. **Suivi** : Sessions sauvegardées automatiquement dans l'historique
+
+### Analyse et statistiques
+1. **Filtres temporels** : Aujourd'hui, 7 jours, 30 jours, tout
+2. **Métriques** : Taux de réussite, temps total, durée moyenne
+3. **Historique détaillé** : Liste des sessions avec statuts
+
+---
+
+## 🌍 Internationalisation
+
+L'application supporte le français et l'anglais avec :
+- Détection automatique de la langue système
+- Sauvegarde des préférences utilisateur
+- Traductions complètes de l'interface
+- Gestion des méthodes prédéfinies multilingues
 
 ---
 
