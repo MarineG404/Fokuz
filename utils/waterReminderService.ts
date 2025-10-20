@@ -2,15 +2,12 @@ import i18n from "@/src/localization/i18n";
 import Constants from "expo-constants";
 import { Platform } from "react-native";
 
-// Vérifier si on est dans Expo Go
 const isExpoGo = Constants.appOwnership === "expo";
 
-// Import conditionnel seulement si pas dans Expo Go
 let Notifications: any = null;
 if (!isExpoGo) {
 	try {
 		Notifications = require("expo-notifications");
-		// Configuration des notifications seulement si disponible
 		Notifications.setNotificationHandler({
 			handleNotification: async () => ({
 				shouldShowAlert: true,
@@ -32,7 +29,7 @@ class WaterReminderService {
 	async requestPermissions() {
 		if (isExpoGo) {
 			console.log("💧 Mode Expo Go: Notifications simulées");
-			return true; // Simuler l'autorisation
+			return true;
 		}
 
 		if (!Notifications) {
@@ -88,7 +85,6 @@ class WaterReminderService {
 
 	async sendWaterReminder() {
 		if (isExpoGo) {
-			// Simulation dans Expo Go avec message console coloré
 			const title = i18n.t("WATER_REMINDER.NOTIFICATIONS.TITLE");
 			const messages = i18n.t("WATER_REMINDER.NOTIFICATIONS.MESSAGES", {
 				returnObjects: true,
@@ -141,7 +137,6 @@ class WaterReminderService {
 			return;
 		}
 
-		// Annuler toutes les notifications seulement si disponible
 		if (Notifications) {
 			Notifications.cancelAllScheduledNotificationsAsync();
 		}
