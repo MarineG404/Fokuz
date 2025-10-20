@@ -19,11 +19,11 @@ jobs:
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: "20"
+                  node-version: "22.20.0"
                   cache: "npm"
 
             - name: Install dependencies
-              run: npm install --legacy-peer-deps --no-audit --no-fund
+              run: npm ci --legacy-peer-deps --no-audit --no-fund
 
             - name: Run Prettier (format)
               run: npm run format
@@ -49,18 +49,18 @@ jobs:
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: "20"
+                  node-version: "22.20.0"
                   cache: "npm"
 
             - name: Install dependencies
-              run: npm install --legacy-peer-deps --no-audit --no-fund
+              run: npm ci --legacy-peer-deps --no-audit --no-fund
 
             - name: Run ESLint (auto-fix)
               run: npm run lint:fix
 
             - name: Check if linting changed files
               run: |
-                  if [ -n "$(git status --porcelain)" ]; then
+                  if [ -n "$(git status --porcelin)" ]; then
                     echo "Files need linting fixes. Please run 'npm run lint:fix' locally and commit.";
                     git --no-pager status --porcelain
                     exit 1
@@ -79,11 +79,11 @@ jobs:
             - name: Use Node.js
               uses: actions/setup-node@v4
               with:
-                  node-version: "20"
+                  node-version: "22.20.0"
                   cache: "npm"
 
             - name: Install dependencies
-              run: npm install --legacy-peer-deps --no-audit --no-fund
+              run: npm ci --legacy-peer-deps --no-audit --no-fund
 
             - name: Run TypeScript check
               run: npx tsc --noEmit
