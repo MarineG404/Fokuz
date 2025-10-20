@@ -1,4 +1,5 @@
 import { useThemeColors } from "@/constants/color";
+import { AudioProvider } from "@/contexts/AudioContext";
 import { CustomMethodsProvider } from "@/contexts/CustomMethodsContext";
 import { SimpleThemeProvider, useSimpleTheme } from "@/contexts/SimpleTheme";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
@@ -34,7 +35,9 @@ export default function RootLayout() {
 	return (
 		<SimpleThemeProvider>
 			<CustomMethodsProvider>
-				<InnerLayout />
+				<AudioProvider>
+					<InnerLayout />
+				</AudioProvider>
 			</CustomMethodsProvider>
 		</SimpleThemeProvider>
 	);

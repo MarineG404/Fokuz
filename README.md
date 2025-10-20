@@ -1,6 +1,6 @@
 # 🎯 Fokuz
 
-***Français** | [English](README.en.md)*
+**\*Français** | [English](README.en.md)\*
 
 ## 📖 Description
 
@@ -90,22 +90,26 @@ npm run check                 # Format + lint + typecheck
 ## 🎮 Utilisation
 
 ### Navigation principale
+
 1. **Accueil** : Parcourir et sélectionner les méthodes de concentration
 2. **Historique** : Consulter les sessions avec filtres et statistiques
 3. **Paramètres** : Configuration thème et langue
 
 ### Gestion des méthodes
+
 1. **Méthodes prédéfinies** : Pomodoro (25/5), Deep Work (90min), 52/17
 2. **Méthodes custom** : Créer via le bouton + avec nom, description, durées
 3. **Édition/Suppression** : Gestion complète des méthodes personnalisées
 
 ### Sessions de concentration
+
 1. **Sélection** : Choisir une méthode depuis l'accueil
 2. **Configuration** : Visualiser durées travail/pause
 3. **Timer** : Lancer avec audio Lo-Fi, contrôles play/pause/stop
 4. **Suivi** : Sessions sauvegardées automatiquement dans l'historique
 
 ### Analyse et statistiques
+
 1. **Filtres temporels** : Aujourd'hui, 7 jours, 30 jours, tout
 2. **Métriques** : Taux de réussite, temps total, durée moyenne
 3. **Historique détaillé** : Liste des sessions avec statuts
@@ -115,6 +119,7 @@ npm run check                 # Format + lint + typecheck
 ## 🌍 Internationalisation
 
 L'application supporte le français et l'anglais avec :
+
 - Détection automatique de la langue système
 - Sauvegarde des préférences utilisateur
 - Traductions complètes de l'interface
