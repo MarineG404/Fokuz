@@ -19,7 +19,9 @@ export default function SettingsScreen() {
 			<ThemeSwitcher />
 			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{t("LANGUAGE_SETTINGS")}</Text>
 			<LanguageSwitcher />
-			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{t("WATER_REMINDER_SETTINGS")}</Text>
+			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>
+				{t("WATER_REMINDER_SETTINGS")}
+			</Text>
 			<WaterReminderToggle />
 		</SafeAreaView>
 	);

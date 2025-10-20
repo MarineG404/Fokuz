@@ -29,7 +29,6 @@ class WaterReminderService {
 	private reminderInterval: ReturnType<typeof setTimeout> | null = null;
 	private isActive = false;
 
-
 	async requestPermissions() {
 		if (isExpoGo) {
 			console.log("💧 Mode Expo Go: Notifications simulées");
@@ -91,7 +90,9 @@ class WaterReminderService {
 		if (isExpoGo) {
 			// Simulation dans Expo Go avec message console coloré
 			const title = i18n.t("WATER_REMINDER.NOTIFICATIONS.TITLE");
-			const messages = i18n.t("WATER_REMINDER.NOTIFICATIONS.MESSAGES", { returnObjects: true }) as string[];
+			const messages = i18n.t("WATER_REMINDER.NOTIFICATIONS.MESSAGES", {
+				returnObjects: true,
+			}) as string[];
 			const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 
 			console.log(`🚨 NOTIFICATION SIMULÉE 🚨`);
@@ -108,7 +109,9 @@ class WaterReminderService {
 
 		try {
 			const title = i18n.t("WATER_REMINDER.NOTIFICATIONS.TITLE");
-			const messages = i18n.t("WATER_REMINDER.NOTIFICATIONS.MESSAGES", { returnObjects: true }) as string[];
+			const messages = i18n.t("WATER_REMINDER.NOTIFICATIONS.MESSAGES", {
+				returnObjects: true,
+			}) as string[];
 
 			const randomMessage = messages[Math.floor(Math.random() * messages.length)];
 

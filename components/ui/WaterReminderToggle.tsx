@@ -19,17 +19,13 @@ export function WaterReminderToggle() {
 	};
 
 	const handleTest = () => {
-		Alert.alert(
-			t("WATER_REMINDER.TEST.TITLE"),
-			t("WATER_REMINDER.TEST.MESSAGE"),
-			[
-				{ text: t("MODAL.CONFIRM.CANCEL_BUTTON"), style: "cancel" },
-				{
-					text: t("WATER_REMINDER.TEST.SEND_BUTTON"),
-					onPress: sendTestReminder,
-				},
-			]
-		);
+		Alert.alert(t("WATER_REMINDER.TEST.TITLE"), t("WATER_REMINDER.TEST.MESSAGE"), [
+			{ text: t("MODAL.CONFIRM.CANCEL_BUTTON"), style: "cancel" },
+			{
+				text: t("WATER_REMINDER.TEST.SEND_BUTTON"),
+				onPress: sendTestReminder,
+			},
+		]);
 	};
 
 	return (
@@ -51,9 +47,7 @@ export function WaterReminderToggle() {
 						color={isActive ? COLORS.primary : COLORS.textSecondary}
 					/>
 					<View style={styles.textContainer}>
-						<Text style={[styles.title, { color: COLORS.text }]}>
-							{t("WATER_REMINDER.TITLE")}
-						</Text>
+						<Text style={[styles.title, { color: COLORS.text }]}>{t("WATER_REMINDER.TITLE")}</Text>
 						<Text style={[styles.subtitle, { color: COLORS.textSecondary }]}>
 							{isActive ? t("WATER_REMINDER.STATUS.ACTIVE") : t("WATER_REMINDER.STATUS.INACTIVE")}
 						</Text>
