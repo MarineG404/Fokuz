@@ -10,8 +10,8 @@ export function useAllMethods() {
 
 	const allMethods = useMemo(() => {
 		// Pour les méthodes prédéfinies, on ajoute le nom et la description traduits
-		const translatedMethods = methods.map(m => {
-			if ('translationKey' in m) {
+		const translatedMethods = methods.map((m) => {
+			if ("translationKey" in m) {
 				return {
 					...m,
 					name: t(`METHODS.${m.translationKey}.NAME`),
@@ -21,13 +21,13 @@ export function useAllMethods() {
 			return m;
 		});
 		return [...translatedMethods, ...customMethods];
-	}, [methods, customMethods, t]);
+	}, [customMethods, t]);
 
 	const getMethodById = (id: string): Method | undefined => {
 		const method = allMethods.find((m) => m.id === id);
 		if (!method) return undefined;
 
-		if ('translationKey' in method) {
+		if ("translationKey" in method) {
 			return {
 				...method,
 				name: t(`METHODS.${method.translationKey}.NAME`),
@@ -44,4 +44,3 @@ export function useAllMethods() {
 		getMethodById,
 	};
 }
-

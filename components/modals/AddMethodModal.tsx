@@ -52,10 +52,7 @@ export function AddMethodModal({ visible, onClose, onAdd }: AddMethodModalProps)
 
 	const handleAdd = () => {
 		if (!name.trim() || !workDuration.trim()) {
-			Alert.alert(
-				t("MODAL.ADD_METHOD.ERROR.TITLE"),
-				t("MODAL.ADD_METHOD.ERROR.REQUIRED_FIELDS")
-			);
+			Alert.alert(t("MODAL.ADD_METHOD.ERROR.TITLE"), t("MODAL.ADD_METHOD.ERROR.REQUIRED_FIELDS"));
 			return;
 		}
 
@@ -63,7 +60,7 @@ export function AddMethodModal({ visible, onClose, onAdd }: AddMethodModalProps)
 		if (isNaN(workMin) || workMin <= 0) {
 			Alert.alert(
 				t("MODAL.ADD_METHOD.ERROR.TITLE"),
-				t("MODAL.ADD_METHOD.ERROR.INVALID_WORK_DURATION")
+				t("MODAL.ADD_METHOD.ERROR.INVALID_WORK_DURATION"),
 			);
 			return;
 		}

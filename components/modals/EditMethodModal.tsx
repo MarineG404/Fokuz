@@ -56,10 +56,7 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 
 	const handleUpdate = () => {
 		if (!name.trim() || !workDuration.trim()) {
-			Alert.alert(
-				t("EDIT_METHOD.ERROR.TITLE", "Error"),
-				t("EDIT_METHOD.ERROR.REQUIRED_FIELDS")
-			);
+			Alert.alert(t("EDIT_METHOD.ERROR.TITLE", "Error"), t("EDIT_METHOD.ERROR.REQUIRED_FIELDS"));
 			return;
 		}
 
@@ -67,7 +64,7 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 		if (isNaN(workMin) || workMin <= 0) {
 			Alert.alert(
 				t("EDIT_METHOD.ERROR.TITLE", "Error"),
-				t("EDIT_METHOD.ERROR.INVALID_WORK_DURATION")
+				t("EDIT_METHOD.ERROR.INVALID_WORK_DURATION"),
 			);
 			return;
 		}
@@ -100,9 +97,7 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 			<View style={styles.overlay}>
 				<View style={[styles.modalContainer, { backgroundColor: COLORS.background }]}>
 					<View style={styles.header}>
-						<Text style={[styles.title, { color: COLORS.text }]}>
-							{t("EDIT_METHOD.TITLE")}
-						</Text>
+						<Text style={[styles.title, { color: COLORS.text }]}>{t("EDIT_METHOD.TITLE")}</Text>
 						<Pressable onPress={onClose} style={styles.closeButton}>
 							<Ionicons name="close" size={24} color={COLORS.text} />
 						</Pressable>
@@ -238,9 +233,7 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 							onPress={handleUpdate}
 							style={[styles.button, { backgroundColor: COLORS.primary }]}
 						>
-							<Text style={[styles.buttonText, { color: "#FFFFFF" }]}>
-								{t("EDIT_METHOD.SAVE")}
-							</Text>
+							<Text style={[styles.buttonText, { color: "#FFFFFF" }]}>{t("EDIT_METHOD.SAVE")}</Text>
 						</Pressable>
 					</View>
 				</View>
