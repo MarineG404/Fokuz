@@ -72,11 +72,11 @@ export function AddMethodModal({ visible, onClose, onAdd }: AddMethodModalProps)
 			icon: selectedIcon,
 		};
 
-		if (breakDuration.trim()) {
-			const breakMin = parseInt(breakDuration);
-			if (!isNaN(breakMin) && breakMin > 0) {
-				newMethod.breakDuration = breakMin;
-			}
+		const breakMin = parseInt(breakDuration.trim());
+		if (breakDuration.trim() && !isNaN(breakMin) && breakMin > 0) {
+			newMethod.breakDuration = breakMin;
+		} else {
+			newMethod.breakDuration = undefined;
 		}
 
 		onAdd(newMethod);
@@ -181,7 +181,7 @@ export function AddMethodModal({ visible, onClose, onAdd }: AddMethodModalProps)
 								]}
 								value={breakDuration}
 								onChangeText={setBreakDuration}
-								placeholder="5"
+								placeholder=""
 								placeholderTextColor={COLORS.textSecondary}
 								keyboardType="number-pad"
 							/>

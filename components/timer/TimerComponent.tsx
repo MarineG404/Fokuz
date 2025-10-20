@@ -114,7 +114,7 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 
 					<SessionCircularTimer
 						workDurationMinutes={workDurationMinutes}
-						breakDurationMinutes={breakDurationMinutes || 5}
+						breakDurationMinutes={breakDurationMinutes ?? 0}
 						currentPhase={timer.phase}
 						timeLeft={timer.timeLeft}
 						formattedTime={timer.formattedTime}
