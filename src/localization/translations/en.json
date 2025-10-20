@@ -2,6 +2,7 @@
 	"CHOOSE_METHOD": "Choose your method",
 	"THEME_SETTINGS": "App Theme",
 	"LANGUAGE_SETTINGS": "Language Settings",
+	"WATER_REMINDER_SETTINGS": "Water Reminder",
 	"EDIT_METHOD": {
 		"TITLE": "Edit method",
 		"NAME_LABEL": "Method name *",
@@ -137,6 +138,29 @@
 				"REQUIRED_FIELDS": "Name and work duration are required",
 				"INVALID_WORK_DURATION": "Work duration must be a positive number"
 			}
+		}
+	},
+	"WATER_REMINDER": {
+		"TITLE": "Water Reminder",
+		"STATUS": {
+			"ACTIVE": "Active - Notifications every 20-40 min",
+			"INACTIVE": "Inactive"
+		},
+		"TEST": {
+			"TITLE": "Test notification",
+			"MESSAGE": "Do you want to send a test notification?",
+			"SEND_BUTTON": "Send"
+		},
+		"TEST_BUTTON": "Test notification",
+		"NOTIFICATIONS": {
+			"TITLE": "Time to hydrate! 💧",
+			"MESSAGES": [
+				"Don't forget to drink water!",
+				"How about a hydration break?",
+				"Your body needs water 💙",
+				"Drink a glass of water to stay focused!",
+				"Stay hydrated to maintain your energy!"
+			]
 		}
 	}
 }

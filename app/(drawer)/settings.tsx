@@ -1,6 +1,7 @@
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
+import { WaterReminderToggle } from "@/components/ui/WaterReminderToggle";
 import { useThemeColors } from "@/constants/color";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -14,11 +15,12 @@ export default function SettingsScreen() {
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
 			<HeaderTitle title={t("SETTINGS")} showBack />
-			{}
 			<Text style={[styles.titlebis, { color: COLORS.secondary }]}> {t("THEME_SETTINGS")}</Text>
 			<ThemeSwitcher />
 			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{t("LANGUAGE_SETTINGS")}</Text>
 			<LanguageSwitcher />
+			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{t("WATER_REMINDER_SETTINGS")}</Text>
+			<WaterReminderToggle />
 		</SafeAreaView>
 	);
 }

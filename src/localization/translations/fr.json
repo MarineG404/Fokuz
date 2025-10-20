@@ -2,6 +2,7 @@
 	"CHOOSE_METHOD": "Choisissez votre méthode",
 	"THEME_SETTINGS": "Thème de l'application",
 	"LANGUAGE_SETTINGS": "Paramètres de langue",
+	"WATER_REMINDER_SETTINGS": "Rappel d'hydratation",
 	"EDIT_METHOD": {
 		"TITLE": "Modifier la méthode",
 		"NAME_LABEL": "Nom de la méthode *",
@@ -137,6 +138,29 @@
 				"REQUIRED_FIELDS": "Le nom et la durée de travail sont obligatoires",
 				"INVALID_WORK_DURATION": "La durée de travail doit être un nombre positif"
 			}
+		}
+	},
+	"WATER_REMINDER": {
+		"TITLE": "Rappel hydratation",
+		"STATUS": {
+			"ACTIVE": "Actif - Notifications toutes les 20-40 min",
+			"INACTIVE": "Inactif"
+		},
+		"TEST": {
+			"TITLE": "Test de notification",
+			"MESSAGE": "Voulez-vous envoyer une notification de test ?",
+			"SEND_BUTTON": "Envoyer"
+		},
+		"TEST_BUTTON": "Tester la notification",
+		"NOTIFICATIONS": {
+			"TITLE": "Temps de s'hydrater ! 💧",
+			"MESSAGES": [
+				"N'oubliez pas de boire de l'eau !",
+				"Une petite pause hydratation ?",
+				"Votre corps a besoin d'eau 💙",
+				"Buvez un verre d'eau pour rester concentré !",
+				"Hydratez-vous pour maintenir votre énergie !"
+			]
 		}
 	}
 }
