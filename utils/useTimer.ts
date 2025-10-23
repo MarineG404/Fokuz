@@ -77,8 +77,8 @@ export const useTimer = ({
 				workDuration: workDurationMinutes,
 				breakDuration: breakDurationMinutes,
 				completedCycles,
-				totalWorkTime: Math.round(actualWorkTime / 60),
-				totalBreakTime: Math.round(actualBreakTime / 60),
+				totalWorkTime: actualWorkTime, // en secondes
+				totalBreakTime: actualBreakTime, // en secondes
 				startTime: sessionStartTime,
 				endTime: new Date(),
 				date: new Date().toISOString().split("T")[0],

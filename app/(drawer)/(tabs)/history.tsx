@@ -1,6 +1,5 @@
 import { SessionCard } from "@/components/cards/SessionCard";
 import { StatsCard } from "@/components/cards/StatsCard";
-import BlockCard from "@/components/ui/BlockCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import { SessionRecord } from "@/types/session";
@@ -9,7 +8,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { Alert, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type FilterType = "all" | "today" | "week" | "month";
@@ -79,6 +78,7 @@ export default function HistoryScreen() {
 				filter === type && styles.filterButtonActive,
 				{
 					borderColor: COLORS.primary,
+					backgroundColor: filter === type ? COLORS.primary : "transparent",
 				},
 			]}
 			onPress={() => setFilter(type)}
@@ -131,9 +131,27 @@ export default function HistoryScreen() {
 		}
 	};
 
+	const handleClearHistory = async () => {
+		Alert.alert(
+			t("HISTORY.DELETE_TITLE"),
+			t("HISTORY.DELETE_CONFIRM"),
+			[
+				{ text: t("MODAL.CONFIRM.CANCEL_BUTTON"), style: "cancel" },
+				{
+					text: t("HISTORY.DELETE_BUTTON"),
+					style: "destructive",
+					onPress: async () => {
+						await historyService.clearAllData();
+						loadSessions();
+					},
+				},
+			],
+		);
+	};
+
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-			<HeaderTitle title={t("HISTORY")} />
+			<HeaderTitle title={t("HISTORY.TITLE")} />
 
 			<ScrollView
 				style={styles.content}
@@ -148,12 +166,23 @@ export default function HistoryScreen() {
 				}
 			>
 				{/* Filtres */}
-				<View style={styles.filtersContainer}>
+				<View style={styles.filtersRow}>
 					<FilterButton type="all" label={t("FILTERS.ALL")} />
 					<FilterButton type="today" label={t("FILTERS.TODAY")} />
 					<FilterButton type="week" label={t("FILTERS.WEEK")} />
 					<FilterButton type="month" label={t("FILTERS.MONTH")} />
 				</View>
+
+				{/* Bouton supprimer */}
+				<TouchableOpacity
+					style={[styles.deleteButton, { borderColor: COLORS.textSecondary + "40" }]}
+					onPress={handleClearHistory}
+				>
+					<Ionicons name="trash-outline" size={18} color={COLORS.textSecondary} />
+					<Text style={[styles.deleteButtonText, { color: COLORS.textSecondary }]}>
+						Effacer l'historique
+					</Text>
+				</TouchableOpacity>
 
 				{/* Statistiques */}
 				<StatsCard
@@ -192,24 +221,6 @@ export default function HistoryScreen() {
 						</View>
 					))
 				)}
-				{sessions.length === 0 && (
-					<BlockCard>
-						<View style={styles.emptyState}>
-							<Ionicons
-								name="document-text-outline"
-								size={48}
-								color={COLORS.textSecondary}
-								style={styles.emptyIcon}
-							/>
-							<Text style={[styles.emptyTitle, { color: COLORS.text }]}>
-								{t("EMPTY_STATE.TITLE")}
-							</Text>
-							<Text style={[styles.emptySubtitle, { color: COLORS.textSecondary }]}>
-								{t(filter === "all" ? "EMPTY_STATE.SUBTITLE_ALL" : "EMPTY_STATE.SUBTITLE_FILTERED")}
-							</Text>
-						</View>
-					</BlockCard>
-				)}
 			</ScrollView>
 		</SafeAreaView>
 	);
@@ -224,10 +235,10 @@ const styles = StyleSheet.create({
 	content: {
 		flex: 1,
 	},
-	filtersContainer: {
+	filtersRow: {
 		flexDirection: "row",
 		gap: 8,
-		marginBottom: 20,
+		marginBottom: 12,
 		paddingHorizontal: 4,
 	},
 	filterButton: {
@@ -240,6 +251,22 @@ const styles = StyleSheet.create({
 		// Style dynamique appliqué via backgroundColor
 	},
 	filterButtonText: {
+		fontSize: 14,
+		fontWeight: "500",
+	},
+	deleteButton: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+		gap: 8,
+		paddingVertical: 10,
+		paddingHorizontal: 16,
+		borderRadius: 12,
+		borderWidth: 1,
+		marginBottom: 20,
+		marginHorizontal: 4,
+	},
+	deleteButtonText: {
 		fontSize: 14,
 		fontWeight: "500",
 	},

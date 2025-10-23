@@ -138,20 +138,11 @@ class HistoryService {
 		}
 	}
 
-	// Formater la durée en heures/minutes
-	formatDuration(minutes: number): string {
-		if (minutes < 60) {
-			return `${minutes}min`;
-		}
-
-		const hours = Math.floor(minutes / 60);
-		const remainingMinutes = minutes % 60;
-
-		if (remainingMinutes === 0) {
-			return `${hours}h`;
-		}
-
-		return `${hours}h ${remainingMinutes}min`;
+	// Formater la durée en mm:ss
+	formatDuration(seconds: number): string {
+		const m = Math.floor(seconds / 60);
+		const s = seconds % 60;
+		return `${m}:${s.toString().padStart(2, "0")}`;
 	}
 
 	// Générer un ID unique pour une session

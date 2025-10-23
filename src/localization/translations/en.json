@@ -25,7 +25,12 @@
 	},
 	"SETTINGS": "Settings",
 	"HOME": "Home",
-	"HISTORY": "History",
+	"HISTORY": {
+		"TITLE": "History",
+		"DELETE_TITLE": "Delete history",
+		"DELETE_CONFIRM": "Are you sure you want to delete all history? This action cannot be undone.",
+		"DELETE_BUTTON": "Delete"
+	},
 	"DURATION": {
 		"WORK": "{{duration}} min work",
 		"BREAK": ", {{duration}} min break"

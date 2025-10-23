@@ -25,7 +25,12 @@
 	},
 	"SETTINGS": "Paramètres",
 	"HOME": "Accueil",
-	"HISTORY": "Historique",
+	"HISTORY": {
+		"TITLE": "Historique",
+		"DELETE_TITLE": "Supprimer l'historique",
+		"DELETE_CONFIRM": "Es-tu sûr de vouloir tout supprimer ? Cette action est irréversible.",
+		"DELETE_BUTTON": "Supprimer"
+	},
 	"DURATION": {
 		"WORK": "{{duration}} min de travail",
 		"BREAK": ", {{duration}} min de pause"

@@ -109,6 +109,9 @@ export default function HomeScreen() {
 				style: "destructive",
 				onPress: async () => {
 					if (timerState.current) {
+						const initialWorkTime = timerState.current.workDurationMinutes * 60;
+						const timeLeft = timerState.current.timeLeft;
+						const totalWorkTime = Math.round((initialWorkTime - timeLeft) / 60); // en minutes
 						const session = {
 							id: `${Date.now()}`,
 							methodName: timerState.current.methodName ?? "",
@@ -116,7 +119,7 @@ export default function HomeScreen() {
 							workDuration: timerState.current.workDurationMinutes,
 							breakDuration: timerState.current.breakDurationMinutes,
 							completedCycles: 0,
-							totalWorkTime: Math.round(timerState.current.timeLeft / 60),
+							totalWorkTime,
 							totalBreakTime: 0,
 							startTime: new Date(),
 							endTime: new Date(),

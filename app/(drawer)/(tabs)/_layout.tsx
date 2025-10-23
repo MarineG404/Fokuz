@@ -28,7 +28,7 @@ export default function TabLayout() {
 			<Tabs.Screen
 				name="history"
 				options={{
-					title: t("HISTORY"),
+					title: t("HISTORY.TITLE"),
 					tabBarIcon: ({ color, size }) => (
 						<Ionicons name="document-text-outline" size={size} color={color} />
 					),

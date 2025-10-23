@@ -89,7 +89,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 				<View style={styles.statItem}>
 					<Ionicons name="briefcase-outline" size={16} color={COLORS.textSecondary} />
 					<Text style={[styles.statValue, { color: COLORS.text }]}>
-						{historyService.formatDuration(session.totalWorkTime)}
+						{formatDuration(session.totalWorkTime)}
 					</Text>
 					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
 						{t("SESSION.STATS.WORK")}
@@ -100,7 +100,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 					<View style={styles.statItem}>
 						<Ionicons name="cafe-outline" size={16} color={COLORS.textSecondary} />
 						<Text style={[styles.statValue, { color: COLORS.text }]}>
-							{historyService.formatDuration(session.totalBreakTime)}
+							{formatDuration(session.totalBreakTime)}
 						</Text>
 						<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
 							{t("SESSION.STATS.BREAK")}
@@ -156,3 +156,11 @@ const styles = StyleSheet.create({
 });
 
 export default SessionCard;
+
+const formatDuration = (seconds: number) => {
+	const m = Math.floor(seconds / 60);
+	const s = seconds % 60;
+	if (seconds === 0) return "-";
+	if (m > 0) return `${m}min ${s.toString().padStart(2, "0")}s`;
+	return `${s}s`;
+};
