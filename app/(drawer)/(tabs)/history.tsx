@@ -175,7 +175,7 @@ export default function HistoryScreen() {
 
 				{/* Bouton supprimer */}
 				<TouchableOpacity
-					style={[styles.deleteButton, { borderColor: COLORS.textSecondary + "40" }]}
+					style={[styles.deleteButton, { borderColor: COLORS.primary}]}
 					onPress={handleClearHistory}
 				>
 					<Ionicons name="trash-outline" size={18} color={COLORS.textSecondary} />
@@ -215,9 +215,11 @@ export default function HistoryScreen() {
 							<Text style={[styles.dateHeader, { color: COLORS.text }]}>
 								{formatDateHeader(date)}
 							</Text>
-							{dateSessions.map((session, index) => (
-								<SessionCard key={session.id || `${date}-${index}`} session={session} />
-							))}
+							{dateSessions.map((session, index) => {
+								// Générer une clé unique même si l'id est dupliqué ou absent
+								const uniqueKey = `${session.id ?? "noid"}-${session.startTime instanceof Date ? session.startTime.getTime() : new Date(session.startTime).getTime()}-${index}`;
+								return <SessionCard key={uniqueKey} session={session} />;
+							})}
 						</View>
 					))
 				)}

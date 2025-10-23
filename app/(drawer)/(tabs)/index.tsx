@@ -7,9 +7,9 @@ import { useThemeColors } from "@/constants/color";
 import { useTimerContext } from "@/contexts/TimerContext";
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
-import { historyService } from "@/utils/historyService";
+
 import { useFocusEffect, useRouter } from "expo-router";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Alert, FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -21,11 +21,8 @@ export default function HomeScreen() {
 	const { addCustomMethod } = useCustomMethods();
 	const [modalVisible, setModalVisible] = useState(false);
 	const [refresh, setRefresh] = useState(0);
-	const { timerState, clearTimerState } = useTimerContext();
+	const { timerState, clearTimerState, saveCurrentSession } = useTimerContext();
 	const { t } = useTranslation();
-
-	// Ajout d'un état local pour le temps restant
-	const [localTimeLeft, setLocalTimeLeft] = useState(timerState.current?.timeLeft || 0);
 
 	const hasActiveSession = !!(
 		timerState.current &&
@@ -34,28 +31,15 @@ export default function HomeScreen() {
 		timerState.current.timeLeft > 0
 	);
 
-	// Synchroniser localTimeLeft avec timerState quand on arrive sur la page
-	useFocusEffect(
-		useCallback(() => {
+	// Force refresh chaque seconde pour affichage temps réel du timer
+	useEffect(() => {
+		if (!hasActiveSession) return;
+		const interval = setInterval(() => {
 			setRefresh((r) => r + 1);
-			setLocalTimeLeft(timerState.current?.timeLeft || 0);
-		}, [timerState])
-	);
+		}, 1000);
+		return () => clearInterval(interval);
+	}, [hasActiveSession]);
 
-	// Minuteur réactif
-	useFocusEffect(
-		useCallback(() => {
-			if (hasActiveSession) {
-				const interval = setInterval(() => {
-					setLocalTimeLeft((prev) => {
-						if (prev > 0) return prev - 1;
-						return 0;
-					});
-				}, 1000);
-				return () => clearInterval(interval);
-			}
-		}, [hasActiveSession])
-	);
 
 	const handleAddMethod = async (method: Omit<Method, "id">) => {
 		await addCustomMethod(method);
@@ -98,6 +82,8 @@ export default function HomeScreen() {
 		}
 	};
 
+
+
 	const handleStopSession = () => {
 		Alert.alert(t("TIMER.STOP_CONFIRM_TITLE"), t("TIMER.STOP_CONFIRM_MESSAGE"), [
 			{
@@ -108,37 +94,14 @@ export default function HomeScreen() {
 				text: t("MODAL.CONFIRM.CONFIRM_BUTTON"),
 				style: "destructive",
 				onPress: async () => {
-					if (timerState.current) {
-						const initialWorkTime = timerState.current.workDurationMinutes * 60;
-						const timeLeft = timerState.current.timeLeft;
-						const totalWorkTime = Math.round((initialWorkTime - timeLeft) / 60); // en minutes
-						const session = {
-							id: `${Date.now()}`,
-							methodName: timerState.current.methodName ?? "",
-							methodId: timerState.current.methodId ?? "",
-							workDuration: timerState.current.workDurationMinutes,
-							breakDuration: timerState.current.breakDurationMinutes,
-							completedCycles: 0,
-							totalWorkTime,
-							totalBreakTime: 0,
-							startTime: new Date(),
-							endTime: new Date(),
-							date: new Date().toISOString().split("T")[0],
-							isCompleted: false,
-						};
-						await historyService.saveSession(session);
-					}
-
-					// Réinitialiser l'état du timer
+					await saveCurrentSession(false);
 					clearTimerState();
 				},
 			},
 		]);
 	};
 
-	const formattedTime = hasActiveSession
-		? `${Math.floor(localTimeLeft / 60)}:${(localTimeLeft % 60).toString().padStart(2, "0")}`
-		: "0:00";
+
 
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
@@ -146,11 +109,11 @@ export default function HomeScreen() {
 
 			{/* Bloc visuel session en cours en haut */}
 			{hasActiveSession && timerState.current && (
-				<Pressable onPress={handleViewSession} style={styles.sessionBlock}>
+				<View style={styles.sessionBlock}>
 					<Text style={styles.sessionTitle}>⏱️ {t("SESSION.CURRENT")}</Text>
 					<Text style={styles.sessionMethod}>{timerState.current.methodName}</Text>
 					<Text style={styles.sessionPhase}>
-						{t("TIMER.PHASE." + timerState.current.phase.toUpperCase())} • {formattedTime} restantes
+						{t("TIMER.PHASE." + timerState.current.phase.toUpperCase())} • {`${Math.floor(timerState.current.timeLeft / 60)}:${(timerState.current.timeLeft % 60).toString().padStart(2, "0")}`} restantes
 					</Text>
 					<View style={styles.sessionButtonsRow}>
 						<Pressable onPress={handleViewSession} style={styles.sessionViewButton}>
@@ -160,7 +123,7 @@ export default function HomeScreen() {
 							<Text style={styles.sessionStopText}>{t("SESSION.STOP")}</Text>
 						</Pressable>
 					</View>
-				</Pressable>
+				</View>
 			)}
 
 			{/* Message informatif si session en cours */}

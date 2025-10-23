@@ -329,5 +329,6 @@ export const useTimer = ({
 		sessionCount,
 		formatTime,
 		formattedTime: formatTime(timeLeft),
+		saveSession, // Ajouté pour accès externe
 	};
 };

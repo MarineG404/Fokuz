@@ -1,6 +1,5 @@
 import { useThemeColors } from "@/constants/color";
 import { SessionRecord } from "@/types/session";
-import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -35,10 +34,10 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 		});
 	};
 
-	const getSessionDuration = () => {
-		const durationMs = session.endTime.getTime() - session.startTime.getTime();
-		const durationMinutes = Math.round(durationMs / (1000 * 60));
-		return historyService.formatDuration(durationMinutes);
+	// Durée totale = travail + pause (en secondes)
+	const getSessionTotalDuration = () => {
+		const totalSeconds = (session.totalWorkTime || 0) + (session.totalBreakTime || 0);
+		return formatDuration(totalSeconds);
 	};
 
 	const getStatusInfo = () => {
@@ -80,7 +79,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 			<View style={styles.statsContainer}>
 				<View style={styles.statItem}>
 					<Ionicons name="time-outline" size={16} color={COLORS.textSecondary} />
-					<Text style={[styles.statValue, { color: COLORS.text }]}>{getSessionDuration()}</Text>
+					<Text style={[styles.statValue, { color: COLORS.text }]}>{getSessionTotalDuration()}</Text>
 					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
 						{t("SESSION.STATS.TOTAL_DURATION")}
 					</Text>
@@ -110,7 +109,11 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 
 				<View style={styles.statItem}>
 					<Ionicons name="repeat-outline" size={16} color={COLORS.textSecondary} />
-					<Text style={[styles.statValue, { color: COLORS.text }]}>{session.completedCycles}</Text>
+					<Text style={[styles.statValue, { color: COLORS.text }]}> {
+						session.isCompleted
+							? session.completedCycles
+							: Math.max(0, session.completedCycles - 1)
+					} </Text>
 					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
 						{t("SESSION.STATS.CYCLES")}
 					</Text>
