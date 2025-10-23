@@ -14,7 +14,6 @@ import { useTranslation } from "react-i18next";
 import { Alert, FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-
 export default function HomeScreen() {
 	const router = useRouter();
 	const COLORS = useThemeColors();
@@ -39,7 +38,7 @@ export default function HomeScreen() {
 	useFocusEffect(
 		useCallback(() => {
 			setRefreshKey((prevKey) => prevKey + 1); // Déclenche un re-rendu
-		}, [timerState])
+		}, [timerState]),
 	);
 
 	useFocusEffect(
@@ -55,15 +54,12 @@ export default function HomeScreen() {
 
 				return () => clearInterval(interval);
 			}
-		}, [timerState])
+		}, [timerState]),
 	);
 
 	const handleMethodPress = (method: Method) => {
 		if (hasActiveSession) {
-			Alert.alert(
-				t("TIMER.TITLE"),
-				t("Une session est déjà en cours. Termine-la avant d'en lancer une nouvelle."),
-			);
+			Alert.alert(t("TIMER.TITLE"), t("TIMER.SESSION_IN_PROGRESS"));
 			return;
 		}
 		if (method && method.id) {
@@ -78,43 +74,39 @@ export default function HomeScreen() {
 	};
 
 	const handleStopSession = () => {
-		Alert.alert(
-			t("Arrêter la séance ?"),
-			t("Es-tu sûr de vouloir arrêter la séance en cours ? Ta progression ne sera pas sauvegardée."),
-			[
-				{
-					text: t("MODAL.CONFIRM.CANCEL_BUTTON"),
-					style: "cancel",
-				},
-				{
-					text: t("MODAL.CONFIRM.CONFIRM_BUTTON"),
-					style: "destructive",
-					onPress: async () => {
-						if (timerState.current) {
-							const session = {
-								id: `${Date.now()}`,
-								methodName: timerState.current.methodName ?? "",
-								methodId: timerState.current.methodId ?? "",
-								workDuration: timerState.current.workDurationMinutes,
-								breakDuration: timerState.current.breakDurationMinutes,
-								completedCycles: 0,
-								totalWorkTime: Math.round(timerState.current.timeLeft / 60),
-								totalBreakTime: 0,
-								startTime: new Date(),
-								endTime: new Date(),
-								date: new Date().toISOString().split("T")[0],
-								isCompleted: false,
-							};
-							await historyService.saveSession(session);
-						}
+		Alert.alert(t("TIMER.STOP_CONFIRM_TITLE"), t("TIMER.STOP_CONFIRM_MESSAGE"), [
+			{
+				text: t("MODAL.CONFIRM.CANCEL_BUTTON"),
+				style: "cancel",
+			},
+			{
+				text: t("MODAL.CONFIRM.CONFIRM_BUTTON"),
+				style: "destructive",
+				onPress: async () => {
+					if (timerState.current) {
+						const session = {
+							id: `${Date.now()}`,
+							methodName: timerState.current.methodName ?? "",
+							methodId: timerState.current.methodId ?? "",
+							workDuration: timerState.current.workDurationMinutes,
+							breakDuration: timerState.current.breakDurationMinutes,
+							completedCycles: 0,
+							totalWorkTime: Math.round(timerState.current.timeLeft / 60),
+							totalBreakTime: 0,
+							startTime: new Date(),
+							endTime: new Date(),
+							date: new Date().toISOString().split("T")[0],
+							isCompleted: false,
+						};
+						await historyService.saveSession(session);
+					}
 
-						// Réinitialiser l'état du timer
-						clearTimerState();
-						setRefreshKey((prevKey) => prevKey + 1);
-					},
+					// Réinitialiser l'état du timer
+					clearTimerState();
+					setRefreshKey((prevKey) => prevKey + 1);
 				},
-			],
-		);
+			},
+		]);
 	};
 
 	const formattedTime = timerState.current
@@ -128,17 +120,17 @@ export default function HomeScreen() {
 			{/* Bloc visuel session en cours en haut */}
 			{hasActiveSession && timerState.current && (
 				<Pressable onPress={handleViewSession} style={styles.sessionBlock}>
-					<Text style={styles.sessionTitle}>⏱️ {t("Séance en cours")}</Text>
+					<Text style={styles.sessionTitle}>⏱️ {t("SESSION.CURRENT")}</Text>
 					<Text style={styles.sessionMethod}>{timerState.current.methodName}</Text>
 					<Text style={styles.sessionPhase}>
 						{t("TIMER.PHASE." + timerState.current.phase.toUpperCase())} • {formattedTime} restantes
 					</Text>
 					<View style={styles.sessionButtonsRow}>
 						<Pressable onPress={handleViewSession} style={styles.sessionViewButton}>
-							<Text style={styles.sessionViewText}>{t("Voir la séance")}</Text>
+							<Text style={styles.sessionViewText}>{t("SESSION.VIEW")}</Text>
 						</Pressable>
 						<Pressable onPress={handleStopSession} style={styles.sessionStopButton}>
-							<Text style={styles.sessionStopText}>{t("Arrêter")}</Text>
+							<Text style={styles.sessionStopText}>{t("SESSION.STOP")}</Text>
 						</Pressable>
 					</View>
 				</Pressable>
@@ -148,7 +140,7 @@ export default function HomeScreen() {
 			{hasActiveSession && (
 				<View style={styles.infoBlock}>
 					<Text style={[styles.infoText, { color: COLORS.textSecondary }]}>
-						💡 {t("Les autres méthodes sont désactivées pendant ta séance")}
+						💡 {t("SESSION.DISABLED_METHODS")}
 					</Text>
 				</View>
 			)}

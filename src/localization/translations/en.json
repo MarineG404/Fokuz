@@ -79,7 +79,11 @@
 			"WORK": "Work",
 			"BREAK": "Break",
 			"CYCLES": "Cycles"
-		}
+		},
+		"CURRENT": "Current session",
+		"VIEW": "View session",
+		"STOP": "Stop",
+		"DISABLED_METHODS": "Other methods are disabled during your session"
 	},
 	"STATS": {
 		"TITLE": "Statistics",
@@ -115,7 +119,14 @@
 		"CONFIRM_MODAL": {
 			"TITLE": "Finish session?",
 			"MESSAGE": "You will lose your current progress and reset the timer."
-		}
+		},
+		"SESSION_IN_PROGRESS": "A session is already in progress. Finish it before starting a new one.",
+		"STOP_CONFIRM_TITLE": "Stop the session?",
+		"STOP_CONFIRM_MESSAGE": "Are you sure you want to stop the current session? Your progress will not be saved.",
+		"CURRENT": "Current session",
+		"VIEW": "View session",
+		"STOP": "Stop",
+		"DISABLED_METHODS": "Other methods are disabled during your session"
 	},
 	"MODAL": {
 		"CONFIRM": {
@@ -162,5 +173,10 @@
 				"Stay hydrated to maintain your energy!"
 			]
 		}
+	},
+	"MESSAGES": {
+		"SESSION_IN_PROGRESS": "A session is already in progress. Finish it before starting a new one.",
+		"STOP_CONFIRM_TITLE": "Stop the session?",
+		"STOP_CONFIRM_MESSAGE": "Are you sure you want to stop the current session? Your progress will not be saved."
 	}
 }

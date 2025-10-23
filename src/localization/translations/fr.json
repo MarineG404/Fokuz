@@ -79,7 +79,11 @@
 			"WORK": "Travail",
 			"BREAK": "Pause",
 			"CYCLES": "Cycles"
-		}
+		},
+		"CURRENT": "Séance en cours",
+		"VIEW": "Voir la séance",
+		"STOP": "Arrêter",
+		"DISABLED_METHODS": "Les autres méthodes sont désactivées pendant ta séance"
 	},
 	"STATS": {
 		"TITLE": "Statistiques",
@@ -115,7 +119,10 @@
 		"CONFIRM_MODAL": {
 			"TITLE": "Terminer la session ?",
 			"MESSAGE": "Vous allez perdre votre progression actuelle et remettre le compteur à zéro."
-		}
+		},
+		"SESSION_IN_PROGRESS": "Une session est déjà en cours. Termine-la avant d'en lancer une nouvelle.",
+		"STOP_CONFIRM_TITLE": "Arrêter la séance ?",
+		"STOP_CONFIRM_MESSAGE": "Es-tu sûr de vouloir arrêter la séance en cours ? Ta progression ne sera pas sauvegardée."
 	},
 	"MODAL": {
 		"CONFIRM": {
@@ -162,5 +169,10 @@
 				"Hydratez-vous pour maintenir votre énergie !"
 			]
 		}
+	},
+	"MESSAGES": {
+		"SESSION_IN_PROGRESS": "Une session est déjà en cours. Termine-la avant d'en lancer une nouvelle.",
+		"STOP_CONFIRM_TITLE": "Arrêter la séance ?",
+		"STOP_CONFIRM_MESSAGE": "Es-tu sûr de vouloir arrêter la séance en cours ? Ta progression ne sera pas sauvegardée."
 	}
 }

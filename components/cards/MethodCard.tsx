@@ -27,7 +27,7 @@ export const MethodCard = ({
 	const isCustomMethod = method.id.startsWith("custom_");
 
 	const handlePress = () => {
-		console.log('CLICK MethodCard', method.name, 'disabled:', disabled);
+		console.log("CLICK MethodCard", method.name, "disabled:", disabled);
 		if (disabled) return;
 		if (onPress) return onPress();
 		onPressDefault();
@@ -68,17 +68,9 @@ export const MethodCard = ({
 		setEditModalVisible(false);
 	}
 
-
 	return (
-		<TouchableOpacity
-			onPress={handlePress}
-			disabled={disabled}
-			activeOpacity={disabled ? 1 : 0.7}
-		>
-			<BlockCard style={[
-				styles.card,
-				disabled && styles.cardDisabled
-			]}>
+		<TouchableOpacity onPress={handlePress} disabled={disabled} activeOpacity={disabled ? 1 : 0.7}>
+			<BlockCard style={[styles.card, disabled && styles.cardDisabled]}>
 				<Ionicons
 					name={method.icon}
 					size={40}
@@ -86,10 +78,7 @@ export const MethodCard = ({
 					style={[styles.icon, disabled && styles.iconDisabled]}
 				/>
 				<View style={styles.textContainer}>
-					<Text style={[
-						styles.name,
-						{ color: disabled ? COLORS.textSecondary : COLORS.text }
-					]}>
+					<Text style={[styles.name, { color: disabled ? COLORS.textSecondary : COLORS.text }]}>
 						{method.name}
 					</Text>
 					<Text style={[styles.description, { color: COLORS.textSecondary }]}>
@@ -105,15 +94,11 @@ export const MethodCard = ({
 							style={[
 								styles.actionButton,
 								{ backgroundColor: COLORS.mutedButton },
-								disabled && styles.actionButtonDisabled
+								disabled && styles.actionButtonDisabled,
 							]}
 							hitSlop={8}
 						>
-							<Ionicons
-								name="pencil-outline"
-								size={20}
-								color={COLORS.textSecondary}
-							/>
+							<Ionicons name="pencil-outline" size={20} color={COLORS.textSecondary} />
 						</Pressable>
 						<Pressable
 							onPress={handleDelete}
@@ -121,21 +106,15 @@ export const MethodCard = ({
 							style={[
 								styles.actionButton,
 								{ backgroundColor: COLORS.mutedButton },
-								disabled && styles.actionButtonDisabled
+								disabled && styles.actionButtonDisabled,
 							]}
 							hitSlop={8}
 						>
-							<Ionicons
-								name="trash-outline"
-								size={20}
-								color={COLORS.textSecondary}
-							/>
+							<Ionicons name="trash-outline" size={20} color={COLORS.textSecondary} />
 						</Pressable>
 					</View>
 				)}
-				{disabled && (
-					<View style={styles.disabledOverlay} />
-				)}
+				{disabled && <View style={styles.disabledOverlay} />}
 			</BlockCard>
 			{isCustomMethod && (
 				<EditMethodModal
@@ -160,21 +139,21 @@ const styles = StyleSheet.create({
 		opacity: 0.5,
 	},
 	icon: {
-		marginRight: 16
+		marginRight: 16,
 	},
 	iconDisabled: {
 		opacity: 0.5,
 	},
 	textContainer: {
-		flex: 1
+		flex: 1,
 	},
 	name: {
 		fontSize: 18,
 		fontWeight: "600",
-		marginBottom: 4
+		marginBottom: 4,
 	},
 	description: {
-		fontSize: 14
+		fontSize: 14,
 	},
 	actionsContainer: {
 		flexDirection: "row",
@@ -189,7 +168,7 @@ const styles = StyleSheet.create({
 	},
 	disabledOverlay: {
 		...StyleSheet.absoluteFillObject,
-		backgroundColor: 'transparent',
+		backgroundColor: "transparent",
 	},
 });
 
