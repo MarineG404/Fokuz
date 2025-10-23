@@ -40,7 +40,6 @@ export default function HomeScreen() {
 		return () => clearInterval(interval);
 	}, [hasActiveSession]);
 
-
 	const handleAddMethod = async (method: Omit<Method, "id">) => {
 		await addCustomMethod(method);
 	};
@@ -82,8 +81,6 @@ export default function HomeScreen() {
 		}
 	};
 
-
-
 	const handleStopSession = () => {
 		Alert.alert(t("TIMER.STOP_CONFIRM_TITLE"), t("TIMER.STOP_CONFIRM_MESSAGE"), [
 			{
@@ -101,8 +98,6 @@ export default function HomeScreen() {
 		]);
 	};
 
-
-
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
 			<HeaderTitle title={t("CHOOSE_METHOD")} showDrawer />
@@ -113,7 +108,9 @@ export default function HomeScreen() {
 					<Text style={styles.sessionTitle}>⏱️ {t("SESSION.CURRENT")}</Text>
 					<Text style={styles.sessionMethod}>{timerState.current.methodName}</Text>
 					<Text style={styles.sessionPhase}>
-						{t("TIMER.PHASE." + timerState.current.phase.toUpperCase())} • {`${Math.floor(timerState.current.timeLeft / 60)}:${(timerState.current.timeLeft % 60).toString().padStart(2, "0")}`} restantes
+						{t("TIMER.PHASE." + timerState.current.phase.toUpperCase())} •{" "}
+						{`${Math.floor(timerState.current.timeLeft / 60)}:${(timerState.current.timeLeft % 60).toString().padStart(2, "0")}`}{" "}
+						restantes
 					</Text>
 					<View style={styles.sessionButtonsRow}>
 						<Pressable onPress={handleViewSession} style={styles.sessionViewButton}>

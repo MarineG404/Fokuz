@@ -8,7 +8,15 @@ import { Ionicons } from "@expo/vector-icons";
 import { useFocusEffect } from "@react-navigation/native";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, RefreshControl, ScrollView, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+	Alert,
+	RefreshControl,
+	ScrollView,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 type FilterType = "all" | "today" | "week" | "month";
@@ -132,21 +140,17 @@ export default function HistoryScreen() {
 	};
 
 	const handleClearHistory = async () => {
-		Alert.alert(
-			t("HISTORY.DELETE_TITLE"),
-			t("HISTORY.DELETE_CONFIRM"),
-			[
-				{ text: t("MODAL.CONFIRM.CANCEL_BUTTON"), style: "cancel" },
-				{
-					text: t("HISTORY.DELETE_BUTTON"),
-					style: "destructive",
-					onPress: async () => {
-						await historyService.clearAllData();
-						loadSessions();
-					},
+		Alert.alert(t("HISTORY.DELETE_TITLE"), t("HISTORY.DELETE_CONFIRM"), [
+			{ text: t("MODAL.CONFIRM.CANCEL_BUTTON"), style: "cancel" },
+			{
+				text: t("HISTORY.DELETE_BUTTON"),
+				style: "destructive",
+				onPress: async () => {
+					await historyService.clearAllData();
+					loadSessions();
 				},
-			],
-		);
+			},
+		]);
 	};
 
 	return (
@@ -175,12 +179,12 @@ export default function HistoryScreen() {
 
 				{/* Bouton supprimer */}
 				<TouchableOpacity
-					style={[styles.deleteButton, { borderColor: COLORS.primary}]}
+					style={[styles.deleteButton, { borderColor: COLORS.primary }]}
 					onPress={handleClearHistory}
 				>
 					<Ionicons name="trash-outline" size={18} color={COLORS.textSecondary} />
 					<Text style={[styles.deleteButtonText, { color: COLORS.textSecondary }]}>
-						Effacer l'historique
+						Effacer l&apos;historique
 					</Text>
 				</TouchableOpacity>
 

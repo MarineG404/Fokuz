@@ -79,7 +79,9 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 			<View style={styles.statsContainer}>
 				<View style={styles.statItem}>
 					<Ionicons name="time-outline" size={16} color={COLORS.textSecondary} />
-					<Text style={[styles.statValue, { color: COLORS.text }]}>{getSessionTotalDuration()}</Text>
+					<Text style={[styles.statValue, { color: COLORS.text }]}>
+						{getSessionTotalDuration()}
+					</Text>
 					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
 						{t("SESSION.STATS.TOTAL_DURATION")}
 					</Text>
@@ -109,11 +111,12 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 
 				<View style={styles.statItem}>
 					<Ionicons name="repeat-outline" size={16} color={COLORS.textSecondary} />
-					<Text style={[styles.statValue, { color: COLORS.text }]}> {
-						session.isCompleted
+					<Text style={[styles.statValue, { color: COLORS.text }]}>
+						{" "}
+						{session.isCompleted
 							? session.completedCycles
-							: Math.max(0, session.completedCycles - 1)
-					} </Text>
+							: Math.max(0, session.completedCycles - 1)}{" "}
+					</Text>
 					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
 						{t("SESSION.STATS.CYCLES")}
 					</Text>

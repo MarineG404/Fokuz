@@ -27,7 +27,6 @@ interface TimerContextType {
 const TIMER_STATE_KEY = "@fokuz/timer_state";
 const TimerContext = createContext<TimerContextType | undefined>(undefined);
 
-
 export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 	const timerState = useRef<TimerPersistState | null>(null);
 
@@ -69,7 +68,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 			workDuration: s.workDurationMinutes,
 			breakDuration: s.breakDurationMinutes,
 			completedCycles: s.completedCycles || 0,
-			totalWorkTime: s.actualWorkTime || (s.workDurationMinutes * 60 - (s.timeLeft || 0)),
+			totalWorkTime: s.actualWorkTime || s.workDurationMinutes * 60 - (s.timeLeft || 0),
 			totalBreakTime: s.actualBreakTime || 0,
 			startTime: s.startTime ? new Date(s.startTime) : new Date(),
 			endTime: new Date(),
@@ -79,7 +78,9 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 	};
 
 	return (
-		<TimerContext.Provider value={{ timerState, setTimerState, clearTimerState, saveCurrentSession }}>
+		<TimerContext.Provider
+			value={{ timerState, setTimerState, clearTimerState, saveCurrentSession }}
+		>
 			{children}
 		</TimerContext.Provider>
 	);
