@@ -186,8 +186,8 @@ export default function HistoryScreen() {
 							<Text style={[styles.dateHeader, { color: COLORS.text }]}>
 								{formatDateHeader(date)}
 							</Text>
-							{dateSessions.map((session) => (
-								<SessionCard key={session.id} session={session} />
+							{dateSessions.map((session, index) => (
+								<SessionCard key={session.id || `${date}-${index}`} session={session} />
 							))}
 						</View>
 					))

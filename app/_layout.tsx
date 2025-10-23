@@ -2,12 +2,13 @@ import { useThemeColors } from "@/constants/color";
 import { AudioProvider } from "@/contexts/AudioContext";
 import { CustomMethodsProvider } from "@/contexts/CustomMethodsContext";
 import { SimpleThemeProvider, useSimpleTheme } from "@/contexts/SimpleTheme";
+import { TimerProvider } from "@/contexts/TimerContext";
+import "@/src/localization/i18n";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
 import "react-native-reanimated";
-import "@/src/localization/i18n";
 
 function InnerLayout() {
 	const { effectiveScheme } = useSimpleTheme();
@@ -36,7 +37,9 @@ export default function RootLayout() {
 		<SimpleThemeProvider>
 			<CustomMethodsProvider>
 				<AudioProvider>
-					<InnerLayout />
+					<TimerProvider>
+						<InnerLayout />
+					</TimerProvider>
 				</AudioProvider>
 			</CustomMethodsProvider>
 		</SimpleThemeProvider>

@@ -1,13 +1,17 @@
+import { useTimerContext } from "@/contexts/TimerContext";
 import { SessionRecord } from "@/types/session";
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import * as Haptics from "expo-haptics";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { historyService } from "./historyService";
 import { soundManager } from "./soundManager";
 
+
+
 export type TimerPhase = "work" | "break" | "finished";
 
 export interface TimerState {
-	timeLeft: number; // en secondes
+	timeLeft: number;
 	isRunning: boolean;
 	phase: TimerPhase;
 	totalWorkTime: number;
@@ -39,6 +43,7 @@ export const useTimer = ({
 	onPhaseChange,
 	onFinish,
 }: UseTimerProps) => {
+	const { timerState, setTimerState, clearTimerState } = useTimerContext();
 	const [timeLeft, setTimeLeft] = useState(0);
 	const [isRunning, setIsRunning] = useState(false);
 	const [phase, setPhase] = useState<TimerPhase>("work");
@@ -74,7 +79,7 @@ export const useTimer = ({
 				workDuration: workDurationMinutes,
 				breakDuration: breakDurationMinutes,
 				completedCycles,
-				totalWorkTime: Math.round(actualWorkTime / 60), // convertir en minutes
+				totalWorkTime: Math.round(actualWorkTime / 60),
 				totalBreakTime: Math.round(actualBreakTime / 60),
 				startTime: sessionStartTime,
 				endTime: new Date(),
@@ -98,7 +103,7 @@ export const useTimer = ({
 	);
 
 	// Start timer
-	const start = () => {
+	const start = async () => {
 		// Vibration forte pour tester
 		Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
 
@@ -115,6 +120,8 @@ export const useTimer = ({
 		setIsRunning(true);
 		setSessionCount((prev) => prev + 1);
 		onPhaseChange?.("work");
+		await AsyncStorage.setItem('timer', 'true');
+
 	};
 
 	// Restart timer (nouvelle session)
@@ -178,6 +185,49 @@ export const useTimer = ({
 			clearInterval(intervalRef.current);
 		}
 	};
+
+	// Au montage, restaurer l'état si existant
+	useEffect(() => {
+		if (timerState.current) {
+			if (timerState.current.phase === "finished" || timerState.current.timeLeft <= 0) {
+				clearTimerState();
+			} else {
+				setTimeLeft(timerState.current.timeLeft);
+				setPhase(timerState.current.phase);
+				setIsRunning(timerState.current.isRunning);
+				// ...restaurer autres props si besoin...
+				clearTimerState(); // On ne veut pas restaurer à chaque rotation
+			}
+		}
+	}, []);
+
+	// Sauvegarder l'état à chaque tick
+	useEffect(() => {
+		setTimerState({
+			timeLeft,
+			phase,
+			isRunning,
+			workDurationMinutes,
+			breakDurationMinutes,
+			methodName,
+			methodId,
+		});
+	}, [timeLeft, phase, isRunning, workDurationMinutes, breakDurationMinutes, methodName, methodId]);
+
+	// Dans useTimer, après les autres useEffect, ajoutez celui-ci :
+
+	// Écouter si le contexte a été vidé depuis l'extérieur
+	useEffect(() => {
+		if (!timerState.current && isRunning) {
+			// Le contexte a été vidé, on doit arrêter le timer local
+			setIsRunning(false);
+			setTimeLeft(0);
+			setPhase("work");
+			if (intervalRef.current) {
+				clearInterval(intervalRef.current);
+			}
+		}
+	}, [timerState.current, isRunning]);
 
 	// Timer logic
 	useEffect(() => {

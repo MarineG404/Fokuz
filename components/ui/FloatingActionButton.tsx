@@ -4,18 +4,23 @@ import { Pressable, StyleSheet } from "react-native";
 
 type FloatingActionButtonProps = {
 	onPress: () => void;
+	disabled?: boolean;
 };
 
-export function FloatingActionButton({ onPress }: FloatingActionButtonProps) {
+export function FloatingActionButton({ onPress, disabled = false }: FloatingActionButtonProps) {
 	const COLORS = useThemeColors();
 
 	return (
 		<Pressable
-			onPress={onPress}
-			style={[styles.fab, { backgroundColor: COLORS.primary }]}
+			onPress={disabled ? undefined : onPress}
+			style={[
+				styles.fab,
+				{ backgroundColor: disabled ? COLORS.card : COLORS.primary, opacity: disabled ? 0.5 : 1 },
+			]}
 			android_ripple={{ color: "rgba(255, 255, 255, 0.3)" }}
+			disabled={disabled}
 		>
-			<Ionicons name="add" size={32} color="#FFFFFF" />
+			<Ionicons name="add" size={32} color={disabled ? COLORS.textSecondary : "#FFFFFF"} />
 		</Pressable>
 	);
 }

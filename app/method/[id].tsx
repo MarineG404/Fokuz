@@ -6,7 +6,7 @@ import { useThemeColors } from "@/constants/color";
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useLocalSearchParams } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
-import React from "react";
+import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -31,6 +31,10 @@ export default function MethodDetails() {
 	const method = getMethodById(id || "");
 
 	const { t } = useTranslation();
+
+	useEffect(() => {
+
+	}, []);
 
 	// Afficher un loader pendant le chargement
 	if (loading) {

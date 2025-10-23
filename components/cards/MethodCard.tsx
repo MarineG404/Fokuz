@@ -9,7 +9,15 @@ import { Alert, Pressable, StyleSheet, Text, TouchableOpacity, View } from "reac
 import { EditMethodModal } from "../modals/EditMethodModal";
 import BlockCard from "../ui/BlockCard";
 
-export const MethodCard = ({ method }: { method: Method }) => {
+export const MethodCard = ({
+	method,
+	disabled = false,
+	onPress,
+}: {
+	method: Method;
+	disabled?: boolean;
+	onPress?: () => void;
+}) => {
 	const COLORS = useThemeColors();
 	const router = useRouter();
 	const { t } = useTranslation();
@@ -18,19 +26,24 @@ export const MethodCard = ({ method }: { method: Method }) => {
 
 	const isCustomMethod = method.id.startsWith("custom_");
 
-	const onPress = () => {
+	const handlePress = () => {
+		console.log('CLICK MethodCard', method.name, 'disabled:', disabled);
+		if (disabled) return;
+		if (onPress) return onPress();
+		onPressDefault();
+	};
+
+	const onPressDefault = () => {
 		router.push(`/method/${method.id}` as any);
 	};
 
 	const handleEdit = () => {
+		if (disabled) return;
 		setEditModalVisible(true);
 	};
 
-	const handleUpdate = async (updatedMethod: Method) => {
-		await updateCustomMethod(updatedMethod);
-	};
-
 	const handleDelete = () => {
+		if (disabled) return;
 		Alert.alert(
 			t("EDIT_METHOD.DELETE.TITLE"),
 			t("EDIT_METHOD.DELETE.MESSAGE", { name: method.name }),
@@ -50,12 +63,35 @@ export const MethodCard = ({ method }: { method: Method }) => {
 		);
 	};
 
+	function handleUpdate(updatedMethod: Method): void {
+		updateCustomMethod(updatedMethod);
+		setEditModalVisible(false);
+	}
+
+
 	return (
-		<TouchableOpacity onPress={onPress}>
-			<BlockCard style={styles.card}>
-				<Ionicons name={method.icon} size={40} color={COLORS.secondary} style={styles.icon} />
+		<TouchableOpacity
+			onPress={handlePress}
+			disabled={disabled}
+			activeOpacity={disabled ? 1 : 0.7}
+		>
+			<BlockCard style={[
+				styles.card,
+				disabled && styles.cardDisabled
+			]}>
+				<Ionicons
+					name={method.icon}
+					size={40}
+					color={disabled ? COLORS.textSecondary : COLORS.secondary}
+					style={[styles.icon, disabled && styles.iconDisabled]}
+				/>
 				<View style={styles.textContainer}>
-					<Text style={[styles.name, { color: COLORS.text }]}>{method.name}</Text>
+					<Text style={[
+						styles.name,
+						{ color: disabled ? COLORS.textSecondary : COLORS.text }
+					]}>
+						{method.name}
+					</Text>
 					<Text style={[styles.description, { color: COLORS.textSecondary }]}>
 						{t("DURATION.WORK", { duration: method.workDuration })}
 						{method.breakDuration && t("DURATION.BREAK", { duration: method.breakDuration })}
@@ -65,19 +101,40 @@ export const MethodCard = ({ method }: { method: Method }) => {
 					<View style={styles.actionsContainer}>
 						<Pressable
 							onPress={handleEdit}
-							style={[styles.actionButton, { backgroundColor: COLORS.mutedButton }]}
+							disabled={disabled}
+							style={[
+								styles.actionButton,
+								{ backgroundColor: COLORS.mutedButton },
+								disabled && styles.actionButtonDisabled
+							]}
 							hitSlop={8}
 						>
-							<Ionicons name="pencil-outline" size={20} color={COLORS.textSecondary} />
+							<Ionicons
+								name="pencil-outline"
+								size={20}
+								color={COLORS.textSecondary}
+							/>
 						</Pressable>
 						<Pressable
 							onPress={handleDelete}
-							style={[styles.actionButton, { backgroundColor: COLORS.mutedButton }]}
+							disabled={disabled}
+							style={[
+								styles.actionButton,
+								{ backgroundColor: COLORS.mutedButton },
+								disabled && styles.actionButtonDisabled
+							]}
 							hitSlop={8}
 						>
-							<Ionicons name="trash-outline" size={20} color={COLORS.textSecondary} />
+							<Ionicons
+								name="trash-outline"
+								size={20}
+								color={COLORS.textSecondary}
+							/>
 						</Pressable>
 					</View>
+				)}
+				{disabled && (
+					<View style={styles.disabledOverlay} />
 				)}
 			</BlockCard>
 			{isCustomMethod && (
@@ -97,11 +154,28 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		marginBottom: 16,
+		position: "relative",
 	},
-	icon: { marginRight: 16 },
-	textContainer: { flex: 1 },
-	name: { fontSize: 18, fontWeight: "600", marginBottom: 4 },
-	description: { fontSize: 14 },
+	cardDisabled: {
+		opacity: 0.5,
+	},
+	icon: {
+		marginRight: 16
+	},
+	iconDisabled: {
+		opacity: 0.5,
+	},
+	textContainer: {
+		flex: 1
+	},
+	name: {
+		fontSize: 18,
+		fontWeight: "600",
+		marginBottom: 4
+	},
+	description: {
+		fontSize: 14
+	},
 	actionsContainer: {
 		flexDirection: "row",
 		gap: 8,
@@ -109,6 +183,13 @@ const styles = StyleSheet.create({
 	actionButton: {
 		padding: 8,
 		borderRadius: 8,
+	},
+	actionButtonDisabled: {
+		opacity: 0.5,
+	},
+	disabledOverlay: {
+		...StyleSheet.absoluteFillObject,
+		backgroundColor: 'transparent',
 	},
 });
 
