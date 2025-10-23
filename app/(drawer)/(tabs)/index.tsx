@@ -37,7 +37,7 @@ export default function HomeScreen() {
 	useFocusEffect(
 		useCallback(() => {
 			// Removed the setRefreshKey logic as it was not used elsewhere.
-		}, [timerState]),
+		}, []),
 	);
 
 	useFocusEffect(
@@ -52,7 +52,7 @@ export default function HomeScreen() {
 
 				return () => clearInterval(interval);
 			}
-		}, []), // Removed 'timerState' from dependencies
+		}, [timerState]),
 	);
 
 	const handleMethodPress = (method: Method) => {

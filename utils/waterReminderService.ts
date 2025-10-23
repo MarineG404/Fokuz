@@ -2,12 +2,12 @@ import i18n from "@/src/localization/i18n";
 import Constants from "expo-constants";
 import { Platform } from "react-native";
 
+import * as Notifications from "expo-notifications";
+
 const isExpoGo = Constants.appOwnership === "expo";
 
-let Notifications: any = null;
 if (!isExpoGo) {
 	try {
-		Notifications = require("expo-notifications");
 		Notifications.setNotificationHandler({
 			handleNotification: async () => ({
 				shouldShowAlert: true,
@@ -17,7 +17,7 @@ if (!isExpoGo) {
 				shouldShowList: true,
 			}),
 		});
-	} catch (error) {
+	} catch {
 		console.log("expo-notifications non disponible");
 	}
 }
