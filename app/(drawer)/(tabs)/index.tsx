@@ -20,8 +20,12 @@ export default function HomeScreen() {
 	const { allMethods } = useAllMethods();
 	const { addCustomMethod } = useCustomMethods();
 	const [modalVisible, setModalVisible] = useState(false);
+	const [refresh, setRefresh] = useState(0);
 	const { timerState, clearTimerState } = useTimerContext();
 	const { t } = useTranslation();
+
+	// Ajout d'un état local pour le temps restant
+	const [localTimeLeft, setLocalTimeLeft] = useState(timerState.current?.timeLeft || 0);
 
 	const hasActiveSession = !!(
 		timerState.current &&
@@ -30,13 +34,36 @@ export default function HomeScreen() {
 		timerState.current.timeLeft > 0
 	);
 
+	// Synchroniser localTimeLeft avec timerState quand on arrive sur la page
+	useFocusEffect(
+		useCallback(() => {
+			setRefresh((r) => r + 1);
+			setLocalTimeLeft(timerState.current?.timeLeft || 0);
+		}, [timerState])
+	);
+
+	// Minuteur réactif
+	useFocusEffect(
+		useCallback(() => {
+			if (hasActiveSession) {
+				const interval = setInterval(() => {
+					setLocalTimeLeft((prev) => {
+						if (prev > 0) return prev - 1;
+						return 0;
+					});
+				}, 1000);
+				return () => clearInterval(interval);
+			}
+		}, [hasActiveSession])
+	);
+
 	const handleAddMethod = async (method: Omit<Method, "id">) => {
 		await addCustomMethod(method);
 	};
 
 	useFocusEffect(
 		useCallback(() => {
-			// Removed the setRefreshKey logic as it was not used elsewhere.
+			setRefresh((r) => r + 1); // Forcer le refresh à chaque focus
 		}, []),
 	);
 
@@ -106,8 +133,8 @@ export default function HomeScreen() {
 		]);
 	};
 
-	const formattedTime = timerState.current
-		? `${Math.floor(timerState.current.timeLeft / 60)}:${(timerState.current.timeLeft % 60).toString().padStart(2, "0")}`
+	const formattedTime = hasActiveSession
+		? `${Math.floor(localTimeLeft / 60)}:${(localTimeLeft % 60).toString().padStart(2, "0")}`
 		: "0:00";
 
 	return (
