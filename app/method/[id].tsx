@@ -32,9 +32,7 @@ export default function MethodDetails() {
 
 	const { t } = useTranslation();
 
-	useEffect(() => {
-
-	}, []);
+	useEffect(() => {}, []);
 
 	// Afficher un loader pendant le chargement
 	if (loading) {

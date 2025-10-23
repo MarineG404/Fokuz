@@ -1,12 +1,10 @@
 import { useTimerContext } from "@/contexts/TimerContext";
 import { SessionRecord } from "@/types/session";
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import * as Haptics from "expo-haptics";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { historyService } from "./historyService";
 import { soundManager } from "./soundManager";
-
-
 
 export type TimerPhase = "work" | "break" | "finished";
 
@@ -120,8 +118,7 @@ export const useTimer = ({
 		setIsRunning(true);
 		setSessionCount((prev) => prev + 1);
 		onPhaseChange?.("work");
-		await AsyncStorage.setItem('timer', 'true');
-
+		await AsyncStorage.setItem("timer", "true");
 	};
 
 	// Restart timer (nouvelle session)
@@ -195,11 +192,10 @@ export const useTimer = ({
 				setTimeLeft(timerState.current.timeLeft);
 				setPhase(timerState.current.phase);
 				setIsRunning(timerState.current.isRunning);
-				// ...restaurer autres props si besoin...
-				clearTimerState(); // On ne veut pas restaurer à chaque rotation
+				clearTimerState();
 			}
 		}
-	}, []);
+	}, [timerState, clearTimerState]);
 
 	// Sauvegarder l'état à chaque tick
 	useEffect(() => {
@@ -212,7 +208,16 @@ export const useTimer = ({
 			methodName,
 			methodId,
 		});
-	}, [timeLeft, phase, isRunning, workDurationMinutes, breakDurationMinutes, methodName, methodId]);
+	}, [
+		setTimerState,
+		timeLeft,
+		phase,
+		isRunning,
+		workDurationMinutes,
+		breakDurationMinutes,
+		methodName,
+		methodId,
+	]);
 
 	// Dans useTimer, après les autres useEffect, ajoutez celui-ci :
 
@@ -227,7 +232,7 @@ export const useTimer = ({
 				clearInterval(intervalRef.current);
 			}
 		}
-	}, [timerState.current, isRunning]);
+	}, [timerState, isRunning]);
 
 	// Timer logic
 	useEffect(() => {

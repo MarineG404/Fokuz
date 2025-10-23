@@ -22,7 +22,6 @@ export default function HomeScreen() {
 	const [modalVisible, setModalVisible] = useState(false);
 	const { timerState, clearTimerState } = useTimerContext();
 	const { t } = useTranslation();
-	const [refreshKey, setRefreshKey] = useState(0);
 
 	const hasActiveSession = !!(
 		timerState.current &&
@@ -37,7 +36,7 @@ export default function HomeScreen() {
 
 	useFocusEffect(
 		useCallback(() => {
-			setRefreshKey((prevKey) => prevKey + 1); // Déclenche un re-rendu
+			// Removed the setRefreshKey logic as it was not used elsewhere.
 		}, [timerState]),
 	);
 
@@ -48,13 +47,12 @@ export default function HomeScreen() {
 				const interval = setInterval(() => {
 					if (timerState.current) {
 						timerState.current.timeLeft -= 1;
-						setRefreshKey((prevKey) => prevKey + 1);
 					}
 				}, 1000);
 
 				return () => clearInterval(interval);
 			}
-		}, [timerState]),
+		}, []), // Removed 'timerState' from dependencies
 	);
 
 	const handleMethodPress = (method: Method) => {
@@ -103,7 +101,6 @@ export default function HomeScreen() {
 
 					// Réinitialiser l'état du timer
 					clearTimerState();
-					setRefreshKey((prevKey) => prevKey + 1);
 				},
 			},
 		]);
