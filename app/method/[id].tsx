@@ -63,7 +63,7 @@ export default function MethodDetails() {
 			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
 				<HeaderTitle title={t("METHOD.NOT_FOUND")} showBack />
 				<ScrollView style={styles.content}>
-					<BlockCard style={styles.card} padded={false}>
+					<BlockCard padded={false}>
 						<Text style={[styles.errorText, { color: COLORS.textSecondary }]}>
 							{t("METHOD.NOT_FOUND_ID", { id })}
 						</Text>
@@ -79,12 +79,12 @@ export default function MethodDetails() {
 			return (
 				<View style={styles.landscapeRow}>
 					<View style={styles.landscapeHalf}>
-						<BlockCard style={[styles.cardFill]}>
+						<BlockCard style={styles.cardFill}>
 							<LofiPlayer />
 						</BlockCard>
 					</View>
 					<View style={styles.landscapeHalf}>
-						<BlockCard style={[styles.cardFill, styles.timerCard]}>
+						<BlockCard style={styles.cardFill}>
 							<TimerComponent
 								workDurationMinutes={method.workDuration}
 								breakDurationMinutes={method.breakDuration}
@@ -104,7 +104,7 @@ export default function MethodDetails() {
 			<>
 				{/* Portrait: stacked */}
 				<LofiPlayer />
-				<BlockCard style={[styles.card, styles.timerCard]}>
+				<BlockCard>
 					<TimerComponent
 						workDurationMinutes={method.workDuration}
 						breakDurationMinutes={method.breakDuration}
@@ -176,7 +176,7 @@ export default function MethodDetails() {
 					</BlockCard>
 
 					{/* Duration Info Card */}
-					<BlockCard style={styles.durationCard}>
+					<BlockCard>
 						<Text style={[styles.cardTitle, { color: COLORS.primary }]}>
 							{t("METHOD.CONFIGURATION")}
 						</Text>
@@ -287,32 +287,10 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingTop: 8,
 	},
-	card: {
-		borderRadius: 16,
-		padding: 20,
-		marginBottom: 16,
-	},
-	cardLight: {
-		borderWidth: 1,
-		borderColor: "#E5E7EB",
-	},
-	cardDark: {
-		shadowColor: "#000",
-		shadowOffset: {
-			width: 0,
-			height: 2,
-		},
-		shadowOpacity: 0.25,
-		shadowRadius: 8,
-		elevation: 6,
-	},
 	description: {
 		fontSize: 16,
 		lineHeight: 24,
 		textAlign: "center",
-	},
-	durationCard: {
-		marginBottom: 20,
 	},
 	cardTitle: {
 		fontSize: 18,
@@ -339,9 +317,6 @@ const styles = StyleSheet.create({
 	durationValue: {
 		fontSize: 20,
 		fontWeight: "bold",
-	},
-	timerCard: {
-		alignItems: "center",
 	},
 	landscapeRow: {
 		flexDirection: "row",
