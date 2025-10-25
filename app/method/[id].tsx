@@ -4,21 +4,26 @@ import BlockCard from "@/components/ui/BlockCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import { useAllMethods } from "@/hooks/useAllMethods";
+import { useCustomMethods } from "@/hooks/useCustomMethods";
+import { Ionicons } from "@expo/vector-icons";
 import { useLocalSearchParams } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { ScrollView, StyleSheet, Text, View, useWindowDimensions } from "react-native";
+import { Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View, useWindowDimensions } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function MethodDetails() {
+	const { updateCustomMethod } = useCustomMethods();
+	const [editDescModalVisible, setEditDescModalVisible] = React.useState(false);
+	const [descDraft, setDescDraft] = React.useState("");
 	React.useEffect(() => {
 		// allow rotation for this screen
-		ScreenOrientation.unlockAsync().catch(() => {});
+		ScreenOrientation.unlockAsync().catch(() => { });
 
 		return () => {
 			// restore portrait lock when leaving
-			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
 		};
 	}, []);
 
@@ -32,7 +37,7 @@ export default function MethodDetails() {
 
 	const { t } = useTranslation();
 
-	useEffect(() => {}, []);
+	useEffect(() => { }, []);
 
 	// Afficher un loader pendant le chargement
 	if (loading) {
@@ -117,11 +122,41 @@ export default function MethodDetails() {
 				<>
 					{/* Description Card */}
 					<BlockCard>
-						<Text style={[styles.description, { color: COLORS.text }]}>
-							{"translationKey" in method
-								? t(`METHODS.${method.translationKey}.DESCRIPTION`)
-								: method.description}
-						</Text>
+						<View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+							{/* Description */}
+							<View style={{ flex: 1 }}>
+								{(() => {
+									const desc = "translationKey" in method
+										? t(`METHODS.${method.translationKey}.DESCRIPTION`)
+										: method.description;
+									const isEmpty = !desc || desc === t("METHOD.NO_DESCRIPTION");
+									return (
+										<Text
+											style={[
+												styles.description,
+												isEmpty
+													? { color: COLORS.textSecondary, fontStyle: "italic" }
+													: { color: COLORS.text },
+											]}
+										>
+											{isEmpty ? t("METHOD.NO_DESCRIPTION") : desc}
+										</Text>
+									);
+								})()}
+							</View>
+							{method.id.startsWith("custom_") && (
+								<Pressable
+									onPress={() => {
+										setDescDraft(method.description || "");
+										setEditDescModalVisible(true);
+									}}
+									style={{ marginLeft: 8, padding: 4 }}
+									hitSlop={8}
+								>
+									<Ionicons name="pencil-outline" size={20} color={COLORS.textSecondary} />
+								</Pressable>
+							)}
+						</View>
 					</BlockCard>
 
 					{/* Duration Info Card */}
@@ -156,9 +191,75 @@ export default function MethodDetails() {
 					{renderLofiAndTimer()}
 				</>
 			</ScrollView>
+
+			{/* Modal édition description */}
+			<Modal
+				visible={editDescModalVisible}
+				transparent
+				animationType="fade"
+				onRequestClose={() => setEditDescModalVisible(false)}
+			>
+				<Pressable
+					style={styles.modalOverlay}
+					onPress={() => setEditDescModalVisible(false)}
+				>
+					<Pressable style={styles.modalContent} onPress={(e) => e.stopPropagation()}>
+						<BlockCard style={styles.modalCard}>
+							<View style={styles.modalHeader}>
+								<Ionicons name="create-outline" size={20} color={COLORS.primary} />
+								<Text style={[styles.modalTitle, { color: COLORS.text }]}>
+									{t("EDIT_METHOD.DESCRIPTION_LABEL")}
+								</Text>
+							</View>
+
+							<TextInput
+								style={[
+									styles.textArea,
+									{
+										borderColor: COLORS.border,
+										color: COLORS.text,
+										backgroundColor: COLORS.background,
+									},
+								]}
+								value={descDraft}
+								onChangeText={setDescDraft}
+								placeholder={t("EDIT_METHOD.DESCRIPTION_PLACEHOLDER")}
+								placeholderTextColor={COLORS.textSecondary}
+								multiline
+								numberOfLines={4}
+								textAlignVertical="top"
+							/>
+
+							<View style={styles.modalButtons}>
+								<Pressable
+									onPress={() => setEditDescModalVisible(false)}
+									style={[styles.button, styles.buttonCancel, { backgroundColor: COLORS.background }]}
+								>
+									<Text style={[styles.buttonText, { color: COLORS.text }]}>
+										{t("EDIT_METHOD.CANCEL")}
+									</Text>
+								</Pressable>
+								<Pressable
+									onPress={async () => {
+										await updateCustomMethod({ ...method, description: descDraft });
+										setEditDescModalVisible(false);
+									}}
+									style={[styles.button, styles.buttonSave, { backgroundColor: COLORS.primary }]}
+								>
+									<Ionicons name="checkmark" size={18} color="#fff" style={{ marginRight: 4 }} />
+									<Text style={[styles.buttonText, styles.buttonTextSave]}>
+										{t("EDIT_METHOD.SAVE")}
+									</Text>
+								</Pressable>
+							</View>
+						</BlockCard>
+					</Pressable>
+				</Pressable>
+			</Modal>
 		</SafeAreaView>
 	);
 }
+
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
@@ -245,5 +346,66 @@ const styles = StyleSheet.create({
 	errorText: {
 		fontSize: 16,
 		textAlign: "center",
+	},
+	// Modal styles
+	modalOverlay: {
+		flex: 1,
+		backgroundColor: "rgba(0, 0, 0, 0.5)",
+		justifyContent: "center",
+		alignItems: "center",
+		padding: 20,
+	},
+	modalContent: {
+		width: "100%",
+		maxWidth: 500,
+	},
+	modalCard: {
+		marginBottom: 0,
+	},
+	modalHeader: {
+		flexDirection: "row",
+		alignItems: "center",
+		marginBottom: 16,
+	},
+	modalTitle: {
+		fontSize: 18,
+		fontWeight: "600",
+		marginLeft: 8,
+	},
+	textArea: {
+		borderWidth: 1,
+		borderRadius: 12,
+		padding: 14,
+		fontSize: 16,
+		minHeight: 120,
+		marginBottom: 20,
+	},
+	modalButtons: {
+		flexDirection: "row",
+		gap: 12,
+		justifyContent: "flex-end",
+	},
+	button: {
+		flexDirection: "row",
+		alignItems: "center",
+		justifyContent: "center",
+		paddingVertical: 12,
+		paddingHorizontal: 20,
+		borderRadius: 10,
+		minWidth: 100,
+	},
+	buttonCancel: {
+		borderWidth: 1,
+		borderColor: "rgba(0, 0, 0, 0.1)",
+	},
+	buttonSave: {
+		flex: 1,
+	},
+	buttonText: {
+		fontSize: 16,
+		fontWeight: "600",
+	},
+	buttonTextSave: {
+		color: "#fff",
 	},
 });

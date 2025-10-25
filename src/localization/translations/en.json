@@ -72,7 +72,8 @@
 		"WORK": "Work",
 		"WORK_DURATION": "{{duration}} min",
 		"BREAK": "Break",
-		"BREAK_DURATION": "{{duration}} min"
+		"BREAK_DURATION": "{{duration}} min",
+		"NO_DESCRIPTION": "No description available"
 	},
 	"SESSION": {
 		"STATUS": {
