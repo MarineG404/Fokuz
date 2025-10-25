@@ -10,7 +10,16 @@ import { useLocalSearchParams } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import React, { useEffect } from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, Pressable, ScrollView, StyleSheet, Text, TextInput, View, useWindowDimensions } from "react-native";
+import {
+	Modal,
+	Pressable,
+	ScrollView,
+	StyleSheet,
+	Text,
+	TextInput,
+	View,
+	useWindowDimensions,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function MethodDetails() {
@@ -19,11 +28,11 @@ export default function MethodDetails() {
 	const [descDraft, setDescDraft] = React.useState("");
 	React.useEffect(() => {
 		// allow rotation for this screen
-		ScreenOrientation.unlockAsync().catch(() => { });
+		ScreenOrientation.unlockAsync().catch(() => {});
 
 		return () => {
 			// restore portrait lock when leaving
-			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
 		};
 	}, []);
 
@@ -37,7 +46,7 @@ export default function MethodDetails() {
 
 	const { t } = useTranslation();
 
-	useEffect(() => { }, []);
+	useEffect(() => {}, []);
 
 	// Afficher un loader pendant le chargement
 	if (loading) {
@@ -122,13 +131,20 @@ export default function MethodDetails() {
 				<>
 					{/* Description Card */}
 					<BlockCard>
-						<View style={{ flexDirection: "row", alignItems: "center", justifyContent: "space-between" }}>
+						<View
+							style={{
+								flexDirection: "row",
+								alignItems: "center",
+								justifyContent: "space-between",
+							}}
+						>
 							{/* Description */}
 							<View style={{ flex: 1 }}>
 								{(() => {
-									const desc = "translationKey" in method
-										? t(`METHODS.${method.translationKey}.DESCRIPTION`)
-										: method.description;
+									const desc =
+										"translationKey" in method
+											? t(`METHODS.${method.translationKey}.DESCRIPTION`)
+											: method.description;
 									const isEmpty = !desc || desc === t("METHOD.NO_DESCRIPTION");
 									return (
 										<Text
@@ -199,10 +215,7 @@ export default function MethodDetails() {
 				animationType="fade"
 				onRequestClose={() => setEditDescModalVisible(false)}
 			>
-				<Pressable
-					style={styles.modalOverlay}
-					onPress={() => setEditDescModalVisible(false)}
-				>
+				<Pressable style={styles.modalOverlay} onPress={() => setEditDescModalVisible(false)}>
 					<Pressable style={styles.modalContent} onPress={(e) => e.stopPropagation()}>
 						<BlockCard style={styles.modalCard}>
 							<View style={styles.modalHeader}>
@@ -233,7 +246,11 @@ export default function MethodDetails() {
 							<View style={styles.modalButtons}>
 								<Pressable
 									onPress={() => setEditDescModalVisible(false)}
-									style={[styles.button, styles.buttonCancel, { backgroundColor: COLORS.background }]}
+									style={[
+										styles.button,
+										styles.buttonCancel,
+										{ backgroundColor: COLORS.background },
+									]}
 								>
 									<Text style={[styles.buttonText, { color: COLORS.text }]}>
 										{t("EDIT_METHOD.CANCEL")}
