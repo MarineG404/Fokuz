@@ -1,6 +1,11 @@
 {
 	"CHOOSE_METHOD": "Choose your method",
 	"THEME_SETTINGS": "App Theme",
+	"THEME_OPTIONS": {
+		"AUTO": "Automatic",
+		"LIGHT": "Light",
+		"DARK": "Dark"
+	},
 	"LANGUAGE_SETTINGS": "Language Settings",
 	"WATER_REMINDER_SETTINGS": "Water Reminder",
 	"EDIT_METHOD": {

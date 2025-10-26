@@ -1,6 +1,11 @@
 {
 	"CHOOSE_METHOD": "Choisissez votre méthode",
 	"THEME_SETTINGS": "Thème de l'application",
+	"THEME_OPTIONS": {
+		"AUTO": "Automatique",
+		"LIGHT": "Clair",
+		"DARK": "Sombre"
+	},
 	"LANGUAGE_SETTINGS": "Paramètres de langue",
 	"WATER_REMINDER_SETTINGS": "Rappel d'hydratation",
 	"EDIT_METHOD": {
