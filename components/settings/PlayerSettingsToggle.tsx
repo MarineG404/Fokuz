@@ -1,14 +1,11 @@
 import ToggleRow from "@/components/settings/ToggleRow";
-import { useThemeColors } from "@/constants/color";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text } from "react-native";
 
 const STORAGE_KEY = "@fokuz:lofi_enabled";
 
 const PlayerSettingsToggle: React.FC = () => {
-	const COLORS = useThemeColors();
 	const { t } = useTranslation();
 	const [enabled, setEnabled] = React.useState<boolean>(true);
 	const [loading, setLoading] = React.useState<boolean>(true);
@@ -23,7 +20,7 @@ const PlayerSettingsToggle: React.FC = () => {
 				} else {
 					setEnabled(raw === "true");
 				}
-			} catch (e) {
+			} catch {
 				// ignore
 			} finally {
 				setLoading(false);
@@ -35,7 +32,7 @@ const PlayerSettingsToggle: React.FC = () => {
 		setEnabled(value);
 		try {
 			await AsyncStorage.setItem(STORAGE_KEY, value ? "true" : "false");
-		} catch (e) {
+		} catch {
 			// ignore
 		}
 	};

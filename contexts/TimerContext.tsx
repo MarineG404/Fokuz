@@ -41,7 +41,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 					if (parsed && parsed.startTime) parsed.startTime = new Date(parsed.startTime);
 					timerState.current = parsed;
 				}
-			} catch (e) {
+			} catch {
 				// ignore
 			}
 		})();

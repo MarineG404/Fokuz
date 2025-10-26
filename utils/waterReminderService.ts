@@ -8,20 +8,24 @@ const isExpoGo = Constants.appOwnership === "expo";
 
 let Notifications: any = null;
 if (!isExpoGo) {
-	try {
-		Notifications = require("expo-notifications");
-		Notifications.setNotificationHandler({
-			handleNotification: async () => ({
-				shouldShowAlert: true,
-				shouldPlaySound: true,
-				shouldSetBadge: false,
-				shouldShowBanner: true,
-				shouldShowList: true,
-			}),
-		});
-	} catch {
-		console.log("expo-notifications non disponible");
-	}
+	// try dynamic import to avoid require-style import
+	(async () => {
+		try {
+			const mod = await import("expo-notifications");
+			Notifications = mod;
+			Notifications.setNotificationHandler({
+				handleNotification: async () => ({
+					shouldShowAlert: true,
+					shouldPlaySound: true,
+					shouldSetBadge: false,
+					shouldShowBanner: true,
+					shouldShowList: true,
+				}),
+			});
+		} catch {
+			console.log("expo-notifications non disponible");
+		}
+	})();
 }
 
 class WaterReminderService {

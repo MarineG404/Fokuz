@@ -20,7 +20,7 @@ export default function HomeScreen() {
 	const { allMethods } = useAllMethods();
 	const { addCustomMethod } = useCustomMethods();
 	const [modalVisible, setModalVisible] = useState(false);
-	const [refresh, setRefresh] = useState(0);
+	const [, setRefresh] = useState(0);
 	const { timerState, clearTimerState, saveCurrentSession } = useTimerContext();
 	const { t } = useTranslation();
 

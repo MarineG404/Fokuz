@@ -55,7 +55,7 @@ export default function MethodDetails() {
 			try {
 				const raw = await AsyncStorage.getItem("@fokuz:lofi_enabled");
 				setLofiEnabled(raw === null ? true : raw === "true");
-			} catch (e) {
+			} catch {
 				setLofiEnabled(true);
 			}
 		})();

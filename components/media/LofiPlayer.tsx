@@ -33,7 +33,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 				} else {
 					setEnabled(raw === "true");
 				}
-			} catch (e) {
+			} catch {
 				setEnabled(true);
 			}
 		})();
