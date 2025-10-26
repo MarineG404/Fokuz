@@ -1,9 +1,8 @@
-import CategorySelector from "@/components/settings/CategorySelector";
+import CategoriesModal from "@/components/settings/CategoriesModal";
 import { LanguageSwitcher } from "@/components/settings/LanguageSwitcher";
 import PlayerSettingsToggle from "@/components/settings/PlayerSettingsToggle";
 import { ThemeSwitcher } from "@/components/settings/ThemeSwitcher";
 import { WaterReminderToggle } from "@/components/settings/WaterReminderToggle";
-import BlockCard from "@/components/ui/BlockCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import SPACING from "@/constants/spacing";
@@ -11,7 +10,7 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, Pressable, ScrollView, StyleSheet, Text } from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SettingsScreen() {
@@ -88,37 +87,10 @@ export default function SettingsScreen() {
 				)}
 			</ScrollView>
 
-			{/* Modal pour les catégories */}
-			<Modal
+			<CategoriesModal
 				visible={showCategoriesModal}
-				transparent
-				animationType="slide"
-				onRequestClose={() => setShowCategoriesModal(false)}
-			>
-				<Pressable
-					style={styles.modalOverlay}
-					onPress={() => setShowCategoriesModal(false)}
-				>
-					<Pressable style={styles.modalContent} onPress={(e) => e.stopPropagation()}>
-						<BlockCard style={styles.modalCard}>
-							<Text style={[styles.modalTitle, { color: COLORS.text }]}>
-								{t("PLAYER_SETTINGS.CATEGORIES")}
-							</Text>
-
-							<CategorySelector compact />
-
-							<Pressable
-								onPress={() => setShowCategoriesModal(false)}
-								style={[styles.closeButton, { backgroundColor: COLORS.primary }]}
-							>
-								<Text style={styles.closeButtonText}>
-									{t("MODAL.CONFIRM.CANCEL_BUTTON") || "Fermer"}
-								</Text>
-							</Pressable>
-						</BlockCard>
-					</Pressable>
-				</Pressable>
-			</Modal>
+				onClose={() => setShowCategoriesModal(false)}
+			/>
 		</SafeAreaView>
 	);
 }
