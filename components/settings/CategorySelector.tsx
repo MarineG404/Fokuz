@@ -1,5 +1,6 @@
 import { LOFI_VIDEOS } from "@/assets/data/lofiVideos";
 import { useThemeColors } from "@/constants/color";
+import { SPACING } from "@/constants/spacing";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
@@ -57,7 +58,7 @@ export default function CategorySelector({ compact = false }: Props) {
 
 	if (compact) {
 		return (
-			<View style={{ marginTop: 8 }}>
+			<View>
 				<FlatList
 					data={cats}
 					keyExtractor={(item) => item}
@@ -70,10 +71,17 @@ export default function CategorySelector({ compact = false }: Props) {
 								onPress={() => toggle(item)}
 								style={[
 									styles.compactChip,
-									{ backgroundColor: active ? COLORS.primary : COLORS.card, borderColor: COLORS.border },
+									{
+										backgroundColor: active ? COLORS.primary : COLORS.card,
+										borderColor: COLORS.border,
+									},
 								]}
 							>
-								<Text style={[styles.compactText, { color: active ? COLORS.background : COLORS.text }]}>{item}</Text>
+								<Text
+									style={[styles.compactText, { color: active ? COLORS.background : COLORS.text }]}
+								>
+									{item}
+								</Text>
 							</Pressable>
 						);
 					}}
@@ -83,8 +91,10 @@ export default function CategorySelector({ compact = false }: Props) {
 	}
 
 	return (
-		<View style={{ marginBottom: 12 }}>
-			<Text style={[styles.title, { color: COLORS.secondary }]}>{t("PLAYER_SETTINGS.CATEGORIES")}</Text>
+		<View>
+			<Text style={[styles.title, { color: COLORS.secondary }]}>
+				{t("PLAYER_SETTINGS.CATEGORIES")}
+			</Text>
 			<FlatList
 				data={cats}
 				keyExtractor={(item) => item}
@@ -110,24 +120,23 @@ export default function CategorySelector({ compact = false }: Props) {
 }
 
 const styles = StyleSheet.create({
-	title: { fontSize: 16, fontWeight: "700", marginBottom: 8 },
+	title: { fontSize: 16, fontWeight: "700" },
 	row: {
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		padding: 12,
-		borderRadius: 10,
+		borderRadius: SPACING.radius,
 		borderWidth: 1,
-		marginBottom: 8,
+		padding: SPACING.medium,
 	},
-	catText: { fontSize: 15 },
+	catText: { fontSize: 18, fontWeight: "600" },
 	compactChip: {
-		paddingVertical: 8,
-		paddingHorizontal: 12,
 		borderRadius: 999,
-		marginBottom: 8,
 		minWidth: "48%",
 		alignItems: "center",
+		paddingVertical: SPACING.small,
+		paddingHorizontal: SPACING.medium,
+		marginBottom: SPACING.small,
 	},
-	compactText: { fontSize: 13, fontWeight: "600" },
+	compactText: { fontSize: 16, fontWeight: "700" },
 });

@@ -1,4 +1,5 @@
 import { useThemeColors } from "@/constants/color";
+import { SPACING } from "@/constants/spacing";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -66,15 +67,13 @@ export default function ToggleRow({ title, subtitle, iconName, active, onToggle 
 }
 
 const styles = StyleSheet.create({
-	container: {
-		marginBottom: 16,
-	},
+	container: {},
 	toggleContainer: {
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		padding: 16,
-		borderRadius: 12,
+		padding: SPACING.large,
+		borderRadius: SPACING.radius,
 		borderWidth: 1,
 	},
 	iconTextContainer: {
@@ -83,7 +82,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	textContainer: {
-		marginLeft: 12,
+		marginLeft: SPACING.medium,
 		flex: 1,
 	},
 	title: {

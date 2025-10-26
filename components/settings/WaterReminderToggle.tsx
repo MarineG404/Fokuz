@@ -1,5 +1,6 @@
 import ToggleRow from "@/components/settings/ToggleRow";
 import { useThemeColors } from "@/constants/color";
+import { SPACING } from "@/constants/spacing";
 import { useWaterReminder } from "@/hooks/useWaterReminder";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
@@ -61,14 +62,13 @@ export function WaterReminderToggle() {
 
 const styles = StyleSheet.create({
 	container: {
-		marginBottom: 16,
+		marginBottom: 0,
 	},
 	toggleContainer: {
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		padding: 16,
-		borderRadius: 12,
+		borderRadius: SPACING.radius,
 		borderWidth: 1,
 	},
 	iconTextContainer: {
@@ -77,7 +77,6 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	textContainer: {
-		marginLeft: 12,
 		flex: 1,
 	},
 	title: {
@@ -105,15 +104,15 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "center",
-		marginTop: 8,
-		paddingVertical: 8,
-		paddingHorizontal: 16,
-		borderRadius: 8,
+		marginTop: SPACING.small,
+		paddingVertical: SPACING.small,
+		paddingHorizontal: SPACING.large,
+		borderRadius: SPACING.radius,
 	},
 	testButtonText: {
 		color: "#FFFFFF",
 		fontSize: 14,
 		fontWeight: "600",
-		marginLeft: 8,
+		marginLeft: SPACING.small,
 	},
 });

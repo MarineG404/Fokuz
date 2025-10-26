@@ -1,4 +1,5 @@
 import { useThemeColors } from "@/constants/color";
+import { SPACING } from "@/constants/spacing";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, View } from "react-native";
@@ -48,22 +49,20 @@ export const LanguageSwitcher = () => {
 
 const styles = StyleSheet.create({
 	container: {
-		marginVertical: 8,
 		minWidth: 140,
 	},
 	dropdown: {
 		height: 40,
 		borderWidth: 1,
-		borderRadius: 8,
-		paddingHorizontal: 12,
+		borderRadius: SPACING.radius,
+		paddingHorizontal: SPACING.medium,
 	},
 	selectedText: {
 		fontSize: 14,
 		fontWeight: "600",
 	},
 	listContainer: {
-		borderRadius: 8,
-		marginTop: 4,
+		borderRadius: SPACING.radius,
 	},
 	icon: {
 		width: 20,

@@ -1,4 +1,5 @@
 import { useThemeColors } from "@/constants/color";
+import { SPACING } from "@/constants/spacing";
 import { useSimpleTheme } from "@/contexts/SimpleTheme";
 import React from "react";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -35,15 +36,14 @@ const styles = StyleSheet.create({
 	container: {
 		flexDirection: "row",
 		justifyContent: "space-around",
-		paddingVertical: 12,
 	},
 	option: {
 		flexDirection: "row",
 		alignItems: "center",
 		borderWidth: 1,
 		borderColor: "transparent",
-		padding: 8,
-		borderRadius: 8,
+		padding: SPACING.small,
+		borderRadius: SPACING.radius,
 	},
 	radio: {
 		width: 14,
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
 		borderRadius: 7,
 		borderWidth: 1,
 		borderColor: "#999",
-		marginRight: 8,
+		marginRight: SPACING.small,
 	},
 	label: {
 		fontSize: 14,

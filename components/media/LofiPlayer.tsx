@@ -91,7 +91,6 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 		setIsCollapsed(!isCollapsed);
 	};
 
-
 	const currentVideo = filteredVideos[currentVideoIndex] || LOFI_VIDEOS[0];
 
 	return (
