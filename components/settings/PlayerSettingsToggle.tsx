@@ -55,7 +55,6 @@ const PlayerSettingsToggle: React.FC = () => {
 				onToggle={() => toggle(!enabled)}
 				iconName={"musical-notes"}
 			/>
-
 		</>
 	);
 };
