@@ -5,7 +5,7 @@ import { ThemeSwitcher } from "@/components/settings/ThemeSwitcher";
 import { WaterReminderToggle } from "@/components/settings/WaterReminderToggle";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
-import SPACING from "@/constants/spacing";
+import { SPACING } from "@/constants/spacing";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
