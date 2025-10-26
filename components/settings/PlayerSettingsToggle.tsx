@@ -5,7 +5,12 @@ import { useTranslation } from "react-i18next";
 
 const STORAGE_KEY = "@fokuz:lofi_enabled";
 
-const PlayerSettingsToggle: React.FC = () => {
+type Props = {
+	/** optional callback fired when enabled state changes */
+	onChange?: (enabled: boolean) => void;
+};
+
+const PlayerSettingsToggle: React.FC<Props> = ({ onChange }) => {
 	const { t } = useTranslation();
 	const [enabled, setEnabled] = React.useState<boolean>(true);
 	const [loading, setLoading] = React.useState<boolean>(true);
@@ -35,6 +40,7 @@ const PlayerSettingsToggle: React.FC = () => {
 		} catch {
 			// ignore
 		}
+		if (onChange) onChange(value);
 	};
 
 	return (

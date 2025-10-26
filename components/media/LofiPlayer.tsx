@@ -16,6 +16,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 	const COLORS = useThemeColors();
 	const { t } = useTranslation();
 	const [enabled, setEnabled] = useState<boolean | null>(null);
+	const [selectedCategories, setSelectedCategories] = useState<string[] | null>(null);
 	const [playing, setPlaying] = useState(false);
 	const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 	const [isCollapsed, setIsCollapsed] = useState(false);
@@ -33,11 +34,37 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 				} else {
 					setEnabled(raw === "true");
 				}
+
+				// load selected categories (if any)
+				const catsRaw = await AsyncStorage.getItem("@fokuz:lofi_categories");
+				if (catsRaw) {
+					try {
+						setSelectedCategories(JSON.parse(catsRaw));
+					} catch {
+						setSelectedCategories([]);
+					}
+				} else {
+					setSelectedCategories([]);
+				}
 			} catch {
 				setEnabled(true);
 			}
 		})();
 	}, []);
+
+	// compute filtered list based on selectedCategories; if none selected show all
+	const filteredVideos = React.useMemo(() => {
+		if (!selectedCategories || selectedCategories.length === 0) return LOFI_VIDEOS;
+		return LOFI_VIDEOS.filter((v) => v.category.some((c) => selectedCategories.includes(c)));
+	}, [selectedCategories]);
+
+	// ensure currentVideoIndex valid
+	React.useEffect(() => {
+		if (currentVideoIndex >= filteredVideos.length) {
+			setCurrentVideoIndex(0);
+			setPlayerKey((p) => p + 1);
+		}
+	}, [filteredVideos.length, currentVideoIndex]);
 
 	if (enabled === false) return null;
 	if (!isVisible) return null;
@@ -64,7 +91,8 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 		setIsCollapsed(!isCollapsed);
 	};
 
-	const currentVideo = LOFI_VIDEOS[currentVideoIndex];
+
+	const currentVideo = filteredVideos[currentVideoIndex] || LOFI_VIDEOS[0];
 
 	return (
 		<BlockCard style={[styles.container, isCollapsed && styles.collapsed]}>
@@ -192,7 +220,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 
 					{/* Progress indicator */}
 					<View style={styles.progressContainer}>
-						{LOFI_VIDEOS.map((_, index) => (
+						{filteredVideos.map((_, index) => (
 							<View
 								key={index}
 								style={[

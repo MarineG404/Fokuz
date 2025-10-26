@@ -108,6 +108,8 @@
 		"ACTIVE": "Active",
 		"INACTIVE": "Inactive"
 	},
+	"PLAYER_SETTINGS.CATEGORIES": "Categories",
+	"PLAYER_SETTINGS.CATEGORIES_BUTTON": "Choose categories",
 	"TIMER": {
 		"TITLE": "Timer",
 		"SESSION_COUNT": "Session {{count}}",
