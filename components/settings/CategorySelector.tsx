@@ -127,9 +127,9 @@ const styles = StyleSheet.create({
 		justifyContent: "space-between",
 		borderRadius: SPACING.radius,
 		borderWidth: 1,
-		padding: SPACING.medium,
+		padding: SPACING.large,
 	},
-	catText: { fontSize: 18, fontWeight: "600" },
+	catText: { fontSize: 20, fontWeight: "600" },
 	compactChip: {
 		borderRadius: 999,
 		minWidth: "48%",
@@ -138,5 +138,5 @@ const styles = StyleSheet.create({
 		paddingHorizontal: SPACING.medium,
 		marginBottom: SPACING.small,
 	},
-	compactText: { fontSize: 16, fontWeight: "700" },
+	compactText: { fontSize: 14, fontWeight: "600" },
 });

@@ -112,13 +112,15 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		padding: 14,
-		borderRadius: 10,
+		height: 48,
+		paddingHorizontal: SPACING.large,
+		paddingVertical: 0,
+		borderRadius: SPACING.radius,
 		borderWidth: 1,
 	},
 	categoriesButtonText: {
 		fontWeight: "600",
-		fontSize: 16,
+		fontSize: 18,
 	},
 	modalOverlay: {
 		flex: 1,

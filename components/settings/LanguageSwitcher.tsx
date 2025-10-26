@@ -52,13 +52,14 @@ const styles = StyleSheet.create({
 		minWidth: 140,
 	},
 	dropdown: {
-		height: 40,
+		height: 48,
 		borderWidth: 1,
 		borderRadius: SPACING.radius,
-		paddingHorizontal: SPACING.medium,
+		paddingHorizontal: SPACING.large,
+		paddingVertical: 0,
 	},
 	selectedText: {
-		fontSize: 14,
+		fontSize: 18,
 		fontWeight: "600",
 	},
 	listContainer: {

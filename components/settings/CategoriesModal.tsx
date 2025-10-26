@@ -53,19 +53,19 @@ const styles = StyleSheet.create({
 		width: "100%",
 	},
 	title: {
-		fontSize: 20,
+		fontSize: 18,
 		fontWeight: "700",
-		marginBottom: SPACING.large,
+		marginBottom: SPACING.medium,
 	},
 	closeButton: {
-		marginTop: SPACING.large,
-		padding: SPACING.large,
+		marginTop: SPACING.medium,
+		padding: SPACING.medium,
 		borderRadius: SPACING.radius,
 		alignItems: "center",
 	},
 	closeButtonText: {
 		color: "#fff",
 		fontWeight: "600",
-		fontSize: 16,
+		fontSize: 14,
 	},
 });
