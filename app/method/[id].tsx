@@ -6,6 +6,7 @@ import { useThemeColors } from "@/constants/color";
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
 import React, { useEffect } from "react";
@@ -28,11 +29,11 @@ export default function MethodDetails() {
 	const [descDraft, setDescDraft] = React.useState("");
 	React.useEffect(() => {
 		// allow rotation for this screen
-		ScreenOrientation.unlockAsync().catch(() => {});
+		ScreenOrientation.unlockAsync().catch(() => { });
 
 		return () => {
 			// restore portrait lock when leaving
-			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
 		};
 	}, []);
 
@@ -46,9 +47,20 @@ export default function MethodDetails() {
 
 	const { t } = useTranslation();
 
-	useEffect(() => {}, []);
+	// read lofi enabled flag to avoid rendering an empty BlockCard in landscape
+	const [lofiEnabled, setLofiEnabled] = React.useState<boolean | null>(null);
 
-	// Afficher un loader pendant le chargement
+	useEffect(() => {
+		(async () => {
+			try {
+				const raw = await AsyncStorage.getItem("@fokuz:lofi_enabled");
+				setLofiEnabled(raw === null ? true : raw === "true");
+			} catch (e) {
+				setLofiEnabled(true);
+			}
+		})();
+	}, []);
+
 	if (loading) {
 		return (
 			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
@@ -57,7 +69,6 @@ export default function MethodDetails() {
 		);
 	}
 
-	// Si la méthode n'existe pas après le chargement
 	if (!method) {
 		return (
 			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
@@ -75,7 +86,26 @@ export default function MethodDetails() {
 
 	const renderLofiAndTimer = () => {
 		const isLandscape = width > height;
+		const lofiIsEnabled = lofiEnabled === null ? true : lofiEnabled;
 		if (isLandscape) {
+			// If lofi player is disabled, show only the timer in landscape (no empty left column)
+			if (!lofiIsEnabled) {
+				return (
+					<BlockCard>
+						<TimerComponent
+							workDurationMinutes={method.workDuration}
+							breakDurationMinutes={method.breakDuration}
+							methodName={
+								"translationKey" in method
+									? t(`METHODS.${method.translationKey}.NAME`)
+									: method.name
+							}
+							methodId={method.id}
+						/>
+					</BlockCard>
+				);
+			}
+
 			return (
 				<View style={styles.landscapeRow}>
 					<View style={styles.landscapeHalf}>

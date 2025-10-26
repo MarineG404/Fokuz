@@ -5,7 +5,7 @@ export const LOFI_VIDEOS = [
 		title: "lofi hip hop mix 📚 beats to relax/study to (Part 2)",
 		category: ["relax", "study"],
 	},
-	{ id: "M8J9zHyyUYc", title: "lofi beats to do absolutely nothing to", category: ["Other"] },
+	{ id: "M8J9zHyyUYc", title: "lofi beats to do absolutely nothing to", category: ["other"] },
 	{ id: "deRDilpdOnE", title: "Summer in Rio 🏖️", category: ["bossa", "summer lofi"] },
 	{
 		id: "rwLv6YPiGsE",

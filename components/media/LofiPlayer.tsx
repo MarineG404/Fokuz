@@ -1,6 +1,7 @@
 import { LOFI_VIDEOS } from "@/assets/data/lofiVideos";
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
@@ -14,6 +15,7 @@ interface LofiPlayerProps {
 export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 	const COLORS = useThemeColors();
 	const { t } = useTranslation();
+	const [enabled, setEnabled] = useState<boolean | null>(null);
 	const [playing, setPlaying] = useState(false);
 	const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 	const [isCollapsed, setIsCollapsed] = useState(false);
@@ -21,6 +23,23 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [hasError, setHasError] = useState(false);
 
+	// read persisted enabled flag
+	React.useEffect(() => {
+		(async () => {
+			try {
+				const raw = await AsyncStorage.getItem("@fokuz:lofi_enabled");
+				if (raw === null) {
+					setEnabled(true);
+				} else {
+					setEnabled(raw === "true");
+				}
+			} catch (e) {
+				setEnabled(true);
+			}
+		})();
+	}, []);
+
+	if (enabled === false) return null;
 	if (!isVisible) return null;
 
 	const changeVideo = (newIndex: number) => {

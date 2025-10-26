@@ -1,3 +1,4 @@
+import ToggleRow from "@/components/settings/ToggleRow";
 import { useThemeColors } from "@/constants/color";
 import { useWaterReminder } from "@/hooks/useWaterReminder";
 import { Ionicons } from "@expo/vector-icons";
@@ -30,48 +31,15 @@ export function WaterReminderToggle() {
 
 	return (
 		<View style={styles.container}>
-			<Pressable
-				style={[
-					styles.toggleContainer,
-					{
-						backgroundColor: COLORS.card,
-						borderColor: COLORS.border,
-					},
-				]}
-				onPress={handleToggle}
-			>
-				<View style={styles.iconTextContainer}>
-					<Ionicons
-						name="water"
-						size={24}
-						color={isActive ? COLORS.primary : COLORS.textSecondary}
-					/>
-					<View style={styles.textContainer}>
-						<Text style={[styles.title, { color: COLORS.text }]}>{t("WATER_REMINDER.TITLE")}</Text>
-						<Text style={[styles.subtitle, { color: COLORS.textSecondary }]}>
-							{isActive ? t("WATER_REMINDER.STATUS.ACTIVE") : t("WATER_REMINDER.STATUS.INACTIVE")}
-						</Text>
-					</View>
-				</View>
-				<View
-					style={[
-						styles.switch,
-						{
-							backgroundColor: isActive ? COLORS.primary : COLORS.textSecondary,
-						},
-					]}
-				>
-					<View
-						style={[
-							styles.switchThumb,
-							{
-								backgroundColor: COLORS.background,
-								transform: [{ translateX: isActive ? 22 : 2 }],
-							},
-						]}
-					/>
-				</View>
-			</Pressable>
+			<ToggleRow
+				title={t("WATER_REMINDER.TITLE")}
+				subtitle={
+					isActive ? t("WATER_REMINDER.STATUS.ACTIVE") : t("WATER_REMINDER.STATUS.INACTIVE")
+				}
+				iconName={"water"}
+				active={isActive}
+				onToggle={handleToggle}
+			/>
 
 			{isActive && (
 				<Pressable

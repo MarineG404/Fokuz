@@ -102,6 +102,12 @@
 	"LOFI_PLAYER": {
 		"TITLE": "Lofi Focus"
 	},
+	"PLAYER_SETTINGS": "Player Settings",
+	"PLAYER_SETTINGS_ENABLE_PLAYER": "Enable Lofi player",
+	"PLAYER_SETTINGS_STATUS": {
+		"ACTIVE": "Active",
+		"INACTIVE": "Inactive"
+	},
 	"TIMER": {
 		"TITLE": "Timer",
 		"SESSION_COUNT": "Session {{count}}",

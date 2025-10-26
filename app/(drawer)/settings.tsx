@@ -1,7 +1,8 @@
+import { LanguageSwitcher } from "@/components/settings/LanguageSwitcher";
+import PlayerSettingsToggle from "@/components/settings/PlayerSettingsToggle";
+import { ThemeSwitcher } from "@/components/settings/ThemeSwitcher";
+import { WaterReminderToggle } from "@/components/settings/WaterReminderToggle";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
-import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
-import { ThemeSwitcher } from "@/components/ui/ThemeSwitcher";
-import { WaterReminderToggle } from "@/components/ui/WaterReminderToggle";
 import { useThemeColors } from "@/constants/color";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -17,12 +18,17 @@ export default function SettingsScreen() {
 			<HeaderTitle title={t("SETTINGS")} showBack />
 			<Text style={[styles.titlebis, { color: COLORS.secondary }]}> {t("THEME_SETTINGS")}</Text>
 			<ThemeSwitcher />
+
 			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{t("LANGUAGE_SETTINGS")}</Text>
 			<LanguageSwitcher />
+
 			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>
 				{t("WATER_REMINDER_SETTINGS")}
 			</Text>
 			<WaterReminderToggle />
+
+			<Text style={[styles.titlebis, { color: COLORS.secondary }]}>{t("PLAYER_SETTINGS")}</Text>
+			<PlayerSettingsToggle />
 		</SafeAreaView>
 	);
 }
@@ -39,4 +45,12 @@ const styles = StyleSheet.create({
 		marginTop: 8,
 		marginBottom: 8,
 	},
+	row: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		alignItems: "center",
+		marginVertical: 12,
+	},
+	label: { fontSize: 16, fontWeight: "600" },
+	note: { marginTop: 8, fontSize: 14 },
 });

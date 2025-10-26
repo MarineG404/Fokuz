@@ -102,6 +102,12 @@
 	"LOFI_PLAYER": {
 		"TITLE": "Lofi Focus"
 	},
+	"PLAYER_SETTINGS": "Paramètres du lecteur vidéo",
+	"PLAYER_SETTINGS_ENABLE_PLAYER": "Activer le lecteur Lofi",
+	"PLAYER_SETTINGS_STATUS": {
+		"ACTIVE": "Actif",
+		"INACTIVE": "Inactif"
+	},
 	"TIMER": {
 		"TITLE": "Minuteur",
 		"SESSION_COUNT": "Session {{count}}",
