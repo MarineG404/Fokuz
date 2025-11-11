@@ -1,7 +1,7 @@
 import { useSimpleTheme } from "@/contexts/SimpleTheme";
 
 export const light = {
-	primary: "#8151e5",
+	primary: "#a000e1",
 	secondary: "#b29cff",
 	background: "#F5F5F7",
 	cardBackground: "#fff",
@@ -15,7 +15,7 @@ export const light = {
 };
 
 export const dark = {
-	primary: "#9b6bff",
+	primary: "#d18bff",
 	secondary: "#b29cff",
 	background: "#0b0b0d",
 	cardBackground: "#16151aff",
