@@ -4,15 +4,18 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View , ViewStyle } from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import BlockCard from "../ui/BlockCard";
 
+
 interface LofiPlayerProps {
 	isVisible?: boolean;
+	// allow parent to pass styles to the root BlockCard
+	style?: ViewStyle | ViewStyle[];
 }
 
-export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
+export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true, style }) => {
 	const COLORS = useThemeColors();
 	const { t } = useTranslation();
 	const [enabled, setEnabled] = useState<boolean | null>(null);
@@ -94,7 +97,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 	const currentVideo = filteredVideos[currentVideoIndex] || LOFI_VIDEOS[0];
 
 	return (
-		<BlockCard style={[styles.container, isCollapsed && styles.collapsed]}>
+		<BlockCard style={[styles.container, isCollapsed && styles.collapsed, style]}>
 			{/* Header */}
 			<View style={styles.header}>
 				<View style={styles.headerLeft}>

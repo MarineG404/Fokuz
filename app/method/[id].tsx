@@ -109,9 +109,8 @@ export default function MethodDetails() {
 			return (
 				<View style={styles.landscapeRow}>
 					<View style={styles.landscapeHalf}>
-						<BlockCard style={styles.cardFill}>
-							<LofiPlayer />
-						</BlockCard>
+						{/* LofiPlayer already renders a BlockCard internally — pass style to match Timer */}
+						<LofiPlayer style={styles.cardFill} />
 					</View>
 					<View style={styles.landscapeHalf}>
 						<BlockCard style={styles.cardFill}>
