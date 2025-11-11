@@ -31,8 +31,8 @@ const AppButton: React.FC<AppButtonProps> = ({
 			? COLORS.primary
 			: variant === "muted"
 				? // muted button from theme
-					// @ts-ignore newest key exists on COLORS
-					(COLORS as any).mutedButton || "rgba(0,0,0,0.06)"
+				// @ts-ignore newest key exists on COLORS
+				(COLORS as any).mutedButton || "rgba(0,0,0,0.06)"
 				: "transparent";
 
 	const color = variant === "primary" ? "#fff" : COLORS.text;
@@ -42,9 +42,12 @@ const AppButton: React.FC<AppButtonProps> = ({
 			style={[styles.button, { backgroundColor }, style]}
 			onPress={onPress}
 			activeOpacity={activeOpacity}
+			accessibilityRole="button"
+			accessibilityLabel={title || iconName || "button"}
+			accessibilityState={{ disabled: !onPress }}
 		>
 			{iconName ? (
-				<Ionicons name={iconName as any} size={16} color={color} style={styles.icon} />
+				<Ionicons name={iconName as any} size={16} color={color} style={styles.icon} accessible={false} />
 			) : null}
 			{title ? <Text style={[styles.text, { color }, textStyle]}>{title}</Text> : null}
 		</TouchableOpacity>

@@ -113,10 +113,20 @@ export default function HomeScreen() {
 						restantes
 					</Text>
 					<View style={styles.sessionButtonsRow}>
-						<Pressable onPress={handleViewSession} style={styles.sessionViewButton}>
+						<Pressable
+							accessibilityRole="button"
+							accessibilityLabel={t("SESSION.VIEW")}
+							onPress={handleViewSession}
+							style={styles.sessionViewButton}
+						>
 							<Text style={styles.sessionViewText}>{t("SESSION.VIEW")}</Text>
 						</Pressable>
-						<Pressable onPress={handleStopSession} style={styles.sessionStopButton}>
+						<Pressable
+							onPress={handleStopSession}
+							style={styles.sessionStopButton}
+							accessibilityRole="button"
+							accessibilityLabel={t("SESSION.STOP")}
+						>
 							<Text style={styles.sessionStopText}>{t("SESSION.STOP")}</Text>
 						</Pressable>
 					</View>

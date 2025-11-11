@@ -2,6 +2,7 @@ import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React from "react";
+import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
@@ -13,6 +14,7 @@ type Props = {
 export const HeaderTitle = ({ title, showDrawer = false, showBack = false }: Props) => {
 	const navigation = useNavigation();
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 
 	const hasButtons = showDrawer || showBack;
 
@@ -22,14 +24,21 @@ export const HeaderTitle = ({ title, showDrawer = false, showBack = false }: Pro
 				<TouchableOpacity
 					onPress={() => navigation.dispatch(DrawerActions.openDrawer())}
 					style={styles.menuButton}
+					accessibilityRole="button"
+					accessibilityLabel={t("HEADER.OPEN_MENU")}
 				>
-					<Ionicons name="menu" size={26} color={COLORS.primary} />
+					<Ionicons name="menu" size={26} color={COLORS.primary} accessible={false} />
 				</TouchableOpacity>
 			)}
 
 			{showBack && (
-				<TouchableOpacity onPress={() => navigation.goBack()} style={styles.menuButton}>
-					<Ionicons name="arrow-back" size={26} color={COLORS.primary} />
+				<TouchableOpacity
+					onPress={() => navigation.goBack()}
+					style={styles.menuButton}
+					accessibilityRole="button"
+					accessibilityLabel={t("HEADER.GO_BACK")}
+				>
+					<Ionicons name="arrow-back" size={26} color={COLORS.primary} accessible={false} />
 				</TouchableOpacity>
 			)}
 

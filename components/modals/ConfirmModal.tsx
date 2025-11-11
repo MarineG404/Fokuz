@@ -41,6 +41,8 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
 								{ borderColor: COLORS.textSecondary },
 							]}
 							onPress={onCancel}
+							accessibilityRole="button"
+							accessibilityLabel={cancelText || t("MODAL.CONFIRM.CANCEL_BUTTON")}
 						>
 							<Text style={[styles.modalButtonText, { color: COLORS.textSecondary }]}>
 								{cancelText || t("MODAL.CONFIRM.CANCEL_BUTTON")}
@@ -53,6 +55,8 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
 								{ backgroundColor: COLORS.primary },
 							]}
 							onPress={onConfirm}
+							accessibilityRole="button"
+							accessibilityLabel={confirmText || t("MODAL.CONFIRM.CONFIRM_BUTTON")}
 						>
 							<Text style={[styles.modalButtonText, { color: "white" }]}>
 								{confirmText || t("MODAL.CONFIRM.CONFIRM_BUTTON")}

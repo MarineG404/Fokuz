@@ -78,6 +78,8 @@ export default function SettingsScreen() {
 							},
 						]}
 						onPress={() => setShowCategoriesModal(true)}
+						accessibilityRole="button"
+						accessibilityLabel={t("PLAYER_SETTINGS.CATEGORIES_BUTTON")}
 					>
 						<Text style={[styles.categoriesButtonText, { color: COLORS.text }]}>
 							{t("PLAYER_SETTINGS.CATEGORIES_BUTTON")}

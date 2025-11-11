@@ -26,6 +26,9 @@ export default function ToggleRow({ title, subtitle, iconName, active, onToggle 
 					},
 				]}
 				onPress={onToggle}
+				accessibilityRole="switch"
+				accessibilityLabel={title}
+				accessibilityState={{ checked: active }}
 			>
 				<View style={styles.iconTextContainer}>
 					{iconName ? (

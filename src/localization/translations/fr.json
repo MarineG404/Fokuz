@@ -29,6 +29,10 @@
 		}
 	},
 	"SETTINGS": "Paramètres",
+	"HEADER": {
+		"OPEN_MENU": "Ouvrir le menu",
+		"GO_BACK": "Retour"
+	},
 	"HOME": "Accueil",
 	"HISTORY": {
 		"TITLE": "Historique",
@@ -78,7 +82,10 @@
 		"WORK_DURATION": "{{duration}} min",
 		"BREAK": "Pause",
 		"BREAK_DURATION": "{{duration}} min",
-		"NO_DESCRIPTION": "Aucune description disponible"
+		"NO_DESCRIPTION": "Aucune description disponible",
+		"EDIT": "Modifier la méthode",
+		"DELETE": "Supprimer la méthode",
+		"ADD": "Ajouter une méthode"
 	},
 	"SESSION": {
 		"STATUS": {
@@ -105,7 +112,11 @@
 		"AVG_DURATION": "Durée moyenne par session"
 	},
 	"LOFI_PLAYER": {
-		"TITLE": "Lofi Focus"
+		"TITLE": "Lofi Focus",
+		"PREVIOUS": "Vidéo précédente",
+		"NEXT": "Vidéo suivante",
+		"COLLAPSE": "Réduire le lecteur",
+		"EXPAND": "Développer le lecteur"
 	},
 	"PLAYER_SETTINGS": "Paramètres du lecteur vidéo",
 	"PLAYER_SETTINGS_ENABLE_PLAYER": "Activer le lecteur Lofi",
@@ -149,6 +160,19 @@
 			"CANCEL_BUTTON": "Annuler"
 		},
 		"ADD_METHOD": {
+			"CLOSE_BUTTON": "Fermer",
+			"ICON_NAMES": {
+				"REPEAT": "Répéter",
+				"BRIEFCASE": "Travail",
+				"HOURGLASS": "Sablier",
+				"TIMER": "Minuteur",
+				"FLASH": "Éclair",
+				"ROCKET": "Fusée",
+				"STAR": "Étoile",
+				"FLAME": "Flamme",
+				"TROPHY": "Trophée",
+				"FITNESS": "Sport"
+			},
 			"TITLE": "Nouvelle méthode",
 			"NAME_LABEL": "Nom de la méthode *",
 			"NAME_PLACEHOLDER": "Ex: Ma méthode perso",

@@ -117,11 +117,17 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true, style 
 						)}
 					</View>
 				</View>
-				<TouchableOpacity onPress={toggleCollapse}>
+				<TouchableOpacity
+					onPress={toggleCollapse}
+					accessibilityRole="button"
+					accessibilityLabel={isCollapsed ? t("LOFI_PLAYER.EXPAND") : t("LOFI_PLAYER.COLLAPSE")}
+					accessibilityState={{ expanded: !isCollapsed }}
+				>
 					<Ionicons
 						name={isCollapsed ? "chevron-up" : "chevron-down"}
 						size={20}
 						color={COLORS.textSecondary}
+						accessible={false}
 					/>
 				</TouchableOpacity>
 			</View>
@@ -186,6 +192,8 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true, style 
 					{/* Controls */}
 					<View style={styles.controls}>
 						<TouchableOpacity
+							accessibilityRole="button"
+							accessibilityLabel={t("LOFI_PLAYER.PREVIOUS")}
 							style={[
 								styles.controlButton,
 								styles.secondaryButton,
@@ -202,6 +210,8 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true, style 
 						</TouchableOpacity>
 
 						<TouchableOpacity
+							accessibilityRole="button"
+							accessibilityLabel={t("LOFI_PLAYER.NEXT")}
 							style={[
 								styles.controlButton,
 								styles.secondaryButton,

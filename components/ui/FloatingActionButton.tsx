@@ -1,5 +1,6 @@
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
+import { useTranslation } from "react-i18next";
 import { Pressable, StyleSheet } from "react-native";
 
 type FloatingActionButtonProps = {
@@ -9,9 +10,12 @@ type FloatingActionButtonProps = {
 
 export function FloatingActionButton({ onPress, disabled = false }: FloatingActionButtonProps) {
 	const COLORS = useThemeColors();
+	const { t } = useTranslation();
 
 	return (
 		<Pressable
+			accessibilityRole="button"
+			accessibilityLabel={t("METHOD.ADD")}
 			onPress={disabled ? undefined : onPress}
 			style={[
 				styles.fab,

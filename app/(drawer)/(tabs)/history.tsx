@@ -90,6 +90,8 @@ export default function HistoryScreen() {
 				},
 			]}
 			onPress={() => setFilter(type)}
+			accessibilityRole="button"
+			accessibilityLabel={label}
 		>
 			<Text
 				style={[
@@ -181,10 +183,12 @@ export default function HistoryScreen() {
 				<TouchableOpacity
 					style={[styles.deleteButton, { borderColor: COLORS.primary }]}
 					onPress={handleClearHistory}
+					accessibilityRole="button"
+					accessibilityLabel={t("HISTORY.DELETE_BUTTON")}
 				>
-					<Ionicons name="trash-outline" size={18} color={COLORS.textSecondary} />
+					<Ionicons name="trash-outline" size={18} color={COLORS.textSecondary} accessible={false} />
 					<Text style={[styles.deleteButtonText, { color: COLORS.textSecondary }]}>
-						Effacer l&apos;historique
+						{t("HISTORY.DELETE_BUTTON")}
 					</Text>
 				</TouchableOpacity>
 
@@ -253,9 +257,7 @@ const styles = StyleSheet.create({
 		borderRadius: 20,
 		borderWidth: 1,
 	},
-	filterButtonActive: {
-		// Style dynamique appliqué via backgroundColor
-	},
+	filterButtonActive: {},
 	filterButtonText: {
 		fontSize: 14,
 		fontWeight: "500",

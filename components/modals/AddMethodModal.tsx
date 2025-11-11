@@ -42,6 +42,20 @@ export function AddMethodModal({ visible, onClose, onAdd }: AddMethodModalProps)
 	const [breakDuration, setBreakDuration] = useState("");
 	const [selectedIcon, setSelectedIcon] = useState<keyof typeof Ionicons.glyphMap>("timer-outline");
 
+	// translation keys for icon names (used for accessibilityLabel)
+	const ICON_LABEL_KEYS: Record<string, string> = {
+		"repeat-outline": "MODAL.ADD_METHOD.ICON_NAMES.REPEAT",
+		"briefcase-outline": "MODAL.ADD_METHOD.ICON_NAMES.BRIEFCASE",
+		"hourglass-outline": "MODAL.ADD_METHOD.ICON_NAMES.HOURGLASS",
+		"timer-outline": "MODAL.ADD_METHOD.ICON_NAMES.TIMER",
+		"flash-outline": "MODAL.ADD_METHOD.ICON_NAMES.FLASH",
+		"rocket-outline": "MODAL.ADD_METHOD.ICON_NAMES.ROCKET",
+		"star-outline": "MODAL.ADD_METHOD.ICON_NAMES.STAR",
+		"flame-outline": "MODAL.ADD_METHOD.ICON_NAMES.FLAME",
+		"trophy-outline": "MODAL.ADD_METHOD.ICON_NAMES.TROPHY",
+		"fitness-outline": "MODAL.ADD_METHOD.ICON_NAMES.FITNESS",
+	};
+
 	const resetForm = () => {
 		setName("");
 		setDescription("");
@@ -92,8 +106,13 @@ export function AddMethodModal({ visible, onClose, onAdd }: AddMethodModalProps)
 						<Text style={[styles.title, { color: COLORS.text }]}>
 							{t("MODAL.ADD_METHOD.TITLE")}
 						</Text>
-						<Pressable onPress={onClose} style={styles.closeButton}>
-							<Ionicons name="close" size={24} color={COLORS.text} />
+						<Pressable
+							onPress={onClose}
+							style={styles.closeButton}
+							accessibilityRole="button"
+							accessibilityLabel={t("MODAL.ADD_METHOD.CLOSE_BUTTON")}
+						>
+							<Ionicons name="close" size={24} color={COLORS.text} accessible={false} />
 						</Pressable>
 					</View>
 
@@ -204,11 +223,15 @@ export function AddMethodModal({ visible, onClose, onAdd }: AddMethodModalProps)
 												borderColor: selectedIcon === icon ? COLORS.primary : COLORS.border,
 											},
 										]}
+										accessibilityRole="button"
+										accessibilityLabel={t(ICON_LABEL_KEYS[icon] || "MODAL.ADD_METHOD.ICON_LABEL")}
+										accessibilityState={{ selected: selectedIcon === icon }}
 									>
 										<Ionicons
 											name={icon}
 											size={28}
 											color={selectedIcon === icon ? "#FFFFFF" : COLORS.text}
+											accessible={false}
 										/>
 									</Pressable>
 								))}
@@ -218,7 +241,12 @@ export function AddMethodModal({ visible, onClose, onAdd }: AddMethodModalProps)
 
 					{/* Boutons d'action */}
 					<View style={styles.footer}>
-						<Pressable onPress={onClose} style={[styles.button, { backgroundColor: COLORS.card }]}>
+						<Pressable
+							onPress={onClose}
+							style={[styles.button, { backgroundColor: COLORS.card }]}
+							accessibilityRole="button"
+							accessibilityLabel={t("MODAL.ADD_METHOD.CANCEL_BUTTON")}
+						>
 							<Text style={[styles.buttonText, { color: COLORS.text }]}>
 								{t("MODAL.ADD_METHOD.CANCEL_BUTTON")}
 							</Text>
@@ -226,6 +254,8 @@ export function AddMethodModal({ visible, onClose, onAdd }: AddMethodModalProps)
 						<Pressable
 							onPress={handleAdd}
 							style={[styles.button, { backgroundColor: COLORS.primary }]}
+							accessibilityRole="button"
+							accessibilityLabel={t("MODAL.ADD_METHOD.ADD_BUTTON")}
 						>
 							<Text style={[styles.buttonText, { color: "#FFFFFF" }]}>
 								{t("MODAL.ADD_METHOD.ADD_BUTTON")}

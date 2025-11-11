@@ -29,6 +29,10 @@
 		}
 	},
 	"SETTINGS": "Settings",
+	"HEADER": {
+		"OPEN_MENU": "Open menu",
+		"GO_BACK": "Go back"
+	},
 	"HOME": "Home",
 	"HISTORY": {
 		"TITLE": "History",
@@ -78,7 +82,10 @@
 		"WORK_DURATION": "{{duration}} min",
 		"BREAK": "Break",
 		"BREAK_DURATION": "{{duration}} min",
-		"NO_DESCRIPTION": "No description available"
+		"NO_DESCRIPTION": "No description available",
+		"EDIT": "Edit method",
+		"DELETE": "Delete method",
+		"ADD": "Add method"
 	},
 	"SESSION": {
 		"STATUS": {
@@ -105,7 +112,11 @@
 		"AVG_DURATION": "Average duration per session"
 	},
 	"LOFI_PLAYER": {
-		"TITLE": "Lofi Focus"
+		"TITLE": "Lofi Focus",
+		"PREVIOUS": "Previous video",
+		"NEXT": "Next video",
+		"COLLAPSE": "Collapse player",
+		"EXPAND": "Expand player"
 	},
 	"PLAYER_SETTINGS": "Player Settings",
 	"PLAYER_SETTINGS_ENABLE_PLAYER": "Enable Lofi player",
@@ -153,6 +164,19 @@
 			"CANCEL_BUTTON": "Cancel"
 		},
 		"ADD_METHOD": {
+			"CLOSE_BUTTON": "Close",
+			"ICON_NAMES": {
+				"REPEAT": "Repeat",
+				"BRIEFCASE": "Work",
+				"HOURGLASS": "Hourglass",
+				"TIMER": "Timer",
+				"FLASH": "Flash",
+				"ROCKET": "Rocket",
+				"STAR": "Star",
+				"FLAME": "Flame",
+				"TROPHY": "Trophy",
+				"FITNESS": "Fitness"
+			},
 			"TITLE": "New method",
 			"NAME_LABEL": "Method name *",
 			"NAME_PLACEHOLDER": "Ex: My custom method",

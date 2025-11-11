@@ -69,7 +69,14 @@ export const MethodCard = ({
 	}
 
 	return (
-		<TouchableOpacity onPress={handlePress} disabled={disabled} activeOpacity={disabled ? 1 : 0.7}>
+		<TouchableOpacity
+			onPress={handlePress}
+			disabled={disabled}
+			activeOpacity={disabled ? 1 : 0.7}
+			accessibilityRole="button"
+			accessibilityLabel={method.name}
+			accessibilityState={{ disabled }}
+		>
 			<BlockCard style={[styles.card, disabled && styles.cardDisabled]}>
 				<Ionicons
 					name={method.icon}
@@ -89,6 +96,8 @@ export const MethodCard = ({
 				{isCustomMethod && (
 					<View style={styles.actionsContainer}>
 						<Pressable
+							accessibilityRole="button"
+							accessibilityLabel={t("METHOD.EDIT")}
 							onPress={handleEdit}
 							disabled={disabled}
 							style={[
@@ -101,6 +110,8 @@ export const MethodCard = ({
 							<Ionicons name="pencil-outline" size={20} color={COLORS.textSecondary} />
 						</Pressable>
 						<Pressable
+							accessibilityRole="button"
+							accessibilityLabel={t("METHOD.DELETE")}
 							onPress={handleDelete}
 							disabled={disabled}
 							style={[

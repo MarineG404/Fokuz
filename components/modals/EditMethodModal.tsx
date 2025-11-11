@@ -43,6 +43,19 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 	const [breakDuration, setBreakDuration] = useState("");
 	const [selectedIcon, setSelectedIcon] = useState<keyof typeof Ionicons.glyphMap>("timer-outline");
 
+	const ICON_LABEL_KEYS: Record<string, string> = {
+		"repeat-outline": "MODAL.ADD_METHOD.ICON_NAMES.REPEAT",
+		"briefcase-outline": "MODAL.ADD_METHOD.ICON_NAMES.BRIEFCASE",
+		"hourglass-outline": "MODAL.ADD_METHOD.ICON_NAMES.HOURGLASS",
+		"timer-outline": "MODAL.ADD_METHOD.ICON_NAMES.TIMER",
+		"flash-outline": "MODAL.ADD_METHOD.ICON_NAMES.FLASH",
+		"rocket-outline": "MODAL.ADD_METHOD.ICON_NAMES.ROCKET",
+		"star-outline": "MODAL.ADD_METHOD.ICON_NAMES.STAR",
+		"flame-outline": "MODAL.ADD_METHOD.ICON_NAMES.FLAME",
+		"trophy-outline": "MODAL.ADD_METHOD.ICON_NAMES.TROPHY",
+		"fitness-outline": "MODAL.ADD_METHOD.ICON_NAMES.FITNESS",
+	};
+
 	// Charger les valeurs de la méthode quand la modal s'ouvre
 	useEffect(() => {
 		if (visible && method) {
@@ -98,8 +111,13 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 				<View style={[styles.modalContainer, { backgroundColor: COLORS.background }]}>
 					<View style={styles.header}>
 						<Text style={[styles.title, { color: COLORS.text }]}>{t("EDIT_METHOD.TITLE")}</Text>
-						<Pressable onPress={onClose} style={styles.closeButton}>
-							<Ionicons name="close" size={24} color={COLORS.text} />
+						<Pressable
+							onPress={onClose}
+							style={styles.closeButton}
+							accessibilityRole="button"
+							accessibilityLabel={t("MODAL.ADD_METHOD.CLOSE_BUTTON")}
+						>
+							<Ionicons name="close" size={24} color={COLORS.text} accessible={false} />
 						</Pressable>
 					</View>
 
@@ -210,11 +228,15 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 												borderColor: selectedIcon === icon ? COLORS.primary : COLORS.border,
 											},
 										]}
+										accessibilityRole="button"
+										accessibilityLabel={t(ICON_LABEL_KEYS[icon] || "MODAL.ADD_METHOD.ICON_LABEL")}
+										accessibilityState={{ selected: selectedIcon === icon }}
 									>
 										<Ionicons
 											name={icon}
 											size={28}
 											color={selectedIcon === icon ? "#FFFFFF" : COLORS.text}
+											accessible={false}
 										/>
 									</Pressable>
 								))}
@@ -224,7 +246,12 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 
 					{/* Boutons d'action */}
 					<View style={styles.footer}>
-						<Pressable onPress={onClose} style={[styles.button, { backgroundColor: COLORS.card }]}>
+						<Pressable
+							onPress={onClose}
+							style={[styles.button, { backgroundColor: COLORS.card }]}
+							accessibilityRole="button"
+							accessibilityLabel={t("EDIT_METHOD.CANCEL")}
+						>
 							<Text style={[styles.buttonText, { color: COLORS.text }]}>
 								{t("EDIT_METHOD.CANCEL")}
 							</Text>
@@ -232,6 +259,8 @@ export function EditMethodModal({ visible, onClose, onUpdate, method }: EditMeth
 						<Pressable
 							onPress={handleUpdate}
 							style={[styles.button, { backgroundColor: COLORS.primary }]}
+							accessibilityRole="button"
+							accessibilityLabel={t("EDIT_METHOD.SAVE")}
 						>
 							<Text style={[styles.buttonText, { color: "#FFFFFF" }]}>{t("EDIT_METHOD.SAVE")}</Text>
 						</Pressable>
