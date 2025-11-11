@@ -4,10 +4,16 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { ActivityIndicator, StyleSheet, Text, TouchableOpacity, View , ViewStyle } from "react-native";
+import {
+	ActivityIndicator,
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+	ViewStyle,
+} from "react-native";
 import YoutubePlayer from "react-native-youtube-iframe";
 import BlockCard from "../ui/BlockCard";
-
 
 interface LofiPlayerProps {
 	isVisible?: boolean;
