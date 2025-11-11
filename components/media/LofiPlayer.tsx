@@ -191,15 +191,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 								color={isLoading ? COLORS.textSecondary : COLORS.primary}
 							/>
 						</TouchableOpacity>
-
-						<TouchableOpacity
-							style={[styles.controlButton, { backgroundColor: COLORS.primary }]}
-							onPress={() => setPlaying(!playing)}
-							disabled={isLoading || hasError}
-						>
-							<Ionicons name={playing ? "pause" : "play"} size={24} color="#FFFFFF" />
-						</TouchableOpacity>
-
+						
 						<TouchableOpacity
 							style={[
 								styles.controlButton,
