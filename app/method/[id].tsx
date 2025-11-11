@@ -310,7 +310,6 @@ const styles = StyleSheet.create({
 	container: {
 		flex: 1,
 		paddingHorizontal: 16,
-		paddingTop: 16,
 	},
 	content: {
 		flex: 1,
@@ -333,10 +332,8 @@ const styles = StyleSheet.create({
 	},
 	durationItem: {
 		alignItems: "center",
-		paddingLeft: 16,
 		borderLeftWidth: 4,
 		flex: 1,
-		marginHorizontal: 8,
 	},
 	durationLabel: {
 		fontSize: 14,
@@ -350,7 +347,6 @@ const styles = StyleSheet.create({
 	landscapeRow: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		alignItems: "flex-start",
 		gap: 16,
 		marginBottom: 16,
 	},
@@ -361,7 +357,6 @@ const styles = StyleSheet.create({
 	},
 	cardFill: {
 		flex: 1,
-		paddingVertical: 12,
 		justifyContent: "center",
 	},
 	errorText: {
