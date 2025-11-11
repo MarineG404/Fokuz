@@ -122,12 +122,6 @@ export const TimerComponent: React.FC<TimerComponentProps> = ({
 				</Animated.View>
 			) : (
 				<Animated.View style={[styles.readyContainer, { opacity: fadeAnim }]}>
-					<Ionicons
-						name={timer.sessionCount > 0 ? "checkmark-circle" : "play-circle"}
-						size={48}
-						color={COLORS.primary}
-						style={styles.readyIcon}
-					/>
 					<Text style={[styles.readyText, { color: COLORS.text }]}>
 						{timer.sessionCount > 0 ? t("TIMER.STATUS.COMPLETED") : t("TIMER.STATUS.READY")}
 					</Text>

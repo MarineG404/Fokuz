@@ -191,7 +191,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true }) => {
 								color={isLoading ? COLORS.textSecondary : COLORS.primary}
 							/>
 						</TouchableOpacity>
-						
+
 						<TouchableOpacity
 							style={[
 								styles.controlButton,
