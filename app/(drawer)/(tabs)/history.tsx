@@ -186,7 +186,12 @@ export default function HistoryScreen() {
 					accessibilityRole="button"
 					accessibilityLabel={t("HISTORY.DELETE_BUTTON")}
 				>
-					<Ionicons name="trash-outline" size={18} color={COLORS.textSecondary} accessible={false} />
+					<Ionicons
+						name="trash-outline"
+						size={18}
+						color={COLORS.textSecondary}
+						accessible={false}
+					/>
 					<Text style={[styles.deleteButtonText, { color: COLORS.textSecondary }]}>
 						{t("HISTORY.DELETE_BUTTON")}
 					</Text>
