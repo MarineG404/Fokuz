@@ -1,13 +1,13 @@
 import { useSimpleTheme } from "@/contexts/SimpleTheme";
 
 export const light = {
-	primary: "#9b6bff",
+	primary: "#8151e5",
 	secondary: "#b29cff",
 	background: "#F5F5F7",
 	cardBackground: "#fff",
 	card: "#fff",
 	text: "#000",
-	textSecondary: "#757575ff",
+	textSecondary: "#707070",
 	border: "#E5E7EB",
 	workColor: "#4F46E5", // Bleu indigo plus intense
 	breakColor: "#E11D48", // Rose plus vif et contrasté
