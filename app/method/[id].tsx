@@ -195,10 +195,23 @@ export default function MethodDetails() {
 										setDescDraft(method.description || "");
 										setEditDescModalVisible(true);
 									}}
-									style={{ marginLeft: 8, padding: 4 }}
+									style={{
+										marginLeft: 8,
+										width: 44,
+										height: 44,
+										alignItems: "center",
+										justifyContent: "center",
+									}}
 									hitSlop={8}
+									accessibilityRole="button"
+									accessibilityLabel={t("EDIT_METHOD.EDIT_DESCRIPTION")}
 								>
-									<Ionicons name="pencil-outline" size={20} color={COLORS.textSecondary} />
+									<Ionicons
+										name="pencil-outline"
+										size={20}
+										color={COLORS.textSecondary}
+										accessible={false}
+									/>
 								</Pressable>
 							)}
 						</View>

@@ -84,7 +84,12 @@ export default function SettingsScreen() {
 						<Text style={[styles.categoriesButtonText, { color: COLORS.text }]}>
 							{t("PLAYER_SETTINGS.CATEGORIES_BUTTON")}
 						</Text>
-						<Ionicons name="chevron-forward" size={18} color={COLORS.textSecondary} />
+						<Ionicons
+							name="chevron-forward"
+							size={18}
+							color={COLORS.textSecondary}
+							accessible={false}
+						/>
 					</Pressable>
 				)}
 			</ScrollView>

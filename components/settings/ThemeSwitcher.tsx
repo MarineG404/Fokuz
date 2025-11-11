@@ -26,6 +26,9 @@ export const ThemeSwitcher = () => {
 					key={o.key}
 					onPress={() => setMode(o.key)}
 					style={[styles.option, mode === o.key && { borderColor: COLORS.primary }]}
+					accessibilityRole="button"
+					accessibilityLabel={t(o.labelKey)}
+					accessibilityState={{ selected: mode === o.key }}
 				>
 					<View style={[styles.radio, mode === o.key && { backgroundColor: COLORS.primary }]} />
 					<Text style={[styles.label, { color: COLORS.text }]}>{t(o.labelKey)}</Text>
@@ -46,6 +49,8 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		borderColor: "transparent",
 		padding: SPACING.small,
+		paddingHorizontal: SPACING.medium,
+		minHeight: 44,
 		borderRadius: SPACING.radius,
 	},
 	radio: {

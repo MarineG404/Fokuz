@@ -171,13 +171,18 @@ export default function HistoryScreen() {
 					/>
 				}
 			>
-				{/* Filtres */}
-				<View style={styles.filtersRow}>
+				{/* Filtres (slider horizontal pour petits écrans) */}
+				<ScrollView
+					horizontal
+					showsHorizontalScrollIndicator={false}
+					contentContainerStyle={styles.filtersContainer}
+					style={styles.filtersScroll}
+				>
 					<FilterButton type="all" label={t("FILTERS.ALL")} />
 					<FilterButton type="today" label={t("FILTERS.TODAY")} />
 					<FilterButton type="week" label={t("FILTERS.WEEK")} />
 					<FilterButton type="month" label={t("FILTERS.MONTH")} />
-				</View>
+				</ScrollView>
 
 				{/* Bouton supprimer */}
 				<TouchableOpacity
@@ -256,16 +261,29 @@ const styles = StyleSheet.create({
 		marginBottom: 12,
 		paddingHorizontal: 4,
 	},
+	filtersContainer: {
+		flexDirection: "row",
+		alignItems: "center",
+		paddingHorizontal: 4,
+		paddingVertical: 6,
+	},
+	filtersScroll: {
+		marginBottom: 12,
+	},
 	filterButton: {
 		paddingHorizontal: 16,
 		paddingVertical: 8,
+		minHeight: 44,
 		borderRadius: 20,
 		borderWidth: 1,
+		marginRight: 8,
+		justifyContent: "center",
 	},
 	filterButtonActive: {},
 	filterButtonText: {
 		fontSize: 14,
 		fontWeight: "500",
+		textAlign: "center",
 	},
 	deleteButton: {
 		flexDirection: "row",
@@ -276,6 +294,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 16,
 		borderRadius: 12,
 		borderWidth: 1,
+		minHeight: 44,
 		marginBottom: 20,
 		marginHorizontal: 4,
 	},

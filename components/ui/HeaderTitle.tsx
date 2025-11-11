@@ -65,9 +65,13 @@ const styles = StyleSheet.create({
 	},
 	menuButton: {
 		marginRight: 12,
+		width: 44,
+		height: 44,
 		padding: 6,
 		borderRadius: 8,
 		zIndex: 2,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	headerTitle: {
 		fontWeight: "700",
@@ -85,7 +89,7 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	headerRowSimple: {
-		minHeight: 38, // Même hauteur que les boutons (26 + 6*2 padding)
+		minHeight: 44,
 		justifyContent: "center",
 	},
 });

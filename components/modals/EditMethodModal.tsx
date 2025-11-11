@@ -295,7 +295,11 @@ const styles = StyleSheet.create({
 		fontWeight: "700",
 	},
 	closeButton: {
-		padding: 4,
+		width: 44,
+		height: 44,
+		alignItems: "center",
+		justifyContent: "center",
+		padding: 8,
 	},
 	content: {
 		paddingHorizontal: 20,

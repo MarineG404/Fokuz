@@ -83,6 +83,7 @@ export const MethodCard = ({
 					size={40}
 					color={disabled ? COLORS.textSecondary : COLORS.secondary}
 					style={[styles.icon, disabled && styles.iconDisabled]}
+					accessible={false}
 				/>
 				<View style={styles.textContainer}>
 					<Text style={[styles.name, { color: disabled ? COLORS.textSecondary : COLORS.text }]}>
@@ -107,7 +108,12 @@ export const MethodCard = ({
 							]}
 							hitSlop={8}
 						>
-							<Ionicons name="pencil-outline" size={20} color={COLORS.textSecondary} />
+							<Ionicons
+								name="pencil-outline"
+								size={20}
+								color={COLORS.textSecondary}
+								accessible={false}
+							/>
 						</Pressable>
 						<Pressable
 							accessibilityRole="button"
@@ -121,7 +127,12 @@ export const MethodCard = ({
 							]}
 							hitSlop={8}
 						>
-							<Ionicons name="trash-outline" size={20} color={COLORS.textSecondary} />
+							<Ionicons
+								name="trash-outline"
+								size={20}
+								color={COLORS.textSecondary}
+								accessible={false}
+							/>
 						</Pressable>
 					</View>
 				)}
@@ -171,8 +182,11 @@ const styles = StyleSheet.create({
 		gap: 8,
 	},
 	actionButton: {
-		padding: 8,
+		width: 44,
+		height: 44,
 		borderRadius: 8,
+		alignItems: "center",
+		justifyContent: "center",
 	},
 	actionButtonDisabled: {
 		opacity: 0.5,

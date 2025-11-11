@@ -51,8 +51,10 @@ export function WaterReminderToggle() {
 						},
 					]}
 					onPress={handleTest}
+					accessibilityRole="button"
+					accessibilityLabel={t("WATER_REMINDER.TEST_BUTTON")}
 				>
-					<Ionicons name="flask" size={16} color="#FFFFFF" />
+					<Ionicons name="flask" size={16} color="#FFFFFF" accessible={false} />
 					<Text style={styles.testButtonText}>{t("WATER_REMINDER.TEST_BUTTON")}</Text>
 				</Pressable>
 			)}
@@ -108,6 +110,7 @@ const styles = StyleSheet.create({
 		paddingVertical: SPACING.small,
 		paddingHorizontal: SPACING.large,
 		borderRadius: SPACING.radius,
+		minHeight: 44,
 	},
 	testButtonText: {
 		color: "#FFFFFF",

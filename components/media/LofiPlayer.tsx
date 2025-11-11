@@ -107,7 +107,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true, style 
 			{/* Header */}
 			<View style={styles.header}>
 				<View style={styles.headerLeft}>
-					<Ionicons name="musical-notes" size={20} color={COLORS.primary} />
+					<Ionicons name="musical-notes" size={20} color={COLORS.primary} accessible={false} />
 					<View style={styles.titleContainer}>
 						<Text style={[styles.title, { color: COLORS.text }]}>{t("LOFI_PLAYER.TITLE")}</Text>
 						{!isCollapsed && (
@@ -119,6 +119,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true, style 
 				</View>
 				<TouchableOpacity
 					onPress={toggleCollapse}
+					style={styles.collapseButton}
 					accessibilityRole="button"
 					accessibilityLabel={isCollapsed ? t("LOFI_PLAYER.EXPAND") : t("LOFI_PLAYER.COLLAPSE")}
 					accessibilityState={{ expanded: !isCollapsed }}
@@ -336,6 +337,13 @@ const styles = StyleSheet.create({
 		borderRadius: 24,
 		justifyContent: "center",
 		alignItems: "center",
+	},
+	collapseButton: {
+		width: 44,
+		height: 44,
+		alignItems: "center",
+		justifyContent: "center",
+		borderRadius: 8,
 	},
 	secondaryButton: {
 		backgroundColor: "transparent",
