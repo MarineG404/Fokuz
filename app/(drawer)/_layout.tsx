@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
 import { Drawer } from "expo-router/drawer";
 import React from "react";
@@ -17,7 +18,7 @@ export default function DrawerLayout() {
 				},
 				drawerActiveTintColor: COLORS.primary,
 				drawerInactiveTintColor: COLORS.textSecondary,
-				drawerLabelStyle: { fontSize: 16 },
+				drawerLabelStyle: { fontSize: TYPOGRAPHY.sizes.base },
 			}}
 		>
 			<Drawer.Screen name="(tabs)" options={{ title: t("HOME") }} />

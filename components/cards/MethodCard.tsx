@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import { Method } from "@/assets/data/methods";
 import { useThemeColors } from "@/constants/color";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
@@ -170,12 +171,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	name: {
-		fontSize: 18,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.md,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 4,
 	},
 	description: {
-		fontSize: 14,
+		fontSize: TYPOGRAPHY.sizes.sm,
 	},
 	actionsContainer: {
 		flexDirection: "row",

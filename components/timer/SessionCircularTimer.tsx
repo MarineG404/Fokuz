@@ -1,4 +1,5 @@
 import { useThemeColors } from "@/constants/color";
+import TYPOGRAPHY from '@/constants/typography';
 import { TimerPhase } from "@/utils/useTimer";
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -210,17 +211,16 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	phaseText: {
-		fontSize: 18,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.md,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 12,
 		textAlign: "center",
 		letterSpacing: 0.5,
 		textTransform: "uppercase",
 	},
 	timerDisplay: {
-		fontSize: 36,
-		fontWeight: "700",
-		fontFamily: "monospace",
+		fontSize: TYPOGRAPHY.sizes['3xl'],
+		fontWeight: TYPOGRAPHY.weights.bold,
 		textAlign: "center",
 		letterSpacing: 1,
 	},

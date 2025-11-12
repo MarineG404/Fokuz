@@ -4,6 +4,8 @@ import { AddMethodModal } from "@/components/modals/AddMethodModal";
 import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from '@/constants/typography';
 import { useTimerContext } from "@/contexts/TimerContext";
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
@@ -175,8 +177,8 @@ const styles = StyleSheet.create({
 		paddingTop: 16,
 	},
 	title: {
-		fontSize: 24,
-		fontWeight: "700",
+		fontSize: TYPOGRAPHY.sizes.xl,
+		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: 20,
 		textAlign: "center",
 	},
@@ -186,7 +188,6 @@ const styles = StyleSheet.create({
 	sessionBlock: {
 		marginBottom: 16,
 		padding: 20,
-		backgroundColor: "#4CAF50",
 		borderRadius: 16,
 		alignItems: "center",
 		shadowColor: "#000",
@@ -198,20 +199,19 @@ const styles = StyleSheet.create({
 	sessionTitle: {
 		color: "#FFFFFF",
 		fontWeight: "bold",
-		fontSize: 16,
+		fontSize: TYPOGRAPHY.sizes.base,
 		marginBottom: 8,
-		textTransform: "uppercase",
 		letterSpacing: 1,
 	},
 	sessionMethod: {
 		color: "#FFFFFF",
-		fontSize: 20,
-		fontWeight: "bold",
+		fontSize: TYPOGRAPHY.sizes.lg,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 8,
 	},
 	sessionPhase: {
 		color: "rgba(255, 255, 255, 0.9)",
-		fontSize: 16,
+		fontSize: TYPOGRAPHY.sizes.base,
 		marginBottom: 12,
 	},
 	sessionButtonsRow: {
@@ -229,8 +229,8 @@ const styles = StyleSheet.create({
 	},
 	sessionViewText: {
 		color: "#4CAF50",
-		fontWeight: "bold",
-		fontSize: 16,
+		fontWeight: TYPOGRAPHY.weights.bold,
+		fontSize: TYPOGRAPHY.sizes.base,
 	},
 	sessionStopButton: {
 		backgroundColor: "rgba(255, 255, 255, 0.2)",
@@ -242,19 +242,19 @@ const styles = StyleSheet.create({
 	},
 	sessionStopText: {
 		color: "#FFFFFF",
-		fontWeight: "bold",
-		fontSize: 16,
+		fontWeight: TYPOGRAPHY.weights.bold,
+		fontSize: TYPOGRAPHY.sizes.base,
 	},
 	infoBlock: {
 		marginBottom: 16,
 		padding: 12,
 		backgroundColor: "rgba(76, 175, 80, 0.1)",
-		borderRadius: 12,
+		borderRadius: SPACING.radius,
 		borderLeftWidth: 4,
 		borderLeftColor: "#4CAF50",
 	},
 	infoText: {
-		fontSize: 14,
+		fontSize: TYPOGRAPHY.sizes.sm,
 		textAlign: "center",
 	},
 	headerRow: {
@@ -266,12 +266,12 @@ const styles = StyleSheet.create({
 	menuButton: {
 		marginRight: 12,
 		padding: 6,
-		borderRadius: 8,
+		borderRadius: SPACING.radius,
 	},
 	headerTitle: {
-		fontWeight: "700",
+		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: 0,
-		lineHeight: 26,
+		lineHeight: TYPOGRAPHY.sizes.base,
 	},
 	headerTitleCentered: {
 		position: "absolute",

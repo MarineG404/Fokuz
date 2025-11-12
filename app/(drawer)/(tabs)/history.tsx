@@ -2,6 +2,8 @@ import { SessionCard } from "@/components/cards/SessionCard";
 import { StatsCard } from "@/components/cards/StatsCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from '@/constants/typography';
 import { SessionRecord } from "@/types/session";
 import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
@@ -281,8 +283,8 @@ const styles = StyleSheet.create({
 	},
 	filterButtonActive: {},
 	filterButtonText: {
-		fontSize: 14,
-		fontWeight: "500",
+		fontSize: TYPOGRAPHY.sizes.sm,
+		fontWeight: TYPOGRAPHY.weights.medium,
 		textAlign: "center",
 	},
 	deleteButton: {
@@ -292,14 +294,14 @@ const styles = StyleSheet.create({
 		gap: 8,
 		paddingVertical: 10,
 		paddingHorizontal: 16,
-		borderRadius: 12,
+		borderRadius: SPACING.radius,
 		borderWidth: 1,
 		minHeight: 44,
 		marginBottom: 20,
 		marginHorizontal: 4,
 	},
 	deleteButtonText: {
-		fontSize: 14,
+		fontSize: TYPOGRAPHY.sizes.sm,
 		fontWeight: "500",
 	},
 	emptyState: {
@@ -312,22 +314,22 @@ const styles = StyleSheet.create({
 		marginBottom: 16,
 	},
 	emptyTitle: {
-		fontSize: 18,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.md,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 8,
 		textAlign: "center",
 	},
 	emptySubtitle: {
-		fontSize: 14,
+		fontSize: TYPOGRAPHY.sizes.sm,
 		textAlign: "center",
-		lineHeight: 20,
+		lineHeight: TYPOGRAPHY.sizes.base,
 	},
 	dateGroup: {
 		marginBottom: 24,
 	},
 	dateHeader: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 12,
 		marginLeft: 4,
 		textTransform: "capitalize",

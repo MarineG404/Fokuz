@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import type { Method } from "@/assets/data/methods";
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
@@ -291,8 +292,8 @@ const styles = StyleSheet.create({
 		paddingBottom: 16,
 	},
 	title: {
-		fontSize: 22,
-		fontWeight: "700",
+		fontSize: TYPOGRAPHY.sizes.lg,
+		fontWeight: TYPOGRAPHY.weights.bold,
 	},
 	closeButton: {
 		width: 44,
@@ -309,15 +310,15 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	label: {
-		fontSize: 14,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.sm,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 8,
 	},
 	input: {
 		borderWidth: 1,
 		borderRadius: 12,
 		padding: 14,
-		fontSize: 16,
+		fontSize: TYPOGRAPHY.sizes.base,
 	},
 	textArea: {
 		minHeight: 80,
@@ -350,7 +351,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	buttonText: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 });

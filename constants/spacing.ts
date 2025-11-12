@@ -7,6 +7,7 @@ export const SPACING = {
 	large: 16,
 	xlarge: 24,
 	radius: 10,
+	largeRadius: 24,
 };
 
 export default SPACING;

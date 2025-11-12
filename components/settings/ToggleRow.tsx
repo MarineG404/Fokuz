@@ -1,5 +1,6 @@
 import { useThemeColors } from "@/constants/color";
 import { SPACING } from "@/constants/spacing";
+import TYPOGRAPHY from '@/constants/typography';
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
@@ -89,17 +90,17 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	title: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 2,
 	},
 	subtitle: {
-		fontSize: 14,
+		fontSize: TYPOGRAPHY.sizes.sm,
 	},
 	switch: {
 		width: 50,
 		height: 30,
-		borderRadius: 15,
+		borderRadius: SPACING.radius,
 		justifyContent: "center",
 		position: "relative",
 	},

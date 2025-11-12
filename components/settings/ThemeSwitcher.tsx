@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
 import { SPACING } from "@/constants/spacing";
 import { useSimpleTheme } from "@/contexts/SimpleTheme";
@@ -62,6 +63,6 @@ const styles = StyleSheet.create({
 		marginRight: SPACING.small,
 	},
 	label: {
-		fontSize: 14,
+		fontSize: TYPOGRAPHY.sizes.sm,
 	},
 });

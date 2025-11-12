@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
@@ -47,7 +48,7 @@ export const HeaderTitle = ({ title, showDrawer = false, showBack = false }: Pro
 				style={[
 					styles.headerTitle,
 					hasButtons ? styles.headerTitleCentered : styles.headerTitleSimple,
-					{ color: COLORS.primary, fontSize: 26 },
+					{ color: COLORS.primary, fontSize: TYPOGRAPHY.sizes['xl'] },
 				]}
 			>
 				{title}
@@ -74,7 +75,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	headerTitle: {
-		fontWeight: "700",
+		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: 0,
 		lineHeight: 26,
 	},

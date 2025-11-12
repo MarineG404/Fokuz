@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -81,13 +82,13 @@ const styles = StyleSheet.create({
 		maxWidth: 320,
 	},
 	modalTitle: {
-		fontSize: 18,
+		fontSize: TYPOGRAPHY.sizes.md,
 		fontWeight: "600",
 		textAlign: "center",
 		marginBottom: 12,
 	},
 	modalMessage: {
-		fontSize: 16,
+		fontSize: TYPOGRAPHY.sizes.base,
 		textAlign: "center",
 		lineHeight: 22,
 		marginBottom: 24,
@@ -111,7 +112,7 @@ const styles = StyleSheet.create({
 		// backgroundColor défini dynamiquement
 	},
 	modalButtonText: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 });

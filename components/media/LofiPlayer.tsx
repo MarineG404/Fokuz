@@ -1,5 +1,7 @@
 import { LOFI_VIDEOS } from "@/assets/data/lofiVideos";
 import { useThemeColors } from "@/constants/color";
+import SPACING from '@/constants/spacing';
+import TYPOGRAPHY from '@/constants/typography';
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";
@@ -273,11 +275,11 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	title: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 	subtitle: {
-		fontSize: 12,
+		fontSize: TYPOGRAPHY.sizes.xs,
 		marginTop: 2,
 	},
 	playerContainer: {
@@ -300,7 +302,7 @@ const styles = StyleSheet.create({
 	},
 	loadingText: {
 		marginTop: 8,
-		fontSize: 14,
+		fontSize: TYPOGRAPHY.sizes.sm,
 	},
 	errorContainer: {
 		height: 180,
@@ -310,8 +312,8 @@ const styles = StyleSheet.create({
 		padding: 20,
 	},
 	errorText: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginTop: 12,
 		marginBottom: 16,
 	},
@@ -322,7 +324,7 @@ const styles = StyleSheet.create({
 	},
 	retryButtonText: {
 		color: "#FFFFFF",
-		fontWeight: "600",
+		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 	controls: {
 		flexDirection: "row",
@@ -358,6 +360,6 @@ const styles = StyleSheet.create({
 	progressDot: {
 		width: 6,
 		height: 6,
-		borderRadius: 3,
+		borderRadius: SPACING.radius,
 	},
 });

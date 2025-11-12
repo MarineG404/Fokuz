@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import CategorySelector from "@/components/settings/CategorySelector";
 import BlockCard from "@/components/ui/BlockCard";
 import { useThemeColors } from "@/constants/color";
@@ -53,8 +54,8 @@ const styles = StyleSheet.create({
 		width: "100%",
 	},
 	title: {
-		fontSize: 18,
-		fontWeight: "700",
+		fontSize: TYPOGRAPHY.sizes.md,
+		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: SPACING.medium,
 	},
 	closeButton: {
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
 	},
 	closeButtonText: {
 		color: "#fff",
-		fontWeight: "600",
-		fontSize: 14,
+		fontWeight: TYPOGRAPHY.weights.semibold,
+		fontSize: TYPOGRAPHY.sizes.sm,
 	},
 });

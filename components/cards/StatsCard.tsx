@@ -1,4 +1,5 @@
 import { useThemeColors } from "@/constants/color";
+import TYPOGRAPHY from '@/constants/typography';
 import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
@@ -95,7 +96,6 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 
 const styles = StyleSheet.create({
 	container: {
-		// layout-only; visual styles provided by BlockCard
 		marginBottom: 24,
 	},
 	containerLight: {
@@ -118,8 +118,8 @@ const styles = StyleSheet.create({
 		marginBottom: 16,
 	},
 	title: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginLeft: 8,
 	},
 	statsGrid: {
@@ -134,15 +134,15 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	statValue: {
-		fontSize: 18,
-		fontWeight: "700",
+		fontSize: TYPOGRAPHY.sizes.md,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginTop: 8,
 		marginBottom: 4,
 	},
 	statLabel: {
-		fontSize: 11,
+		fontSize: TYPOGRAPHY.sizes.xs,
 		textAlign: "center",
-		lineHeight: 14,
+		lineHeight: TYPOGRAPHY.lineHeights.xs,
 	},
 	additionalStats: {
 		marginTop: 16,
@@ -154,12 +154,12 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	avgValue: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 4,
 	},
 	avgLabel: {
-		fontSize: 12,
+		fontSize: TYPOGRAPHY.sizes.xs,
 		textAlign: "center",
 	},
 });

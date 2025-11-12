@@ -1,5 +1,7 @@
 import type { Method } from "@/assets/data/methods";
 import { useThemeColors } from "@/constants/color";
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from '@/constants/typography';
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -275,8 +277,8 @@ const styles = StyleSheet.create({
 		justifyContent: "flex-end",
 	},
 	modalContainer: {
-		borderTopLeftRadius: 24,
-		borderTopRightRadius: 24,
+		borderTopLeftRadius: SPACING.largeRadius,
+		borderTopRightRadius: SPACING.largeRadius,
 		maxHeight: "90%",
 		paddingTop: 16,
 	},
@@ -288,8 +290,8 @@ const styles = StyleSheet.create({
 		paddingBottom: 16,
 	},
 	title: {
-		fontSize: 22,
-		fontWeight: "700",
+		fontSize: TYPOGRAPHY.sizes.lg,
+		fontWeight: TYPOGRAPHY.weights.bold,
 	},
 	closeButton: {
 		width: 44,
@@ -306,15 +308,15 @@ const styles = StyleSheet.create({
 		marginBottom: 20,
 	},
 	label: {
-		fontSize: 14,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.sm,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 8,
 	},
 	input: {
 		borderWidth: 1,
 		borderRadius: 12,
 		padding: 14,
-		fontSize: 16,
+		fontSize: TYPOGRAPHY.sizes.base,
 	},
 	textArea: {
 		minHeight: 80,
@@ -347,7 +349,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 	},
 	buttonText: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 });

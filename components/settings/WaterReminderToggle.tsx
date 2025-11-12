@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import ToggleRow from "@/components/settings/ToggleRow";
 import { useThemeColors } from "@/constants/color";
 import { SPACING } from "@/constants/spacing";
@@ -82,12 +83,12 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	title: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 2,
 	},
 	subtitle: {
-		fontSize: 14,
+		fontSize: TYPOGRAPHY.sizes.sm,
 	},
 	switch: {
 		width: 50,
@@ -114,8 +115,8 @@ const styles = StyleSheet.create({
 	},
 	testButtonText: {
 		color: "#FFFFFF",
-		fontSize: 14,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.sm,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginLeft: SPACING.small,
 	},
 });

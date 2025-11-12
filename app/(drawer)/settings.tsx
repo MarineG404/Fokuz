@@ -6,6 +6,7 @@ import { WaterReminderToggle } from "@/components/settings/WaterReminderToggle";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import { SPACING } from "@/constants/spacing";
+import TYPOGRAPHY from '@/constants/typography';
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
@@ -109,7 +110,7 @@ const styles = StyleSheet.create({
 		paddingTop: 16,
 	},
 	sectionTitle: {
-		fontSize: 20,
+		fontSize: TYPOGRAPHY.sizes.lg,
 		fontWeight: "700",
 		marginTop: 16,
 		marginBottom: 12,
@@ -126,8 +127,8 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 	},
 	categoriesButtonText: {
-		fontWeight: "600",
-		fontSize: 18,
+		fontWeight: TYPOGRAPHY.weights.semibold,
+		fontSize: TYPOGRAPHY.sizes.md,
 	},
 	modalOverlay: {
 		flex: 1,
@@ -139,12 +140,12 @@ const styles = StyleSheet.create({
 	},
 	modalCard: {
 		marginBottom: 0,
-		borderBottomLeftRadius: 0,
-		borderBottomRightRadius: 0,
+		borderBottomLeftRadius: SPACING.radius,
+		borderBottomRightRadius: SPACING.radius,
 	},
 	modalTitle: {
-		fontSize: 20,
-		fontWeight: "700",
+		fontSize: TYPOGRAPHY.sizes.lg,
+		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: SPACING.large,
 	},
 	closeButton: {
@@ -155,7 +156,7 @@ const styles = StyleSheet.create({
 	},
 	closeButtonText: {
 		color: "#fff",
-		fontWeight: "600",
-		fontSize: 16,
+		fontWeight: TYPOGRAPHY.weights.semibold,
+		fontSize: TYPOGRAPHY.sizes.base,
 	},
 });

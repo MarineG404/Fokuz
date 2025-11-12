@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import { LOFI_VIDEOS } from "@/assets/data/lofiVideos";
 import { useThemeColors } from "@/constants/color";
 import { SPACING } from "@/constants/spacing";
@@ -120,7 +121,7 @@ export default function CategorySelector({ compact = false }: Props) {
 }
 
 const styles = StyleSheet.create({
-	title: { fontSize: 16, fontWeight: "700" },
+	title: { fontSize: TYPOGRAPHY.sizes.base, fontWeight: "700" },
 	row: {
 		flexDirection: "row",
 		alignItems: "center",
@@ -129,7 +130,7 @@ const styles = StyleSheet.create({
 		borderWidth: 1,
 		padding: SPACING.large,
 	},
-	catText: { fontSize: 20, fontWeight: "600" },
+	catText: { fontSize: TYPOGRAPHY.sizes.lg, fontWeight: TYPOGRAPHY.weights.semibold },
 	compactChip: {
 		borderRadius: 999,
 		minWidth: "48%",
@@ -138,5 +139,5 @@ const styles = StyleSheet.create({
 		paddingHorizontal: SPACING.medium,
 		marginBottom: SPACING.small,
 	},
-	compactText: { fontSize: 14, fontWeight: "600" },
+	compactText: { fontSize: TYPOGRAPHY.sizes.sm, fontWeight: TYPOGRAPHY.weights.semibold },
 });

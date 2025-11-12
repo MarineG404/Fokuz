@@ -3,6 +3,7 @@ import { TimerComponent } from "@/components/timer/TimerComponent";
 import BlockCard from "@/components/ui/BlockCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
+import TYPOGRAPHY from '@/constants/typography';
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
 import { Ionicons } from "@expo/vector-icons";
@@ -29,11 +30,11 @@ export default function MethodDetails() {
 	const [descDraft, setDescDraft] = React.useState("");
 	React.useEffect(() => {
 		// allow rotation for this screen
-		ScreenOrientation.unlockAsync().catch(() => {});
+		ScreenOrientation.unlockAsync().catch(() => { });
 
 		return () => {
 			// restore portrait lock when leaving
-			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
 		};
 	}, []);
 
@@ -329,13 +330,13 @@ const styles = StyleSheet.create({
 		paddingTop: 8,
 	},
 	description: {
-		fontSize: 16,
-		lineHeight: 24,
+		fontSize: TYPOGRAPHY.sizes.base,
+		lineHeight: TYPOGRAPHY.lineHeights.lg,
 		textAlign: "center",
 	},
 	cardTitle: {
-		fontSize: 18,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.md,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 16,
 		textAlign: "center",
 	},
@@ -349,13 +350,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	durationLabel: {
-		fontSize: 14,
-		fontWeight: "500",
+		fontSize: TYPOGRAPHY.sizes.sm,
+		fontWeight: TYPOGRAPHY.weights.medium,
 		marginBottom: 4,
 	},
 	durationValue: {
-		fontSize: 20,
-		fontWeight: "bold",
+		fontSize: TYPOGRAPHY.sizes.lg,
+		fontWeight: TYPOGRAPHY.weights.bold,
 	},
 	landscapeRow: {
 		flexDirection: "row",
@@ -373,7 +374,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 	},
 	errorText: {
-		fontSize: 16,
+		fontSize: TYPOGRAPHY.sizes.base,
 		textAlign: "center",
 	},
 	// Modal styles
@@ -397,15 +398,15 @@ const styles = StyleSheet.create({
 		marginBottom: 16,
 	},
 	modalTitle: {
-		fontSize: 18,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.md,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginLeft: 8,
 	},
 	textArea: {
 		borderWidth: 1,
 		borderRadius: 12,
 		padding: 14,
-		fontSize: 16,
+		fontSize: TYPOGRAPHY.sizes.base,
 		minHeight: 120,
 		marginBottom: 20,
 	},
@@ -431,8 +432,8 @@ const styles = StyleSheet.create({
 		flex: 1,
 	},
 	buttonText: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 	buttonTextSave: {
 		color: "#fff",

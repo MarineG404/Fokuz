@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
@@ -72,8 +73,8 @@ const styles = StyleSheet.create({
 		elevation: 0,
 	},
 	text: {
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.medium,
 	},
 	icon: {
 		marginRight: 6,

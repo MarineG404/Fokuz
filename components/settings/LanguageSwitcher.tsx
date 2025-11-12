@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
 import { SPACING } from "@/constants/spacing";
 import React from "react";
@@ -59,8 +60,8 @@ const styles = StyleSheet.create({
 		paddingVertical: 0,
 	},
 	selectedText: {
-		fontSize: 18,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.md,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 	listContainer: {
 		borderRadius: SPACING.radius,

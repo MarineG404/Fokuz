@@ -1,3 +1,4 @@
+import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
 import { SessionRecord } from "@/types/session";
 import { Ionicons } from "@expo/vector-icons";
@@ -150,15 +151,15 @@ const styles = StyleSheet.create({
 	},
 	methodInfo: { flexDirection: "row", alignItems: "center", flex: 1 },
 	methodIcon: { marginRight: 8 },
-	methodName: { fontSize: 16, fontWeight: "600" },
+	methodName: { fontSize: TYPOGRAPHY.sizes.base, fontWeight: TYPOGRAPHY.weights.semibold },
 	statusContainer: { flexDirection: "row", alignItems: "center", gap: 4 },
-	statusText: { fontSize: 12, fontWeight: "500" },
+	statusText: { fontSize: TYPOGRAPHY.sizes.xs, fontWeight: TYPOGRAPHY.weights.medium },
 	statsContainer: { flexDirection: "row", justifyContent: "space-between", marginBottom: 12 },
 	statItem: { alignItems: "center", flex: 1 },
-	statValue: { fontSize: 14, fontWeight: "600", marginTop: 4, marginBottom: 2 },
-	statLabel: { fontSize: 11, textAlign: "center" },
+	statValue: { fontSize: TYPOGRAPHY.sizes.sm, fontWeight: TYPOGRAPHY.weights.semibold, marginTop: 4, marginBottom: 2 },
+	statLabel: { fontSize: TYPOGRAPHY.sizes.xs, textAlign: "center" },
 	footer: { paddingTop: 12, borderTopWidth: 1, borderTopColor: "rgba(0,0,0,0.08)" },
-	timeRange: { fontSize: 12, textAlign: "center", fontFamily: "monospace" },
+	timeRange: { fontSize: TYPOGRAPHY.sizes.xs, textAlign: "center", fontFamily: "monospace" },
 });
 
 export default SessionCard;

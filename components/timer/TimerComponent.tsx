@@ -1,4 +1,5 @@
 import { useThemeColors } from "@/constants/color";
+import TYPOGRAPHY from '@/constants/typography';
 import { TimerPhase, useTimer } from "@/utils/useTimer";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
@@ -197,14 +198,14 @@ const styles = StyleSheet.create({
 		marginBottom: 24,
 	},
 	sectionTitle: {
-		fontSize: 20,
-		fontWeight: "700",
+		fontSize: TYPOGRAPHY.sizes.lg,
+		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: 6,
 		letterSpacing: 0.5,
 	},
 	sessionCounter: {
-		fontSize: 14,
-		fontWeight: "500",
+		fontSize: TYPOGRAPHY.sizes.sm,
+		fontWeight: TYPOGRAPHY.weights.medium,
 		paddingHorizontal: 12,
 		paddingVertical: 4,
 		borderRadius: 12,
@@ -225,13 +226,13 @@ const styles = StyleSheet.create({
 		marginBottom: 16,
 	},
 	readyText: {
-		fontSize: 18,
-		fontWeight: "500",
+		fontSize: TYPOGRAPHY.sizes.md,
+		fontWeight: TYPOGRAPHY.weights.medium,
 		textAlign: "center",
 		marginBottom: 8,
 	},
 	readySubText: {
-		fontSize: 14,
+		fontSize: TYPOGRAPHY.sizes.sm,
 		textAlign: "center",
 		fontStyle: "italic",
 	},
@@ -256,8 +257,8 @@ const styles = StyleSheet.create({
 	},
 	phaseText: {
 		color: "white",
-		fontSize: 14,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.sm,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 	buttonRow: {
 		flexDirection: "row",
@@ -298,7 +299,7 @@ const styles = StyleSheet.create({
 	},
 	buttonText: {
 		color: "white",
-		fontSize: 16,
-		fontWeight: "600",
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 });
