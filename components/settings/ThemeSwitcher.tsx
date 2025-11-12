@@ -4,7 +4,14 @@ import { SPACING } from "@/constants/spacing";
 import { useSimpleTheme } from "@/contexts/SimpleTheme";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+	ViewStyle,
+	TextStyle
+} from "react-native";
 
 type ThemeMode = "auto" | "light" | "dark";
 
@@ -52,7 +59,7 @@ const styles = StyleSheet.create({
 		padding: SPACING.small,
 		paddingHorizontal: SPACING.medium,
 		minHeight: 44,
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 	},
 	radio: {
 		width: 14,

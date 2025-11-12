@@ -13,7 +13,9 @@ import {
 	StyleSheet,
 	Text,
 	TextInput,
+	TextStyle,
 	View,
+	ViewStyle
 } from "react-native";
 
 type AddMethodModalProps = {
@@ -275,58 +277,58 @@ const styles = StyleSheet.create({
 		flex: 1,
 		backgroundColor: "rgba(0, 0, 0, 0.5)",
 		justifyContent: "flex-end",
-	},
+	} as ViewStyle,
 	modalContainer: {
-		borderTopLeftRadius: SPACING.largeRadius,
-		borderTopRightRadius: SPACING.largeRadius,
+		borderTopLeftRadius: SPACING.radius['3xl'],
+		borderTopRightRadius: SPACING.radius['3xl'],
 		maxHeight: "90%",
-		paddingTop: 16,
-	},
+		paddingTop: SPACING.lg,
+	} as ViewStyle,
 	header: {
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
 		paddingHorizontal: 20,
 		paddingBottom: 16,
-	},
+	} as ViewStyle,
 	title: {
 		fontSize: TYPOGRAPHY.sizes.lg,
 		fontWeight: TYPOGRAPHY.weights.bold,
-	},
+	} as TextStyle,
 	closeButton: {
 		width: 44,
 		height: 44,
 		alignItems: "center",
 		justifyContent: "center",
-		padding: 8,
-	},
+		padding: SPACING.sm,
+	} as ViewStyle,
 	content: {
 		paddingHorizontal: 20,
 		marginBottom: 16,
-	},
+	} as ViewStyle,
 	inputGroup: {
 		marginBottom: 20,
-	},
+	} as ViewStyle,
 	label: {
 		fontSize: TYPOGRAPHY.sizes.sm,
 		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 8,
-	},
+	} as TextStyle,
 	input: {
 		borderWidth: 1,
 		borderRadius: 12,
-		padding: 14,
+		padding: SPACING.padding.md,
 		fontSize: TYPOGRAPHY.sizes.base,
-	},
+	} as TextStyle,
 	textArea: {
 		minHeight: 80,
 		textAlignVertical: "top",
-	},
+	} as TextStyle,
 	iconGrid: {
 		flexDirection: "row",
 		flexWrap: "wrap",
-		gap: 12,
-	},
+		gap: SPACING.md,
+	} as ViewStyle,
 	iconButton: {
 		width: 56,
 		height: 56,
@@ -334,22 +336,22 @@ const styles = StyleSheet.create({
 		borderWidth: 2,
 		alignItems: "center",
 		justifyContent: "center",
-	},
+	} as ViewStyle,
 	footer: {
 		flexDirection: "row",
-		gap: 12,
+		gap: SPACING.md,
 		paddingHorizontal: 20,
 		paddingBottom: 20,
 		paddingTop: 12,
-	},
+	} as ViewStyle,
 	button: {
 		flex: 1,
 		paddingVertical: 16,
 		borderRadius: 12,
 		alignItems: "center",
-	},
+	} as ViewStyle,
 	buttonText: {
 		fontSize: TYPOGRAPHY.sizes.base,
 		fontWeight: TYPOGRAPHY.weights.semibold,
-	},
+	} as TextStyle,
 });

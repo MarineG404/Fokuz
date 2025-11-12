@@ -1,8 +1,17 @@
-import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
+import SPACING from '@/constants/spacing';
+import TYPOGRAPHY from '@/constants/typography';
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+	Modal,
+	StyleSheet,
+	Text,
+	TextStyle,
+	TouchableOpacity,
+	View,
+	ViewStyle
+} from "react-native";
 import BlockCard from "../ui/BlockCard";
 
 interface ConfirmModalProps {
@@ -75,44 +84,44 @@ const styles = StyleSheet.create({
 		flex: 1,
 		justifyContent: "center",
 		alignItems: "center",
-		padding: 20,
-	},
+		padding: SPACING.xl,
+	} as ViewStyle,
 	modalContent: {
 		width: "100%",
 		maxWidth: 320,
-	},
+	} as ViewStyle,
 	modalTitle: {
 		fontSize: TYPOGRAPHY.sizes.md,
-		fontWeight: "600",
+		fontWeight: TYPOGRAPHY.weights.semibold,
 		textAlign: "center",
 		marginBottom: 12,
-	},
+	} as TextStyle,
 	modalMessage: {
 		fontSize: TYPOGRAPHY.sizes.base,
 		textAlign: "center",
-		lineHeight: 22,
+		lineHeight: TYPOGRAPHY.lineHeights.md,
 		marginBottom: 24,
-	},
+	} as TextStyle,
 	modalButtons: {
 		flexDirection: "row",
-		gap: 12,
+		gap: SPACING.md,
 		justifyContent: "center",
-	},
+	} as ViewStyle,
 	modalButton: {
 		paddingHorizontal: 20,
 		paddingVertical: 12,
 		borderRadius: 8,
 		minWidth: 100,
 		alignItems: "center",
-	},
+	} as ViewStyle,
 	cancelButton: {
 		borderWidth: 1,
-	},
+	} as ViewStyle,
 	confirmButton: {
 		// backgroundColor défini dynamiquement
-	},
+	} as ViewStyle,
 	modalButtonText: {
 		fontSize: TYPOGRAPHY.sizes.base,
 		fontWeight: TYPOGRAPHY.weights.semibold,
-	},
+	} as TextStyle,
 });

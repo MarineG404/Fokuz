@@ -1,6 +1,11 @@
 import { useThemeColors } from "@/constants/color";
 import React from "react";
-import { StyleProp, View, ViewStyle } from "react-native";
+import {
+	StyleProp,
+	View,
+	ViewStyle,
+	TextStyle
+} from "react-native";
 import { uiStyles } from "../ui/uiStyles";
 
 interface BlockCardProps {

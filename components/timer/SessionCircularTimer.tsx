@@ -3,7 +3,13 @@ import TYPOGRAPHY from '@/constants/typography';
 import { TimerPhase } from "@/utils/useTimer";
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { Animated, StyleSheet, Text } from "react-native";
+import {
+	Animated,
+	StyleSheet,
+	Text,
+	TextStyle,
+	ViewStyle
+} from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
 
 interface SessionCircularTimerProps {
@@ -202,14 +208,14 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		position: "relative",
-	},
+	} as ViewStyle,
 	svg: {
 		position: "absolute",
-	},
+	} as ViewStyle,
 	centerContent: {
 		alignItems: "center",
 		justifyContent: "center",
-	},
+	} as ViewStyle,
 	phaseText: {
 		fontSize: TYPOGRAPHY.sizes.md,
 		fontWeight: TYPOGRAPHY.weights.semibold,
@@ -217,15 +223,15 @@ const styles = StyleSheet.create({
 		textAlign: "center",
 		letterSpacing: 0.5,
 		textTransform: "uppercase",
-	},
+	} as TextStyle,
 	timerDisplay: {
 		fontSize: TYPOGRAPHY.sizes['3xl'],
 		fontWeight: TYPOGRAPHY.weights.bold,
 		textAlign: "center",
 		letterSpacing: 1,
-	},
+	} as TextStyle,
 	pulseIndicator: {
 		position: "absolute",
 		zIndex: -1,
-	},
+	} as ViewStyle,
 });

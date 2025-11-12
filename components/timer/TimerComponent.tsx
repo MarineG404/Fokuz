@@ -1,10 +1,18 @@
 import { useThemeColors } from "@/constants/color";
+import SPACING from '@/constants/spacing';
 import TYPOGRAPHY from '@/constants/typography';
 import { TimerPhase, useTimer } from "@/utils/useTimer";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Animated, StyleSheet, Text, View } from "react-native";
+import {
+	Animated,
+	StyleSheet,
+	Text,
+	TextStyle,
+	View,
+	ViewStyle
+} from "react-native";
 import { ConfirmModal } from "../modals/ConfirmModal";
 import AppButton from "../ui/AppButton";
 import { SessionCircularTimer } from "./SessionCircularTimer";
@@ -192,17 +200,17 @@ const styles = StyleSheet.create({
 		marginTop: 24,
 		alignItems: "center",
 		paddingHorizontal: 20,
-	},
+	} as ViewStyle,
 	header: {
 		alignItems: "center",
 		marginBottom: 24,
-	},
+	} as ViewStyle,
 	sectionTitle: {
 		fontSize: TYPOGRAPHY.sizes.lg,
 		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: 6,
 		letterSpacing: 0.5,
-	},
+	} as TextStyle,
 	sessionCounter: {
 		fontSize: TYPOGRAPHY.sizes.sm,
 		fontWeight: TYPOGRAPHY.weights.medium,
@@ -210,32 +218,32 @@ const styles = StyleSheet.create({
 		paddingVertical: 4,
 		borderRadius: 12,
 		backgroundColor: "rgba(0,0,0,0.05)",
-	},
+	} as TextStyle,
 	timerContainer: {
 		marginBottom: 36,
 		alignItems: "center",
 		justifyContent: "center",
-	},
+	} as ViewStyle,
 	readyContainer: {
 		height: 220,
 		justifyContent: "center",
 		alignItems: "center",
 		marginBottom: 30,
-	},
+	} as ViewStyle,
 	readyIcon: {
 		marginBottom: 16,
-	},
+	} as TextStyle,
 	readyText: {
 		fontSize: TYPOGRAPHY.sizes.md,
 		fontWeight: TYPOGRAPHY.weights.medium,
 		textAlign: "center",
 		marginBottom: 8,
-	},
+	} as TextStyle,
 	readySubText: {
 		fontSize: TYPOGRAPHY.sizes.sm,
 		textAlign: "center",
 		fontStyle: "italic",
-	},
+	} as TextStyle,
 	phaseIndicator: {
 		flexDirection: "row",
 		alignItems: "center",
@@ -251,21 +259,21 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.2,
 		shadowRadius: 4,
 		elevation: 3,
-	},
+	} as ViewStyle,
 	phaseIcon: {
 		marginRight: 6,
-	},
+	} as TextStyle,
 	phaseText: {
 		color: "white",
 		fontSize: TYPOGRAPHY.sizes.sm,
 		fontWeight: TYPOGRAPHY.weights.semibold,
-	},
+	} as TextStyle,
 	buttonRow: {
 		flexDirection: "row",
-		gap: 16,
+		gap: SPACING.lg,
 		justifyContent: "center",
 		marginTop: 8,
-	},
+	} as ViewStyle,
 	button: {
 		flexDirection: "row",
 		paddingHorizontal: 20,
@@ -282,24 +290,24 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.1,
 		shadowRadius: 3,
 		elevation: 2,
-	},
+	} as ViewStyle,
 	primaryButton: {
 		shadowOpacity: 0.2,
 		shadowRadius: 4,
 		elevation: 3,
-	},
+	} as ViewStyle,
 	buttonIcon: {
 		marginRight: 6,
-	},
+	} as TextStyle,
 	resetButton: {
 		backgroundColor: "transparent",
 		borderWidth: 0,
 		elevation: 0,
 		shadowOpacity: 0,
-	},
+	} as ViewStyle,
 	buttonText: {
 		color: "white",
 		fontSize: TYPOGRAPHY.sizes.base,
 		fontWeight: TYPOGRAPHY.weights.semibold,
-	},
+	} as TextStyle,
 });

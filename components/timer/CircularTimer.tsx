@@ -1,5 +1,10 @@
 import React from "react";
-import { StyleSheet, View } from "react-native";
+import {
+	StyleSheet,
+	View,
+	ViewStyle,
+	TextStyle
+} from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
 
 interface CircularTimerProps {

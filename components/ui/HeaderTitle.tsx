@@ -1,10 +1,18 @@
+import SPACING from '@/constants/spacing';
 import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	TouchableOpacity,
+	View,
+	ViewStyle,
+	TextStyle
+} from "react-native";
 
 type Props = {
 	title: string;
@@ -68,7 +76,7 @@ const styles = StyleSheet.create({
 		marginRight: 12,
 		width: 44,
 		height: 44,
-		padding: 6,
+		padding: SPACING.padding.xs,
 		borderRadius: 8,
 		zIndex: 2,
 		alignItems: "center",
@@ -77,7 +85,7 @@ const styles = StyleSheet.create({
 	headerTitle: {
 		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: 0,
-		lineHeight: 26,
+		lineHeight: TYPOGRAPHY.lineHeights.xl,
 	},
 	headerTitleCentered: {
 		position: "absolute",

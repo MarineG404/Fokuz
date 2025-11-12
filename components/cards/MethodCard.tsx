@@ -1,12 +1,22 @@
-import TYPOGRAPHY from '@/constants/typography';
 import { Method } from "@/assets/data/methods";
 import { useThemeColors } from "@/constants/color";
+import SPACING from '@/constants/spacing';
+import TYPOGRAPHY from '@/constants/typography';
 import { useCustomMethods } from "@/hooks/useCustomMethods";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, Pressable, StyleSheet, Text, TouchableOpacity, View } from "react-native";
+import {
+	Alert,
+	Pressable,
+	StyleSheet,
+	Text,
+	TextStyle,
+	TouchableOpacity,
+	View,
+	ViewStyle
+} from "react-native";
 import { EditMethodModal } from "../modals/EditMethodModal";
 import BlockCard from "../ui/BlockCard";
 
@@ -157,45 +167,45 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		marginBottom: 16,
 		position: "relative",
-	},
+	} as ViewStyle,
 	cardDisabled: {
 		opacity: 0.5,
-	},
+	} as ViewStyle,
 	icon: {
 		marginRight: 16,
-	},
+	} as TextStyle,
 	iconDisabled: {
 		opacity: 0.5,
-	},
+	} as TextStyle,
 	textContainer: {
 		flex: 1,
-	},
+	} as ViewStyle,
 	name: {
 		fontSize: TYPOGRAPHY.sizes.md,
 		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 4,
-	},
+	} as TextStyle,
 	description: {
 		fontSize: TYPOGRAPHY.sizes.sm,
-	},
+	} as TextStyle,
 	actionsContainer: {
 		flexDirection: "row",
-		gap: 8,
-	},
+		gap: SPACING.sm,
+	} as ViewStyle,
 	actionButton: {
 		width: 44,
 		height: 44,
 		borderRadius: 8,
 		alignItems: "center",
 		justifyContent: "center",
-	},
+	} as ViewStyle,
 	actionButtonDisabled: {
 		opacity: 0.5,
-	},
+	} as ViewStyle,
 	disabledOverlay: {
 		...StyleSheet.absoluteFillObject,
 		backgroundColor: "transparent",
-	},
+	} as ViewStyle,
 });
 
 export default MethodCard;

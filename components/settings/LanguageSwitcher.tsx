@@ -3,7 +3,12 @@ import { useThemeColors } from "@/constants/color";
 import { SPACING } from "@/constants/spacing";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, View } from "react-native";
+import {
+	StyleSheet,
+	View,
+	ViewStyle,
+	TextStyle
+} from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 
 const options = [
@@ -55,7 +60,7 @@ const styles = StyleSheet.create({
 	dropdown: {
 		height: 48,
 		borderWidth: 1,
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		paddingHorizontal: SPACING.large,
 		paddingVertical: 0,
 	},
@@ -64,7 +69,7 @@ const styles = StyleSheet.create({
 		fontWeight: TYPOGRAPHY.weights.semibold,
 	},
 	listContainer: {
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 	},
 	icon: {
 		width: 20,

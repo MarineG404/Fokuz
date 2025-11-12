@@ -3,7 +3,14 @@ import { SPACING } from "@/constants/spacing";
 import TYPOGRAPHY from '@/constants/typography';
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import {
+	Pressable,
+	StyleSheet,
+	Text,
+	View,
+	ViewStyle,
+	TextStyle
+} from "react-native";
 
 type Props = {
 	title: string;
@@ -77,7 +84,7 @@ const styles = StyleSheet.create({
 		alignItems: "center",
 		justifyContent: "space-between",
 		padding: SPACING.large,
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		borderWidth: 1,
 	},
 	iconTextContainer: {
@@ -100,7 +107,7 @@ const styles = StyleSheet.create({
 	switch: {
 		width: 50,
 		height: 30,
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		justifyContent: "center",
 		position: "relative",
 	},

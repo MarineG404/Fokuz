@@ -1,10 +1,17 @@
-import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
+import SPACING from '@/constants/spacing';
+import TYPOGRAPHY from '@/constants/typography';
 import { SessionRecord } from "@/types/session";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, View } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	TextStyle,
+	View,
+	ViewStyle
+} from "react-native";
 import BlockCard from "../ui/BlockCard";
 
 interface SessionCardProps {
@@ -134,32 +141,32 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 };
 
 const styles = StyleSheet.create({
-	container: { marginBottom: 12 },
-	containerLight: { borderWidth: 1, borderColor: "#E5E7EB" },
+	container: { marginBottom: 12 } as ViewStyle,
+	containerLight: { borderWidth: 1, borderColor: "#E5E7EB" } as ViewStyle,
 	containerDark: {
 		shadowColor: "#000",
 		shadowOffset: { width: 0, height: 2 },
 		shadowOpacity: 0.1,
 		shadowRadius: 8,
 		elevation: 3,
-	},
+	} as ViewStyle,
 	header: {
 		flexDirection: "row",
 		justifyContent: "space-between",
 		alignItems: "center",
 		marginBottom: 16,
-	},
-	methodInfo: { flexDirection: "row", alignItems: "center", flex: 1 },
-	methodIcon: { marginRight: 8 },
-	methodName: { fontSize: TYPOGRAPHY.sizes.base, fontWeight: TYPOGRAPHY.weights.semibold },
-	statusContainer: { flexDirection: "row", alignItems: "center", gap: 4 },
-	statusText: { fontSize: TYPOGRAPHY.sizes.xs, fontWeight: TYPOGRAPHY.weights.medium },
-	statsContainer: { flexDirection: "row", justifyContent: "space-between", marginBottom: 12 },
-	statItem: { alignItems: "center", flex: 1 },
-	statValue: { fontSize: TYPOGRAPHY.sizes.sm, fontWeight: TYPOGRAPHY.weights.semibold, marginTop: 4, marginBottom: 2 },
-	statLabel: { fontSize: TYPOGRAPHY.sizes.xs, textAlign: "center" },
-	footer: { paddingTop: 12, borderTopWidth: 1, borderTopColor: "rgba(0,0,0,0.08)" },
-	timeRange: { fontSize: TYPOGRAPHY.sizes.xs, textAlign: "center", fontFamily: "monospace" },
+	} as ViewStyle,
+	methodInfo: { flexDirection: "row", alignItems: "center", flex: 1 } as ViewStyle,
+	methodIcon: { marginRight: 8 } as TextStyle,
+	methodName: { fontSize: TYPOGRAPHY.sizes.base, fontWeight: TYPOGRAPHY.weights.semibold } as TextStyle,
+	statusContainer: { flexDirection: "row", alignItems: "center", gap: SPACING.xs } as ViewStyle,
+	statusText: { fontSize: TYPOGRAPHY.sizes.xs, fontWeight: TYPOGRAPHY.weights.medium } as TextStyle,
+	statsContainer: { flexDirection: "row", justifyContent: "space-between", marginBottom: 12 } as ViewStyle,
+	statItem: { alignItems: "center", flex: 1 } as ViewStyle,
+	statValue: { fontSize: TYPOGRAPHY.sizes.sm, fontWeight: TYPOGRAPHY.weights.semibold, marginTop: 4, marginBottom: 2 } as TextStyle,
+	statLabel: { fontSize: TYPOGRAPHY.sizes.xs, textAlign: "center" } as TextStyle,
+	footer: { paddingTop: 12, borderTopWidth: 1, borderTopColor: "rgba(0,0,0,0.08)" } as ViewStyle,
+	timeRange: { fontSize: TYPOGRAPHY.sizes.xs, textAlign: "center", fontFamily: "monospace" } as TextStyle,
 });
 
 export default SessionCard;

@@ -1,3 +1,4 @@
+import SPACING from '@/constants/spacing';
 import { StyleSheet } from "react-native";
 
 export const uiStyles = StyleSheet.create({
@@ -6,7 +7,7 @@ export const uiStyles = StyleSheet.create({
 		marginBottom: 16,
 	},
 	cardPadded: {
-		padding: 20,
+		padding: SPACING.xl,
 	},
 	cardLight: {
 		borderWidth: 1,

@@ -19,7 +19,7 @@ const TYPOGRAPHY = {
 		base: 20,
 		md: 22,
 		lg: 24,
-		xl: 28,
+		xl: 26,
 		'2xl': 32,
 		'3xl': 40,
 	},
@@ -39,10 +39,10 @@ const TYPOGRAPHY = {
 
 	// font weights (strings so they can be passed directly to style.fontWeight)
 	weights: {
-		regular: 400,
-		medium: 500,
-		semibold: 600,
-		bold: 700,
+		regular: '400' as const,
+		medium: '500' as const,
+		semibold: '600' as const,
+		bold: '700' as const,
 	},
 } as const;
 

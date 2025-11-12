@@ -13,7 +13,16 @@ import { useCustomMethods } from "@/hooks/useCustomMethods";
 import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+	Alert,
+	FlatList,
+	Pressable,
+	StyleSheet,
+	Text,
+	TextStyle,
+	View,
+	ViewStyle
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function HomeScreen() {
@@ -175,19 +184,19 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: 16,
 		paddingTop: 16,
-	},
+	} as ViewStyle,
 	title: {
 		fontSize: TYPOGRAPHY.sizes.xl,
 		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: 20,
 		textAlign: "center",
-	},
+	} as TextStyle,
 	list: {
 		paddingBottom: 20,
-	},
+	} as ViewStyle,
 	sessionBlock: {
 		marginBottom: 16,
-		padding: 20,
+		padding: SPACING.xl,
 		borderRadius: 16,
 		alignItems: "center",
 		shadowColor: "#000",
@@ -195,30 +204,30 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.1,
 		shadowRadius: 8,
 		elevation: 4,
-	},
+	} as ViewStyle,
 	sessionTitle: {
 		color: "#FFFFFF",
-		fontWeight: "bold",
+		fontWeight: TYPOGRAPHY.weights.bold,
 		fontSize: TYPOGRAPHY.sizes.base,
 		marginBottom: 8,
 		letterSpacing: 1,
-	},
+	} as TextStyle,
 	sessionMethod: {
 		color: "#FFFFFF",
 		fontSize: TYPOGRAPHY.sizes.lg,
 		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 8,
-	},
+	} as TextStyle,
 	sessionPhase: {
 		color: "rgba(255, 255, 255, 0.9)",
 		fontSize: TYPOGRAPHY.sizes.base,
 		marginBottom: 12,
-	},
+	} as TextStyle,
 	sessionButtonsRow: {
 		flexDirection: "row",
-		gap: 12,
+		gap: SPACING.md,
 		marginTop: 8,
-	},
+	} as ViewStyle,
 	sessionViewButton: {
 		backgroundColor: "#FFFFFF",
 		borderRadius: 12,
@@ -226,12 +235,12 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 24,
 		borderWidth: 2,
 		borderColor: "#FFFFFF",
-	},
+	} as ViewStyle,
 	sessionViewText: {
 		color: "#4CAF50",
 		fontWeight: TYPOGRAPHY.weights.bold,
 		fontSize: TYPOGRAPHY.sizes.base,
-	},
+	} as TextStyle,
 	sessionStopButton: {
 		backgroundColor: "rgba(255, 255, 255, 0.2)",
 		borderRadius: 12,
@@ -239,44 +248,44 @@ const styles = StyleSheet.create({
 		paddingHorizontal: 24,
 		borderWidth: 2,
 		borderColor: "#FFFFFF",
-	},
+	} as ViewStyle,
 	sessionStopText: {
 		color: "#FFFFFF",
 		fontWeight: TYPOGRAPHY.weights.bold,
 		fontSize: TYPOGRAPHY.sizes.base,
-	},
+	} as TextStyle,
 	infoBlock: {
 		marginBottom: 16,
-		padding: 12,
+		padding: SPACING.md,
 		backgroundColor: "rgba(76, 175, 80, 0.1)",
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		borderLeftWidth: 4,
 		borderLeftColor: "#4CAF50",
-	},
+	} as ViewStyle,
 	infoText: {
 		fontSize: TYPOGRAPHY.sizes.sm,
 		textAlign: "center",
-	},
+	} as TextStyle,
 	headerRow: {
 		flexDirection: "row",
 		alignItems: "center",
 		marginBottom: 12,
 		position: "relative",
-	},
+	} as ViewStyle,
 	menuButton: {
 		marginRight: 12,
-		padding: 6,
-		borderRadius: SPACING.radius,
-	},
+		padding: SPACING.padding.xs,
+		borderRadius: SPACING.radius.lg,
+	} as ViewStyle,
 	headerTitle: {
 		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: 0,
-		lineHeight: TYPOGRAPHY.sizes.base,
-	},
+		lineHeight: TYPOGRAPHY.lineHeights.base,
+	} as TextStyle,
 	headerTitleCentered: {
 		position: "absolute",
 		left: 0,
 		right: 0,
 		textAlign: "center",
-	},
+	} as TextStyle,
 });

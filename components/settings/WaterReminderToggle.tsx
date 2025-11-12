@@ -6,7 +6,15 @@ import { useWaterReminder } from "@/hooks/useWaterReminder";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+	Alert,
+	Pressable,
+	StyleSheet,
+	Text,
+	View,
+	ViewStyle,
+	TextStyle
+} from "react-native";
 
 export function WaterReminderToggle() {
 	const COLORS = useThemeColors();
@@ -71,7 +79,7 @@ const styles = StyleSheet.create({
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		borderWidth: 1,
 	},
 	iconTextContainer: {
@@ -110,7 +118,7 @@ const styles = StyleSheet.create({
 		marginTop: SPACING.small,
 		paddingVertical: SPACING.small,
 		paddingHorizontal: SPACING.large,
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		minHeight: 44,
 	},
 	testButtonText: {

@@ -5,7 +5,14 @@ import { useThemeColors } from "@/constants/color";
 import { SPACING } from "@/constants/spacing";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Modal, Pressable, StyleSheet, Text } from "react-native";
+import {
+	Modal,
+	Pressable,
+	StyleSheet,
+	Text,
+	ViewStyle,
+	TextStyle
+} from "react-native";
 
 type Props = {
 	visible: boolean;
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
 	closeButton: {
 		marginTop: SPACING.medium,
 		padding: SPACING.medium,
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		alignItems: "center",
 	},
 	closeButtonText: {

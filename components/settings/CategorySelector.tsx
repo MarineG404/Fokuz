@@ -6,7 +6,15 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
+import {
+	FlatList,
+	Pressable,
+	StyleSheet,
+	Text,
+	View,
+	ViewStyle,
+	TextStyle
+} from "react-native";
 
 const STORAGE_KEY = "@fokuz:lofi_categories";
 
@@ -121,12 +129,12 @@ export default function CategorySelector({ compact = false }: Props) {
 }
 
 const styles = StyleSheet.create({
-	title: { fontSize: TYPOGRAPHY.sizes.base, fontWeight: "700" },
+	title: { fontSize: TYPOGRAPHY.sizes.base, fontWeight: TYPOGRAPHY.weights.bold },
 	row: {
 		flexDirection: "row",
 		alignItems: "center",
 		justifyContent: "space-between",
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		borderWidth: 1,
 		padding: SPACING.large,
 	},

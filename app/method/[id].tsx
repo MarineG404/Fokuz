@@ -3,6 +3,7 @@ import { TimerComponent } from "@/components/timer/TimerComponent";
 import BlockCard from "@/components/ui/BlockCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
+import SPACING from '@/constants/spacing';
 import TYPOGRAPHY from '@/constants/typography';
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
@@ -19,8 +20,8 @@ import {
 	StyleSheet,
 	Text,
 	TextInput,
-	View,
 	useWindowDimensions,
+	View
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -361,7 +362,7 @@ const styles = StyleSheet.create({
 	landscapeRow: {
 		flexDirection: "row",
 		justifyContent: "space-between",
-		gap: 16,
+		gap: SPACING.lg,
 		marginBottom: 16,
 	},
 	landscapeHalf: {
@@ -383,7 +384,7 @@ const styles = StyleSheet.create({
 		backgroundColor: "rgba(0, 0, 0, 0.5)",
 		justifyContent: "center",
 		alignItems: "center",
-		padding: 20,
+		padding: SPACING.xl,
 	},
 	modalContent: {
 		width: "100%",
@@ -405,14 +406,14 @@ const styles = StyleSheet.create({
 	textArea: {
 		borderWidth: 1,
 		borderRadius: 12,
-		padding: 14,
+		padding: SPACING.padding.md,
 		fontSize: TYPOGRAPHY.sizes.base,
 		minHeight: 120,
 		marginBottom: 20,
 	},
 	modalButtons: {
 		flexDirection: "row",
-		gap: 12,
+		gap: SPACING.md,
 		justifyContent: "flex-end",
 	},
 	button: {

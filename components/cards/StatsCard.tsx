@@ -1,10 +1,17 @@
 import { useThemeColors } from "@/constants/color";
+import SPACING from '@/constants/spacing';
 import TYPOGRAPHY from '@/constants/typography';
 import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, View } from "react-native";
+import {
+	StyleSheet,
+	Text,
+	TextStyle,
+	View,
+	ViewStyle
+} from "react-native";
 import BlockCard from "../ui/BlockCard";
 
 interface StatsCardProps {
@@ -97,11 +104,11 @@ export const StatsCard: React.FC<StatsCardProps> = ({
 const styles = StyleSheet.create({
 	container: {
 		marginBottom: 24,
-	},
+	} as ViewStyle,
 	containerLight: {
 		borderWidth: 1,
 		borderColor: "#E5E7EB",
-	},
+	} as ViewStyle,
 	containerDark: {
 		shadowColor: "#000",
 		shadowOffset: {
@@ -111,55 +118,55 @@ const styles = StyleSheet.create({
 		shadowOpacity: 0.15,
 		shadowRadius: 8,
 		elevation: 4,
-	},
+	} as ViewStyle,
 	header: {
 		flexDirection: "row",
 		alignItems: "center",
 		marginBottom: 16,
-	},
+	} as ViewStyle,
 	title: {
 		fontSize: TYPOGRAPHY.sizes.base,
 		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginLeft: 8,
-	},
+	} as TextStyle,
 	statsGrid: {
 		flexDirection: "row",
 		flexWrap: "wrap",
 		justifyContent: "space-between",
-		gap: 16,
-	},
+		gap: SPACING.lg,
+	} as ViewStyle,
 	statItem: {
 		alignItems: "center",
 		minWidth: "22%",
 		flex: 1,
-	},
+	} as ViewStyle,
 	statValue: {
 		fontSize: TYPOGRAPHY.sizes.md,
 		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginTop: 8,
 		marginBottom: 4,
-	},
+	} as TextStyle,
 	statLabel: {
 		fontSize: TYPOGRAPHY.sizes.xs,
 		textAlign: "center",
 		lineHeight: TYPOGRAPHY.lineHeights.xs,
-	},
+	} as TextStyle,
 	additionalStats: {
 		marginTop: 16,
 		paddingTop: 16,
 		borderTopWidth: 1,
 		borderTopColor: "rgba(0,0,0,0.08)",
-	},
+	} as ViewStyle,
 	avgStat: {
 		alignItems: "center",
-	},
+	} as ViewStyle,
 	avgValue: {
 		fontSize: TYPOGRAPHY.sizes.base,
 		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 4,
-	},
+	} as TextStyle,
 	avgLabel: {
 		fontSize: TYPOGRAPHY.sizes.xs,
 		textAlign: "center",
-	},
+	} as TextStyle,
 });

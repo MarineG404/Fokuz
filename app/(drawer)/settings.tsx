@@ -11,7 +11,14 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { Pressable, ScrollView, StyleSheet, Text } from "react-native";
+import {
+	Pressable,
+	ScrollView,
+	StyleSheet,
+	Text,
+	TextStyle,
+	ViewStyle
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SettingsScreen() {
@@ -108,13 +115,13 @@ const styles = StyleSheet.create({
 		flex: 1,
 		paddingHorizontal: 16,
 		paddingTop: 16,
-	},
+	} as ViewStyle,
 	sectionTitle: {
 		fontSize: TYPOGRAPHY.sizes.lg,
-		fontWeight: "700",
+		fontWeight: TYPOGRAPHY.weights.bold,
 		marginTop: 16,
 		marginBottom: 12,
-	},
+	} as TextStyle,
 	categoriesButton: {
 		marginTop: 12,
 		flexDirection: "row",
@@ -123,40 +130,40 @@ const styles = StyleSheet.create({
 		height: 48,
 		paddingHorizontal: SPACING.large,
 		paddingVertical: 0,
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		borderWidth: 1,
-	},
+	} as ViewStyle,
 	categoriesButtonText: {
 		fontWeight: TYPOGRAPHY.weights.semibold,
 		fontSize: TYPOGRAPHY.sizes.md,
-	},
+	} as TextStyle,
 	modalOverlay: {
 		flex: 1,
 		backgroundColor: "rgba(0, 0, 0, 0.5)",
 		justifyContent: "flex-end",
-	},
+	} as ViewStyle,
 	modalContent: {
 		maxHeight: "80%",
-	},
+	} as ViewStyle,
 	modalCard: {
 		marginBottom: 0,
-		borderBottomLeftRadius: SPACING.radius,
-		borderBottomRightRadius: SPACING.radius,
-	},
+		borderBottomLeftRadius: SPACING.radius.lg,
+		borderBottomRightRadius: SPACING.radius.lg,
+	} as ViewStyle,
 	modalTitle: {
 		fontSize: TYPOGRAPHY.sizes.lg,
 		fontWeight: TYPOGRAPHY.weights.bold,
 		marginBottom: SPACING.large,
-	},
+	} as TextStyle,
 	closeButton: {
 		marginTop: SPACING.large,
 		padding: SPACING.large,
-		borderRadius: SPACING.radius,
+		borderRadius: SPACING.radius.lg,
 		alignItems: "center",
-	},
+	} as ViewStyle,
 	closeButtonText: {
 		color: "#fff",
 		fontWeight: TYPOGRAPHY.weights.semibold,
 		fontSize: TYPOGRAPHY.sizes.base,
-	},
+	} as TextStyle,
 });
