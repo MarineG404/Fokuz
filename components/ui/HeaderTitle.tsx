@@ -1,18 +1,11 @@
-import SPACING from '@/constants/spacing';
-import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { Ionicons } from "@expo/vector-icons";
 import { DrawerActions, useNavigation } from "@react-navigation/native";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
-	ViewStyle,
-	TextStyle
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type Props = {
 	title: string;
@@ -56,7 +49,7 @@ export const HeaderTitle = ({ title, showDrawer = false, showBack = false }: Pro
 				style={[
 					styles.headerTitle,
 					hasButtons ? styles.headerTitleCentered : styles.headerTitleSimple,
-					{ color: COLORS.primary, fontSize: TYPOGRAPHY.sizes['xl'] },
+					{ color: COLORS.primary, fontSize: TYPOGRAPHY.sizes["xl"] },
 				]}
 			>
 				{title}

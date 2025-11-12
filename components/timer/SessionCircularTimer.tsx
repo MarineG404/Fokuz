@@ -1,15 +1,9 @@
 import { useThemeColors } from "@/constants/color";
-import TYPOGRAPHY from '@/constants/typography';
+import TYPOGRAPHY from "@/constants/typography";
 import { TimerPhase } from "@/utils/useTimer";
 import React, { useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import {
-	Animated,
-	StyleSheet,
-	Text,
-	TextStyle,
-	ViewStyle
-} from "react-native";
+import { Animated, StyleSheet, Text, TextStyle, ViewStyle } from "react-native";
 import Svg, { Circle, G } from "react-native-svg";
 
 interface SessionCircularTimerProps {
@@ -225,7 +219,7 @@ const styles = StyleSheet.create({
 		textTransform: "uppercase",
 	} as TextStyle,
 	timerDisplay: {
-		fontSize: TYPOGRAPHY.sizes['3xl'],
+		fontSize: TYPOGRAPHY.sizes["3xl"],
 		fontWeight: TYPOGRAPHY.weights.bold,
 		textAlign: "center",
 		letterSpacing: 1,

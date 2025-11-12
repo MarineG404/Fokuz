@@ -5,20 +5,13 @@ import { ThemeSwitcher } from "@/components/settings/ThemeSwitcher";
 import { WaterReminderToggle } from "@/components/settings/WaterReminderToggle";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
-import { SPACING } from "@/constants/spacing";
-import TYPOGRAPHY from '@/constants/typography';
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-	Pressable,
-	ScrollView,
-	StyleSheet,
-	Text,
-	TextStyle,
-	ViewStyle
-} from "react-native";
+import { Pressable, ScrollView, StyleSheet, Text, TextStyle, ViewStyle } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function SettingsScreen() {

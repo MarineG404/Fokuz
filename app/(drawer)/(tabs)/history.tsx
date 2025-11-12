@@ -3,7 +3,7 @@ import { StatsCard } from "@/components/cards/StatsCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import SPACING from "@/constants/spacing";
-import TYPOGRAPHY from '@/constants/typography';
+import TYPOGRAPHY from "@/constants/typography";
 import { SessionRecord } from "@/types/session";
 import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
@@ -19,7 +19,7 @@ import {
 	TextStyle,
 	TouchableOpacity,
 	View,
-	ViewStyle
+	ViewStyle,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -307,7 +307,7 @@ const styles = StyleSheet.create({
 		fontWeight: TYPOGRAPHY.weights.medium,
 	} as TextStyle,
 	emptyState: {
-		padding: SPACING['3xl'],
+		padding: SPACING["3xl"],
 		borderRadius: 16,
 		alignItems: "center",
 		marginTop: 40,

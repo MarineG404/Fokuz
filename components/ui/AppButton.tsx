@@ -1,14 +1,8 @@
-import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
+import TYPOGRAPHY from "@/constants/typography";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
-import {
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	ViewStyle,
-	TextStyle
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, ViewStyle } from "react-native";
 
 type Variant = "primary" | "muted" | "outline";
 

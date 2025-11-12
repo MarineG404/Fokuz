@@ -1,20 +1,12 @@
-import TYPOGRAPHY from '@/constants/typography';
 import { LOFI_VIDEOS } from "@/assets/data/lofiVideos";
 import { useThemeColors } from "@/constants/color";
-import { SPACING } from "@/constants/spacing";
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-	FlatList,
-	Pressable,
-	StyleSheet,
-	Text,
-	View,
-	ViewStyle,
-	TextStyle
-} from "react-native";
+import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 
 const STORAGE_KEY = "@fokuz:lofi_categories";
 

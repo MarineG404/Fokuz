@@ -7,11 +7,7 @@ import "@/src/localization/i18n";
 import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import {
-	View,
-	ViewStyle,
-	TextStyle
-} from "react-native";
+import { View } from "react-native";
 import "react-native-reanimated";
 
 function InnerLayout() {

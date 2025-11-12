@@ -1,17 +1,10 @@
-import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
-import { SPACING } from "@/constants/spacing";
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { useSimpleTheme } from "@/contexts/SimpleTheme";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-	StyleSheet,
-	Text,
-	TouchableOpacity,
-	View,
-	ViewStyle,
-	TextStyle
-} from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
 type ThemeMode = "auto" | "light" | "dark";
 

@@ -1,7 +1,7 @@
 import { LOFI_VIDEOS } from "@/assets/data/lofiVideos";
 import { useThemeColors } from "@/constants/color";
-import SPACING from '@/constants/spacing';
-import TYPOGRAPHY from '@/constants/typography';
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { useState } from "react";

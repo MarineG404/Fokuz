@@ -1,18 +1,11 @@
 import { useThemeColors } from "@/constants/color";
-import SPACING from '@/constants/spacing';
-import TYPOGRAPHY from '@/constants/typography';
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { TimerPhase, useTimer } from "@/utils/useTimer";
 import { Ionicons } from "@expo/vector-icons";
 import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
-import {
-	Animated,
-	StyleSheet,
-	Text,
-	TextStyle,
-	View,
-	ViewStyle
-} from "react-native";
+import { Animated, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
 import { ConfirmModal } from "../modals/ConfirmModal";
 import AppButton from "../ui/AppButton";
 import { SessionCircularTimer } from "./SessionCircularTimer";

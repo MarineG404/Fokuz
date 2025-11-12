@@ -7,9 +7,9 @@ const TYPOGRAPHY = {
 		md: 18,
 		lg: 20,
 		xl: 24,
-		'2xl': 28,
-		'3xl': 34,
-		'4xl': 40,
+		"2xl": 28,
+		"3xl": 34,
+		"4xl": 40,
 	},
 
 	// matching line heights to preserve good vertical rhythm
@@ -20,8 +20,8 @@ const TYPOGRAPHY = {
 		md: 22,
 		lg: 24,
 		xl: 26,
-		'2xl': 32,
-		'3xl': 40,
+		"2xl": 32,
+		"3xl": 40,
 	},
 
 	// semantic aliases for common UI elements
@@ -39,10 +39,10 @@ const TYPOGRAPHY = {
 
 	// font weights (strings so they can be passed directly to style.fontWeight)
 	weights: {
-		regular: '400' as const,
-		medium: '500' as const,
-		semibold: '600' as const,
-		bold: '700' as const,
+		regular: "400" as const,
+		medium: "500" as const,
+		semibold: "600" as const,
+		bold: "700" as const,
 	},
 } as const;
 

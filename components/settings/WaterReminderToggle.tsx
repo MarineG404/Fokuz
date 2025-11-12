@@ -1,20 +1,12 @@
-import TYPOGRAPHY from '@/constants/typography';
 import ToggleRow from "@/components/settings/ToggleRow";
 import { useThemeColors } from "@/constants/color";
-import { SPACING } from "@/constants/spacing";
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { useWaterReminder } from "@/hooks/useWaterReminder";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-	Alert,
-	Pressable,
-	StyleSheet,
-	Text,
-	View,
-	ViewStyle,
-	TextStyle
-} from "react-native";
+import { Alert, Pressable, StyleSheet, Text, View } from "react-native";
 
 export function WaterReminderToggle() {
 	const COLORS = useThemeColors();

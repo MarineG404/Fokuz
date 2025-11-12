@@ -1,17 +1,11 @@
 import { useThemeColors } from "@/constants/color";
-import SPACING from '@/constants/spacing';
-import TYPOGRAPHY from '@/constants/typography';
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { SessionRecord } from "@/types/session";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-	StyleSheet,
-	Text,
-	TextStyle,
-	View,
-	ViewStyle
-} from "react-native";
+import { StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
 import BlockCard from "../ui/BlockCard";
 
 interface SessionCardProps {
@@ -158,15 +152,31 @@ const styles = StyleSheet.create({
 	} as ViewStyle,
 	methodInfo: { flexDirection: "row", alignItems: "center", flex: 1 } as ViewStyle,
 	methodIcon: { marginRight: 8 } as TextStyle,
-	methodName: { fontSize: TYPOGRAPHY.sizes.base, fontWeight: TYPOGRAPHY.weights.semibold } as TextStyle,
+	methodName: {
+		fontSize: TYPOGRAPHY.sizes.base,
+		fontWeight: TYPOGRAPHY.weights.semibold,
+	} as TextStyle,
 	statusContainer: { flexDirection: "row", alignItems: "center", gap: SPACING.xs } as ViewStyle,
 	statusText: { fontSize: TYPOGRAPHY.sizes.xs, fontWeight: TYPOGRAPHY.weights.medium } as TextStyle,
-	statsContainer: { flexDirection: "row", justifyContent: "space-between", marginBottom: 12 } as ViewStyle,
+	statsContainer: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		marginBottom: 12,
+	} as ViewStyle,
 	statItem: { alignItems: "center", flex: 1 } as ViewStyle,
-	statValue: { fontSize: TYPOGRAPHY.sizes.sm, fontWeight: TYPOGRAPHY.weights.semibold, marginTop: 4, marginBottom: 2 } as TextStyle,
+	statValue: {
+		fontSize: TYPOGRAPHY.sizes.sm,
+		fontWeight: TYPOGRAPHY.weights.semibold,
+		marginTop: 4,
+		marginBottom: 2,
+	} as TextStyle,
 	statLabel: { fontSize: TYPOGRAPHY.sizes.xs, textAlign: "center" } as TextStyle,
 	footer: { paddingTop: 12, borderTopWidth: 1, borderTopColor: "rgba(0,0,0,0.08)" } as ViewStyle,
-	timeRange: { fontSize: TYPOGRAPHY.sizes.xs, textAlign: "center", fontFamily: "monospace" } as TextStyle,
+	timeRange: {
+		fontSize: TYPOGRAPHY.sizes.xs,
+		textAlign: "center",
+		fontFamily: "monospace",
+	} as TextStyle,
 });
 
 export default SessionCard;

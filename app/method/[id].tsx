@@ -3,8 +3,8 @@ import { TimerComponent } from "@/components/timer/TimerComponent";
 import BlockCard from "@/components/ui/BlockCard";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
-import SPACING from '@/constants/spacing';
-import TYPOGRAPHY from '@/constants/typography';
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
 import { Ionicons } from "@expo/vector-icons";
@@ -21,7 +21,7 @@ import {
 	Text,
 	TextInput,
 	useWindowDimensions,
-	View
+	View,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -31,11 +31,11 @@ export default function MethodDetails() {
 	const [descDraft, setDescDraft] = React.useState("");
 	React.useEffect(() => {
 		// allow rotation for this screen
-		ScreenOrientation.unlockAsync().catch(() => { });
+		ScreenOrientation.unlockAsync().catch(() => {});
 
 		return () => {
 			// restore portrait lock when leaving
-			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
 		};
 	}, []);
 

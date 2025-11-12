@@ -1,4 +1,4 @@
-import TYPOGRAPHY from '@/constants/typography';
+import TYPOGRAPHY from "@/constants/typography";
 import { useThemeColors } from "@/constants/color";
 import { Drawer } from "expo-router/drawer";
 import React from "react";

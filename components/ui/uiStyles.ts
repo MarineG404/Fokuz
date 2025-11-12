@@ -1,4 +1,4 @@
-import SPACING from '@/constants/spacing';
+import SPACING from "@/constants/spacing";
 import { StyleSheet } from "react-native";
 
 export const uiStyles = StyleSheet.create({

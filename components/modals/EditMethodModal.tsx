@@ -1,7 +1,7 @@
 import type { Method } from "@/assets/data/methods";
 import { useThemeColors } from "@/constants/color";
-import SPACING from '@/constants/spacing';
-import TYPOGRAPHY from '@/constants/typography';
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { Ionicons } from "@expo/vector-icons";
 import { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ import {
 	TextInput,
 	TextStyle,
 	View,
-	ViewStyle
+	ViewStyle,
 } from "react-native";
 
 type EditMethodModalProps = {

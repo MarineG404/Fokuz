@@ -2,12 +2,7 @@ import { useThemeColors } from "@/constants/color";
 import SPACING from "@/constants/spacing";
 import { Ionicons } from "@expo/vector-icons";
 import { useTranslation } from "react-i18next";
-import {
-	Pressable,
-	StyleSheet,
-	ViewStyle,
-	TextStyle
-} from "react-native";
+import { Pressable, StyleSheet } from "react-native";
 
 type FloatingActionButtonProps = {
 	onPress: () => void;
@@ -42,7 +37,7 @@ const styles = StyleSheet.create({
 		right: 24,
 		width: 64,
 		height: 64,
-		borderRadius: SPACING.radius['3xl'],
+		borderRadius: SPACING.radius["3xl"],
 		alignItems: "center",
 		justifyContent: "center",
 		elevation: 8,

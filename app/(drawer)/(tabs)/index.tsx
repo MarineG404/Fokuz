@@ -5,7 +5,7 @@ import { FloatingActionButton } from "@/components/ui/FloatingActionButton";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import SPACING from "@/constants/spacing";
-import TYPOGRAPHY from '@/constants/typography';
+import TYPOGRAPHY from "@/constants/typography";
 import { useTimerContext } from "@/contexts/TimerContext";
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
@@ -21,7 +21,7 @@ import {
 	Text,
 	TextStyle,
 	View,
-	ViewStyle
+	ViewStyle,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 

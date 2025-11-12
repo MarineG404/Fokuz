@@ -1,7 +1,7 @@
 import type { Method } from "@/assets/data/methods";
 import { useThemeColors } from "@/constants/color";
 import SPACING from "@/constants/spacing";
-import TYPOGRAPHY from '@/constants/typography';
+import TYPOGRAPHY from "@/constants/typography";
 import { Ionicons } from "@expo/vector-icons";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,7 @@ import {
 	TextInput,
 	TextStyle,
 	View,
-	ViewStyle
+	ViewStyle,
 } from "react-native";
 
 type AddMethodModalProps = {
@@ -279,8 +279,8 @@ const styles = StyleSheet.create({
 		justifyContent: "flex-end",
 	} as ViewStyle,
 	modalContainer: {
-		borderTopLeftRadius: SPACING.radius['3xl'],
-		borderTopRightRadius: SPACING.radius['3xl'],
+		borderTopLeftRadius: SPACING.radius["3xl"],
+		borderTopRightRadius: SPACING.radius["3xl"],
 		maxHeight: "90%",
 		paddingTop: SPACING.lg,
 	} as ViewStyle,

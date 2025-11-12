@@ -1,18 +1,11 @@
-import TYPOGRAPHY from '@/constants/typography';
 import CategorySelector from "@/components/settings/CategorySelector";
 import BlockCard from "@/components/ui/BlockCard";
 import { useThemeColors } from "@/constants/color";
-import { SPACING } from "@/constants/spacing";
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-	Modal,
-	Pressable,
-	StyleSheet,
-	Text,
-	ViewStyle,
-	TextStyle
-} from "react-native";
+import { Modal, Pressable, StyleSheet, Text } from "react-native";
 
 type Props = {
 	visible: boolean;

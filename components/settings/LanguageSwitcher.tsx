@@ -1,14 +1,9 @@
-import TYPOGRAPHY from '@/constants/typography';
 import { useThemeColors } from "@/constants/color";
-import { SPACING } from "@/constants/spacing";
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-	StyleSheet,
-	View,
-	ViewStyle,
-	TextStyle
-} from "react-native";
+import { StyleSheet, View } from "react-native";
 import { Dropdown } from "react-native-element-dropdown";
 
 const options = [

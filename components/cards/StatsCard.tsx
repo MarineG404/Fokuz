@@ -1,17 +1,11 @@
 import { useThemeColors } from "@/constants/color";
-import SPACING from '@/constants/spacing';
-import TYPOGRAPHY from '@/constants/typography';
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import {
-	StyleSheet,
-	Text,
-	TextStyle,
-	View,
-	ViewStyle
-} from "react-native";
+import { StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
 import BlockCard from "../ui/BlockCard";
 
 interface StatsCardProps {

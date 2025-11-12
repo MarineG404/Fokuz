@@ -1,7 +1,7 @@
 import { Method } from "@/assets/data/methods";
 import { useThemeColors } from "@/constants/color";
-import SPACING from '@/constants/spacing';
-import TYPOGRAPHY from '@/constants/typography';
+import SPACING from "@/constants/spacing";
+import TYPOGRAPHY from "@/constants/typography";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
 import { Ionicons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
@@ -15,7 +15,7 @@ import {
 	TextStyle,
 	TouchableOpacity,
 	View,
-	ViewStyle
+	ViewStyle,
 } from "react-native";
 import { EditMethodModal } from "../modals/EditMethodModal";
 import BlockCard from "../ui/BlockCard";

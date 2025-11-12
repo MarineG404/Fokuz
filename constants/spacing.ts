@@ -1,5 +1,5 @@
 // Centralized spacing and radius constants for consistent layout across the app
-export const SPACING = {
+const SPACING = {
 	// Page-level spacing
 	pagePadding: 16,
 
@@ -9,9 +9,9 @@ export const SPACING = {
 	md: 12,
 	lg: 16,
 	xl: 20,
-	'2xl': 24,
-	'3xl': 32,
-	'4xl': 40,
+	"2xl": 24,
+	"3xl": 32,
+	"4xl": 40,
 
 	// Legacy aliases (for gradual migration)
 	tiny: 4,
@@ -27,8 +27,8 @@ export const SPACING = {
 		md: 12,
 		lg: 14,
 		xl: 16,
-		'2xl': 20,
-		'3xl': 24,
+		"2xl": 20,
+		"3xl": 24,
 		full: 999,
 	},
 
