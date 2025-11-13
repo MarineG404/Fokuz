@@ -33,7 +33,7 @@ export const LofiPlayer: React.FC<LofiPlayerProps> = ({ isVisible = true, style 
 	const [currentVideoIndex, setCurrentVideoIndex] = useState(0);
 	const [isCollapsed, setIsCollapsed] = useState(false);
 	const [playerKey, setPlayerKey] = useState(0);
-	const [isLoading, setIsLoading] = useState(false);
+	const [isLoading, setIsLoading] = useState(true);
 	const [hasError, setHasError] = useState(false);
 
 	// read persisted enabled flag
