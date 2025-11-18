@@ -21,13 +21,15 @@ export const GeneratorCatCard = () => {
 
 	React.useEffect(() => {
 		fetchCat();
-		// eslint-disable-next-line react-hooks/exhaustive-deps
+		 
 	}, []);
 
 	return (
 		<View style={{ alignItems: "center", width: "100%" }}>
 			<Text style={[styles.title, { color: COLORS.primary }]}>{t("CAT_CARD.TITLE")}</Text>
-			<View style={{ minHeight: 180, minWidth: 180, justifyContent: "center", alignItems: "center" }}>
+			<View
+				style={{ minHeight: 180, minWidth: 180, justifyContent: "center", alignItems: "center" }}
+			>
 				{loading && <ActivityIndicator color={COLORS.primary} size="large" />}
 				{catUrl && !loading && (
 					<Image
@@ -65,7 +67,7 @@ const styles = StyleSheet.create({
 		height: 180,
 		borderRadius: SPACING.radius.md,
 		marginBottom: SPACING.md,
-		backgroundColor: '#eee',
+		backgroundColor: "#eee",
 	},
 	button: {
 		marginTop: SPACING.sm,

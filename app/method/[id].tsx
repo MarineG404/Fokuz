@@ -33,11 +33,11 @@ export default function MethodDetails() {
 	const [descDraft, setDescDraft] = React.useState("");
 	React.useEffect(() => {
 		// allow rotation for this screen
-		ScreenOrientation.unlockAsync().catch(() => { });
+		ScreenOrientation.unlockAsync().catch(() => {});
 
 		return () => {
 			// restore portrait lock when leaving
-			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
 		};
 	}, []);
 
@@ -48,7 +48,6 @@ export default function MethodDetails() {
 	const { getMethodById, loading } = useAllMethods();
 
 	const method = getMethodById(id || "");
-
 
 	const { t } = useTranslation();
 
@@ -123,7 +122,7 @@ export default function MethodDetails() {
 	}
 
 	// Track timer phase to show cat card only during break
-	const [timerPhase, setTimerPhase] = useState<'work' | 'break' | 'finished'>('work');
+	const [timerPhase, setTimerPhase] = useState<"work" | "break" | "finished">("work");
 
 	// Cat generator enabled state
 	const [catGenEnabled, setCatGenEnabled] = useState<boolean>(true);
@@ -142,7 +141,7 @@ export default function MethodDetails() {
 		})();
 	}, []);
 
-	const handlePhaseChange = (phase: 'work' | 'break' | 'finished') => {
+	const handlePhaseChange = (phase: "work" | "break" | "finished") => {
 		setTimerPhase(phase);
 	};
 
@@ -314,7 +313,7 @@ export default function MethodDetails() {
 					{/* Lofi + Timer: stacked on portrait, side-by-side on landscape */}
 					{/* useWindowDimensions must be called unconditionally at component top-level */}
 					{renderLofiAndTimer()}
-					{timerPhase === 'break' && catGenEnabled && (
+					{timerPhase === "break" && catGenEnabled && (
 						<BlockCard>
 							<GeneratorCatCard />
 						</BlockCard>
