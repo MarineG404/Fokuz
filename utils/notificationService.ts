@@ -178,10 +178,7 @@ export class NotificationService {
 	/**
 	 * Schedule a notification for when the timer ends
 	 */
-	static async scheduleTimerEndNotification(
-		phase: TimerPhase,
-		delayMs: number,
-	): Promise<void> {
+	static async scheduleTimerEndNotification(phase: TimerPhase, delayMs: number): Promise<void> {
 		try {
 			const hasPermission = await this.requestPermissions();
 			if (!hasPermission) return;
@@ -191,9 +188,7 @@ export class NotificationService {
 					? "TIMER.NOTIFICATIONS.WORK_FINISHED"
 					: "TIMER.NOTIFICATIONS.SESSION_COMPLETE";
 			const bodyKey =
-				phase === "work"
-					? "TIMER.NOTIFICATIONS.START_BREAK"
-					: "TIMER.NOTIFICATIONS.GREAT_WORK";
+				phase === "work" ? "TIMER.NOTIFICATIONS.START_BREAK" : "TIMER.NOTIFICATIONS.GREAT_WORK";
 
 			const content: Notifications.NotificationContentInput = {
 				title: i18n.t(titleKey),

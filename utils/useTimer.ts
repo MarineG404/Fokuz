@@ -317,12 +317,7 @@ export const useTimer = ({
 					const newTimeLeft = prev - 1;
 
 					// Update notification
-					NotificationService.showTimerNotification(
-						methodName,
-						phase,
-						newTimeLeft,
-						true
-					);
+					NotificationService.showTimerNotification(methodName, phase, newTimeLeft, true);
 
 					if (newTimeLeft <= 0) {
 						// Timer finished
@@ -336,7 +331,7 @@ export const useTimer = ({
 							// Transition notification
 							NotificationService.showTimerEvent(
 								"TIMER.NOTIFICATIONS.WORK_FINISHED",
-								"TIMER.NOTIFICATIONS.START_BREAK"
+								"TIMER.NOTIFICATIONS.START_BREAK",
 							);
 
 							return totalBreakTime;
@@ -358,7 +353,7 @@ export const useTimer = ({
 							// Completion notification
 							NotificationService.showTimerEvent(
 								"TIMER.NOTIFICATIONS.SESSION_COMPLETE",
-								"TIMER.NOTIFICATIONS.GREAT_WORK"
+								"TIMER.NOTIFICATIONS.GREAT_WORK",
 							);
 							NotificationService.clearTimerNotification();
 
@@ -404,16 +399,14 @@ export const useTimer = ({
 
 				// Schedule notification for when timer will end
 				if (phaseStartTime.current) {
-					const endTime = phaseStartTime.current + (timeLeft * 1000);
+					const endTime = phaseStartTime.current + timeLeft * 1000;
 					const now = Date.now();
 					const timeUntilEnd = Math.max(0, endTime - now);
 
 					// Schedule a notification for when the timer ends
-					if (timeUntilEnd > 0 && timeUntilEnd < 24 * 60 * 60 * 1000) { // max 24h
-						await NotificationService.scheduleTimerEndNotification(
-							phase,
-							timeUntilEnd
-						);
+					if (timeUntilEnd > 0 && timeUntilEnd < 24 * 60 * 60 * 1000) {
+						// max 24h
+						await NotificationService.scheduleTimerEndNotification(phase, timeUntilEnd);
 					}
 				}
 			} else if (nextAppState === "active" && isRunning) {

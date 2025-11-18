@@ -11,20 +11,14 @@
 		"ios": {
 			"supportsTablet": true,
 			"infoPlist": {
-				"UIBackgroundModes": [
-					"remote-notification"
-				]
+				"UIBackgroundModes": ["remote-notification"]
 			}
 		},
 		"android": {
 			"edgeToEdgeEnabled": true,
 			"predictiveBackGestureEnabled": false,
 			"package": "com.marineg404.Fokuz",
-			"permissions": [
-				"RECEIVE_BOOT_COMPLETED",
-				"VIBRATE",
-				"POST_NOTIFICATIONS"
-			]
+			"permissions": ["RECEIVE_BOOT_COMPLETED", "VIBRATE", "POST_NOTIFICATIONS"]
 		},
 		"web": {
 			"output": "static",
