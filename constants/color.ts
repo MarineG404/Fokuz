@@ -9,8 +9,8 @@ export const light = {
 	text: "#000",
 	textSecondary: "#707070",
 	border: "#E5E7EB",
-	workColor: "#4F46E5", // Bleu indigo plus intense
-	breakColor: "#E11D48", // Rose plus vif et contrasté
+	workColor: "#3B82F6", // Bleu vif et énergique pour le travail
+	breakColor: "#10B981", // Vert apaisant pour la pause
 	mutedButton: "#E5E7EB",
 };
 
@@ -23,8 +23,8 @@ export const dark = {
 	text: "#fff",
 	textSecondary: "#bdbdbd",
 	border: "#2F3136",
-	workColor: "#6366F1", // Bleu indigo vif pour le travail
-	breakColor: "#EC4899", // Rose vif pour la pause
+	workColor: "#60A5FA", // Bleu clair et dynamique pour le travail
+	breakColor: "#34D399", // Vert menthe relaxant pour la pause
 	mutedButton: "#2F3136",
 };
 
