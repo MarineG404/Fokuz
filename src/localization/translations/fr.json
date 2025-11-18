@@ -39,7 +39,10 @@
 		"TITLE": "Historique",
 		"DELETE_TITLE": "Supprimer l'historique",
 		"DELETE_CONFIRM": "Es-tu sûr de vouloir tout supprimer ? Cette action est irréversible.",
-		"DELETE_BUTTON": "Supprimer"
+		"DELETE_BUTTON": "Supprimer",
+		"DELETE_SESSION_TITLE": "Supprimer la session",
+		"DELETE_SESSION_MESSAGE": "Voulez-vous vraiment supprimer cette session ?",
+		"DELETE_SESSION": "Supprimer la session"
 	},
 	"DURATION": {
 		"WORK": "{{duration}} min de travail",

@@ -240,7 +240,7 @@ export default function HistoryScreen() {
 							{dateSessions.map((session, index) => {
 								// Générer une clé unique même si l'id est dupliqué ou absent
 								const uniqueKey = `${session.id ?? "noid"}-${session.startTime instanceof Date ? session.startTime.getTime() : new Date(session.startTime).getTime()}-${index}`;
-								return <SessionCard key={uniqueKey} session={session} />;
+								return <SessionCard key={uniqueKey} session={session} onDelete={loadSessions} />;
 							})}
 						</View>
 					))

@@ -2,19 +2,42 @@ import { useThemeColors } from "@/constants/color";
 import SPACING from "@/constants/spacing";
 import TYPOGRAPHY from "@/constants/typography";
 import { SessionRecord } from "@/types/session";
+import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
 import React from "react";
 import { useTranslation } from "react-i18next";
-import { StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
+import { Alert, Pressable, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
 import BlockCard from "../ui/BlockCard";
 
 interface SessionCardProps {
 	session: SessionRecord;
+	onDelete?: () => void; // Callback pour rafraîchir la liste après suppression
 }
 
-export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
+export const SessionCard: React.FC<SessionCardProps> = ({ session, onDelete }) => {
 	const COLORS = useThemeColors();
 	const { t } = useTranslation();
+
+	const handleDelete = () => {
+		Alert.alert(
+			t("HISTORY.DELETE_SESSION_TITLE"),
+			t("HISTORY.DELETE_SESSION_MESSAGE"),
+			[
+				{
+					text: t("MODAL.CONFIRM.CANCEL_BUTTON"),
+					style: "cancel",
+				},
+				{
+					text: t("MODAL.CONFIRM.CONFIRM_BUTTON"),
+					style: "destructive",
+					onPress: async () => {
+						await historyService.deleteSession(session.id);
+						onDelete?.(); // Refresh the list
+					},
+				},
+			],
+		);
+	};
 
 	const getMethodIcon = (methodName: string) => {
 		switch (methodName.toLowerCase()) {
@@ -72,9 +95,20 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 					/>
 					<Text style={[styles.methodName, { color: COLORS.text }]}>{session.methodName}</Text>
 				</View>
-				<View style={styles.statusContainer}>
-					<Ionicons name={statusInfo.icon} size={16} color={statusInfo.color} />
-					<Text style={[styles.statusText, { color: statusInfo.color }]}>{statusInfo.text}</Text>
+				<View style={styles.headerRight}>
+					<View style={styles.statusContainer}>
+						<Ionicons name={statusInfo.icon} size={16} color={statusInfo.color} />
+						<Text style={[styles.statusText, { color: statusInfo.color }]}>{statusInfo.text}</Text>
+					</View>
+					<Pressable
+						accessibilityRole="button"
+						accessibilityLabel={t("HISTORY.DELETE_SESSION")}
+						onPress={handleDelete}
+						style={[styles.deleteButton, { backgroundColor: COLORS.mutedButton }]}
+						hitSlop={8}
+					>
+						<Ionicons name="trash-outline" size={20} color={COLORS.textSecondary} accessible={false} />
+					</Pressable>
 				</View>
 			</View>
 
@@ -151,6 +185,7 @@ const styles = StyleSheet.create({
 		marginBottom: 16,
 	} as ViewStyle,
 	methodInfo: { flexDirection: "row", alignItems: "center", flex: 1 } as ViewStyle,
+	headerRight: { flexDirection: "row", alignItems: "center", gap: SPACING.sm } as ViewStyle,
 	methodIcon: { marginRight: 8 } as TextStyle,
 	methodName: {
 		fontSize: TYPOGRAPHY.sizes.base,
@@ -158,6 +193,13 @@ const styles = StyleSheet.create({
 	} as TextStyle,
 	statusContainer: { flexDirection: "row", alignItems: "center", gap: SPACING.xs } as ViewStyle,
 	statusText: { fontSize: TYPOGRAPHY.sizes.xs, fontWeight: TYPOGRAPHY.weights.medium } as TextStyle,
+	deleteButton: {
+		width: 44,
+		height: 44,
+		borderRadius: 8,
+		alignItems: "center",
+		justifyContent: "center",
+	} as ViewStyle,
 	statsContainer: {
 		flexDirection: "row",
 		justifyContent: "space-between",

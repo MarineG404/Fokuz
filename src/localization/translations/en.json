@@ -39,7 +39,10 @@
 		"TITLE": "History",
 		"DELETE_TITLE": "Delete history",
 		"DELETE_CONFIRM": "Are you sure you want to delete all history? This action cannot be undone.",
-		"DELETE_BUTTON": "Delete"
+		"DELETE_BUTTON": "Delete",
+		"DELETE_SESSION_TITLE": "Delete session",
+		"DELETE_SESSION_MESSAGE": "Do you really want to delete this session?",
+		"DELETE_SESSION": "Delete session"
 	},
 	"DURATION": {
 		"WORK": "{{duration}} min work",

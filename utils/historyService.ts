@@ -56,6 +56,81 @@ class HistoryService {
 		return allSessions.filter((session) => session.startTime >= cutoffDate);
 	}
 
+	// Supprimer une session spécifique
+	async deleteSession(sessionId: string): Promise<void> {
+		try {
+			const allSessions = await this.getAllSessions();
+			const sessionToDelete = allSessions.find((s) => s.id === sessionId);
+
+			if (!sessionToDelete) {
+				console.warn("Session non trouvée:", sessionId);
+				return;
+			}
+
+			// Filtrer pour exclure la session à supprimer
+			const updatedSessions = allSessions.filter((s) => s.id !== sessionId);
+			await AsyncStorage.setItem(STORAGE_KEYS.SESSIONS, JSON.stringify(updatedSessions));
+
+			// Recalculer les stats quotidiennes pour cette date
+			await this.recalculateDailyStatsForDate(sessionToDelete.date);
+		} catch (error) {
+			console.error("Erreur lors de la suppression de session:", error);
+		}
+	}
+
+	// Recalculer les stats quotidiennes pour une date donnée
+	private async recalculateDailyStatsForDate(date: string): Promise<void> {
+		try {
+			const sessionsForDate = await this.getSessionsByDate(date);
+			const existingStats = await this.getDailyStats();
+
+			if (sessionsForDate.length === 0) {
+				// Aucune session pour cette date, supprimer les stats
+				const { [date]: _, ...updatedStats } = existingStats;
+				await AsyncStorage.setItem(STORAGE_KEYS.DAILY_STATS, JSON.stringify(updatedStats));
+				return;
+			}
+
+			// Recalculer les stats depuis zéro pour cette date
+			const dateStats: DailyStats = {
+				date,
+				totalSessions: 0,
+				totalWorkTime: 0,
+				totalBreakTime: 0,
+				completedSessions: 0,
+				methods: {},
+			};
+
+			sessionsForDate.forEach((session) => {
+				dateStats.totalSessions += 1;
+				dateStats.totalWorkTime += session.totalWorkTime;
+				dateStats.totalBreakTime += session.totalBreakTime;
+
+				if (session.isCompleted) {
+					dateStats.completedSessions += 1;
+				}
+
+				if (!dateStats.methods[session.methodName]) {
+					dateStats.methods[session.methodName] = {
+						count: 0,
+						workTime: 0,
+					};
+				}
+				dateStats.methods[session.methodName].count += 1;
+				dateStats.methods[session.methodName].workTime += session.totalWorkTime;
+			});
+
+			// Sauvegarder les stats mises à jour
+			const updatedStats = {
+				...existingStats,
+				[date]: dateStats,
+			};
+			await AsyncStorage.setItem(STORAGE_KEYS.DAILY_STATS, JSON.stringify(updatedStats));
+		} catch (error) {
+			console.error("Erreur lors du recalcul des stats:", error);
+		}
+	}
+
 	// Mettre à jour les statistiques quotidiennes
 	private async updateDailyStats(session: SessionRecord): Promise<void> {
 		try {
