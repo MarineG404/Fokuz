@@ -91,11 +91,10 @@ export default function HomeScreen() {
 						{timerDisplay.isRunning ? "⏱️" : "⏸️"} {t("SESSION.CURRENT")}
 					</Text>
 					<Text style={styles.sessionMethod}>{timerDisplay.methodName}</Text>
-					<Text style={styles.sessionPhase}>
-						{timerDisplay.isRunning ? "" : "⏸️ "}
-						{t("TIMER.PHASE." + timerDisplay.phase.toUpperCase())} •{" "}
-						{`${Math.floor(timerDisplay.timeLeft / 60)}:${(timerDisplay.timeLeft % 60).toString().padStart(2, "0")}`}
-						{timerDisplay.isRunning ? " restantes" : " (en pause)"}
+					<Text style={styles.sessionStatus}>
+						{timerDisplay.isRunning
+							? t("TIMER.PHASE." + timerDisplay.phase.toUpperCase()) + " en cours..."
+							: "⏸️ " + t("TIMER.PHASE." + timerDisplay.phase.toUpperCase()) + " (en pause)"}
 					</Text>
 					<View style={styles.sessionButtonsRow}>
 						<Pressable
@@ -192,7 +191,7 @@ const styles = StyleSheet.create({
 		fontWeight: TYPOGRAPHY.weights.semibold,
 		marginBottom: 8,
 	} as TextStyle,
-	sessionPhase: {
+	sessionStatus: {
 		color: "rgba(255, 255, 255, 0.9)",
 		fontSize: TYPOGRAPHY.sizes.base,
 		marginBottom: 12,
