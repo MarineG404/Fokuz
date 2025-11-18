@@ -53,9 +53,13 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 		AsyncStorage.setItem(TIMER_STATE_KEY, JSON.stringify(state));
 	};
 
-	const clearTimerState = () => {
+	const clearTimerState = async () => {
 		timerState.current = null;
-		AsyncStorage.removeItem(TIMER_STATE_KEY);
+		await AsyncStorage.removeItem(TIMER_STATE_KEY);
+		// Also clear timer timestamps from AsyncStorage
+		await AsyncStorage.removeItem("timerStartTime");
+		await AsyncStorage.removeItem("timerPhase");
+		await AsyncStorage.removeItem("timerDuration");
 	};
 
 	const saveCurrentSession = async (isCompleted: boolean) => {

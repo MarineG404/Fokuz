@@ -74,7 +74,7 @@ export default function HomeScreen() {
 				style: "destructive",
 				onPress: async () => {
 					await saveCurrentSession(false);
-					clearTimerState();
+					await clearTimerState();
 				},
 			},
 		]);
