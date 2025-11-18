@@ -125,7 +125,7 @@ export const useTimer = ({
 	const restart = () => {
 		// Sauvegarder la session précédente si elle existe
 		if (currentSessionId) {
-			saveSession(false); // Session abandonnée pour restart
+			saveSession(false);
 		}
 
 		// Vibration forte pour tester
@@ -165,7 +165,7 @@ export const useTimer = ({
 	const reset = () => {
 		// Sauvegarder la session si elle existe
 		if (currentSessionId) {
-			saveSession(false); // Session abandonnée
+			saveSession(false); 
 		}
 
 		setIsRunning(false);

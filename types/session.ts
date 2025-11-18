@@ -10,7 +10,7 @@ export interface SessionRecord {
 	startTime: Date;
 	endTime: Date;
 	date: string; // format YYYY-MM-DD pour groupement
-	isCompleted: boolean; // session terminée ou abandonnée
+	isCompleted: boolean; // session terminée ou arrêtée
 }
 
 export interface DailyStats {

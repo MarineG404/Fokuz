@@ -15,7 +15,7 @@ The app combines mental wellness techniques with detailed statistical tracking t
 - [x] **Focus methods** - Predefined methods catalog (Pomodoro, Deep Work, 52/17)
 - [x] **Custom methods** - Create, edit and delete custom methods
 - [x] **Smart timer** - Chronometer with work/break alternation and complete controls
-- [x] **Session tracking** - Detailed history with status (completed/abandoned)
+- [x] **Session tracking** - Detailed history with status (completed/stop)
 - [x] **Advanced statistics** - Dashboards with success rate, total time, average
 - [x] **Smart filtering** - Period filters (today, 7 days, 30 days)
 - [x] **Multilingual interface** - French/English support with i18next

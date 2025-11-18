@@ -53,7 +53,7 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session }) => {
 			return {
 				icon: "close-circle" as const,
 				color: "#EF4444",
-				text: t("SESSION.STATUS.ABANDONED"),
+				text: t("SESSION.STATUS.STOP"),
 			};
 		}
 	};

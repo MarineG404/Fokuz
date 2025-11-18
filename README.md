@@ -15,7 +15,7 @@ L'application combine des techniques de bien-être mental avec un suivi statisti
 - [x] **Méthodes de concentration** - Catalogue de méthodes prédéfinies (Pomodoro, Deep Work, 52/17)
 - [x] **Méthodes personnalisées** - Création, modification et suppression de méthodes custom
 - [x] **Timer intelligent** - Chronomètre avec alternance travail/pause et contrôles complets
-- [x] **Suivi des sessions** - Historique détaillé avec statut (complétée/abandonnée)
+- [x] **Suivi des sessions** - Historique détaillé avec statut (complétée/arrêtée)
 - [x] **Statistiques avancées** - Tableaux de bord avec taux de réussite, temps total, moyenne
 - [x] **Filtrage intelligent** - Filtres par période (aujourd'hui, 7 jours, 30 jours)
 - [x] **Interface multilingue** - Support français/anglais avec i18next

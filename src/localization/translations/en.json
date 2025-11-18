@@ -90,7 +90,7 @@
 	"SESSION": {
 		"STATUS": {
 			"COMPLETED": "Completed",
-			"ABANDONED": "Abandoned"
+			"STOP": "STOP"
 		},
 		"STATS": {
 			"TOTAL_DURATION": "Total duration",
