@@ -87,12 +87,15 @@ export default function HomeScreen() {
 			{/* Bloc visuel session en cours en haut */}
 			{hasActiveSession && timerDisplay && (
 				<View style={styles.sessionBlock}>
-					<Text style={styles.sessionTitle}>⏱️ {t("SESSION.CURRENT")}</Text>
+					<Text style={styles.sessionTitle}>
+						{timerDisplay.isRunning ? "⏱️" : "⏸️"} {t("SESSION.CURRENT")}
+					</Text>
 					<Text style={styles.sessionMethod}>{timerDisplay.methodName}</Text>
 					<Text style={styles.sessionPhase}>
+						{timerDisplay.isRunning ? "" : "⏸️ "}
 						{t("TIMER.PHASE." + timerDisplay.phase.toUpperCase())} •{" "}
-						{`${Math.floor(timerDisplay.timeLeft / 60)}:${(timerDisplay.timeLeft % 60).toString().padStart(2, "0")}`}{" "}
-						restantes
+						{`${Math.floor(timerDisplay.timeLeft / 60)}:${(timerDisplay.timeLeft % 60).toString().padStart(2, "0")}`}
+						{timerDisplay.isRunning ? " restantes" : " (en pause)"}
 					</Text>
 					<View style={styles.sessionButtonsRow}>
 						<Pressable

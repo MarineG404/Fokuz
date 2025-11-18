@@ -21,19 +21,29 @@ export const useTimerDisplay = () => {
 	const [, forceUpdate] = useState(0);
 
 	const calculateTimeLeft = useCallback(async () => {
-		// First check if there's an active timer in AsyncStorage
+		// Check if there's a timer session (running or paused)
+		if (
+			!timerState.current ||
+			timerState.current.phase === "finished" ||
+			timerState.current.timeLeft <= 0
+		) {
+			return null;
+		}
+
+		// Check if there's an active timer in AsyncStorage
 		const savedStartTime = await AsyncStorage.getItem("timerStartTime");
 		const savedPhase = await AsyncStorage.getItem("timerPhase");
 		const savedDuration = await AsyncStorage.getItem("timerDuration");
 
-		if (savedStartTime && savedPhase && savedDuration) {
+		// If running and has AsyncStorage data, calculate from timestamp
+		if (timerState.current.isRunning && savedStartTime && savedPhase && savedDuration) {
 			const startTime = parseInt(savedStartTime);
 			const duration = parseInt(savedDuration);
 			const now = Date.now();
 			const elapsed = Math.floor((now - startTime) / 1000);
 			const remaining = Math.max(0, duration - elapsed);
 
-			if (timerState.current && remaining > 0) {
+			if (remaining > 0) {
 				return {
 					timeLeft: remaining,
 					phase: savedPhase as TimerPhase,
@@ -44,23 +54,14 @@ export const useTimerDisplay = () => {
 			}
 		}
 
-		// Fallback to context state
-		if (
-			timerState.current &&
-			timerState.current.isRunning &&
-			timerState.current.phase !== "finished" &&
-			timerState.current.timeLeft > 0
-		) {
-			return {
-				timeLeft: timerState.current.timeLeft,
-				phase: timerState.current.phase,
-				isRunning: timerState.current.isRunning,
-				methodName: timerState.current.methodName || "Timer",
-				methodId: timerState.current.methodId || "custom",
-			};
-		}
-
-		return null;
+		// Return context state (works for both running and paused)
+		return {
+			timeLeft: timerState.current.timeLeft,
+			phase: timerState.current.phase,
+			isRunning: timerState.current.isRunning,
+			methodName: timerState.current.methodName || "Timer",
+			methodId: timerState.current.methodId || "custom",
+		};
 	}, [timerState]);
 
 	const updateDisplay = useCallback(async () => {

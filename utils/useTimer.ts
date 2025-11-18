@@ -223,7 +223,31 @@ export const useTimer = ({
 	// On mount, restore state if exists
 	useEffect(() => {
 		const restoreTimer = async () => {
-			// Check AsyncStorage for running timer
+			// First check context state
+			if (timerState.current) {
+				if (timerState.current.phase === "finished" || timerState.current.timeLeft <= 0) {
+					clearTimerState();
+				} else {
+					// Restore from context
+					setTimeLeft(timerState.current.timeLeft);
+					setPhase(timerState.current.phase);
+					setIsRunning(timerState.current.isRunning);
+
+					// Only restore timestamps if timer is running
+					if (timerState.current.isRunning) {
+						const savedStartTime = await AsyncStorage.getItem("timerStartTime");
+						if (savedStartTime) {
+							phaseStartTime.current = parseInt(savedStartTime);
+							timerStartTime.current = parseInt(savedStartTime);
+						}
+					}
+
+					clearTimerState();
+					return;
+				}
+			}
+
+			// If no context, check AsyncStorage for running timer
 			const savedStartTime = await AsyncStorage.getItem("timerStartTime");
 			const savedPhase = await AsyncStorage.getItem("timerPhase");
 			const savedDuration = await AsyncStorage.getItem("timerDuration");
@@ -248,26 +272,13 @@ export const useTimer = ({
 					await AsyncStorage.removeItem("timerDuration");
 				}
 			}
-
-			if (timerState.current) {
-				if (timerState.current.phase === "finished" || timerState.current.timeLeft <= 0) {
-					clearTimerState();
-				} else {
-					setTimeLeft(timerState.current.timeLeft);
-					setPhase(timerState.current.phase);
-					setIsRunning(timerState.current.isRunning);
-					clearTimerState();
-				}
-			}
 		};
 
 		restoreTimer();
 
 		// Request notification permissions on mount
 		NotificationService.requestPermissions();
-	}, [timerState, clearTimerState]);
-
-	// Save state on each tick
+	}, [timerState, clearTimerState]);	// Save state on each tick
 	useEffect(() => {
 		setTimerState({
 			timeLeft,
