@@ -6,13 +6,14 @@ import React from "react";
 import { useTranslation } from "react-i18next";
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 
-type ThemeMode = "auto" | "light" | "dark";
+type ThemeMode = "auto" | "light" | "dark" | "oled";
 
 // labelKey refers to translation keys in the i18n JSON files
 const options: { key: ThemeMode; labelKey: string }[] = [
 	{ key: "auto", labelKey: "THEME_OPTIONS.AUTO" },
 	{ key: "light", labelKey: "THEME_OPTIONS.LIGHT" },
 	{ key: "dark", labelKey: "THEME_OPTIONS.DARK" },
+	{ key: "oled", labelKey: "THEME_OPTIONS.OLED" },
 ];
 
 export const ThemeSwitcher = () => {
@@ -42,7 +43,9 @@ export const ThemeSwitcher = () => {
 const styles = StyleSheet.create({
 	container: {
 		flexDirection: "row",
-		justifyContent: "space-around",
+		flexWrap: "wrap",
+		justifyContent: "space-between",
+		gap: SPACING.small,
 	},
 	option: {
 		flexDirection: "row",
@@ -53,6 +56,7 @@ const styles = StyleSheet.create({
 		paddingHorizontal: SPACING.medium,
 		minHeight: 44,
 		borderRadius: SPACING.radius.lg,
+		flexBasis: "48%",
 	},
 	radio: {
 		width: 14,

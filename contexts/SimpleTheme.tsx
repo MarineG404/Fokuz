@@ -2,12 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { useColorScheme } from "react-native";
 
-type ThemeMode = "auto" | "light" | "dark";
+type ThemeMode = "auto" | "light" | "dark" | "oled";
 
 type ThemeContextType = {
 	mode: ThemeMode;
 	setMode: (mode: ThemeMode) => void;
-	effectiveScheme: "light" | "dark";
+	effectiveScheme: "light" | "dark" | "oled";
 };
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
@@ -22,7 +22,7 @@ export function SimpleThemeProvider({ children }: { children: React.ReactNode })
 	useEffect(() => {
 		AsyncStorage.getItem(THEME_KEY)
 			.then((saved) => {
-				if (saved === "auto" || saved === "light" || saved === "dark") {
+				if (saved === "auto" || saved === "light" || saved === "dark" || saved === "oled") {
 					setModeState(saved);
 				}
 			})
@@ -46,9 +46,11 @@ export function SimpleThemeProvider({ children }: { children: React.ReactNode })
 			? systemScheme === "dark"
 				? "dark"
 				: "light"
-			: mode === "dark"
-				? "dark"
-				: "light";
+			: mode === "oled"
+				? "oled"
+				: mode === "dark"
+					? "dark"
+					: "light";
 
 	return (
 		<ThemeContext.Provider value={{ mode, setMode, effectiveScheme }}>
@@ -63,8 +65,8 @@ export function useSimpleTheme() {
 	if (!context) {
 		return {
 			mode: "auto" as ThemeMode,
-			setMode: () => {},
-			effectiveScheme: (systemScheme === "dark" ? "dark" : "light") as "light" | "dark",
+			setMode: () => { },
+			effectiveScheme: (systemScheme === "dark" ? "dark" : "light") as "light" | "dark" | "oled",
 		};
 	}
 	return context;

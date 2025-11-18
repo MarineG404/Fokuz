@@ -28,7 +28,22 @@ export const dark = {
 	mutedButton: "#2F3136",
 };
 
+export const oled = {
+	primary: "#d18bff",
+	secondary: "#b29cff",
+	background: "#000000", // Pure black pour OLED
+	cardBackground: "#000000", // Pure black
+	card: "#000000", // Pure black
+	text: "#FFFFFF",
+	textSecondary: "#999999",
+	border: "#1A1A1A", // Gris très sombre
+	workColor: "#5B9BF3", // Bleu légèrement désaturé pour OLED
+	breakColor: "#2DD4BF", // Vert cyan pour OLED
+	mutedButton: "#1A1A1A",
+};
+
 export const useThemeColors = () => {
 	const { effectiveScheme } = useSimpleTheme();
+	if (effectiveScheme === "oled") return oled;
 	return effectiveScheme === "dark" ? dark : light;
 };

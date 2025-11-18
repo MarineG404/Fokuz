@@ -4,7 +4,8 @@
 	"THEME_OPTIONS": {
 		"AUTO": "Automatique",
 		"LIGHT": "Clair",
-		"DARK": "Sombre"
+		"DARK": "Sombre",
+		"OLED": "OLED"
 	},
 	"LANGUAGE_SETTINGS": "Paramètres de langue",
 	"WATER_REMINDER_SETTINGS": "Rappel d'hydratation",
