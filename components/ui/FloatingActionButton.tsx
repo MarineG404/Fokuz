@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
 		right: 24,
 		width: 64,
 		height: 64,
-		borderRadius: SPACING.radius["3xl"],
+		borderRadius: SPACING.radius.full,
 		alignItems: "center",
 		justifyContent: "center",
 		elevation: 8,
