@@ -1,6 +1,7 @@
 import { LofiPlayer } from "@/components/media/LofiPlayer";
 import { TimerComponent } from "@/components/timer/TimerComponent";
 import BlockCard from "@/components/ui/BlockCard";
+import EncouragementBox from "@/components/ui/EncouragementBox";
 import { HeaderTitle } from "@/components/ui/HeaderTitle";
 import { useThemeColors } from "@/constants/color";
 import SPACING from "@/constants/spacing";
@@ -11,7 +12,7 @@ import { Ionicons } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useLocalSearchParams } from "expo-router";
 import * as ScreenOrientation from "expo-screen-orientation";
-import React, { useEffect } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
 	Modal,
@@ -31,11 +32,11 @@ export default function MethodDetails() {
 	const [descDraft, setDescDraft] = React.useState("");
 	React.useEffect(() => {
 		// allow rotation for this screen
-		ScreenOrientation.unlockAsync().catch(() => {});
+		ScreenOrientation.unlockAsync().catch(() => { });
 
 		return () => {
 			// restore portrait lock when leaving
-			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
+			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => { });
 		};
 	}, []);
 
@@ -47,7 +48,41 @@ export default function MethodDetails() {
 
 	const method = getMethodById(id || "");
 
+
 	const { t } = useTranslation();
+
+	// Encouragement phrase (random, changes every 1-2 min)
+	const encouragements = t("ENCOURAGEMENTS", { returnObjects: true }) as string[];
+	const [encouragement, setEncouragement] = useState<string | null>(() => {
+		if (!encouragements || encouragements.length === 0) return null;
+		return encouragements[Math.floor(Math.random() * encouragements.length)];
+	});
+	const intervalRef = useRef<number | null>(null);
+
+	useEffect(() => {
+		function pickRandom() {
+			if (!encouragements || encouragements.length === 0) return;
+			setEncouragement((prev) => {
+				let next = prev;
+				while (encouragements.length > 1 && next === prev) {
+					next = encouragements[Math.floor(Math.random() * encouragements.length)];
+				}
+				return next;
+			});
+		}
+		function scheduleNext() {
+			const delay = 60000 + Math.floor(Math.random() * 60000); // 60s à 120s
+			intervalRef.current = setTimeout(() => {
+				pickRandom();
+				scheduleNext();
+			}, delay);
+		}
+		scheduleNext();
+		return () => {
+			if (intervalRef.current) clearTimeout(intervalRef.current);
+		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [id, encouragements.length]);
 
 	// read lofi enabled flag to avoid rendering an empty BlockCard in landscape
 	const [lofiEnabled, setLofiEnabled] = React.useState<boolean | null>(null);
@@ -246,6 +281,8 @@ export default function MethodDetails() {
 						</View>
 					</BlockCard>
 
+					<EncouragementBox textStyle={styles.encouragementText} />
+
 					{/* Lofi + Timer: stacked on portrait, side-by-side on landscape */}
 					{/* useWindowDimensions must be called unconditionally at component top-level */}
 					{renderLofiAndTimer()}
@@ -322,6 +359,22 @@ export default function MethodDetails() {
 }
 
 const styles = StyleSheet.create({
+	encouragementBox: {
+		backgroundColor: "rgba(255,255,255,0.15)",
+		borderRadius: 10,
+		paddingVertical: 10,
+		paddingHorizontal: 18,
+		marginBottom: 10,
+		marginTop: 4,
+		alignSelf: "stretch",
+		alignItems: "center",
+	},
+	encouragementText: {
+		color: "#FFF",
+		fontSize: 16,
+		fontWeight: "600",
+		textAlign: "center",
+	},
 	container: {
 		flex: 1,
 		paddingHorizontal: 16,

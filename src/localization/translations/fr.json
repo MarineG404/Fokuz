@@ -227,5 +227,23 @@
 		"SESSION_IN_PROGRESS": "Une session est déjà en cours. Termine-la avant d'en lancer une nouvelle.",
 		"STOP_CONFIRM_TITLE": "Arrêter la séance ?",
 		"STOP_CONFIRM_MESSAGE": "Es-tu sûr de vouloir arrêter la séance en cours ? Ta progression ne sera pas sauvegardée."
-	}
+	},
+	"ENCOURAGEMENTS": [
+		"Bravo, continue comme ça !",
+		"Tu progresses chaque jour !",
+		"Ne lâche rien, tu vas y arriver !",
+		"Super boulot, persévère !",
+		"Tu es sur la bonne voie !",
+		"Chaque effort compte !",
+		"Ta motivation est inspirante !",
+		"Reste concentré, tu gères !",
+		"Encore un petit effort !",
+		"Tu fais du super travail !",
+		"Ta persévérance va payer !",
+		"Tu es capable de grandes choses !",
+		"N’abandonne pas, tu es presque au bout !",
+		"Ta discipline t’emmène loin !",
+		"Tu peux être fier de toi !",
+		"Un pas après l’autre, tu avances !"
+	]
 }

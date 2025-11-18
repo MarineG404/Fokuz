@@ -231,5 +231,23 @@
 		"SESSION_IN_PROGRESS": "A session is already in progress. Finish it before starting a new one.",
 		"STOP_CONFIRM_TITLE": "Stop the session?",
 		"STOP_CONFIRM_MESSAGE": "Are you sure you want to stop the current session? Your progress will not be saved."
-	}
+	},
+	"ENCOURAGEMENTS": [
+		"Great job, keep going!",
+		"You're making progress every day!",
+		"Don't give up, you can do it!",
+		"Awesome work, keep it up!",
+		"You're on the right track!",
+		"Every effort counts!",
+		"Your motivation is inspiring!",
+		"Stay focused, you got this!",
+		"Just a little more!",
+		"You're doing amazing work!",
+		"Your perseverance will pay off!",
+		"You are capable of great things!",
+		"Don't quit, you're almost there!",
+		"Your discipline takes you far!",
+		"Be proud of yourself!",
+		"One step at a time, you're moving forward!"
+	]
 }
