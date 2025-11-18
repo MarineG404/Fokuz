@@ -156,7 +156,13 @@
 		"CURRENT": "Current session",
 		"VIEW": "View session",
 		"STOP": "Stop",
-		"DISABLED_METHODS": "Other methods are disabled during your session"
+		"DISABLED_METHODS": "Other methods are disabled during your session",
+		"NOTIFICATIONS": {
+			"WORK_FINISHED": "Work time finished",
+			"START_BREAK": "Start your break!",
+			"SESSION_COMPLETE": "Session completed",
+			"GREAT_WORK": "Excellent work! 🎉"
+		}
 	},
 	"MODAL": {
 		"CONFIRM": {

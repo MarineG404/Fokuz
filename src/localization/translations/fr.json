@@ -152,7 +152,13 @@
 		},
 		"SESSION_IN_PROGRESS": "Une session est déjà en cours. Termine-la avant d'en lancer une nouvelle.",
 		"STOP_CONFIRM_TITLE": "Arrêter la séance ?",
-		"STOP_CONFIRM_MESSAGE": "Es-tu sûr de vouloir arrêter la séance en cours ? Ta progression ne sera pas sauvegardée."
+		"STOP_CONFIRM_MESSAGE": "Es-tu sûr de vouloir arrêter la séance en cours ? Ta progression ne sera pas sauvegardée.",
+		"NOTIFICATIONS": {
+			"WORK_FINISHED": "Temps de travail terminé",
+			"START_BREAK": "Commencez votre pause !",
+			"SESSION_COMPLETE": "Session terminée",
+			"GREAT_WORK": "Excellent travail ! 🎉"
+		}
 	},
 	"MODAL": {
 		"CONFIRM": {

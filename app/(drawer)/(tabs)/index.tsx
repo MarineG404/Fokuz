@@ -9,9 +9,10 @@ import TYPOGRAPHY from "@/constants/typography";
 import { useTimerContext } from "@/contexts/TimerContext";
 import { useAllMethods } from "@/hooks/useAllMethods";
 import { useCustomMethods } from "@/hooks/useCustomMethods";
+import { useTimerDisplay } from "@/hooks/useTimerDisplay";
 
 import { useFocusEffect, useRouter } from "expo-router";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
 	Alert,
@@ -31,50 +32,20 @@ export default function HomeScreen() {
 	const { allMethods } = useAllMethods();
 	const { addCustomMethod } = useCustomMethods();
 	const [modalVisible, setModalVisible] = useState(false);
-	const [, setRefresh] = useState(0);
 	const { timerState, clearTimerState, saveCurrentSession } = useTimerContext();
+	const { timerDisplay, hasActiveSession, refresh } = useTimerDisplay();
 	const { t } = useTranslation();
 
-	const hasActiveSession = !!(
-		timerState.current &&
-		timerState.current.isRunning &&
-		timerState.current.phase !== "finished" &&
-		timerState.current.timeLeft > 0
+	// Refresh on focus
+	useFocusEffect(
+		useCallback(() => {
+			refresh();
+		}, [refresh]),
 	);
-
-	// Force refresh chaque seconde pour affichage temps réel du timer
-	useEffect(() => {
-		if (!hasActiveSession) return;
-		const interval = setInterval(() => {
-			setRefresh((r) => r + 1);
-		}, 1000);
-		return () => clearInterval(interval);
-	}, [hasActiveSession]);
 
 	const handleAddMethod = async (method: Omit<Method, "id">) => {
 		await addCustomMethod(method);
 	};
-
-	useFocusEffect(
-		useCallback(() => {
-			setRefresh((r) => r + 1); // Forcer le refresh à chaque focus
-		}, []),
-	);
-
-	useFocusEffect(
-		useCallback(() => {
-			// Vérifier si le minuteur est en cours d'exécution et continuer à décrémenter
-			if (timerState.current && timerState.current.isRunning) {
-				const interval = setInterval(() => {
-					if (timerState.current) {
-						timerState.current.timeLeft -= 1;
-					}
-				}, 1000);
-
-				return () => clearInterval(interval);
-			}
-		}, [timerState]),
-	);
 
 	const handleMethodPress = (method: Method) => {
 		if (hasActiveSession) {
@@ -87,8 +58,8 @@ export default function HomeScreen() {
 	};
 
 	const handleViewSession = () => {
-		if (timerState.current && timerState.current.methodId) {
-			router.push(`/method/${timerState.current.methodId}`);
+		if (timerDisplay?.methodId) {
+			router.push(`/method/${timerDisplay.methodId}` as any);
 		}
 	};
 
@@ -114,13 +85,13 @@ export default function HomeScreen() {
 			<HeaderTitle title={t("CHOOSE_METHOD")} showDrawer />
 
 			{/* Bloc visuel session en cours en haut */}
-			{hasActiveSession && timerState.current && (
+			{hasActiveSession && timerDisplay && (
 				<View style={styles.sessionBlock}>
 					<Text style={styles.sessionTitle}>⏱️ {t("SESSION.CURRENT")}</Text>
-					<Text style={styles.sessionMethod}>{timerState.current.methodName}</Text>
+					<Text style={styles.sessionMethod}>{timerDisplay.methodName}</Text>
 					<Text style={styles.sessionPhase}>
-						{t("TIMER.PHASE." + timerState.current.phase.toUpperCase())} •{" "}
-						{`${Math.floor(timerState.current.timeLeft / 60)}:${(timerState.current.timeLeft % 60).toString().padStart(2, "0")}`}{" "}
+						{t("TIMER.PHASE." + timerDisplay.phase.toUpperCase())} •{" "}
+						{`${Math.floor(timerDisplay.timeLeft / 60)}:${(timerDisplay.timeLeft % 60).toString().padStart(2, "0")}`}{" "}
 						restantes
 					</Text>
 					<View style={styles.sessionButtonsRow}>
