@@ -8,6 +8,7 @@ import { DarkTheme, DefaultTheme, ThemeProvider } from "@react-navigation/native
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 import "react-native-reanimated";
 
 function InnerLayout() {
@@ -34,14 +35,16 @@ export const unstable_settings = {
 
 export default function RootLayout() {
 	return (
-		<SimpleThemeProvider>
-			<CustomMethodsProvider>
-				<AudioProvider>
-					<TimerProvider>
-						<InnerLayout />
-					</TimerProvider>
-				</AudioProvider>
-			</CustomMethodsProvider>
-		</SimpleThemeProvider>
+		<GestureHandlerRootView style={{ flex: 1 }}>
+			<SimpleThemeProvider>
+				<CustomMethodsProvider>
+					<AudioProvider>
+						<TimerProvider>
+							<InnerLayout />
+						</TimerProvider>
+					</AudioProvider>
+				</CustomMethodsProvider>
+			</SimpleThemeProvider>
+		</GestureHandlerRootView>
 	);
 }

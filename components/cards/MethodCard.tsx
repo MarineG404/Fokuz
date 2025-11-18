@@ -8,7 +8,6 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
-	Alert,
 	Pressable,
 	StyleSheet,
 	Text,
@@ -19,6 +18,7 @@ import {
 } from "react-native";
 import { EditMethodModal } from "../modals/EditMethodModal";
 import BlockCard from "../ui/BlockCard";
+import SwipeableCard from "../ui/SwipeableCard";
 
 export const MethodCard = ({
 	method,
@@ -34,6 +34,7 @@ export const MethodCard = ({
 	const { t } = useTranslation();
 	const { updateCustomMethod, deleteCustomMethod } = useCustomMethods();
 	const [editModalVisible, setEditModalVisible] = useState(false);
+	const [isDeleting, setIsDeleting] = useState(false);
 
 	const isCustomMethod = method.id.startsWith("custom_");
 
@@ -55,31 +56,24 @@ export const MethodCard = ({
 
 	const handleDelete = () => {
 		if (disabled) return;
-		Alert.alert(
-			t("EDIT_METHOD.DELETE.TITLE"),
-			t("EDIT_METHOD.DELETE.MESSAGE", { name: method.name }),
-			[
-				{
-					text: t("MODAL.CONFIRM.CANCEL_BUTTON"),
-					style: "cancel",
-				},
-				{
-					text: t("MODAL.CONFIRM.CONFIRM_BUTTON"),
-					style: "destructive",
-					onPress: async () => {
-						await deleteCustomMethod(method.id);
-					},
-				},
-			],
-		);
+		// Marquer comme en suppression immédiatement
+		setIsDeleting(true);
+		// Supprimer en arrière-plan
+		setTimeout(() => {
+			deleteCustomMethod(method.id);
+		}, 300);
 	};
+
+	if (isDeleting) {
+		return null; // Disparaît immédiatement
+	}
 
 	function handleUpdate(updatedMethod: Method): void {
 		updateCustomMethod(updatedMethod);
 		setEditModalVisible(false);
 	}
 
-	return (
+	const cardContent = (
 		<TouchableOpacity
 			onPress={handlePress}
 			disabled={disabled}
@@ -159,6 +153,17 @@ export const MethodCard = ({
 			)}
 		</TouchableOpacity>
 	);
+
+	// Wrap with swipeable only for custom methods
+	if (isCustomMethod && !disabled) {
+		return (
+			<SwipeableCard onDelete={handleDelete} deleteLabel={t("METHOD.DELETE")}>
+				{cardContent}
+			</SwipeableCard>
+		);
+	}
+
+	return cardContent;
 };
 
 const styles = StyleSheet.create({

@@ -4,40 +4,33 @@ import TYPOGRAPHY from "@/constants/typography";
 import { SessionRecord } from "@/types/session";
 import { historyService } from "@/utils/historyService";
 import { Ionicons } from "@expo/vector-icons";
-import React from "react";
+import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Alert, Pressable, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
+import { Pressable, StyleSheet, Text, TextStyle, View, ViewStyle } from "react-native";
 import BlockCard from "../ui/BlockCard";
+import SwipeableCard from "../ui/SwipeableCard";
 
 interface SessionCardProps {
 	session: SessionRecord;
-	onDelete?: () => void; // Callback pour rafraîchir la liste après suppression
+	onDelete?: () => void; 
 }
 
 export const SessionCard: React.FC<SessionCardProps> = ({ session, onDelete }) => {
 	const COLORS = useThemeColors();
 	const { t } = useTranslation();
+	const [isDeleting, setIsDeleting] = useState(false);
 
 	const handleDelete = () => {
-		Alert.alert(
-			t("HISTORY.DELETE_SESSION_TITLE"),
-			t("HISTORY.DELETE_SESSION_MESSAGE"),
-			[
-				{
-					text: t("MODAL.CONFIRM.CANCEL_BUTTON"),
-					style: "cancel",
-				},
-				{
-					text: t("MODAL.CONFIRM.CONFIRM_BUTTON"),
-					style: "destructive",
-					onPress: async () => {
-						await historyService.deleteSession(session.id);
-						onDelete?.(); // Refresh the list
-					},
-				},
-			],
-		);
+		setIsDeleting(true);
+		setTimeout(async () => {
+			await historyService.deleteSession(session.id);
+			onDelete?.();
+		});
 	};
+
+	if (isDeleting) {
+		return null;
+	}
 
 	const getMethodIcon = (methodName: string) => {
 		switch (methodName.toLowerCase()) {
@@ -84,87 +77,89 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session, onDelete }) =
 	const statusInfo = getStatusInfo();
 
 	return (
-		<BlockCard style={styles.container}>
-			<View style={styles.header}>
-				<View style={styles.methodInfo}>
-					<Ionicons
-						name={getMethodIcon(session.methodName)}
-						size={20}
-						color={COLORS.primary}
-						style={styles.methodIcon}
-					/>
-					<Text style={[styles.methodName, { color: COLORS.text }]}>{session.methodName}</Text>
-				</View>
-				<View style={styles.headerRight}>
-					<View style={styles.statusContainer}>
-						<Ionicons name={statusInfo.icon} size={16} color={statusInfo.color} />
-						<Text style={[styles.statusText, { color: statusInfo.color }]}>{statusInfo.text}</Text>
+		<SwipeableCard onDelete={handleDelete} deleteLabel={t("HISTORY.DELETE_SESSION")}>
+			<BlockCard style={styles.container}>
+				<View style={styles.header}>
+					<View style={styles.methodInfo}>
+						<Ionicons
+							name={getMethodIcon(session.methodName)}
+							size={20}
+							color={COLORS.primary}
+							style={styles.methodIcon}
+						/>
+						<Text style={[styles.methodName, { color: COLORS.text }]}>{session.methodName}</Text>
 					</View>
-					<Pressable
-						accessibilityRole="button"
-						accessibilityLabel={t("HISTORY.DELETE_SESSION")}
-						onPress={handleDelete}
-						style={[styles.deleteButton, { backgroundColor: COLORS.mutedButton }]}
-						hitSlop={8}
-					>
-						<Ionicons name="trash-outline" size={20} color={COLORS.textSecondary} accessible={false} />
-					</Pressable>
-				</View>
-			</View>
-
-			<View style={styles.statsContainer}>
-				<View style={styles.statItem}>
-					<Ionicons name="time-outline" size={16} color={COLORS.textSecondary} />
-					<Text style={[styles.statValue, { color: COLORS.text }]}>
-						{getSessionTotalDuration()}
-					</Text>
-					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
-						{t("SESSION.STATS.TOTAL_DURATION")}
-					</Text>
+					<View style={styles.headerRight}>
+						<View style={styles.statusContainer}>
+							<Ionicons name={statusInfo.icon} size={16} color={statusInfo.color} />
+							<Text style={[styles.statusText, { color: statusInfo.color }]}>{statusInfo.text}</Text>
+						</View>
+						<Pressable
+							accessibilityRole="button"
+							accessibilityLabel={t("HISTORY.DELETE_SESSION")}
+							onPress={handleDelete}
+							style={[styles.deleteButton, { backgroundColor: COLORS.mutedButton }]}
+							hitSlop={8}
+						>
+							<Ionicons name="trash-outline" size={20} color={COLORS.textSecondary} accessible={false} />
+						</Pressable>
+					</View>
 				</View>
 
-				<View style={styles.statItem}>
-					<Ionicons name="briefcase-outline" size={16} color={COLORS.textSecondary} />
-					<Text style={[styles.statValue, { color: COLORS.text }]}>
-						{formatDuration(session.totalWorkTime)}
-					</Text>
-					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
-						{t("SESSION.STATS.WORK")}
-					</Text>
-				</View>
-
-				{session.totalBreakTime > 0 && (
+				<View style={styles.statsContainer}>
 					<View style={styles.statItem}>
-						<Ionicons name="cafe-outline" size={16} color={COLORS.textSecondary} />
+						<Ionicons name="time-outline" size={16} color={COLORS.textSecondary} />
 						<Text style={[styles.statValue, { color: COLORS.text }]}>
-							{formatDuration(session.totalBreakTime)}
+							{getSessionTotalDuration()}
 						</Text>
 						<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
-							{t("SESSION.STATS.BREAK")}
+							{t("SESSION.STATS.TOTAL_DURATION")}
 						</Text>
 					</View>
-				)}
 
-				<View style={styles.statItem}>
-					<Ionicons name="repeat-outline" size={16} color={COLORS.textSecondary} />
-					<Text style={[styles.statValue, { color: COLORS.text }]}>
-						{" "}
-						{session.isCompleted
-							? session.completedCycles
-							: Math.max(0, session.completedCycles - 1)}{" "}
-					</Text>
-					<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
-						{t("SESSION.STATS.CYCLES")}
+					<View style={styles.statItem}>
+						<Ionicons name="briefcase-outline" size={16} color={COLORS.textSecondary} />
+						<Text style={[styles.statValue, { color: COLORS.text }]}>
+							{formatDuration(session.totalWorkTime)}
+						</Text>
+						<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
+							{t("SESSION.STATS.WORK")}
+						</Text>
+					</View>
+
+					{session.totalBreakTime > 0 && (
+						<View style={styles.statItem}>
+							<Ionicons name="cafe-outline" size={16} color={COLORS.textSecondary} />
+							<Text style={[styles.statValue, { color: COLORS.text }]}>
+								{formatDuration(session.totalBreakTime)}
+							</Text>
+							<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
+								{t("SESSION.STATS.BREAK")}
+							</Text>
+						</View>
+					)}
+
+					<View style={styles.statItem}>
+						<Ionicons name="repeat-outline" size={16} color={COLORS.textSecondary} />
+						<Text style={[styles.statValue, { color: COLORS.text }]}>
+							{" "}
+							{session.isCompleted
+								? session.completedCycles
+								: Math.max(0, session.completedCycles - 1)}{" "}
+						</Text>
+						<Text style={[styles.statLabel, { color: COLORS.textSecondary }]}>
+							{t("SESSION.STATS.CYCLES")}
+						</Text>
+					</View>
+				</View>
+
+				<View style={styles.footer}>
+					<Text style={[styles.timeRange, { color: COLORS.textSecondary }]}>
+						{formatTime(session.startTime)} → {formatTime(session.endTime)}
 					</Text>
 				</View>
-			</View>
-
-			<View style={styles.footer}>
-				<Text style={[styles.timeRange, { color: COLORS.textSecondary }]}>
-					{formatTime(session.startTime)} → {formatTime(session.endTime)}
-				</Text>
-			</View>
-		</BlockCard>
+			</BlockCard>
+		</SwipeableCard>
 	);
 };
 
