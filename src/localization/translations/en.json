@@ -249,5 +249,11 @@
 		"Your discipline takes you far!",
 		"Be proud of yourself!",
 		"One step at a time, you're moving forward!"
-	]
+	],
+	"CAT_CARD": {
+		"TITLE": "Cat Generator",
+		"BUTTON": "Generate image",
+		"BUTTON_A11Y": "Generate a new cat image",
+		"IMAGE_ALT": "Random cat image"
+	}
 }

@@ -245,5 +245,11 @@
 		"Ta discipline t’emmène loin !",
 		"Tu peux être fier de toi !",
 		"Un pas après l’autre, tu avances !"
-	]
+	],
+	"CAT_CARD": {
+		"TITLE": "Générateur de chats",
+		"BUTTON": "Générer l'image",
+		"BUTTON_A11Y": "Générer une nouvelle image de chat",
+		"IMAGE_ALT": "Image de chat aléatoire"
+	}
 }

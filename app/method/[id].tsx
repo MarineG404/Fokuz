@@ -1,3 +1,4 @@
+import { GeneratorCatCard } from "@/components/cards/GeneratorCatCard";
 import { LofiPlayer } from "@/components/media/LofiPlayer";
 import { TimerComponent } from "@/components/timer/TimerComponent";
 import BlockCard from "@/components/ui/BlockCard";
@@ -121,6 +122,13 @@ export default function MethodDetails() {
 		);
 	}
 
+	// Track timer phase to show cat card only during break
+	const [timerPhase, setTimerPhase] = useState<'work' | 'break' | 'finished'>('work');
+
+	const handlePhaseChange = (phase: 'work' | 'break' | 'finished') => {
+		setTimerPhase(phase);
+	};
+
 	const renderLofiAndTimer = () => {
 		const isLandscape = width > height;
 		const lofiIsEnabled = lofiEnabled === null ? true : lofiEnabled;
@@ -138,6 +146,7 @@ export default function MethodDetails() {
 									: method.name
 							}
 							methodId={method.id}
+							onPhaseChange={handlePhaseChange}
 						/>
 					</BlockCard>
 				);
@@ -160,6 +169,7 @@ export default function MethodDetails() {
 										: method.name
 								}
 								methodId={method.id}
+								onPhaseChange={handlePhaseChange}
 							/>
 						</BlockCard>
 					</View>
@@ -178,6 +188,7 @@ export default function MethodDetails() {
 							"translationKey" in method ? t(`METHODS.${method.translationKey}.NAME`) : method.name
 						}
 						methodId={method.id}
+						onPhaseChange={handlePhaseChange}
 					/>
 				</BlockCard>
 			</>
@@ -286,6 +297,11 @@ export default function MethodDetails() {
 					{/* Lofi + Timer: stacked on portrait, side-by-side on landscape */}
 					{/* useWindowDimensions must be called unconditionally at component top-level */}
 					{renderLofiAndTimer()}
+					{timerPhase === 'break' && (
+						<BlockCard>
+							<GeneratorCatCard />
+						</BlockCard>
+					)}
 				</>
 			</ScrollView>
 
