@@ -28,13 +28,20 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 
 export default function MethodDetails() {
+	// Hooks that must always be called
+	// Track timer phase to show cat card only during break
+	const [timerPhase, setTimerPhase] = useState<"work" | "break" | "finished">("work");
+	// Cat generator enabled state
+	const [catGenEnabled, setCatGenEnabled] = useState<boolean>(true);
+	// read lofi enabled flag to avoid rendering an empty BlockCard in landscape
+	const [lofiEnabled, setLofiEnabled] = React.useState<boolean | null>(null);
+
 	const { updateCustomMethod } = useCustomMethods();
 	const [editDescModalVisible, setEditDescModalVisible] = React.useState(false);
 	const [descDraft, setDescDraft] = React.useState("");
 	React.useEffect(() => {
 		// allow rotation for this screen
 		ScreenOrientation.unlockAsync().catch(() => {});
-
 		return () => {
 			// restore portrait lock when leaving
 			ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT_UP).catch(() => {});
@@ -46,9 +53,7 @@ export default function MethodDetails() {
 	const COLORS = useThemeColors();
 	const { width, height } = useWindowDimensions();
 	const { getMethodById, loading } = useAllMethods();
-
 	const method = getMethodById(id || "");
-
 	const { t } = useTranslation();
 
 	// Encouragement phrase (random, changes every 1-2 min)
@@ -84,9 +89,6 @@ export default function MethodDetails() {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [id, encouragements.length]);
 
-	// read lofi enabled flag to avoid rendering an empty BlockCard in landscape
-	const [lofiEnabled, setLofiEnabled] = React.useState<boolean | null>(null);
-
 	useEffect(() => {
 		(async () => {
 			try {
@@ -98,34 +100,6 @@ export default function MethodDetails() {
 		})();
 	}, []);
 
-	if (loading) {
-		return (
-			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-				<HeaderTitle title={t("METHOD.LOADING")} showBack />
-			</SafeAreaView>
-		);
-	}
-
-	if (!method) {
-		return (
-			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
-				<HeaderTitle title={t("METHOD.NOT_FOUND")} showBack />
-				<ScrollView style={styles.content}>
-					<BlockCard padded={false}>
-						<Text style={[styles.errorText, { color: COLORS.textSecondary }]}>
-							{t("METHOD.NOT_FOUND_ID", { id })}
-						</Text>
-					</BlockCard>
-				</ScrollView>
-			</SafeAreaView>
-		);
-	}
-
-	// Track timer phase to show cat card only during break
-	const [timerPhase, setTimerPhase] = useState<"work" | "break" | "finished">("work");
-
-	// Cat generator enabled state
-	const [catGenEnabled, setCatGenEnabled] = useState<boolean>(true);
 	useEffect(() => {
 		(async () => {
 			try {
@@ -145,7 +119,9 @@ export default function MethodDetails() {
 		setTimerPhase(phase);
 	};
 
+	// Render Lofi and Timer only if method is defined
 	const renderLofiAndTimer = () => {
+		if (!method) return null;
 		const isLandscape = width > height;
 		const lofiIsEnabled = lofiEnabled === null ? true : lofiEnabled;
 		if (isLandscape) {
@@ -167,7 +143,6 @@ export default function MethodDetails() {
 					</BlockCard>
 				);
 			}
-
 			return (
 				<View style={styles.landscapeRow}>
 					<View style={styles.landscapeHalf}>
@@ -210,6 +185,29 @@ export default function MethodDetails() {
 			</>
 		);
 	};
+
+	if (loading) {
+		return (
+			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
+				<HeaderTitle title={t("METHOD.LOADING")} showBack />
+			</SafeAreaView>
+		);
+	}
+
+	if (!method) {
+		return (
+			<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>
+				<HeaderTitle title={t("METHOD.NOT_FOUND")} showBack />
+				<ScrollView style={styles.content}>
+					<BlockCard padded={false}>
+						<Text style={[styles.errorText, { color: COLORS.textSecondary }]}>
+							{t("METHOD.NOT_FOUND_ID", { id })}
+						</Text>
+					</BlockCard>
+				</ScrollView>
+			</SafeAreaView>
+		);
+	}
 
 	return (
 		<SafeAreaView style={[styles.container, { backgroundColor: COLORS.background }]}>

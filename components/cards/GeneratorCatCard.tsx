@@ -21,7 +21,6 @@ export const GeneratorCatCard = () => {
 
 	React.useEffect(() => {
 		fetchCat();
-		 
 	}, []);
 
 	return (
