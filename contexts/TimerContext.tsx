@@ -75,7 +75,7 @@ export const TimerProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 		if (!timerState) return;
 
 		const now = Date.now();
-		const totalWorkTime = Math.floor((now - timerState.sessionStartTime) / 1000); // Total time in work phase
+		// const totalWorkTime = Math.floor((now - timerState.sessionStartTime) / 1000); // Total time in work phase
 
 		await historyService.saveSession({
 			id: timerState.sessionId,

@@ -17,7 +17,6 @@ export const SwipeableCard: React.FC<SwipeableCardProps> = ({
 	onDelete,
 	deleteLabel = "Supprimer",
 }) => {
-	const COLORS = useThemeColors();
 	const swipeableRef = useRef<Swipeable>(null);
 
 	const handleSwipeableWillOpen = (direction: "left" | "right") => {
