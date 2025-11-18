@@ -21,7 +21,7 @@ export const useTimerDisplay = () => {
 		return {
 			timerDisplay: null,
 			hasActiveSession: false,
-			refresh: () => { }, // No-op
+			refresh: () => {}, // No-op
 		};
 	}
 
@@ -39,6 +39,6 @@ export const useTimerDisplay = () => {
 	return {
 		timerDisplay: displayState,
 		hasActiveSession: timeLeft > 0 || timerState.isRunning,
-		refresh: () => { }, // No-op since context handles real-time updates
+		refresh: () => {}, // No-op since context handles real-time updates
 	};
 };
