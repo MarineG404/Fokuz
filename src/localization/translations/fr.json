@@ -246,6 +246,7 @@
 		"Tu peux être fier de toi !",
 		"Un pas après l’autre, tu avances !"
 	],
+	"CAT_GENERATOR_SETTINGS": "Paramètres du générateur de chats",
 	"CAT_CARD": {
 		"TITLE": "Générateur de chats",
 		"BUTTON": "Générer l'image",

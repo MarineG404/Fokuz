@@ -250,6 +250,7 @@
 		"Be proud of yourself!",
 		"One step at a time, you're moving forward!"
 	],
+	"CAT_GENERATOR_SETTINGS": "Cat Generator Settings",
 	"CAT_CARD": {
 		"TITLE": "Cat Generator",
 		"BUTTON": "Generate image",
