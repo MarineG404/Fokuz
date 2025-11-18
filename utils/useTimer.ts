@@ -278,7 +278,7 @@ export const useTimer = ({
 
 		// Request notification permissions on mount
 		NotificationService.requestPermissions();
-	}, [timerState, clearTimerState]);	// Save state on each tick
+	}, [timerState, clearTimerState]); // Save state on each tick
 	useEffect(() => {
 		setTimerState({
 			timeLeft,

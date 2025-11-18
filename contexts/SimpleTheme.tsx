@@ -65,7 +65,7 @@ export function useSimpleTheme() {
 	if (!context) {
 		return {
 			mode: "auto" as ThemeMode,
-			setMode: () => { },
+			setMode: () => {},
 			effectiveScheme: (systemScheme === "dark" ? "dark" : "light") as "light" | "dark" | "oled",
 		};
 	}
