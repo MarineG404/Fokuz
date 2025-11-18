@@ -27,7 +27,10 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 }) => {
 	const COLORS = useThemeColors();
 	const { t } = useTranslation();
-	const radius = (size - strokeWidth) / 2;
+
+	// Ajout d'un padding pour l'indicateur
+	const indicatorPadding = 4;
+	const radius = (size - strokeWidth - indicatorPadding * 2) / 2;
 	const circumference = 2 * Math.PI * radius;
 
 	// Animations
@@ -93,13 +96,14 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 		currentPosition = workProportion + breakElapsed / totalDuration;
 	}
 
-	// Paramètres SVG
+	// SVG setting
 	const workArcLength = circumference * workProportion;
 	const breakArcLength = circumference * breakProportion;
 	const currentPositionOffset = circumference * (1 - currentPosition);
 
-	// Couleur de fond plus contrastée
 	const backgroundColor = COLORS.text === "#000" ? "#D1D5DB" : "#374151";
+
+	const center = size / 2;
 
 	return (
 		<Animated.View
@@ -113,11 +117,10 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 			]}
 		>
 			<Svg width={size} height={size} style={styles.svg}>
-				<G rotation="270" origin={`${size / 2}, ${size / 2}`}>
-					{/* Cercle de fond avec effet de glow */}
+				<G rotation="270" origin={`${center}, ${center}`}>
 					<Circle
-						cx={size / 2}
-						cy={size / 2}
+						cx={center}
+						cy={center}
 						r={radius}
 						stroke={backgroundColor}
 						strokeWidth={strokeWidth}
@@ -125,10 +128,9 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 						opacity={0.8}
 					/>
 
-					{/* Arc de travail avec meilleure visibilité */}
 					<Circle
-						cx={size / 2}
-						cy={size / 2}
+						cx={center}
+						cy={center}
 						r={radius}
 						stroke={COLORS.workColor}
 						strokeWidth={strokeWidth - 1}
@@ -138,10 +140,9 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 						opacity={currentPhase === "work" ? 0.9 : 0.5}
 					/>
 
-					{/* Arc de pause avec meilleure visibilité */}
 					<Circle
-						cx={size / 2}
-						cy={size / 2}
+						cx={center}
+						cy={center}
 						r={radius}
 						stroke={COLORS.breakColor}
 						strokeWidth={strokeWidth - 1}
@@ -151,14 +152,13 @@ export const SessionCircularTimer: React.FC<SessionCircularTimerProps> = ({
 						opacity={currentPhase === "break" ? 0.9 : 0.5}
 					/>
 
-					{/* Indicateur de position actuelle avec animation */}
 					<Circle
-						cx={size / 2}
-						cy={size / 2}
+						cx={center}
+						cy={center}
 						r={radius}
 						stroke="#FFFFFF"
-						strokeWidth={strokeWidth + 4}
-						strokeDasharray={`3 ${circumference - 3}`}
+						strokeWidth={strokeWidth}
+						strokeDasharray={`1 ${circumference - 1}`}
 						strokeDashoffset={currentPositionOffset}
 						strokeLinecap="round"
 						fill="transparent"
@@ -202,6 +202,7 @@ const styles = StyleSheet.create({
 		justifyContent: "center",
 		alignItems: "center",
 		position: "relative",
+		padding: 4,
 	} as ViewStyle,
 	svg: {
 		position: "absolute",
