@@ -12,7 +12,7 @@ import SwipeableCard from "../ui/SwipeableCard";
 
 interface SessionCardProps {
 	session: SessionRecord;
-	onDelete?: () => void; 
+	onDelete?: () => void;
 }
 
 export const SessionCard: React.FC<SessionCardProps> = ({ session, onDelete }) => {
@@ -92,7 +92,9 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session, onDelete }) =
 					<View style={styles.headerRight}>
 						<View style={styles.statusContainer}>
 							<Ionicons name={statusInfo.icon} size={16} color={statusInfo.color} />
-							<Text style={[styles.statusText, { color: statusInfo.color }]}>{statusInfo.text}</Text>
+							<Text style={[styles.statusText, { color: statusInfo.color }]}>
+								{statusInfo.text}
+							</Text>
 						</View>
 						<Pressable
 							accessibilityRole="button"
@@ -101,7 +103,12 @@ export const SessionCard: React.FC<SessionCardProps> = ({ session, onDelete }) =
 							style={[styles.deleteButton, { backgroundColor: COLORS.mutedButton }]}
 							hitSlop={8}
 						>
-							<Ionicons name="trash-outline" size={20} color={COLORS.textSecondary} accessible={false} />
+							<Ionicons
+								name="trash-outline"
+								size={20}
+								color={COLORS.textSecondary}
+								accessible={false}
+							/>
 						</Pressable>
 					</View>
 				</View>
