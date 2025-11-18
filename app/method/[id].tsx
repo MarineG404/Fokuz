@@ -125,6 +125,23 @@ export default function MethodDetails() {
 	// Track timer phase to show cat card only during break
 	const [timerPhase, setTimerPhase] = useState<'work' | 'break' | 'finished'>('work');
 
+	// Cat generator enabled state
+	const [catGenEnabled, setCatGenEnabled] = useState<boolean>(true);
+	useEffect(() => {
+		(async () => {
+			try {
+				const raw = await AsyncStorage.getItem("@fokuz:cat_generator_enabled");
+				if (raw === null) {
+					setCatGenEnabled(true);
+				} else {
+					setCatGenEnabled(raw === "true");
+				}
+			} catch {
+				setCatGenEnabled(true);
+			}
+		})();
+	}, []);
+
 	const handlePhaseChange = (phase: 'work' | 'break' | 'finished') => {
 		setTimerPhase(phase);
 	};
@@ -297,7 +314,7 @@ export default function MethodDetails() {
 					{/* Lofi + Timer: stacked on portrait, side-by-side on landscape */}
 					{/* useWindowDimensions must be called unconditionally at component top-level */}
 					{renderLofiAndTimer()}
-					{timerPhase === 'break' && (
+					{timerPhase === 'break' && catGenEnabled && (
 						<BlockCard>
 							<GeneratorCatCard />
 						</BlockCard>

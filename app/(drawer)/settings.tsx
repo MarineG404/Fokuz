@@ -1,4 +1,5 @@
 import CategoriesModal from "@/components/settings/CategoriesModal";
+import CatGeneratorToggle from "@/components/settings/CatGeneratorToggle";
 import { LanguageSwitcher } from "@/components/settings/LanguageSwitcher";
 import PlayerSettingsToggle from "@/components/settings/PlayerSettingsToggle";
 import { ThemeSwitcher } from "@/components/settings/ThemeSwitcher";
@@ -93,6 +94,12 @@ export default function SettingsScreen() {
 						/>
 					</Pressable>
 				)}
+
+				<Text style={[styles.sectionTitle, { color: COLORS.secondary }]}>
+					{t("CAT_GENERATOR_SETTINGS")}
+				</Text>
+
+				<CatGeneratorToggle />
 			</ScrollView>
 
 			<CategoriesModal
