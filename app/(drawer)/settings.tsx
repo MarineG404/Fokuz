@@ -1,5 +1,6 @@
 import CategoriesModal from "@/components/settings/CategoriesModal";
 import CatGeneratorToggle from "@/components/settings/CatGeneratorToggle";
+import GoogleAuthSettings from "@/components/settings/GoogleAuthSettings";
 import { LanguageSwitcher } from "@/components/settings/LanguageSwitcher";
 import PlayerSettingsToggle from "@/components/settings/PlayerSettingsToggle";
 import { ThemeSwitcher } from "@/components/settings/ThemeSwitcher";
@@ -100,6 +101,7 @@ export default function SettingsScreen() {
 				</Text>
 
 				<CatGeneratorToggle />
+				<GoogleAuthSettings />
 			</ScrollView>
 
 			<CategoriesModal

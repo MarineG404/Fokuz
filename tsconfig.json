@@ -3,7 +3,9 @@
 	"compilerOptions": {
 		"strict": true,
 		"paths": {
-			"@/*": ["./*"]
+			"@/*": [
+				"./*"
+			]
 		},
 		"resolveJsonModule": true,
 		"esModuleInterop": true
@@ -13,6 +15,7 @@
 		"**/*.tsx",
 		".expo/types/**/*.ts",
 		"expo-env.d.ts",
-		"src/localization/i18n.ts"
+		"src/localization/i18n.ts",
+		"env.d.ts"
 	]
 }

@@ -252,5 +252,12 @@
 		"BUTTON": "Générer l'image",
 		"BUTTON_A11Y": "Générer une nouvelle image de chat",
 		"IMAGE_ALT": "Image de chat aléatoire"
+	},
+	"GOOGLE_AUTH": {
+		"TITLE": "Authentification Google",
+		"DESCRIPTION": "Connectez-vous avec votre compte Google pour synchroniser vos données entre les appareils et accéder aux fonctionnalités cloud.",
+		"SIGN_IN": "Se connecter avec Google",
+		"SIGN_OUT": "Se déconnecter",
+		"CONNECTED": "Vous êtes connecté avec votre compte Google."
 	}
 }

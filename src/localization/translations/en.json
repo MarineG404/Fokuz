@@ -256,5 +256,12 @@
 		"BUTTON": "Generate image",
 		"BUTTON_A11Y": "Generate a new cat image",
 		"IMAGE_ALT": "Random cat image"
+	},
+	"GOOGLE_AUTH": {
+		"TITLE": "Google Authentication",
+		"DESCRIPTION": "Sign in with your Google account to sync your data across devices and access cloud features.",
+		"SIGN_IN": "Sign In with Google",
+		"SIGN_OUT": "Sign Out",
+		"CONNECTED": "You are connected with your Google account."
 	}
 }
