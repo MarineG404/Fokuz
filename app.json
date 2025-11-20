@@ -1,6 +1,6 @@
 {
 	"expo": {
-		"name": "Fokuz",
+		"owner": "marineg404",
 		"slug": "Fokuz",
 		"version": "1.0.0",
 		"orientation": "default",
@@ -64,7 +64,7 @@
 				"projectId": "23f2cc50-0a3c-4efa-ba3c-f76ac42d52d9"
 			},
 			// "googleSingIn": {
-			// 	"webClientId": "process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID",
+			// 	"webClientId": "process.env.EXPO_PUBLIC_GOOGLE_CLIENT_ID_WEB",
 			// 	// "iosClientId": "process.env.GOOGLE_IOS_CLIENT_ID",
 			// 	// "androidClientId": "process.env.GOOGLE_ANDROID_CLIENT_ID"
 			// }
